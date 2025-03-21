@@ -18,6 +18,26 @@ const VideoUrlInput = ({ onSubmit }: VideoUrlInputProps) => {
     return url.trim().match(/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|vimeo\.com|dailymotion\.com).*$/);
   };
 
+  // Extract video ID from various video platforms
+  const extractVideoId = (url: string): string | null => {
+    // YouTube
+    const ytRegex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i;
+    const ytMatch = url.match(ytRegex);
+    if (ytMatch) return ytMatch[1];
+    
+    // Vimeo
+    const vimeoRegex = /(?:vimeo\.com\/(?:video\/)?(\d+))/i;
+    const vimeoMatch = url.match(vimeoRegex);
+    if (vimeoMatch) return vimeoMatch[1];
+    
+    // Dailymotion
+    const dmRegex = /(?:dailymotion\.com\/(?:video\/)([\w]+))/i;
+    const dmMatch = url.match(dmRegex);
+    if (dmMatch) return dmMatch[1];
+    
+    return null;
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -28,11 +48,16 @@ const VideoUrlInput = ({ onSubmit }: VideoUrlInputProps) => {
     
     setIsValidating(true);
     
-    // Simulate validation - in a real app, this would check if the URL is valid
+    // Validate URL and extract video ID
     setTimeout(() => {
       if (validateUrl(url)) {
-        onSubmit(url);
-        toast.success("URL validated successfully");
+        const videoId = extractVideoId(url);
+        if (videoId) {
+          onSubmit(url);
+          toast.success("URL validated successfully");
+        } else {
+          toast.error("Could not extract video ID from the URL");
+        }
       } else {
         toast.error("Please enter a valid video URL");
       }

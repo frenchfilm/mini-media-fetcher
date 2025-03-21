@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -9,31 +8,55 @@ import DownloadProgress from "@/components/DownloadProgress";
 import DownloadHistory, { DownloadItem } from "@/components/DownloadHistory";
 import AppHeader from "@/components/AppHeader";
 
-// Function to generate dummy video details (simulates video metadata fetching)
+// Function to get video details from the URL
 const getVideoDetails = (url: string) => {
-  // In a real app, this would fetch actual metadata from the URL
-  const videoIds = [
-    "dQw4w9WgXcQ", // Rick Astley
-    "9bZkp7q19f0", // Gangnam Style
-    "JGwWNGJdvx8", // Shape of You
-    "kJQP7kiw5Fk", // Despacito
-    "OPf0YbXqDm0", // Uptown Funk
-  ];
+  // Extract video ID based on the platform
+  const extractVideoId = (url: string): { id: string; platform: string } | null => {
+    // YouTube
+    const ytRegex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i;
+    const ytMatch = url.match(ytRegex);
+    if (ytMatch) return { id: ytMatch[1], platform: 'youtube' };
+    
+    // Vimeo
+    const vimeoRegex = /(?:vimeo\.com\/(?:video\/)?(\d+))/i;
+    const vimeoMatch = url.match(vimeoRegex);
+    if (vimeoMatch) return { id: vimeoMatch[1], platform: 'vimeo' };
+    
+    // Dailymotion
+    const dmRegex = /(?:dailymotion\.com\/(?:video\/)([\w]+))/i;
+    const dmMatch = url.match(dmRegex);
+    if (dmMatch) return { id: dmMatch[1], platform: 'dailymotion' };
+    
+    return null;
+  };
+
+  const videoSource = extractVideoId(url);
+  if (!videoSource) {
+    return null;
+  }
+
+  // Get thumbnail URL based on platform
+  let thumbnailUrl = '';
+  let title = 'Video from ' + videoSource.platform;
   
-  const randomId = videoIds[Math.floor(Math.random() * videoIds.length)];
-  const titles = [
-    "Amazing Travel Vlog - Summer 2023",
-    "How to Master Web Development in 2023",
-    "The Ultimate Cooking Guide for Beginners",
-    "Top 10 Hidden Gems in Europe",
-    "Learn Photography in 10 Minutes",
-  ];
-  
+  if (videoSource.platform === 'youtube') {
+    thumbnailUrl = `https://img.youtube.com/vi/${videoSource.id}/mqdefault.jpg`;
+    title = `YouTube Video (ID: ${videoSource.id})`;
+  } else if (videoSource.platform === 'vimeo') {
+    // In a real app, you'd fetch the thumbnail from Vimeo API
+    thumbnailUrl = `https://placeholder.pics/svg/300x200/DEDEDE/555555/Vimeo%20Video%20${videoSource.id}`;
+    title = `Vimeo Video (ID: ${videoSource.id})`;
+  } else if (videoSource.platform === 'dailymotion') {
+    thumbnailUrl = `https://www.dailymotion.com/thumbnail/video/${videoSource.id}`;
+    title = `Dailymotion Video (ID: ${videoSource.id})`;
+  }
+
   return {
-    id: randomId,
-    title: titles[Math.floor(Math.random() * titles.length)],
-    thumbnailUrl: `https://img.youtube.com/vi/${randomId}/mqdefault.jpg`,
-    url: url
+    id: videoSource.id,
+    title,
+    thumbnailUrl,
+    url,
+    platform: videoSource.platform
   };
 };
 
@@ -76,12 +99,15 @@ const Index = () => {
   const handleUrlSubmit = (url: string) => {
     setVideoUrl(url);
     
-    // Simulate fetching video info
-    setTimeout(() => {
-      const videoDetails = getVideoDetails(url);
+    // Get actual video details from the URL
+    const videoDetails = getVideoDetails(url);
+    
+    if (videoDetails) {
       setVideoInfo(videoDetails);
       setAppState(AppState.SELECT_FORMAT);
-    }, 1000);
+    } else {
+      toast.error("Could not retrieve video details. Please check the URL.");
+    }
   };
 
   const handleFormatSelect = (format: VideoFormat) => {
