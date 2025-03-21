@@ -3,6 +3,16 @@
  * Utility functions for video processing
  */
 
+// Function to validate if a URL is from a supported video platform
+export const validateUrl = (url: string): boolean => {
+  // Check if the URL is from a supported platform
+  const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/i;
+  const vimeoRegex = /^(https?:\/\/)?(www\.)?vimeo\.com\/.+$/i;
+  const dailymotionRegex = /^(https?:\/\/)?(www\.)?(dailymotion\.com|dai\.ly)\/.+$/i;
+  
+  return youtubeRegex.test(url) || vimeoRegex.test(url) || dailymotionRegex.test(url);
+};
+
 // Function to get video details from the URL
 export const getVideoDetails = (url: string) => {
   // Extract video ID based on the platform
@@ -36,22 +46,27 @@ export const getVideoDetails = (url: string) => {
   };
 };
 
-// Extract video ID from various video platforms
+// Extract video ID from various video platforms with improved regex patterns
 export const extractVideoId = (url: string): { id: string; platform: string } | null => {
-  // YouTube
-  const ytRegex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i;
+  // YouTube - handle multiple formats including shorts, watch, embed, youtu.be
+  const ytRegex = /(?:youtube\.com\/(?:(?:watch\?v=)|(?:embed\/)|(?:shorts\/)|(?:live\/)|(?:v\/))|(youtu\.be\/))([a-zA-Z0-9_-]{11})/i;
   const ytMatch = url.match(ytRegex);
-  if (ytMatch) return { id: ytMatch[1], platform: 'youtube' };
+  if (ytMatch) return { id: ytMatch[2] || ytMatch[1], platform: 'youtube' };
   
-  // Vimeo
-  const vimeoRegex = /(?:vimeo\.com\/(?:video\/)?(\d+))/i;
+  // YouTube alternative format
+  const ytAltRegex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=))([^"&?\/\s]{11})/i;
+  const ytAltMatch = url.match(ytAltRegex);
+  if (ytAltMatch) return { id: ytAltMatch[1], platform: 'youtube' };
+  
+  // Vimeo - handle both vimeo.com/id and vimeo.com/video/id formats
+  const vimeoRegex = /(?:vimeo\.com\/(?:video\/|channels\/[^\/]+\/|groups\/[^\/]+\/videos\/|album\/[^\/]+\/video\/|)?)(\d+)(?:$|\/|\?|#)/i;
   const vimeoMatch = url.match(vimeoRegex);
   if (vimeoMatch) return { id: vimeoMatch[1], platform: 'vimeo' };
   
-  // Dailymotion
-  const dmRegex = /(?:dailymotion\.com\/(?:video\/)([\w]+))/i;
+  // Dailymotion - handle both dailymotion.com/video/id and dai.ly/id formats
+  const dmRegex = /(?:(?:dailymotion\.com\/(?:video\/|embed\/|))|(dai\.ly\/))([a-zA-Z0-9]+)(?:_[\w-]*)?/i;
   const dmMatch = url.match(dmRegex);
-  if (dmMatch) return { id: dmMatch[1], platform: 'dailymotion' };
+  if (dmMatch) return { id: dmMatch[2] || dmMatch[1], platform: 'dailymotion' };
   
   return null;
 };

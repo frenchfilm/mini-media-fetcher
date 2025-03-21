@@ -1,9 +1,9 @@
-
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from 'sonner';
 import { ArrowRight, X } from 'lucide-react';
+import { validateUrl } from '@/utils/videoUtils';
 
 interface VideoUrlInputProps {
   onSubmit: (url: string) => void;
@@ -12,31 +12,6 @@ interface VideoUrlInputProps {
 const VideoUrlInput = ({ onSubmit }: VideoUrlInputProps) => {
   const [url, setUrl] = useState('');
   const [isValidating, setIsValidating] = useState(false);
-
-  const validateUrl = (url: string) => {
-    // This is a simple validation - in a real app, you'd want more robust validation
-    return url.trim().match(/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|vimeo\.com|dailymotion\.com).*$/);
-  };
-
-  // Extract video ID from various video platforms
-  const extractVideoId = (url: string): string | null => {
-    // YouTube
-    const ytRegex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i;
-    const ytMatch = url.match(ytRegex);
-    if (ytMatch) return ytMatch[1];
-    
-    // Vimeo
-    const vimeoRegex = /(?:vimeo\.com\/(?:video\/)?(\d+))/i;
-    const vimeoMatch = url.match(vimeoRegex);
-    if (vimeoMatch) return vimeoMatch[1];
-    
-    // Dailymotion
-    const dmRegex = /(?:dailymotion\.com\/(?:video\/)([\w]+))/i;
-    const dmMatch = url.match(dmRegex);
-    if (dmMatch) return dmMatch[1];
-    
-    return null;
-  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -48,16 +23,11 @@ const VideoUrlInput = ({ onSubmit }: VideoUrlInputProps) => {
     
     setIsValidating(true);
     
-    // Validate URL and extract video ID
+    // Validate URL using the improved validation function
     setTimeout(() => {
       if (validateUrl(url)) {
-        const videoId = extractVideoId(url);
-        if (videoId) {
-          onSubmit(url);
-          toast.success("URL validated successfully");
-        } else {
-          toast.error("Could not extract video ID from the URL");
-        }
+        onSubmit(url);
+        toast.success("URL validated successfully");
       } else {
         toast.error("Please enter a valid video URL");
       }
