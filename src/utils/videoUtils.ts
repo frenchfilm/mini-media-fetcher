@@ -3,6 +3,8 @@
  * Utility functions for video processing
  */
 
+import { toast } from "sonner";
+
 // Function to validate if a URL is from a supported video platform
 export const validateUrl = (url: string): boolean => {
   // Accept any URL with minimal validation
