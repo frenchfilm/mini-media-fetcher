@@ -36,7 +36,7 @@ const VideoUrlInput = ({ onSubmit }: VideoUrlInputProps) => {
         onSubmit(url);
         toast.success("URL accepted for processing");
       } else {
-        toast.error("Please enter a valid URL");
+        toast.error("Please enter a valid URL format");
       }
       setIsValidating(false);
     }, 800);
@@ -54,7 +54,7 @@ const VideoUrlInput = ({ onSubmit }: VideoUrlInputProps) => {
       <div className="glass-panel rounded-2xl p-1 flex items-center overflow-hidden">
         <Input
           type="text"
-          placeholder="Paste any video URL from YouTube, Vimeo, TikTok, etc..."
+          placeholder="Paste any video URL from any website..."
           value={url}
           onChange={(e) => setUrl(e.target.value)}
           className="border-0 h-14 px-4 bg-transparent text-foreground placeholder:text-muted-foreground/70 focus-visible:ring-0 focus-visible:ring-offset-0 text-base"
@@ -73,7 +73,7 @@ const VideoUrlInput = ({ onSubmit }: VideoUrlInputProps) => {
             </Button>
           </TooltipTrigger>
           <TooltipContent className="max-w-xs">
-            <p>Supports videos from YouTube, Vimeo, Dailymotion, Facebook, Twitter, TikTok, Instagram and many more platforms.</p>
+            <p>Supports videos from any website. Enhanced with yt-dlp for maximum compatibility.</p>
           </TooltipContent>
         </Tooltip>
         
@@ -102,7 +102,7 @@ const VideoUrlInput = ({ onSubmit }: VideoUrlInputProps) => {
       </div>
       
       <p className="text-xs text-center mt-2 text-muted-foreground">
-        Enhanced with yt-dlp for maximum compatibility with video platforms
+        Enhanced with yt-dlp for maximum compatibility with all video platforms
       </p>
     </form>
   );

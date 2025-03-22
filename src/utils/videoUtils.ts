@@ -5,12 +5,17 @@
 
 // Function to validate if a URL is from a supported video platform
 export const validateUrl = (url: string): boolean => {
-  // Accept a much wider range of video platforms and URLs
-  // This regex checks if the string looks like a URL with http(s) protocol
-  // or at least has a domain-like structure
-  const urlRegex = /^(https?:\/\/)?[\w.-]+\.[a-z]{2,}(\/\S*)?$/i;
-  
-  return urlRegex.test(url.trim());
+  // Accept any URL with minimal validation
+  // Just check if it resembles a URL structure
+  try {
+    // Try to construct a URL object - this will validate basic URL structure
+    new URL(url.startsWith('http') ? url : `https://${url}`);
+    return true;
+  } catch (e) {
+    // If it fails URL construction, check if it at least has a domain-like structure
+    const simpleDomainRegex = /^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\/\S*)?$/;
+    return simpleDomainRegex.test(url.trim());
+  }
 };
 
 // Function to get video details from the URL

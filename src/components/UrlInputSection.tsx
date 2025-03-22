@@ -36,7 +36,7 @@ const UrlInputSection = ({
           Download Videos with Ease
         </h1>
         <p className="text-muted-foreground max-w-md mx-auto">
-          Simply paste a video URL from any popular platform to get started. Enhanced with yt-dlp for maximum compatibility.
+          Simply paste a video URL from any platform to get started. Enhanced with yt-dlp for maximum compatibility.
         </p>
       </div>
       
