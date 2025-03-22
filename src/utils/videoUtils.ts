@@ -144,24 +144,25 @@ export const extractVideoId = (url: string): { id: string; platform: string } | 
 
 // Function to get the proper download path based on the OS
 export const getDefaultDownloadPath = (): string => {
-  // In a real app, this would use electron/node APIs to determine the actual OS download path
-  // For now, return platform-specific reasonable guesses
+  // In a real desktop application (Electron/Tauri), use app-specific paths
+  // that are relative to the application's location
   
-  // Detect platform
+  // For Electron, typically:
+  // const { app } = require('electron');
+  // return path.join(app.getPath('downloads'), 'VideoDownloader');
+  
+  // For a portable app, you might use:
+  // const appPath = path.dirname(process.execPath);
+  // return path.join(appPath, 'downloads');
+  
+  // Detect platform for the simulation
   const isWindows = navigator.platform.indexOf('Win') > -1;
   const isMac = navigator.platform.indexOf('Mac') > -1;
   
-  // In a real electron app, we would create this directory if it doesn't exist
-  // Example code (would work in Electron/Node environment):
-  // if (!fs.existsSync(downloadPath)) {
-  //   fs.mkdirSync(downloadPath, { recursive: true });
-  // }
-  
+  // In the simulation, return platform-specific paths
   if (isWindows) {
-    // Use the Downloads folder which definitely exists
     return 'C:\\Users\\YourUsername\\Downloads';
   } else if (isMac) {
-    // Use the Downloads folder which definitely exists
     return '/Users/YourUsername/Downloads';
   } else {
     // Linux/other
@@ -177,24 +178,56 @@ export const getVideoFilePath = (videoTitle: string, format: string): string => 
 };
 
 // Check if download directory exists and create it if it doesn't
-// This function would be used in an actual Electron/Tauri app
 export const ensureDownloadDirectoryExists = (): boolean => {
-  // In a real app with Node.js access, this would be:
-  // const fs = require('fs');
-  // const path = require('path');
-  // const downloadPath = getDefaultDownloadPath();
-  // 
-  // if (!fs.existsSync(downloadPath)) {
-  //   try {
-  //     fs.mkdirSync(downloadPath, { recursive: true });
-  //     return true;
-  //   } catch (error) {
-  //     console.error('Failed to create download directory:', error);
-  //     return false;
-  //   }
-  // }
-  // return true;
+  // In a real desktop app (Electron/Tauri), this would be implemented as:
+  /*
+  try {
+    const fs = require('fs');
+    const path = require('path');
+    const downloadPath = getDefaultDownloadPath();
+    
+    if (!fs.existsSync(downloadPath)) {
+      fs.mkdirSync(downloadPath, { recursive: true });
+    }
+    return true;
+  } catch (error) {
+    console.error('Failed to create download directory:', error);
+    return false;
+  }
+  */
   
-  // For this demo, just return true
+  // For the simulation, just return true
+  console.log("Creating download directory (simulation mode)");
   return true;
+};
+
+// Function to determine if we're running in a desktop environment
+export const isDesktopEnvironment = (): boolean => {
+  // In Electron, we would check:
+  // return typeof process !== 'undefined' && process.versions && !!process.versions.electron;
+  
+  // In Tauri:
+  // return !!(window as any).__TAURI__;
+  
+  // In the web preview/simulation:
+  return false;
+};
+
+// Open a file explorer to show the downloaded file
+export const openFileLocation = (filePath: string): void => {
+  // In Electron, we would use:
+  /*
+  const { shell } = require('electron');
+  shell.showItemInFolder(filePath);
+  */
+  
+  // In Tauri, we would use:
+  /*
+  import { open } from '@tauri-apps/api/shell';
+  open(filePath);
+  */
+  
+  // In the web preview, just log it
+  console.log(`Opening file location (simulation): ${filePath}`);
+  toast.info(`This would open ${filePath} in a desktop environment`);
 };

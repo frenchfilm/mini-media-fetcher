@@ -8,7 +8,12 @@ import AppHeader from "@/components/AppHeader";
 import UrlInputSection from "@/components/UrlInputSection";
 import FormatSelectionSection from "@/components/FormatSelectionSection";
 import { useDownloadHistory } from "@/hooks/useDownloadHistory";
-import { getVideoFilePath, ensureDownloadDirectoryExists } from "@/utils/videoUtils";
+import { 
+  getVideoFilePath, 
+  ensureDownloadDirectoryExists, 
+  isDesktopEnvironment,
+  openFileLocation
+} from "@/utils/videoUtils";
 
 enum AppState {
   INPUT_URL = "input_url",
@@ -28,6 +33,10 @@ const Index = () => {
     const directoryExists = ensureDownloadDirectoryExists();
     if (!directoryExists) {
       toast.error("Could not create download directory. Please check permissions.");
+    }
+    
+    if (!isDesktopEnvironment()) {
+      console.log("Running in simulation mode - file system operations are simulated");
     }
   }, []);
   
@@ -67,6 +76,13 @@ const Index = () => {
     
     addDownload(newDownloadItem);
     
+    // Show information about simulation mode
+    if (!isDesktopEnvironment()) {
+      toast.info("Download completed (simulation mode). In a desktop app, the file would be saved to your Downloads folder.");
+    } else {
+      toast.success("Download completed successfully!");
+    }
+    
     // Reset app state
     setAppState(AppState.INPUT_URL);
     setVideoUrl("");
@@ -83,8 +99,7 @@ const Index = () => {
   };
 
   const handleOpenFile = (item: DownloadItem) => {
-    // In a real app, this would open the file
-    toast.info(`Opening: ${item.filePath}`);
+    openFileLocation(item.filePath);
   };
 
   return (
