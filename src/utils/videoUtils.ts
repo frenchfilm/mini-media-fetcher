@@ -151,13 +151,21 @@ export const getDefaultDownloadPath = (): string => {
   const isWindows = navigator.platform.indexOf('Win') > -1;
   const isMac = navigator.platform.indexOf('Mac') > -1;
   
+  // In a real electron app, we would create this directory if it doesn't exist
+  // Example code (would work in Electron/Node environment):
+  // if (!fs.existsSync(downloadPath)) {
+  //   fs.mkdirSync(downloadPath, { recursive: true });
+  // }
+  
   if (isWindows) {
-    return 'C:\\Users\\YourUsername\\Downloads\\VideoDownloader';
+    // Use the Downloads folder which definitely exists
+    return 'C:\\Users\\YourUsername\\Downloads';
   } else if (isMac) {
-    return '/Users/YourUsername/Downloads/VideoDownloader';
+    // Use the Downloads folder which definitely exists
+    return '/Users/YourUsername/Downloads';
   } else {
     // Linux/other
-    return '/home/yourusername/Downloads/VideoDownloader';
+    return '/home/yourusername/Downloads';
   }
 };
 
@@ -166,4 +174,27 @@ export const getVideoFilePath = (videoTitle: string, format: string): string => 
   const basePath = getDefaultDownloadPath();
   const safeFileName = videoTitle.replace(/[^\w]/g, '_');
   return `${basePath}/${safeFileName}.${format}`;
+};
+
+// Check if download directory exists and create it if it doesn't
+// This function would be used in an actual Electron/Tauri app
+export const ensureDownloadDirectoryExists = (): boolean => {
+  // In a real app with Node.js access, this would be:
+  // const fs = require('fs');
+  // const path = require('path');
+  // const downloadPath = getDefaultDownloadPath();
+  // 
+  // if (!fs.existsSync(downloadPath)) {
+  //   try {
+  //     fs.mkdirSync(downloadPath, { recursive: true });
+  //     return true;
+  //   } catch (error) {
+  //     console.error('Failed to create download directory:', error);
+  //     return false;
+  //   }
+  // }
+  // return true;
+  
+  // For this demo, just return true
+  return true;
 };

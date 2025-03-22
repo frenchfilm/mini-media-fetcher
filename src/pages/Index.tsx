@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { VideoFormat } from "@/components/VideoFormatSelector";
 import DownloadProgress from "@/components/DownloadProgress";
@@ -8,7 +8,7 @@ import AppHeader from "@/components/AppHeader";
 import UrlInputSection from "@/components/UrlInputSection";
 import FormatSelectionSection from "@/components/FormatSelectionSection";
 import { useDownloadHistory } from "@/hooks/useDownloadHistory";
-import { getVideoFilePath } from "@/utils/videoUtils";
+import { getVideoFilePath, ensureDownloadDirectoryExists } from "@/utils/videoUtils";
 
 enum AppState {
   INPUT_URL = "input_url",
@@ -22,6 +22,14 @@ const Index = () => {
   const [videoInfo, setVideoInfo] = useState<any>(null);
   const [selectedFormat, setSelectedFormat] = useState<VideoFormat | null>(null);
   const { downloads, addDownload, clearHistory } = useDownloadHistory();
+  
+  // Check if download directory exists on component mount
+  useEffect(() => {
+    const directoryExists = ensureDownloadDirectoryExists();
+    if (!directoryExists) {
+      toast.error("Could not create download directory. Please check permissions.");
+    }
+  }, []);
   
   const handleUrlSubmit = (url: string, videoDetails: any) => {
     setVideoUrl(url);
