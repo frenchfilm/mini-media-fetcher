@@ -1,235 +1,31 @@
 
 /**
  * Utility functions for video processing
+ * This file re-exports all video-related utilities from their respective modules
  */
 
-import { toast } from "sonner";
+// Re-export URL validation utilities
+export {
+  validateUrl,
+  extractDomain,
+  generateRandomId
+} from './urlValidation';
 
-// Function to validate if a URL is from a supported video platform
-export const validateUrl = (url: string): boolean => {
-  // Accept any URL with minimal validation
-  // Just check if it resembles a URL structure
-  try {
-    // Try to construct a URL object - this will validate basic URL structure
-    new URL(url.startsWith('http') ? url : `https://${url}`);
-    return true;
-  } catch (e) {
-    // If it fails URL construction, check if it at least has a domain-like structure
-    const simpleDomainRegex = /^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\/\S*)?$/;
-    return simpleDomainRegex.test(url.trim());
-  }
-};
+// Re-export video extraction utilities
+export {
+  extractVideoId
+} from './videoExtraction';
 
-// Function to get video details from the URL
-export const getVideoDetails = (url: string) => {
-  // Extract video ID based on the platform
-  const videoSource = extractVideoId(url);
-  if (!videoSource) {
-    // For non-standard platforms, create a generic video source
-    return {
-      id: generateRandomId(),
-      title: 'Video from ' + extractDomain(url),
-      thumbnailUrl: `https://placeholder.pics/svg/300x200/DEDEDE/555555/Video`,
-      url,
-      platform: 'generic'
-    };
-  }
+// Re-export video details utilities
+export {
+  getVideoDetails
+} from './videoDetails';
 
-  // Get thumbnail URL based on platform
-  let thumbnailUrl = '';
-  let title = 'Video from ' + videoSource.platform;
-  
-  if (videoSource.platform === 'youtube') {
-    thumbnailUrl = `https://img.youtube.com/vi/${videoSource.id}/mqdefault.jpg`;
-    title = `YouTube Video (ID: ${videoSource.id})`;
-  } else if (videoSource.platform === 'vimeo') {
-    // In a real app, you'd fetch the thumbnail from Vimeo API
-    thumbnailUrl = `https://placeholder.pics/svg/300x200/DEDEDE/555555/Vimeo%20Video%20${videoSource.id}`;
-    title = `Vimeo Video (ID: ${videoSource.id})`;
-  } else if (videoSource.platform === 'dailymotion') {
-    thumbnailUrl = `https://www.dailymotion.com/thumbnail/video/${videoSource.id}`;
-    title = `Dailymotion Video (ID: ${videoSource.id})`;
-  } else if (videoSource.platform === 'facebook') {
-    thumbnailUrl = `https://placeholder.pics/svg/300x200/DEDEDE/555555/Facebook%20Video`;
-    title = `Facebook Video`;
-  } else if (videoSource.platform === 'twitter') {
-    thumbnailUrl = `https://placeholder.pics/svg/300x200/DEDEDE/555555/Twitter%20Video`;
-    title = `Twitter Video`;
-  } else if (videoSource.platform === 'tiktok') {
-    thumbnailUrl = `https://placeholder.pics/svg/300x200/DEDEDE/555555/TikTok%20Video`;
-    title = `TikTok Video`;
-  } else if (videoSource.platform === 'instagram') {
-    thumbnailUrl = `https://placeholder.pics/svg/300x200/DEDEDE/555555/Instagram%20Video`;
-    title = `Instagram Video`;
-  } else {
-    thumbnailUrl = `https://placeholder.pics/svg/300x200/DEDEDE/555555/Video%20from%20${videoSource.platform}`;
-    title = `Video from ${videoSource.platform}`;
-  }
-
-  return {
-    id: videoSource.id,
-    title,
-    thumbnailUrl,
-    url,
-    platform: videoSource.platform
-  };
-};
-
-// Helper function to extract domain from URL
-const extractDomain = (url: string): string => {
-  try {
-    // Try to parse the URL
-    const urlObj = new URL(url.startsWith('http') ? url : `https://${url}`);
-    return urlObj.hostname.replace('www.', '');
-  } catch (e) {
-    // If parsing fails, try regex extraction
-    const domainMatch = url.match(/^(?:https?:\/\/)?(?:www\.)?([^\/]+)/i);
-    return domainMatch ? domainMatch[1] : 'unknown-domain';
-  }
-};
-
-// Generate a random ID for non-standard video sources
-const generateRandomId = (): string => {
-  return Math.random().toString(36).substring(2, 15);
-};
-
-// Extract video ID from various video platforms with improved regex patterns
-export const extractVideoId = (url: string): { id: string; platform: string } | null => {
-  // YouTube - handle multiple formats including shorts, watch, embed, youtu.be
-  const ytRegex = /(?:youtube\.com\/(?:(?:watch\?v=)|(?:embed\/)|(?:shorts\/)|(?:live\/)|(?:v\/))|(youtu\.be\/))([a-zA-Z0-9_-]{11})/i;
-  const ytMatch = url.match(ytRegex);
-  if (ytMatch) return { id: ytMatch[2] || ytMatch[1], platform: 'youtube' };
-  
-  // YouTube alternative format
-  const ytAltRegex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=))([^"&?\/\s]{11})/i;
-  const ytAltMatch = url.match(ytAltRegex);
-  if (ytAltMatch) return { id: ytAltMatch[1], platform: 'youtube' };
-  
-  // Vimeo - handle both vimeo.com/id and vimeo.com/video/id formats
-  const vimeoRegex = /(?:vimeo\.com\/(?:video\/|channels\/[^\/]+\/|groups\/[^\/]+\/videos\/|album\/[^\/]+\/video\/|)?)(\d+)(?:$|\/|\?|#)/i;
-  const vimeoMatch = url.match(vimeoRegex);
-  if (vimeoMatch) return { id: vimeoMatch[1], platform: 'vimeo' };
-  
-  // Dailymotion - handle both dailymotion.com/video/id and dai.ly/id formats
-  const dmRegex = /(?:(?:dailymotion\.com\/(?:video\/|embed\/|))|(dai\.ly\/))([a-zA-Z0-9]+)(?:_[\w-]*)?/i;
-  const dmMatch = url.match(dmRegex);
-  if (dmMatch) return { id: dmMatch[2] || dmMatch[1], platform: 'dailymotion' };
-  
-  // Facebook videos
-  const fbRegex = /facebook\.com\/(?:watch\/\?v=|[^\/]+\/videos\/|video\.php\?v=)(\d+)/i;
-  const fbMatch = url.match(fbRegex);
-  if (fbMatch) return { id: fbMatch[1], platform: 'facebook' };
-  
-  // Twitter/X videos
-  const twitterRegex = /(?:twitter\.com|x\.com)\/[^\/]+\/status\/(\d+)/i;
-  const twitterMatch = url.match(twitterRegex);
-  if (twitterMatch) return { id: twitterMatch[1], platform: 'twitter' };
-  
-  // TikTok videos
-  const tiktokRegex = /tiktok\.com\/@[^\/]+\/video\/(\d+)/i;
-  const tiktokMatch = url.match(tiktokRegex);
-  if (tiktokMatch) return { id: tiktokMatch[1], platform: 'tiktok' };
-  
-  // Instagram
-  const instaRegex = /instagram\.com\/(?:p|reel)\/([A-Za-z0-9_-]+)/i;
-  const instaMatch = url.match(instaRegex);
-  if (instaMatch) return { id: instaMatch[1], platform: 'instagram' };
-  
-  // If we can't identify the platform specifically, extract the domain as the platform
-  const domain = extractDomain(url);
-  if (domain && domain !== 'unknown-domain') {
-    return { id: generateRandomId(), platform: domain };
-  }
-  
-  return null;
-};
-
-// Function to get the proper download path based on the OS
-export const getDefaultDownloadPath = (): string => {
-  // In a real desktop application (Electron/Tauri), use app-specific paths
-  // that are relative to the application's location
-  
-  // For Electron, typically:
-  // const { app } = require('electron');
-  // return path.join(app.getPath('downloads'), 'VideoDownloader');
-  
-  // For a portable app, you might use:
-  // const appPath = path.dirname(process.execPath);
-  // return path.join(appPath, 'downloads');
-  
-  // Detect platform for the simulation
-  const isWindows = navigator.platform.indexOf('Win') > -1;
-  const isMac = navigator.platform.indexOf('Mac') > -1;
-  
-  // In the simulation, return platform-specific paths
-  if (isWindows) {
-    return 'C:\\Users\\YourUsername\\Downloads';
-  } else if (isMac) {
-    return '/Users/YourUsername/Downloads';
-  } else {
-    // Linux/other
-    return '/home/yourusername/Downloads';
-  }
-};
-
-// Function to get the file path for a saved video
-export const getVideoFilePath = (videoTitle: string, format: string): string => {
-  const basePath = getDefaultDownloadPath();
-  const safeFileName = videoTitle.replace(/[^\w]/g, '_');
-  return `${basePath}/${safeFileName}.${format}`;
-};
-
-// Check if download directory exists and create it if it doesn't
-export const ensureDownloadDirectoryExists = (): boolean => {
-  // In a real desktop app (Electron/Tauri), this would be implemented as:
-  /*
-  try {
-    const fs = require('fs');
-    const path = require('path');
-    const downloadPath = getDefaultDownloadPath();
-    
-    if (!fs.existsSync(downloadPath)) {
-      fs.mkdirSync(downloadPath, { recursive: true });
-    }
-    return true;
-  } catch (error) {
-    console.error('Failed to create download directory:', error);
-    return false;
-  }
-  */
-  
-  // For the simulation, just return true
-  console.log("Creating download directory (simulation mode)");
-  return true;
-};
-
-// Function to determine if we're running in a desktop environment
-export const isDesktopEnvironment = (): boolean => {
-  // In Electron, we would check:
-  // return typeof process !== 'undefined' && process.versions && !!process.versions.electron;
-  
-  // In Tauri:
-  // return !!(window as any).__TAURI__;
-  
-  // In the web preview/simulation:
-  return false;
-};
-
-// Open a file explorer to show the downloaded file
-export const openFileLocation = (filePath: string): void => {
-  // In Electron, we would use:
-  /*
-  const { shell } = require('electron');
-  shell.showItemInFolder(filePath);
-  */
-  
-  // In Tauri, we would use:
-  /*
-  import { open } from '@tauri-apps/api/shell';
-  open(filePath);
-  */
-  
-  // In the web preview, just log it
-  console.log(`Opening file location (simulation): ${filePath}`);
-  toast.info(`This would open ${filePath} in a desktop environment`);
-};
+// Re-export file system utilities
+export {
+  getDefaultDownloadPath,
+  getVideoFilePath,
+  ensureDownloadDirectoryExists,
+  isDesktopEnvironment,
+  openFileLocation
+} from './fileSystem';

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from 'sonner';
 import { ArrowRight, X, Info } from 'lucide-react';
-import { validateUrl } from '@/utils/videoUtils';
+import { validateUrl } from '@/utils/urlValidation';
 import { 
   Tooltip,
   TooltipContent,

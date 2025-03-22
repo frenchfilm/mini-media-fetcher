@@ -2,7 +2,7 @@
 import { toast } from "sonner";
 import VideoUrlInput from "@/components/VideoUrlInput";
 import DownloadHistory, { DownloadItem } from "@/components/DownloadHistory";
-import { getVideoDetails } from "@/utils/videoUtils";
+import { getVideoDetails } from "@/utils/videoDetails";
 
 interface UrlInputSectionProps {
   onUrlSubmit: (url: string, videoInfo: any) => void;
