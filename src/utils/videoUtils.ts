@@ -142,3 +142,28 @@ export const extractVideoId = (url: string): { id: string; platform: string } | 
   return null;
 };
 
+// Function to get the proper download path based on the OS
+export const getDefaultDownloadPath = (): string => {
+  // In a real app, this would use electron/node APIs to determine the actual OS download path
+  // For now, return platform-specific reasonable guesses
+  
+  // Detect platform
+  const isWindows = navigator.platform.indexOf('Win') > -1;
+  const isMac = navigator.platform.indexOf('Mac') > -1;
+  
+  if (isWindows) {
+    return 'C:\\Users\\YourUsername\\Downloads\\VideoDownloader';
+  } else if (isMac) {
+    return '/Users/YourUsername/Downloads/VideoDownloader';
+  } else {
+    // Linux/other
+    return '/home/yourusername/Downloads/VideoDownloader';
+  }
+};
+
+// Function to get the file path for a saved video
+export const getVideoFilePath = (videoTitle: string, format: string): string => {
+  const basePath = getDefaultDownloadPath();
+  const safeFileName = videoTitle.replace(/[^\w]/g, '_');
+  return `${basePath}/${safeFileName}.${format}`;
+};

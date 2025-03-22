@@ -8,6 +8,7 @@ import AppHeader from "@/components/AppHeader";
 import UrlInputSection from "@/components/UrlInputSection";
 import FormatSelectionSection from "@/components/FormatSelectionSection";
 import { useDownloadHistory } from "@/hooks/useDownloadHistory";
+import { getVideoFilePath } from "@/utils/videoUtils";
 
 enum AppState {
   INPUT_URL = "input_url",
@@ -40,7 +41,12 @@ const Index = () => {
   const handleDownloadComplete = () => {
     if (!videoInfo || !selectedFormat) return;
     
-    // Add to download history
+    // Add to download history with proper file path
+    const filePath = getVideoFilePath(
+      videoInfo.title, 
+      selectedFormat.id.split('-')[0]
+    );
+    
     const newDownloadItem: DownloadItem = {
       id: Date.now().toString(),
       title: videoInfo.title,
@@ -48,7 +54,7 @@ const Index = () => {
       url: videoUrl,
       format: selectedFormat,
       downloadDate: new Date(),
-      filePath: `~/Downloads/${videoInfo.title.replace(/[^\w]/g, '_')}.${selectedFormat.id.split('-')[0]}`
+      filePath: filePath
     };
     
     addDownload(newDownloadItem);

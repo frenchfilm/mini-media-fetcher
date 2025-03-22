@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
+import { getDefaultDownloadPath } from "@/utils/videoUtils";
 
 interface AppHeaderProps {
   downloadsCount: number;
@@ -15,6 +16,7 @@ interface AppHeaderProps {
 const AppHeader = ({ downloadsCount }: AppHeaderProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const defaultDownloadPath = getDefaultDownloadPath();
 
   // Track scroll position to add background when scrolled
   useEffect(() => {
@@ -80,13 +82,16 @@ const AppHeader = ({ downloadsCount }: AppHeaderProps) => {
                   <Input 
                     id="download-folder" 
                     readOnly 
-                    value="~/Downloads/VideoDownloader" 
+                    value={defaultDownloadPath}
                     className="flex-1"
                   />
                   <Button variant="outline" size="sm">
                     Change
                   </Button>
                 </div>
+                <p className="text-xs text-muted-foreground">
+                  This is where your downloaded videos will be saved
+                </p>
               </div>
               
               <div className="flex items-center justify-between">
