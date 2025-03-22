@@ -12,11 +12,15 @@ export type VideoFormat = {
   fileSize: string;
 };
 
+// Enhanced formats list with more options
 const FORMATS: VideoFormat[] = [
   { id: 'mp4-1080p', quality: 'High', resolution: '1080p', fileSize: '~120 MB' },
   { id: 'mp4-720p', quality: 'Medium', resolution: '720p', fileSize: '~80 MB' },
   { id: 'mp4-480p', quality: 'Low', resolution: '480p', fileSize: '~45 MB' },
-  { id: 'mp3-audio', quality: 'Audio Only', resolution: 'N/A', fileSize: '~8 MB' },
+  { id: 'mp4-360p', quality: 'Very Low', resolution: '360p', fileSize: '~25 MB' },
+  { id: 'mkv-original', quality: 'Original Quality', resolution: 'Source', fileSize: 'Varies' },
+  { id: 'mp3-audio', quality: 'Audio Only (MP3)', resolution: 'N/A', fileSize: '~8 MB' },
+  { id: 'm4a-audio', quality: 'Audio Only (M4A)', resolution: 'N/A', fileSize: '~10 MB' },
 ];
 
 interface VideoFormatSelectorProps {

@@ -1,9 +1,16 @@
+
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from 'sonner';
-import { ArrowRight, X } from 'lucide-react';
+import { ArrowRight, X, Info } from 'lucide-react';
 import { validateUrl } from '@/utils/videoUtils';
+import { 
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface VideoUrlInputProps {
   onSubmit: (url: string) => void;
@@ -27,9 +34,9 @@ const VideoUrlInput = ({ onSubmit }: VideoUrlInputProps) => {
     setTimeout(() => {
       if (validateUrl(url)) {
         onSubmit(url);
-        toast.success("URL validated successfully");
+        toast.success("URL accepted for processing");
       } else {
-        toast.error("Please enter a valid video URL");
+        toast.error("Please enter a valid URL");
       }
       setIsValidating(false);
     }, 800);
@@ -47,11 +54,28 @@ const VideoUrlInput = ({ onSubmit }: VideoUrlInputProps) => {
       <div className="glass-panel rounded-2xl p-1 flex items-center overflow-hidden">
         <Input
           type="text"
-          placeholder="Paste YouTube, Vimeo or other video URL..."
+          placeholder="Paste any video URL from YouTube, Vimeo, TikTok, etc..."
           value={url}
           onChange={(e) => setUrl(e.target.value)}
           className="border-0 h-14 px-4 bg-transparent text-foreground placeholder:text-muted-foreground/70 focus-visible:ring-0 focus-visible:ring-offset-0 text-base"
         />
+        
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              className="mx-1 h-8 w-8 rounded-full text-muted-foreground hover:text-foreground"
+            >
+              <Info className="h-4 w-4" />
+              <span className="sr-only">Supported platforms</span>
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent className="max-w-xs">
+            <p>Supports videos from YouTube, Vimeo, Dailymotion, Facebook, Twitter, TikTok, Instagram and many more platforms.</p>
+          </TooltipContent>
+        </Tooltip>
         
         {url && (
           <Button
@@ -76,6 +100,10 @@ const VideoUrlInput = ({ onSubmit }: VideoUrlInputProps) => {
           <span className="sr-only">Get Video</span>
         </Button>
       </div>
+      
+      <p className="text-xs text-center mt-2 text-muted-foreground">
+        Enhanced with yt-dlp for maximum compatibility with video platforms
+      </p>
     </form>
   );
 };

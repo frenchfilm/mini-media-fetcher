@@ -5,12 +5,12 @@
 
 // Function to validate if a URL is from a supported video platform
 export const validateUrl = (url: string): boolean => {
-  // Check if the URL is from a supported platform
-  const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/i;
-  const vimeoRegex = /^(https?:\/\/)?(www\.)?vimeo\.com\/.+$/i;
-  const dailymotionRegex = /^(https?:\/\/)?(www\.)?(dailymotion\.com|dai\.ly)\/.+$/i;
+  // Accept a much wider range of video platforms and URLs
+  // This regex checks if the string looks like a URL with http(s) protocol
+  // or at least has a domain-like structure
+  const urlRegex = /^(https?:\/\/)?[\w.-]+\.[a-z]{2,}(\/\S*)?$/i;
   
-  return youtubeRegex.test(url) || vimeoRegex.test(url) || dailymotionRegex.test(url);
+  return urlRegex.test(url.trim());
 };
 
 // Function to get video details from the URL
@@ -18,7 +18,14 @@ export const getVideoDetails = (url: string) => {
   // Extract video ID based on the platform
   const videoSource = extractVideoId(url);
   if (!videoSource) {
-    return null;
+    // For non-standard platforms, create a generic video source
+    return {
+      id: generateRandomId(),
+      title: 'Video from ' + extractDomain(url),
+      thumbnailUrl: `https://placeholder.pics/svg/300x200/DEDEDE/555555/Video`,
+      url,
+      platform: 'generic'
+    };
   }
 
   // Get thumbnail URL based on platform
@@ -35,6 +42,21 @@ export const getVideoDetails = (url: string) => {
   } else if (videoSource.platform === 'dailymotion') {
     thumbnailUrl = `https://www.dailymotion.com/thumbnail/video/${videoSource.id}`;
     title = `Dailymotion Video (ID: ${videoSource.id})`;
+  } else if (videoSource.platform === 'facebook') {
+    thumbnailUrl = `https://placeholder.pics/svg/300x200/DEDEDE/555555/Facebook%20Video`;
+    title = `Facebook Video`;
+  } else if (videoSource.platform === 'twitter') {
+    thumbnailUrl = `https://placeholder.pics/svg/300x200/DEDEDE/555555/Twitter%20Video`;
+    title = `Twitter Video`;
+  } else if (videoSource.platform === 'tiktok') {
+    thumbnailUrl = `https://placeholder.pics/svg/300x200/DEDEDE/555555/TikTok%20Video`;
+    title = `TikTok Video`;
+  } else if (videoSource.platform === 'instagram') {
+    thumbnailUrl = `https://placeholder.pics/svg/300x200/DEDEDE/555555/Instagram%20Video`;
+    title = `Instagram Video`;
+  } else {
+    thumbnailUrl = `https://placeholder.pics/svg/300x200/DEDEDE/555555/Video%20from%20${videoSource.platform}`;
+    title = `Video from ${videoSource.platform}`;
   }
 
   return {
@@ -44,6 +66,24 @@ export const getVideoDetails = (url: string) => {
     url,
     platform: videoSource.platform
   };
+};
+
+// Helper function to extract domain from URL
+const extractDomain = (url: string): string => {
+  try {
+    // Try to parse the URL
+    const urlObj = new URL(url.startsWith('http') ? url : `https://${url}`);
+    return urlObj.hostname.replace('www.', '');
+  } catch (e) {
+    // If parsing fails, try regex extraction
+    const domainMatch = url.match(/^(?:https?:\/\/)?(?:www\.)?([^\/]+)/i);
+    return domainMatch ? domainMatch[1] : 'unknown-domain';
+  }
+};
+
+// Generate a random ID for non-standard video sources
+const generateRandomId = (): string => {
+  return Math.random().toString(36).substring(2, 15);
 };
 
 // Extract video ID from various video platforms with improved regex patterns
@@ -68,5 +108,32 @@ export const extractVideoId = (url: string): { id: string; platform: string } | 
   const dmMatch = url.match(dmRegex);
   if (dmMatch) return { id: dmMatch[2] || dmMatch[1], platform: 'dailymotion' };
   
+  // Facebook videos
+  const fbRegex = /facebook\.com\/(?:watch\/\?v=|[^\/]+\/videos\/|video\.php\?v=)(\d+)/i;
+  const fbMatch = url.match(fbRegex);
+  if (fbMatch) return { id: fbMatch[1], platform: 'facebook' };
+  
+  // Twitter/X videos
+  const twitterRegex = /(?:twitter\.com|x\.com)\/[^\/]+\/status\/(\d+)/i;
+  const twitterMatch = url.match(twitterRegex);
+  if (twitterMatch) return { id: twitterMatch[1], platform: 'twitter' };
+  
+  // TikTok videos
+  const tiktokRegex = /tiktok\.com\/@[^\/]+\/video\/(\d+)/i;
+  const tiktokMatch = url.match(tiktokRegex);
+  if (tiktokMatch) return { id: tiktokMatch[1], platform: 'tiktok' };
+  
+  // Instagram
+  const instaRegex = /instagram\.com\/(?:p|reel)\/([A-Za-z0-9_-]+)/i;
+  const instaMatch = url.match(instaRegex);
+  if (instaMatch) return { id: instaMatch[1], platform: 'instagram' };
+  
+  // If we can't identify the platform specifically, extract the domain as the platform
+  const domain = extractDomain(url);
+  if (domain && domain !== 'unknown-domain') {
+    return { id: generateRandomId(), platform: domain };
+  }
+  
   return null;
 };
+
