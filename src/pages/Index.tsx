@@ -139,6 +139,11 @@ const Index = () => {
           )}
         </div>
       </main>
+      
+      {/* Lightweight footer that reflects SoftBare philosophy */}
+      <footer className="py-4 px-6 text-center text-sm text-muted-foreground">
+        <p>SoftBare Video Downloader • Apps as nature intended them</p>
+      </footer>
     </div>
   );
 };
