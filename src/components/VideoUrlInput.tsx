@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from 'sonner';
-import { ArrowRight, X, Info, Loader2 } from 'lucide-react';
+import { ArrowRight, X, Info, Loader2, FolderOpen } from 'lucide-react';
 import { validateUrl } from '@/utils/urlValidation';
 import { 
   Tooltip,
@@ -15,9 +15,10 @@ import {
 interface VideoUrlInputProps {
   onSubmit: (url: string) => void;
   isLoading?: boolean;
+  onFolderSelect?: () => void;
 }
 
-const VideoUrlInput = ({ onSubmit, isLoading = false }: VideoUrlInputProps) => {
+const VideoUrlInput = ({ onSubmit, isLoading = false, onFolderSelect }: VideoUrlInputProps) => {
   const [url, setUrl] = useState('');
   const [isValidating, setIsValidating] = useState(false);
 
@@ -96,6 +97,20 @@ const VideoUrlInput = ({ onSubmit, isLoading = false }: VideoUrlInputProps) => {
           </Button>
         )}
         
+        {onFolderSelect && (
+          <Button
+            type="button"
+            variant="outline"
+            size="icon"
+            onClick={onFolderSelect}
+            className="h-12 w-12 rounded-xl mr-1 shadow-sm"
+            disabled={showLoading}
+          >
+            <FolderOpen className="h-5 w-5" />
+            <span className="sr-only">Select folder</span>
+          </Button>
+        )}
+        
         <Button
           type="submit"
           size="icon"
@@ -110,10 +125,6 @@ const VideoUrlInput = ({ onSubmit, isLoading = false }: VideoUrlInputProps) => {
           <span className="sr-only">Get Video</span>
         </Button>
       </div>
-      
-      <p className="text-xs text-center mt-2 text-muted-foreground">
-        Enhanced with yt-dlp for maximum compatibility with all video platforms
-      </p>
     </form>
   );
 };

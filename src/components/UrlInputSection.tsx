@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import VideoUrlInput from "@/components/VideoUrlInput";
 import DownloadHistory, { DownloadItem } from "@/components/DownloadHistory";
 import { getVideoDetails } from "@/utils/videoDetails";
+import { isDesktopEnvironment } from "@/utils/fileSystem";
 
 interface UrlInputSectionProps {
   onUrlSubmit: (url: string, videoInfo: any) => void;
@@ -40,6 +41,17 @@ const UrlInputSection = ({
     }
   };
 
+  const handleFolderSelect = () => {
+    if (!isDesktopEnvironment()) {
+      toast.info("Folder selection is only available in desktop environments.");
+      return;
+    }
+    
+    // In a real desktop app (Electron/Tauri), this would open a folder picker
+    toast.info("This would open a folder selection dialog in a desktop environment");
+    console.log("Opening folder selection dialog (simulation)");
+  };
+
   return (
     <>
       <div className="text-center mt-10 mb-12 animate-slide-down">
@@ -47,11 +59,15 @@ const UrlInputSection = ({
           Download Videos with Ease
         </h1>
         <p className="text-muted-foreground max-w-md mx-auto">
-          Simply paste a video URL from any platform to get started. Enhanced with yt-dlp for maximum compatibility.
+          Simply paste a video URL from any platform to get started.
         </p>
       </div>
       
-      <VideoUrlInput onSubmit={handleUrlSubmit} isLoading={isLoading} />
+      <VideoUrlInput 
+        onSubmit={handleUrlSubmit} 
+        isLoading={isLoading} 
+        onFolderSelect={handleFolderSelect}
+      />
       
       {downloads.length > 0 && (
         <div className="mt-16">
