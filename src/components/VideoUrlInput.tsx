@@ -81,8 +81,8 @@ const VideoUrlInput = ({ onSubmit, isLoading = false, onFolderSelect }: VideoUrl
                   <span className="sr-only">Supported platforms</span>
                 </Button>
               </TooltipTrigger>
-              <TooltipContent side="top" sideOffset={15} className="max-w-xs">
-                <p>Supports videos from any website. Enhanced with yt-dlp for maximum compatibility.</p>
+              <TooltipContent side="top" sideOffset={25} className="max-w-xs">
+                <p>Supports videos from any website.</p>
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
