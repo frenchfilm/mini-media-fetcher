@@ -31,7 +31,7 @@ const FormatSelectionSection = ({
       </div>
       
       {displayImage && (
-        <div className="relative w-full max-w-md mx-auto mb-8 animate-slide-up rounded-2xl overflow-hidden shadow-sm">
+        <div className="relative w-full max-w-md mx-auto mb-4 animate-slide-up rounded-2xl overflow-hidden shadow-sm">
           <img 
             src={displayImage} 
             alt={videoInfo.title}
@@ -50,28 +50,27 @@ const FormatSelectionSection = ({
         </div>
       )}
       
-      <VideoFormatSelector onSelect={onFormatSelect} />
-      
-      <div className="flex justify-center mt-8 animate-slide-up">
+      <div className="flex gap-3 justify-center mt-2 mb-8 animate-slide-up">
         <Button
           onClick={onStartDownload}
           disabled={!selectedFormat}
-          className="w-full max-w-xl"
+          className="px-6"
+          size="lg"
         >
           <Download className="h-4 w-4 mr-2" />
           Start Download
         </Button>
-      </div>
-      
-      <div className="flex justify-center mt-3">
+        
         <Button
-          variant="ghost"
+          variant="outline"
           onClick={onCancel}
-          className="text-muted-foreground hover:text-foreground text-sm"
+          size="lg"
         >
           Cancel
         </Button>
       </div>
+      
+      <VideoFormatSelector onSelect={onFormatSelect} />
     </>
   );
 };

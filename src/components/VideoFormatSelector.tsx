@@ -1,8 +1,7 @@
 
 import { useState } from 'react';
 import { Card } from "@/components/ui/card";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
 import { Check } from 'lucide-react';
 
 export type VideoFormat = {
@@ -39,53 +38,30 @@ const VideoFormatSelector = ({ onSelect }: VideoFormatSelectorProps) => {
   };
 
   return (
-    <Card className="glass-panel p-5 rounded-2xl w-full max-w-xl mx-auto animate-slide-up shadow-sm">
-      <h3 className="text-base font-medium text-foreground mb-4">Select Format & Quality</h3>
+    <Card className="glass-panel p-4 rounded-xl w-full max-w-xl mx-auto animate-slide-up shadow-sm">
+      <h3 className="text-sm font-medium text-foreground mb-3">Select Format & Quality</h3>
       
-      <RadioGroup 
-        value={selectedFormat} 
-        onValueChange={handleFormatChange}
-        className="grid gap-3"
-      >
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
         {FORMATS.map((format) => (
-          <div
+          <Button
             key={format.id}
-            className={`flex items-center rounded-xl border p-3 cursor-pointer transition-all-200 ${
-              selectedFormat === format.id
-                ? 'border-primary/50 bg-primary/5'
-                : 'border-border bg-white hover:bg-muted/50'
+            variant={selectedFormat === format.id ? "default" : "outline"}
+            size="sm"
+            className={`h-auto py-2 justify-start ${
+              selectedFormat === format.id ? 'border-primary/50' : 'border-border'
             }`}
             onClick={() => handleFormatChange(format.id)}
           >
-            <RadioGroupItem 
-              value={format.id} 
-              id={format.id} 
-              className="sr-only" 
-            />
-            <div className="flex-1 space-y-1">
-              <Label
-                htmlFor={format.id}
-                className="text-sm font-medium cursor-pointer flex items-center"
-              >
-                {format.quality}
-                <span className="ml-2 text-xs font-normal text-muted-foreground bg-muted/50 px-2 py-0.5 rounded-full">
-                  {format.resolution}
-                </span>
-              </Label>
-              <p className="text-xs text-muted-foreground">
-                Estimated file size: {format.fileSize}
-              </p>
+            <div className="flex flex-col items-start text-left">
+              <span className="text-xs font-medium">{format.quality}</span>
+              <span className="text-[10px] text-muted-foreground">{format.resolution} • {format.fileSize}</span>
             </div>
-            <div className={`flex-shrink-0 ml-3 w-5 h-5 rounded-full flex items-center justify-center ${
-              selectedFormat === format.id
-                ? 'bg-primary text-primary-foreground'
-                : 'bg-muted'
-            }`}>
-              {selectedFormat === format.id && <Check className="h-3 w-3" />}
-            </div>
-          </div>
+            {selectedFormat === format.id && (
+              <Check className="h-3 w-3 ml-1 shrink-0" />
+            )}
+          </Button>
         ))}
-      </RadioGroup>
+      </div>
     </Card>
   );
 };
