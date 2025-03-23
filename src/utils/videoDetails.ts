@@ -25,98 +25,47 @@ export const getVideoDetails = async (url: string) => {
     let thumbnailUrl = '';
     let previewImage = null;
     let title = 'Video from ' + videoSource.platform;
+    let metadataFetched = false;
     
-    if (videoSource.platform === 'youtube') {
-      // YouTube provides different thumbnail qualities
-      thumbnailUrl = `https://img.youtube.com/vi/${videoSource.id}/mqdefault.jpg`;
-      previewImage = `https://img.youtube.com/vi/${videoSource.id}/maxresdefault.jpg`;
+    // First try the generic oEmbed approach for all platforms
+    try {
+      const response = await fetch(`https://noembed.com/embed?url=${encodeURIComponent(url)}`);
+      const data = await response.json();
       
-      // Try to fetch actual title (in a real app, this would use YouTube API)
-      try {
-        const response = await fetch(`https://noembed.com/embed?url=${url}`);
-        const data = await response.json();
-        if (data.title) {
-          title = data.title;
-        } else {
-          title = `YouTube Video`;
-        }
-      } catch (error) {
-        console.error("Failed to fetch YouTube metadata:", error);
-        title = `YouTube Video`;
-      }
-    } else if (videoSource.platform === 'vimeo') {
-      // Try to fetch Vimeo metadata using noembed
-      try {
-        const response = await fetch(`https://noembed.com/embed?url=${url}`);
-        const data = await response.json();
-        if (data.title) {
-          title = data.title;
-        }
+      // Check if we got valid data from noembed
+      if (!data.error && data.title) {
+        title = data.title;
+        metadataFetched = true;
+        
         if (data.thumbnail_url) {
           thumbnailUrl = data.thumbnail_url;
           previewImage = data.thumbnail_url;
-        } else {
-          thumbnailUrl = `https://placeholder.pics/svg/300x200/DEDEDE/555555/Vimeo%20Video`;
         }
-      } catch (error) {
-        console.error("Failed to fetch Vimeo metadata:", error);
-        title = `Vimeo Video (ID: ${videoSource.id})`;
-        thumbnailUrl = `https://placeholder.pics/svg/300x200/DEDEDE/555555/Vimeo%20Video`;
       }
-    } else if (videoSource.platform === 'dailymotion') {
-      thumbnailUrl = `https://www.dailymotion.com/thumbnail/video/${videoSource.id}`;
-      previewImage = thumbnailUrl;
-      
-      // Try to fetch actual title
-      try {
-        const response = await fetch(`https://noembed.com/embed?url=${url}`);
-        const data = await response.json();
-        if (data.title) {
-          title = data.title;
-        } else {
-          title = `Dailymotion Video`;
-        }
-      } catch (error) {
-        console.error("Failed to fetch Dailymotion metadata:", error);
-        title = `Dailymotion Video`;
-      }
-    } else if (videoSource.platform === 'pornhub') {
-      // PornHub specific handling - they don't support oEmbed
-      title = `Video from PornHub`;
-      thumbnailUrl = `https://placeholder.pics/svg/300x200/DEDEDE/555555/PornHub%20Video`;
-      // In a real app, you would use a server-side proxy to scrape the actual thumbnail
-    } else if (videoSource.platform === 'reddit') {
-      // Reddit specific handling - their videos need special handling
-      title = `Reddit Video`;
-      thumbnailUrl = `https://placeholder.pics/svg/300x200/DEDEDE/555555/Reddit%20Video`;
-      // In a real app, you'd use Reddit's API with proper authentication
-    } else {
-      // For other platforms, try generic oEmbed approach via noembed.com
-      try {
-        const response = await fetch(`https://noembed.com/embed?url=${url}`);
-        const data = await response.json();
+    } catch (error) {
+      console.error("Failed to fetch metadata from noembed:", error);
+      // Continue with platform-specific fallbacks
+    }
+    
+    // If oEmbed failed or didn't provide complete data, use platform-specific fallbacks
+    if (!metadataFetched || !thumbnailUrl) {
+      if (videoSource.platform === 'youtube') {
+        // YouTube provides different thumbnail qualities
+        thumbnailUrl = thumbnailUrl || `https://img.youtube.com/vi/${videoSource.id}/mqdefault.jpg`;
+        previewImage = previewImage || `https://img.youtube.com/vi/${videoSource.id}/maxresdefault.jpg`;
         
-        // Check if we got an error from noembed
-        if (data.error) {
-          console.log(`Platform ${videoSource.platform} not supported by oEmbed:`, data.error);
-          title = `Video from ${videoSource.platform}`;
-          thumbnailUrl = `https://placeholder.pics/svg/300x200/DEDEDE/555555/Video%20from%20${videoSource.platform}`;
-        } else {
-          if (data.title) {
-            title = data.title;
-          }
-          
-          if (data.thumbnail_url) {
-            thumbnailUrl = data.thumbnail_url;
-            previewImage = data.thumbnail_url;
-          } else {
-            thumbnailUrl = `https://placeholder.pics/svg/300x200/DEDEDE/555555/Video%20from%20${videoSource.platform}`;
-          }
+        if (!metadataFetched) {
+          title = `YouTube Video`;
         }
-      } catch (error) {
-        console.error(`Failed to fetch metadata for ${videoSource.platform}:`, error);
+      } else if (videoSource.platform === 'vimeo' && !thumbnailUrl) {
+        // We already tried oEmbed which is best for Vimeo
+        thumbnailUrl = `https://placeholder.pics/svg/300x200/DEDEDE/555555/Vimeo%20Video`;
+      } else if (videoSource.platform === 'dailymotion' && !thumbnailUrl) {
+        thumbnailUrl = `https://www.dailymotion.com/thumbnail/video/${videoSource.id}`;
+        previewImage = thumbnailUrl;
+      } else if (!thumbnailUrl) {
+        // If we don't have a thumbnail URL at this point, use a generic one
         thumbnailUrl = `https://placeholder.pics/svg/300x200/DEDEDE/555555/Video%20from%20${videoSource.platform}`;
-        title = `Video from ${videoSource.platform}`;
       }
     }
 
