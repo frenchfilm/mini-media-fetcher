@@ -43,6 +43,16 @@ export const extractVideoId = (url: string): { id: string; platform: string } | 
   const instaMatch = url.match(instaRegex);
   if (instaMatch) return { id: instaMatch[1], platform: 'instagram' };
   
+  // PornHub specific detection
+  const pornhubRegex = /(?:pornhub\.com\/(?:view_video\.php\?viewkey=|embed\/))([a-zA-Z0-9]+)/i;
+  const pornhubMatch = url.match(pornhubRegex);
+  if (pornhubMatch) return { id: pornhubMatch[1], platform: 'pornhub' };
+  
+  // Reddit videos
+  const redditRegex = /reddit\.com\/r\/[^\/]+\/comments\/([a-zA-Z0-9]+)/i;
+  const redditMatch = url.match(redditRegex);
+  if (redditMatch) return { id: redditMatch[1], platform: 'reddit' };
+  
   // If we can't identify the platform specifically, extract the domain as the platform
   const domain = extractDomain(url);
   if (domain && domain !== 'unknown-domain') {
