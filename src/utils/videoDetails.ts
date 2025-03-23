@@ -1,58 +1,119 @@
 
 import { extractVideoId } from "./videoExtraction";
 import { extractDomain, generateRandomId } from "./urlValidation";
+import { toast } from "sonner";
 
 // Function to get video details from the URL
-export const getVideoDetails = (url: string) => {
-  // Extract video ID based on the platform
-  const videoSource = extractVideoId(url);
-  if (!videoSource) {
-    // For non-standard platforms, create a generic video source
+export const getVideoDetails = async (url: string) => {
+  try {
+    // Extract video ID based on the platform
+    const videoSource = extractVideoId(url);
+    
+    if (!videoSource) {
+      // For non-standard platforms, create a generic video source
+      return {
+        id: generateRandomId(),
+        title: 'Video from ' + extractDomain(url),
+        thumbnailUrl: `https://placeholder.pics/svg/300x200/DEDEDE/555555/Video`,
+        previewImage: null,
+        url,
+        platform: 'generic'
+      };
+    }
+
+    // Get thumbnail URL and title based on platform
+    let thumbnailUrl = '';
+    let previewImage = null;
+    let title = 'Video from ' + videoSource.platform;
+    
+    if (videoSource.platform === 'youtube') {
+      // YouTube provides different thumbnail qualities
+      thumbnailUrl = `https://img.youtube.com/vi/${videoSource.id}/mqdefault.jpg`;
+      previewImage = `https://img.youtube.com/vi/${videoSource.id}/maxresdefault.jpg`;
+      
+      // Try to fetch actual title (in a real app, this would use YouTube API)
+      try {
+        const response = await fetch(`https://noembed.com/embed?url=${url}`);
+        const data = await response.json();
+        if (data.title) {
+          title = data.title;
+        } else {
+          title = `YouTube Video`;
+        }
+      } catch (error) {
+        console.error("Failed to fetch YouTube metadata:", error);
+        title = `YouTube Video`;
+      }
+    } else if (videoSource.platform === 'vimeo') {
+      // Try to fetch Vimeo metadata using noembed
+      try {
+        const response = await fetch(`https://noembed.com/embed?url=${url}`);
+        const data = await response.json();
+        if (data.title) {
+          title = data.title;
+        }
+        if (data.thumbnail_url) {
+          thumbnailUrl = data.thumbnail_url;
+          previewImage = data.thumbnail_url;
+        } else {
+          thumbnailUrl = `https://placeholder.pics/svg/300x200/DEDEDE/555555/Vimeo%20Video`;
+        }
+      } catch (error) {
+        console.error("Failed to fetch Vimeo metadata:", error);
+        title = `Vimeo Video (ID: ${videoSource.id})`;
+        thumbnailUrl = `https://placeholder.pics/svg/300x200/DEDEDE/555555/Vimeo%20Video`;
+      }
+    } else if (videoSource.platform === 'dailymotion') {
+      thumbnailUrl = `https://www.dailymotion.com/thumbnail/video/${videoSource.id}`;
+      previewImage = thumbnailUrl;
+      
+      // Try to fetch actual title
+      try {
+        const response = await fetch(`https://noembed.com/embed?url=${url}`);
+        const data = await response.json();
+        if (data.title) {
+          title = data.title;
+        } else {
+          title = `Dailymotion Video`;
+        }
+      } catch (error) {
+        console.error("Failed to fetch Dailymotion metadata:", error);
+        title = `Dailymotion Video`;
+      }
+    } else {
+      // For other platforms, try generic oEmbed approach via noembed.com
+      try {
+        const response = await fetch(`https://noembed.com/embed?url=${url}`);
+        const data = await response.json();
+        
+        if (data.title) {
+          title = data.title;
+        }
+        
+        if (data.thumbnail_url) {
+          thumbnailUrl = data.thumbnail_url;
+          previewImage = data.thumbnail_url;
+        } else {
+          thumbnailUrl = `https://placeholder.pics/svg/300x200/DEDEDE/555555/Video%20from%20${videoSource.platform}`;
+        }
+      } catch (error) {
+        console.error(`Failed to fetch metadata for ${videoSource.platform}:`, error);
+        thumbnailUrl = `https://placeholder.pics/svg/300x200/DEDEDE/555555/Video%20from%20${videoSource.platform}`;
+        title = `Video from ${videoSource.platform}`;
+      }
+    }
+
     return {
-      id: generateRandomId(),
-      title: 'Video from ' + extractDomain(url),
-      thumbnailUrl: `https://placeholder.pics/svg/300x200/DEDEDE/555555/Video`,
+      id: videoSource.id,
+      title,
+      thumbnailUrl,
+      previewImage,
       url,
-      platform: 'generic'
+      platform: videoSource.platform
     };
+  } catch (error) {
+    console.error("Error getting video details:", error);
+    toast.error("Failed to retrieve video information");
+    return null;
   }
-
-  // Get thumbnail URL based on platform
-  let thumbnailUrl = '';
-  let title = 'Video from ' + videoSource.platform;
-  
-  if (videoSource.platform === 'youtube') {
-    thumbnailUrl = `https://img.youtube.com/vi/${videoSource.id}/mqdefault.jpg`;
-    title = `YouTube Video (ID: ${videoSource.id})`;
-  } else if (videoSource.platform === 'vimeo') {
-    // In a real app, you'd fetch the thumbnail from Vimeo API
-    thumbnailUrl = `https://placeholder.pics/svg/300x200/DEDEDE/555555/Vimeo%20Video%20${videoSource.id}`;
-    title = `Vimeo Video (ID: ${videoSource.id})`;
-  } else if (videoSource.platform === 'dailymotion') {
-    thumbnailUrl = `https://www.dailymotion.com/thumbnail/video/${videoSource.id}`;
-    title = `Dailymotion Video (ID: ${videoSource.id})`;
-  } else if (videoSource.platform === 'facebook') {
-    thumbnailUrl = `https://placeholder.pics/svg/300x200/DEDEDE/555555/Facebook%20Video`;
-    title = `Facebook Video`;
-  } else if (videoSource.platform === 'twitter') {
-    thumbnailUrl = `https://placeholder.pics/svg/300x200/DEDEDE/555555/Twitter%20Video`;
-    title = `Twitter Video`;
-  } else if (videoSource.platform === 'tiktok') {
-    thumbnailUrl = `https://placeholder.pics/svg/300x200/DEDEDE/555555/TikTok%20Video`;
-    title = `TikTok Video`;
-  } else if (videoSource.platform === 'instagram') {
-    thumbnailUrl = `https://placeholder.pics/svg/300x200/DEDEDE/555555/Instagram%20Video`;
-    title = `Instagram Video`;
-  } else {
-    thumbnailUrl = `https://placeholder.pics/svg/300x200/DEDEDE/555555/Video%20from%20${videoSource.platform}`;
-    title = `Video from ${videoSource.platform}`;
-  }
-
-  return {
-    id: videoSource.id,
-    title,
-    thumbnailUrl,
-    url,
-    platform: videoSource.platform
-  };
 };

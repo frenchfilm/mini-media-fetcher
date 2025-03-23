@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from 'sonner';
-import { ArrowRight, X, Info } from 'lucide-react';
+import { ArrowRight, X, Info, Loader2 } from 'lucide-react';
 import { validateUrl } from '@/utils/urlValidation';
 import { 
   Tooltip,
@@ -14,9 +14,10 @@ import {
 
 interface VideoUrlInputProps {
   onSubmit: (url: string) => void;
+  isLoading?: boolean;
 }
 
-const VideoUrlInput = ({ onSubmit }: VideoUrlInputProps) => {
+const VideoUrlInput = ({ onSubmit, isLoading = false }: VideoUrlInputProps) => {
   const [url, setUrl] = useState('');
   const [isValidating, setIsValidating] = useState(false);
 
@@ -34,17 +35,20 @@ const VideoUrlInput = ({ onSubmit }: VideoUrlInputProps) => {
     setTimeout(() => {
       if (validateUrl(url)) {
         onSubmit(url);
-        toast.success("URL accepted for processing");
+        // Toast will be shown after metadata is fetched
       } else {
         toast.error("Please enter a valid URL format");
       }
       setIsValidating(false);
-    }, 800);
+    }, 300);
   };
 
   const clearInput = () => {
     setUrl('');
   };
+
+  // Show loading state from either local validation or parent metadata loading
+  const showLoading = isValidating || isLoading;
 
   return (
     <form 
@@ -58,6 +62,7 @@ const VideoUrlInput = ({ onSubmit }: VideoUrlInputProps) => {
           value={url}
           onChange={(e) => setUrl(e.target.value)}
           className="border-0 h-14 px-4 bg-transparent text-foreground placeholder:text-muted-foreground/70 focus-visible:ring-0 focus-visible:ring-offset-0 text-base"
+          disabled={showLoading}
         />
         
         <Tooltip>
@@ -67,6 +72,7 @@ const VideoUrlInput = ({ onSubmit }: VideoUrlInputProps) => {
               variant="ghost"
               size="icon"
               className="mx-1 h-8 w-8 rounded-full text-muted-foreground hover:text-foreground"
+              disabled={showLoading}
             >
               <Info className="h-4 w-4" />
               <span className="sr-only">Supported platforms</span>
@@ -77,7 +83,7 @@ const VideoUrlInput = ({ onSubmit }: VideoUrlInputProps) => {
           </TooltipContent>
         </Tooltip>
         
-        {url && (
+        {url && !showLoading && (
           <Button
             type="button"
             variant="ghost"
@@ -93,10 +99,14 @@ const VideoUrlInput = ({ onSubmit }: VideoUrlInputProps) => {
         <Button
           type="submit"
           size="icon"
-          disabled={isValidating || !url.trim()}
+          disabled={showLoading || !url.trim()}
           className="h-12 w-12 rounded-xl mr-1 shadow-sm transition-all-200"
         >
-          <ArrowRight className="h-5 w-5" />
+          {showLoading ? (
+            <Loader2 className="h-5 w-5 animate-spin" />
+          ) : (
+            <ArrowRight className="h-5 w-5" />
+          )}
           <span className="sr-only">Get Video</span>
         </Button>
       </div>

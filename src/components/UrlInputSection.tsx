@@ -1,4 +1,5 @@
 
+import { useState } from "react";
 import { toast } from "sonner";
 import VideoUrlInput from "@/components/VideoUrlInput";
 import DownloadHistory, { DownloadItem } from "@/components/DownloadHistory";
@@ -17,15 +18,25 @@ const UrlInputSection = ({
   onClearHistory, 
   onOpenFile 
 }: UrlInputSectionProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   
-  const handleUrlSubmit = (url: string) => {
-    // Get actual video details from the URL
-    const videoDetails = getVideoDetails(url);
+  const handleUrlSubmit = async (url: string) => {
+    setIsLoading(true);
     
-    if (videoDetails) {
-      onUrlSubmit(url, videoDetails);
-    } else {
-      toast.error("Could not retrieve video details. Please check the URL.");
+    try {
+      // Get actual video details from the URL
+      const videoDetails = await getVideoDetails(url);
+      
+      if (videoDetails) {
+        onUrlSubmit(url, videoDetails);
+      } else {
+        toast.error("Could not retrieve video details. Please check the URL.");
+      }
+    } catch (error) {
+      console.error("Error processing video URL:", error);
+      toast.error("Failed to process the video URL");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -40,7 +51,7 @@ const UrlInputSection = ({
         </p>
       </div>
       
-      <VideoUrlInput onSubmit={handleUrlSubmit} />
+      <VideoUrlInput onSubmit={handleUrlSubmit} isLoading={isLoading} />
       
       {downloads.length > 0 && (
         <div className="mt-16">

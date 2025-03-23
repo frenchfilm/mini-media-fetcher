@@ -44,6 +44,7 @@ const Index = () => {
     setVideoUrl(url);
     setVideoInfo(videoDetails);
     setAppState(AppState.SELECT_FORMAT);
+    toast.success("Video information retrieved successfully");
   };
 
   const handleFormatSelect = (format: VideoFormat) => {

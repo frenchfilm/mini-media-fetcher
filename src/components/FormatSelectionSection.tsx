@@ -20,6 +20,9 @@ const FormatSelectionSection = ({
   onStartDownload,
   onCancel
 }: FormatSelectionSectionProps) => {
+  // Use the best available image for display
+  const displayImage = videoInfo.previewImage || videoInfo.thumbnailUrl;
+  
   return (
     <>
       <div className="text-center mb-8 animate-slide-down">
@@ -27,12 +30,21 @@ const FormatSelectionSection = ({
         <p className="text-sm text-muted-foreground">{videoUrl}</p>
       </div>
       
-      {videoInfo.thumbnailUrl && (
+      {displayImage && (
         <div className="relative w-full max-w-md mx-auto mb-8 animate-slide-up rounded-2xl overflow-hidden shadow-sm">
           <img 
-            src={videoInfo.thumbnailUrl} 
+            src={displayImage} 
             alt={videoInfo.title}
             className="w-full h-auto object-cover" 
+            onError={(e) => {
+              // If the preview image fails, fall back to thumbnail
+              if (e.currentTarget.src !== videoInfo.thumbnailUrl && videoInfo.thumbnailUrl) {
+                e.currentTarget.src = videoInfo.thumbnailUrl;
+              } else {
+                // If both fail, use a placeholder
+                e.currentTarget.src = "https://placeholder.pics/svg/300x200/DEDEDE/555555/Video";
+              }
+            }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
         </div>
