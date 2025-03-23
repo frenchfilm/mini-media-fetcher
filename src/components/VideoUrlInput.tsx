@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from 'sonner';
-import { ArrowRight, X, Info, Loader2, FolderOpen } from 'lucide-react';
+import { ArrowRight, X, Loader2, FolderOpen } from 'lucide-react';
 import { validateUrl } from '@/utils/urlValidation';
 import { 
   Tooltip,
@@ -11,11 +11,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 
 interface VideoUrlInputProps {
   onSubmit: (url: string) => void;
@@ -71,24 +66,6 @@ const VideoUrlInput = ({ onSubmit, isLoading = false, onFolderSelect }: VideoUrl
             className="border-0 h-14 px-4 bg-transparent text-foreground placeholder:text-muted-foreground/70 focus-visible:ring-0 focus-visible:ring-offset-0 text-base"
             disabled={showLoading}
           />
-          
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button
-                type="button"
-                variant="ghost"
-                size="icon"
-                className="mx-1 h-8 w-8 rounded-full text-muted-foreground hover:text-foreground"
-                disabled={showLoading}
-              >
-                <Info className="h-4 w-4" />
-                <span className="sr-only">Supported platforms</span>
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent side="top" align="center" className="max-w-xs">
-              <p>Supports videos from any website.</p>
-            </PopoverContent>
-          </Popover>
           
           {url && !showLoading && (
             <Button
