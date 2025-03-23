@@ -11,6 +11,11 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 interface VideoUrlInputProps {
   onSubmit: (url: string) => void;
@@ -67,25 +72,23 @@ const VideoUrlInput = ({ onSubmit, isLoading = false, onFolderSelect }: VideoUrl
             disabled={showLoading}
           />
           
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="icon"
-                  className="mx-1 h-8 w-8 rounded-full text-muted-foreground hover:text-foreground"
-                  disabled={showLoading}
-                >
-                  <Info className="h-4 w-4" />
-                  <span className="sr-only">Supported platforms</span>
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent side="top" sideOffset={25} className="max-w-xs">
-                <p>Supports videos from any website.</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="mx-1 h-8 w-8 rounded-full text-muted-foreground hover:text-foreground"
+                disabled={showLoading}
+              >
+                <Info className="h-4 w-4" />
+                <span className="sr-only">Supported platforms</span>
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent side="top" align="center" className="max-w-xs">
+              <p>Supports videos from any website.</p>
+            </PopoverContent>
+          </Popover>
           
           {url && !showLoading && (
             <Button
