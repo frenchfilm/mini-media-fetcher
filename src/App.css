@@ -1,4 +1,3 @@
-
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -83,6 +82,7 @@
 
 .dark .icon-button {
   color: #e8d1aa; /* Updated to specified background color */
+  background-color: transparent;
 }
 
 /* Improved input contrast */
@@ -217,4 +217,19 @@
   color: #e8d1aa !important;
   border: 1px solid #e8d1aa !important;
   font-weight: 500 !important;
+}
+
+/* All buttons use the same consistent styling */
+.app-button {
+  background-color: #0f1118 !important;
+  color: white !important;
+  border: 1px solid #0f1118 !important;
+  font-weight: 600 !important;
+}
+
+.dark .app-button {
+  background-color: #e8d1aa !important;
+  color: #0f1118 !important;
+  border: 1px solid #e8d1aa !important;
+  font-weight: 600 !important;
 }

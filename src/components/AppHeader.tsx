@@ -48,10 +48,10 @@ const AppHeader = ({ downloadsCount }: AppHeaderProps) => {
         </div>
         
         <Button
-          variant="contrast"
+          variant="highContrast"
           size="icon"
           onClick={() => setSettingsOpen(true)}
-          className="h-10 w-10 rounded-full bg-secondary border border-secondary/70 text-primary dark:bg-primary dark:text-secondary dark:border-primary"
+          className="h-10 w-10 rounded-full"
         >
           <Settings className="h-5 w-5" />
           <span className="sr-only">Settings</span>
