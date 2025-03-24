@@ -17,7 +17,7 @@
     --primary: 20 30% 7%;
     --primary-foreground: 40 60% 96%;
 
-    --secondary: 38 57% 80%;
+    --secondary: 40 50% 90%;
     --secondary-foreground: 20 30% 10%;
 
     --muted: 38 30% 85%;
@@ -96,6 +96,12 @@
   
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-muted-foreground/30;
+  }
+
+  /* Ensure placeholders are readable in dark mode */
+  .dark input::placeholder,
+  .dark textarea::placeholder {
+    @apply text-muted-foreground opacity-70;
   }
 }
 

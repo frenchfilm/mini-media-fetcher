@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -34,7 +33,6 @@ const Index = () => {
   const [newsletterOpen, setNewsletterOpen] = useState<boolean>(false);
   const { downloads, addDownload, clearHistory } = useDownloadHistory();
   
-  // Check if download directory exists on component mount
   useEffect(() => {
     const directoryExists = ensureDownloadDirectoryExists();
     if (!directoryExists) {
@@ -65,7 +63,6 @@ const Index = () => {
   const handleDownloadComplete = () => {
     if (!videoInfo || !selectedFormat) return;
     
-    // Add to download history with proper file path
     const filePath = getVideoFilePath(
       videoInfo.title, 
       selectedFormat.id.split('-')[0]
@@ -83,14 +80,12 @@ const Index = () => {
     
     addDownload(newDownloadItem);
     
-    // Show information about simulation mode
     if (!isDesktopEnvironment()) {
       toast.info("Download completed (simulation mode). In a desktop app, the file would be saved to your Downloads folder.");
     } else {
       toast.success("Download completed successfully!");
     }
     
-    // Reset app state
     setAppState(AppState.INPUT_URL);
     setVideoUrl("");
     setVideoInfo(null);
@@ -124,7 +119,6 @@ const Index = () => {
                 onOpenFile={handleOpenFile}
               />
               
-              {/* Home screen action buttons */}
               <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Button 
                   variant="outline" 
@@ -169,17 +163,15 @@ const Index = () => {
         </div>
       </main>
       
-      {/* Newsletter Dialog */}
       <NewsletterDialog
         open={newsletterOpen}
         onOpenChange={setNewsletterOpen}
       />
       
-      {/* Footer */}
       <footer className="py-6 px-6 text-center text-sm text-muted-foreground mt-auto">
         <p className="italic">
-          Quiet, ad-free, lightweight, private - just bare code.<br />
-          Apps as Nature intended them.
+          Our Apps are bare - quiet, private, ad-free and lightweight.<br />
+          Just plain functions, as Nature intended them.
         </p>
       </footer>
     </div>

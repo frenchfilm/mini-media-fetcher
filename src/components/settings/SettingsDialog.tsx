@@ -6,7 +6,6 @@ import DownloadSettings from "./DownloadSettings";
 import AppSettings from "./AppSettings";
 import AboutSettings from "./AboutSettings";
 import { Button } from "@/components/ui/button";
-import { X } from "lucide-react";
 
 interface SettingsDialogProps {
   open: boolean;
@@ -75,30 +74,27 @@ const SettingsDialog = ({
               </TabsTrigger>
             </TabsList>
             
-            <TabsContent value="download" className="space-y-4 mt-2">
-              <h3 className="text-lg font-fraunces mb-4">Download Settings</h3>
-              <DownloadSettings />
-            </TabsContent>
-            
-            <TabsContent value="app" className="space-y-4 mt-2">
-              <h3 className="text-lg font-fraunces mb-4">Application Settings</h3>
-              <AppSettings 
-                licenseKey={licenseKey}
-                onLicenseKeyChange={onLicenseKeyChange}
-              />
-            </TabsContent>
-            
-            <TabsContent value="about" className="mt-2">
-              <AboutSettings 
-                licenseKey={licenseKey}
-              />
-            </TabsContent>
+            <div className="min-h-[360px]">
+              <TabsContent value="download" className="space-y-4 mt-2">
+                <h3 className="text-lg font-fraunces mb-4">Download Settings</h3>
+                <DownloadSettings />
+              </TabsContent>
+              
+              <TabsContent value="app" className="space-y-4 mt-2">
+                <h3 className="text-lg font-fraunces mb-4">Application Settings</h3>
+                <AppSettings 
+                  licenseKey={licenseKey}
+                  onLicenseKeyChange={onLicenseKeyChange}
+                />
+              </TabsContent>
+              
+              <TabsContent value="about" className="mt-2">
+                <AboutSettings 
+                  licenseKey={licenseKey}
+                />
+              </TabsContent>
+            </div>
           </Tabs>
-        </div>
-        
-        <div className="softbare-footer">
-          <p className="font-medium">Our Apps are bare - as Nature intended them.</p>
-          <p>Quiet by design, lightweight, no ads, no tracking, just plain function.</p>
         </div>
       </DialogContent>
     </Dialog>
