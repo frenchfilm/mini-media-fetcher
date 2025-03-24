@@ -87,13 +87,6 @@ const UrlInputSection = ({ onUrlSubmit, onOpenNewsletter }: UrlInputSectionProps
           Subscribe to Newsletter
         </Button>
       </div>
-      
-      <footer className="py-6 px-6 text-center text-sm text-muted-foreground mt-auto">
-        <p className="italic">
-          Our Apps are bare - quiet, private, ad-free and lightweight.<br />
-          Just plain functions, as Nature intended them.
-        </p>
-      </footer>
     </>
   );
 };
