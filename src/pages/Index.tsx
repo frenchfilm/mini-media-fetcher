@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { VideoFormat } from "@/components/VideoFormatSelector";
 import DownloadProgress from "@/components/DownloadProgress";
@@ -7,13 +8,16 @@ import { DownloadItem } from "@/components/DownloadHistory";
 import AppHeader from "@/components/AppHeader";
 import UrlInputSection from "@/components/UrlInputSection";
 import FormatSelectionSection from "@/components/FormatSelectionSection";
-import { useDownloadHistory } from "@/hooks/useDownloadHistory";
+import NewsletterDialog from "@/components/NewsletterDialog";
+import { Button } from "@/components/ui/button";
 import { 
   getVideoFilePath, 
   ensureDownloadDirectoryExists, 
   isDesktopEnvironment,
   openFileLocation
 } from "@/utils/videoUtils";
+import { MessageSquare, Mail } from "lucide-react";
+import { useDownloadHistory } from "@/hooks/useDownloadHistory";
 
 enum AppState {
   INPUT_URL = "input_url",
@@ -22,10 +26,12 @@ enum AppState {
 }
 
 const Index = () => {
+  const navigate = useNavigate();
   const [appState, setAppState] = useState<AppState>(AppState.INPUT_URL);
   const [videoUrl, setVideoUrl] = useState<string>("");
   const [videoInfo, setVideoInfo] = useState<any>(null);
   const [selectedFormat, setSelectedFormat] = useState<VideoFormat | null>(null);
+  const [newsletterOpen, setNewsletterOpen] = useState<boolean>(false);
   const { downloads, addDownload, clearHistory } = useDownloadHistory();
   
   // Check if download directory exists on component mount
@@ -110,12 +116,35 @@ const Index = () => {
       <main className="flex-1 container max-w-4xl mx-auto px-4 pb-10 pt-4">
         <div className="space-y-6">
           {appState === AppState.INPUT_URL && (
-            <UrlInputSection
-              onUrlSubmit={handleUrlSubmit}
-              downloads={downloads}
-              onClearHistory={clearHistory}
-              onOpenFile={handleOpenFile}
-            />
+            <>
+              <UrlInputSection
+                onUrlSubmit={handleUrlSubmit}
+                downloads={downloads}
+                onClearHistory={clearHistory}
+                onOpenFile={handleOpenFile}
+              />
+              
+              {/* Home screen action buttons */}
+              <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Button 
+                  variant="outline" 
+                  onClick={() => navigate('/contact')}
+                  className="w-full sm:w-auto"
+                >
+                  <MessageSquare className="h-4 w-4 mr-2" />
+                  Request Feature / Report Bugs
+                </Button>
+                
+                <Button 
+                  variant="outline" 
+                  onClick={() => setNewsletterOpen(true)}
+                  className="w-full sm:w-auto"
+                >
+                  <Mail className="h-4 w-4 mr-2" />
+                  Subscribe to Newsletter
+                </Button>
+              </div>
+            </>
           )}
           
           {appState === AppState.SELECT_FORMAT && videoInfo && (
@@ -140,7 +169,13 @@ const Index = () => {
         </div>
       </main>
       
-      {/* Lightweight footer that reflects SoftBare philosophy */}
+      {/* Newsletter Dialog */}
+      <NewsletterDialog
+        open={newsletterOpen}
+        onOpenChange={setNewsletterOpen}
+      />
+      
+      {/* Footer */}
       <footer className="py-4 px-6 text-center text-sm text-muted-foreground">
         <p>SoftBare Video Downloader • Apps as nature intended them</p>
       </footer>

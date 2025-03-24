@@ -35,6 +35,36 @@
 
     --radius: 0.75rem;
   }
+  
+  .dark {
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
+
+    --card: 224 71% 4%;
+    --card-foreground: 213 31% 91%;
+
+    --popover: 224 71% 4%;
+    --popover-foreground: 213 31% 91%;
+
+    --primary: 210 100% 60%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 222 47% 12%;
+    --secondary-foreground: 213 31% 91%;
+
+    --muted: 223 47% 11%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 222 47% 12%;
+    --accent-foreground: 213 31% 91%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 210 100% 60%;
+  }
 }
 
 @layer base {
@@ -43,9 +73,11 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
-    font-feature-settings: "salt" on, "ss01" on, "ss02" on, "cv01" on, "cv02" on,
-      "cv03" on, "cv04" on;
+    @apply bg-background text-foreground antialiased font-worksans;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-fraunces;
   }
   
   /* Custom scrollbar */
@@ -92,5 +124,13 @@
   .glass-button {
     @apply bg-white/90 backdrop-blur-8 border border-white/20 shadow-sm 
            hover:bg-white/95 active:bg-white/80 transition-all-200;
+  }
+  
+  .app-logo {
+    @apply font-barlow text-primary-dark;
+  }
+  
+  .app-title {
+    @apply font-fraunces text-primary-dark;
   }
 }
