@@ -113,8 +113,8 @@ const Index = () => {
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-background to-secondary/30">
       <AppHeader downloadsCount={downloads.length} />
       
-      <main className="flex-1 container max-w-4xl mx-auto px-4 pb-10 pt-4">
-        <div className="space-y-6">
+      <main className="flex-1 container max-w-4xl mx-auto px-4 pb-10 pt-4 flex flex-col">
+        <div className="space-y-6 flex-1">
           {appState === AppState.INPUT_URL && (
             <>
               <UrlInputSection
@@ -129,7 +129,7 @@ const Index = () => {
                 <Button 
                   variant="outline" 
                   onClick={() => navigate('/contact')}
-                  className="w-full sm:w-auto"
+                  className="w-full sm:w-auto bg-white border border-secondary/70"
                 >
                   <MessageSquare className="h-4 w-4 mr-2" />
                   Request Feature / Report Bugs
@@ -138,7 +138,7 @@ const Index = () => {
                 <Button 
                   variant="outline" 
                   onClick={() => setNewsletterOpen(true)}
-                  className="w-full sm:w-auto"
+                  className="w-full sm:w-auto bg-white border border-secondary/70"
                 >
                   <Mail className="h-4 w-4 mr-2" />
                   Subscribe to Newsletter
@@ -176,8 +176,11 @@ const Index = () => {
       />
       
       {/* Footer */}
-      <footer className="py-4 px-6 text-center text-sm text-muted-foreground">
-        <p>SoftBare Video Downloader • Apps as nature intended them</p>
+      <footer className="py-6 px-6 text-center text-sm text-muted-foreground mt-auto">
+        <p className="italic">
+          Quiet, ad-free, lightweight, private - just bare code.<br />
+          Apps as Nature intended them.
+        </p>
       </footer>
     </div>
   );

@@ -30,11 +30,10 @@ const AppHeader = ({ downloadsCount }: AppHeaderProps) => {
           <img 
             src="/lovable-uploads/ee37b3bc-4867-4363-924f-9090d70c081a.png" 
             alt="SoftBare Logo" 
-            className="h-11 w-auto mr-3" 
+            className="h-20 w-auto mr-4" 
           />
           <div className="flex flex-col">
-            <h1 className="text-lg font-fraunces leading-tight">SoftBare</h1>
-            <h2 className="text-base font-fraunces leading-tight">Video Downloader</h2>
+            <h1 className="text-xl font-worksans font-semibold leading-tight">SoftBare Video Downloader</h1>
             <div className="flex items-center space-x-2 text-xs">
               <span>{version}</span>
               <button 
@@ -51,7 +50,7 @@ const AppHeader = ({ downloadsCount }: AppHeaderProps) => {
           variant="outline"
           size="icon"
           onClick={() => setSettingsOpen(true)}
-          className="h-9 w-9 rounded-full bg-primary text-secondary"
+          className="h-10 w-10 rounded-full bg-white border border-secondary/70"
         >
           <Settings className="h-5 w-5" />
           <span className="sr-only">Settings</span>

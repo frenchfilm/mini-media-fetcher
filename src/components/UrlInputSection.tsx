@@ -55,7 +55,7 @@ const UrlInputSection = ({
   return (
     <>
       <div className="text-center mt-10 mb-12">
-        <h1 className="text-3xl font-medium mb-4">
+        <h1 className="text-3xl font-fraunces mb-4">
           Download Videos with Ease
         </h1>
         <p className="text-lg mb-2">
@@ -81,11 +81,6 @@ const UrlInputSection = ({
           />
         </div>
       )}
-      
-      <div className="softbare-footer">
-        <p className="font-medium">Our Apps are bare - as Nature intended them.</p>
-        <p>Quiet by design, lightweight, no ads, no tracking, just plain function.</p>
-      </div>
     </>
   );
 };

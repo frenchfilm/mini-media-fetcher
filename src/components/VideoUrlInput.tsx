@@ -48,13 +48,27 @@ const VideoUrlInput = ({ onSubmit, isLoading = false, onFolderSelect }: VideoUrl
   return (
     <form 
       onSubmit={handleSubmit} 
-      className="w-full max-w-xl mx-auto"
+      className="w-full max-w-2xl mx-auto"
     >
-      <div className="flex items-center gap-2">
-        <div className="rounded-md bg-white border border-secondary flex items-center overflow-hidden flex-1">
+      <div className="flex items-stretch gap-2">
+        {onFolderSelect && (
+          <Button
+            type="button"
+            variant="outline"
+            size="icon"
+            onClick={onFolderSelect}
+            className="h-12 w-12 rounded-md bg-white border border-secondary/70 text-primary"
+            disabled={showLoading}
+          >
+            <FolderOpen className="h-5 w-5" />
+            <span className="sr-only">Select folder</span>
+          </Button>
+        )}
+        
+        <div className="rounded-md bg-white border border-secondary/70 flex items-center overflow-hidden flex-1">
           <Input
             type="text"
-            placeholder="Paste or type url here"
+            placeholder="Paste URL here"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             className="border-0 h-12 px-4 bg-transparent text-foreground focus-visible:ring-0 focus-visible:ring-offset-0"
@@ -73,35 +87,21 @@ const VideoUrlInput = ({ onSubmit, isLoading = false, onFolderSelect }: VideoUrl
               <span className="sr-only">Clear</span>
             </Button>
           )}
-          
-          <Button
-            type="submit"
-            size="icon"
-            disabled={showLoading || !url.trim()}
-            className="h-10 w-10 rounded-md mr-1 bg-primary text-secondary"
-          >
-            {showLoading ? (
-              <Loader2 className="h-5 w-5 animate-spin" />
-            ) : (
-              <ArrowRight className="h-5 w-5" />
-            )}
-            <span className="sr-only">Get Video</span>
-          </Button>
         </div>
         
-        {onFolderSelect && (
-          <Button
-            type="button"
-            variant="outline"
-            size="icon"
-            onClick={onFolderSelect}
-            className="h-12 w-12 rounded-md bg-secondary text-primary"
-            disabled={showLoading}
-          >
-            <FolderOpen className="h-5 w-5" />
-            <span className="sr-only">Select folder</span>
-          </Button>
-        )}
+        <Button
+          type="submit"
+          size="icon"
+          disabled={showLoading || !url.trim()}
+          className="h-12 w-12 rounded-md bg-white border border-secondary/70 text-primary"
+        >
+          {showLoading ? (
+            <Loader2 className="h-5 w-5 animate-spin" />
+          ) : (
+            <ArrowRight className="h-5 w-5" />
+          )}
+          <span className="sr-only">Get Video</span>
+        </Button>
       </div>
     </form>
   );
