@@ -34,12 +34,12 @@ export default {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
-          dark: "#0f1118",
+          dark: "#0f1118", // Updated to specified dark grey
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
-          light: "#f4e7cd",
+          light: "#e8d1aa", // Updated to specified background color
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",

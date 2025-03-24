@@ -52,7 +52,7 @@
 .dark .form-input,
 .dark .form-select,
 .dark .form-textarea {
-  background-color: rgba(84, 65, 53, 0.8);
+  background-color: rgba(32, 32, 45, 0.8); /* Updated to match dark grey */
   border-color: rgba(255, 255, 255, 0.3);
   color: white;
 }
@@ -62,25 +62,25 @@
 }
 
 .dark .button-primary {
-  background-color: #f4e7cd;
-  color: #221F26;
+  background-color: #e8d1aa; /* Updated to specified background color */
+  color: #0f1118; /* Updated to specified primary color */
 }
 
 /* Improved button contrast */
 .dark .button-contrast {
-  background-color: #f4e7cd;
-  color: #221F26;
-  border-color: #f4e7cd;
+  background-color: #e8d1aa; /* Updated to specified background color */
+  color: #0f1118; /* Updated to specified primary color */
+  border-color: #e8d1aa;
 }
 
 .dark .softbare-button {
-  background-color: #f4e7cd;
-  color: #221F26;
-  border-color: #f4e7cd;
+  background-color: #e8d1aa; /* Updated to specified background color */
+  color: #0f1118; /* Updated to specified primary color */
+  border-color: #e8d1aa;
 }
 
 .dark .icon-button {
-  color: #f4e7cd;
+  color: #e8d1aa; /* Updated to specified background color */
 }
 
 /* Improved input contrast */
@@ -89,7 +89,7 @@
 }
 
 .dark .input-contrast {
-  background-color: rgba(84, 65, 53, 0.8);
+  background-color: rgba(32, 32, 45, 0.8); /* Updated to match dark grey */
   color: #ffffff;
   border-color: rgba(255, 255, 255, 0.3);
 }
@@ -106,68 +106,68 @@
 
 /* High contrast buttons */
 .button-high-contrast {
-  background-color: #221F26;
+  background-color: #0f1118; /* Updated to specified primary color */
   color: white;
-  border-color: #221F26;
+  border-color: #0f1118;
 }
 
 .dark .button-high-contrast {
-  background-color: #f4e7cd;
-  color: #221F26;
-  border-color: #f4e7cd;
+  background-color: #e8d1aa; /* Updated to specified background color */
+  color: #0f1118; /* Updated to specified primary color */
+  border-color: #e8d1aa;
 }
 
 /* Enhanced higher contrast buttons for light mode */
 .folder-button {
-  background-color: #221F26 !important;
+  background-color: #0f1118 !important; /* Updated to specified primary color */
   color: white !important;
-  border-color: #221F26 !important;
+  border-color: #0f1118 !important;
 }
 
 .folder-button:hover {
-  background-color: #3a3640 !important;
+  background-color: #1a1e2c !important; /* Slightly lighter version of #0f1118 */
 }
 
 .action-button-dark {
-  background-color: #221F26 !important;
+  background-color: #0f1118 !important; /* Updated to specified primary color */
   color: white !important;
-  border-color: #221F26 !important;
+  border-color: #0f1118 !important;
 }
 
 .action-button-dark:hover {
-  background-color: #3a3640 !important;
+  background-color: #1a1e2c !important; /* Slightly lighter version of #0f1118 */
 }
 
 /* Settings buttons with better contrast */
 .settings-button-high-contrast {
-  background-color: #221F26 !important;
+  background-color: #0f1118 !important; /* Updated to specified primary color */
   color: white !important;
-  border-color: #221F26 !important;
+  border-color: #0f1118 !important;
 }
 
 .settings-button-high-contrast:hover {
-  background-color: #3a3640 !important;
+  background-color: #1a1e2c !important; /* Slightly lighter version of #0f1118 */
 }
 
 .dark .settings-button-high-contrast {
-  background-color: #f4e7cd !important;
-  color: #221F26 !important;
-  border-color: #f4e7cd !important;
+  background-color: #e8d1aa !important; /* Updated to specified background color */
+  color: #0f1118 !important; /* Updated to specified primary color */
+  border-color: #e8d1aa !important;
 }
 
 .dark .settings-button-high-contrast:hover {
-  background-color: #e4d7bd !important;
+  background-color: #d8c19a !important; /* Slightly darker version of #e8d1aa */
 }
 
 /* Format selection buttons high contrast */
 .format-button-selected {
-  background-color: #221F26 !important;
+  background-color: #0f1118 !important; /* Updated to specified primary color */
   color: white !important;
-  border-color: #221F26 !important;
+  border-color: #0f1118 !important;
 }
 
 .dark .format-button-selected {
-  background-color: #f4e7cd !important;
-  color: #221F26 !important;
-  border-color: #f4e7cd !important;
+  background-color: #e8d1aa !important; /* Updated to specified background color */
+  color: #0f1118 !important; /* Updated to specified primary color */
+  border-color: #e8d1aa !important;
 }
