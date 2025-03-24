@@ -43,14 +43,14 @@ const AboutSettings = ({ licenseKey }: AboutSettingsProps) => {
         <div className="flex justify-center mt-4 gap-3">
           <Button 
             variant="outline" 
-            className="softbare-button dark:bg-primary dark:text-secondary-foreground dark:hover:bg-primary/90 dark:border-primary/70" 
+            className="button-high-contrast dark:bg-primary dark:text-secondary-foreground dark:hover:bg-primary/90 dark:border-primary/70" 
             onClick={checkForUpdates}
           >
             Check for Updates
           </Button>
           <Button 
             variant="outline" 
-            className="softbare-button dark:bg-primary dark:text-secondary-foreground dark:hover:bg-primary/90 dark:border-primary/70"
+            className="button-high-contrast dark:bg-primary dark:text-secondary-foreground dark:hover:bg-primary/90 dark:border-primary/70"
             onClick={() => window.open("https://softbare.com", "_blank")}
           >
             <ExternalLink className="h-3.5 w-3.5 mr-1.5" />
@@ -74,7 +74,7 @@ const AboutSettings = ({ licenseKey }: AboutSettingsProps) => {
             </p>
             <Button 
               onClick={() => window.open("https://softbare.com", "_blank")} 
-              className="softbare-button dark:bg-primary dark:text-secondary-foreground dark:hover:bg-primary/90 dark:border-primary/70"
+              className="button-high-contrast dark:bg-primary dark:text-secondary-foreground dark:hover:bg-primary/90 dark:border-primary/70"
             >
               <ExternalLink className="h-4 w-4 mr-2" />
               Visit SoftBare.com

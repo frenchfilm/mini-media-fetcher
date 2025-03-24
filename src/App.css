@@ -103,3 +103,16 @@
 .fade-in {
   animation: fade-in 0.3s ease-out forwards;
 }
+
+/* High contrast buttons */
+.button-high-contrast {
+  background-color: #221F26;
+  color: #f4e7cd;
+  border-color: #221F26;
+}
+
+.dark .button-high-contrast {
+  background-color: #f4e7cd;
+  color: #221F26;
+  border-color: #f4e7cd;
+}

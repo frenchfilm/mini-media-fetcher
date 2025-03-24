@@ -84,7 +84,7 @@ const AppSettings = ({ licenseKey, onLicenseKeyChange }: AppSettingsProps) => {
           <Button 
             variant="outline" 
             onClick={handleUnsubscribe}
-            className="softbare-button w-full dark:bg-primary dark:text-secondary-foreground dark:hover:bg-primary/90 dark:border-primary/70"
+            className="button-high-contrast w-full dark:bg-primary dark:text-secondary-foreground dark:hover:bg-primary/90 dark:border-primary/70"
           >
             Unsubscribe from Newsletter
           </Button>
