@@ -100,6 +100,10 @@ const Index = () => {
     setSelectedFormat(null);
   };
 
+  const handleOpenNewsletter = () => {
+    setNewsletterOpen(true);
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-background to-secondary/30">
       <AppHeader downloadsCount={downloads.length} />
@@ -107,7 +111,10 @@ const Index = () => {
       <main className="flex-1 container max-w-4xl mx-auto px-4 pb-10 pt-4 flex flex-col">
         <div className="space-y-6 flex-1">
           {appState === AppState.INPUT_URL && (
-            <UrlInputSection onUrlSubmit={handleUrlSubmit} />
+            <UrlInputSection 
+              onUrlSubmit={handleUrlSubmit} 
+              onOpenNewsletter={handleOpenNewsletter}
+            />
           )}
           
           {appState === AppState.SELECT_FORMAT && videoInfo && (

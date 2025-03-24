@@ -1,6 +1,7 @@
 
 import { useState } from "react";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 import VideoUrlInput from "@/components/VideoUrlInput";
 import { getVideoDetails } from "@/utils/videoDetails";
 import { isDesktopEnvironment } from "@/utils/fileSystem";
@@ -9,9 +10,11 @@ import { MessageSquare, Mail } from "lucide-react";
 
 interface UrlInputSectionProps {
   onUrlSubmit: (url: string, videoInfo: any) => void;
+  onOpenNewsletter: () => void;
 }
 
-const UrlInputSection = ({ onUrlSubmit }: UrlInputSectionProps) => {
+const UrlInputSection = ({ onUrlSubmit, onOpenNewsletter }: UrlInputSectionProps) => {
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   
   const handleUrlSubmit = async (url: string) => {
@@ -68,7 +71,7 @@ const UrlInputSection = ({ onUrlSubmit }: UrlInputSectionProps) => {
       <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
         <Button 
           variant="contrast" 
-          onClick={() => toast.info("Request feature or report bugs")}
+          onClick={() => navigate("/contact")}
           className="w-full sm:w-auto action-button-dark dark:bg-primary dark:text-secondary dark:border-primary/70"
         >
           <MessageSquare className="h-4 w-4 mr-2" />
@@ -77,7 +80,7 @@ const UrlInputSection = ({ onUrlSubmit }: UrlInputSectionProps) => {
         
         <Button 
           variant="contrast" 
-          onClick={() => toast.info("Subscribe to newsletter")}
+          onClick={onOpenNewsletter}
           className="w-full sm:w-auto action-button-dark dark:bg-primary dark:text-secondary dark:border-primary/70"
         >
           <Mail className="h-4 w-4 mr-2" />
