@@ -72,13 +72,6 @@ const FormatSelectionSection = ({
         </Button>
       </div>
       
-      <footer className="softbare-footer mt-auto pt-6">
-        <p className="italic">
-          Our Apps are bare - quiet, private, ad-free and lightweight.<br />
-          Just plain functions, as Nature intended them.
-        </p>
-      </footer>
-      
       <VideoFormatSelector onSelect={onFormatSelect} />
     </>
   );

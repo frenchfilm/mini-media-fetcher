@@ -183,11 +183,6 @@ const DownloadProgress = ({ videoUrl, selectedFormat, onComplete, onCancel }: Do
           Cancel
         </Button>
       </div>
-      
-      <div className="softbare-footer">
-        <p className="font-medium">Our Apps are bare - as Nature intended them.</p>
-        <p>Quiet by design, lightweight, no ads, no tracking, just plain function.</p>
-      </div>
     </div>
   );
 };
