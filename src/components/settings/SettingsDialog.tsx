@@ -31,16 +31,16 @@ const SettingsDialog = ({
       <DialogContent className="sm:max-w-xl p-0 overflow-hidden border-none bg-background">
         <div className="flex justify-between items-center p-4 border-b">
           <Button 
-            variant="outline" 
-            className="softbare-button"
+            variant="contrast" 
+            className="bg-secondary border border-secondary/70 text-primary dark:bg-primary dark:text-secondary dark:border-primary/70"
             onClick={() => onOpenChange(false)}
           >
             ← Back
           </Button>
           <DialogTitle className="text-xl font-fraunces">Settings</DialogTitle>
           <Button 
-            variant="outline" 
-            className="softbare-button-dark"
+            variant="contrast"
+            className="bg-secondary border border-secondary/70 text-primary dark:bg-primary dark:text-secondary dark:border-primary/70"
             onClick={handleSave}
           >
             Save
@@ -56,25 +56,25 @@ const SettingsDialog = ({
             <TabsList className="w-full grid grid-cols-3 mb-6">
               <TabsTrigger 
                 value="download" 
-                className={`font-medium ${activeTab === 'download' ? 'bg-primary text-secondary' : 'bg-secondary/50 text-primary'}`}
+                className={`font-medium ${activeTab === 'download' ? 'bg-primary text-secondary' : 'bg-secondary/50 text-primary dark:bg-secondary dark:text-primary'}`}
               >
                 Download
               </TabsTrigger>
               <TabsTrigger 
                 value="app" 
-                className={`font-medium ${activeTab === 'app' ? 'bg-primary text-secondary' : 'bg-secondary/50 text-primary'}`}
+                className={`font-medium ${activeTab === 'app' ? 'bg-primary text-secondary' : 'bg-secondary/50 text-primary dark:bg-secondary dark:text-primary'}`}
               >
                 App
               </TabsTrigger>
               <TabsTrigger 
                 value="about" 
-                className={`font-medium ${activeTab === 'about' ? 'bg-primary text-secondary' : 'bg-secondary/50 text-primary'}`}
+                className={`font-medium ${activeTab === 'about' ? 'bg-primary text-secondary' : 'bg-secondary/50 text-primary dark:bg-secondary dark:text-primary'}`}
               >
                 About
               </TabsTrigger>
             </TabsList>
             
-            <div className="min-h-[360px]">
+            <div className="min-h-[400px]">
               <TabsContent value="download" className="space-y-4 mt-2">
                 <h3 className="text-lg font-fraunces mb-4">Download Settings</h3>
                 <DownloadSettings />

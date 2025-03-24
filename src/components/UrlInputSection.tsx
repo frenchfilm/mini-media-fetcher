@@ -2,23 +2,16 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import VideoUrlInput from "@/components/VideoUrlInput";
-import DownloadHistory, { DownloadItem } from "@/components/DownloadHistory";
 import { getVideoDetails } from "@/utils/videoDetails";
 import { isDesktopEnvironment } from "@/utils/fileSystem";
+import { Button } from "@/components/ui/button";
+import { MessageSquare, Mail } from "lucide-react";
 
 interface UrlInputSectionProps {
   onUrlSubmit: (url: string, videoInfo: any) => void;
-  downloads: DownloadItem[];
-  onClearHistory: () => void;
-  onOpenFile: (item: DownloadItem) => void;
 }
 
-const UrlInputSection = ({ 
-  onUrlSubmit, 
-  downloads, 
-  onClearHistory, 
-  onOpenFile 
-}: UrlInputSectionProps) => {
+const UrlInputSection = ({ onUrlSubmit }: UrlInputSectionProps) => {
   const [isLoading, setIsLoading] = useState(false);
   
   const handleUrlSubmit = async (url: string) => {
@@ -72,15 +65,32 @@ const UrlInputSection = ({
         onFolderSelect={handleFolderSelect}
       />
       
-      {downloads.length > 0 && (
-        <div className="mt-16">
-          <DownloadHistory 
-            downloads={downloads} 
-            onClearHistory={onClearHistory}
-            onOpenFile={onOpenFile}
-          />
-        </div>
-      )}
+      <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <Button 
+          variant="contrast" 
+          onClick={() => toast.info("Request feature or report bugs")}
+          className="w-full sm:w-auto bg-secondary border border-secondary/70 text-primary dark:bg-primary dark:text-secondary dark:border-primary/70"
+        >
+          <MessageSquare className="h-4 w-4 mr-2" />
+          Request Feature / Report Bugs
+        </Button>
+        
+        <Button 
+          variant="contrast" 
+          onClick={() => toast.info("Subscribe to newsletter")}
+          className="w-full sm:w-auto bg-secondary border border-secondary/70 text-primary dark:bg-primary dark:text-secondary dark:border-primary/70"
+        >
+          <Mail className="h-4 w-4 mr-2" />
+          Subscribe to Newsletter
+        </Button>
+      </div>
+      
+      <footer className="py-6 px-6 text-center text-sm text-muted-foreground mt-auto">
+        <p className="italic">
+          Our Apps are bare - quiet, private, ad-free and lightweight.<br />
+          Just plain functions, as Nature intended them.
+        </p>
+      </footer>
     </>
   );
 };

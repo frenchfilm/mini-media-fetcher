@@ -45,16 +45,16 @@ const VideoFormatSelector = ({ onSelect }: VideoFormatSelectorProps) => {
         {FORMATS.map((format) => (
           <Button
             key={format.id}
-            variant={selectedFormat === format.id ? "default" : "outline"}
+            variant={selectedFormat === format.id ? "contrast" : "outline"}
             size="sm"
             className={`h-auto py-2 justify-start ${
-              selectedFormat === format.id ? 'border-primary/50' : 'border-border'
+              selectedFormat === format.id ? 'border-primary/50 dark:bg-primary dark:text-secondary' : 'border-border dark:text-secondary-foreground'
             }`}
             onClick={() => handleFormatChange(format.id)}
           >
             <div className="flex flex-col items-start text-left">
               <span className="text-xs font-medium">{format.quality}</span>
-              <span className="text-[10px] text-muted-foreground">{format.resolution} • {format.fileSize}</span>
+              <span className="text-[10px] text-muted-foreground dark:text-secondary-foreground/70">{format.resolution} • {format.fileSize}</span>
             </div>
             {selectedFormat === format.id && (
               <Check className="h-3 w-3 ml-1 shrink-0" />

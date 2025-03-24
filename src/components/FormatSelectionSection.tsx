@@ -54,8 +54,9 @@ const FormatSelectionSection = ({
         <Button
           onClick={onStartDownload}
           disabled={!selectedFormat}
-          className="px-6"
+          className="px-6 bg-secondary border border-secondary/70 text-primary dark:bg-primary dark:text-secondary dark:border-primary/70"
           size="lg"
+          variant="contrast"
         >
           <Download className="h-4 w-4 mr-2" />
           Start Download
@@ -65,10 +66,18 @@ const FormatSelectionSection = ({
           variant="outline"
           onClick={onCancel}
           size="lg"
+          className="bg-background text-primary dark:bg-secondary dark:text-secondary-foreground"
         >
           Cancel
         </Button>
       </div>
+      
+      <footer className="softbare-footer mt-auto pt-6">
+        <p className="italic">
+          Our Apps are bare - quiet, private, ad-free and lightweight.<br />
+          Just plain functions, as Nature intended them.
+        </p>
+      </footer>
       
       <VideoFormatSelector onSelect={onFormatSelect} />
     </>

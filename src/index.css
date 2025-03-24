@@ -17,7 +17,7 @@
     --primary: 20 30% 7%;
     --primary-foreground: 40 60% 96%;
 
-    --secondary: 40 50% 90%;
+    --secondary: 36 67% 86%;
     --secondary-foreground: 20 30% 10%;
 
     --muted: 38 30% 85%;
@@ -50,7 +50,7 @@
     --primary-foreground: 20 30% 10%;
 
     --secondary: 20 25% 20%;
-    --secondary-foreground: 40 60% 96%;
+    --secondary-foreground: 40 80% 96%;
 
     --muted: 20 25% 20%;
     --muted-foreground: 40 60% 85%;
@@ -101,7 +101,7 @@
   /* Ensure placeholders are readable in dark mode */
   .dark input::placeholder,
   .dark textarea::placeholder {
-    @apply text-muted-foreground/70;
+    @apply text-secondary-foreground/70;
   }
   
   /* Add higher contrast for dark mode inputs */
@@ -111,8 +111,22 @@
     @apply text-foreground bg-secondary border-secondary-foreground/30;
   }
   
+  /* High contrast buttons for dark mode */
   .dark .softbare-button {
     @apply bg-primary text-secondary-foreground hover:bg-primary/90;
+  }
+  
+  .dark .button-contrast {
+    @apply bg-primary text-secondary-foreground hover:bg-primary/90;
+  }
+  
+  /* Improved styling for dark mode buttons */
+  .dark .settings-button {
+    @apply bg-primary text-secondary-foreground hover:bg-primary/90 border-primary;
+  }
+  
+  .dark .action-button {
+    @apply bg-primary text-secondary-foreground border-primary/50;
   }
 }
 
@@ -163,12 +177,23 @@
     @apply text-center text-sm text-muted-foreground mt-8 pb-4;
   }
   
-  /* Improved contrast for dark mode */
-  .dark .icon-button {
-    @apply text-foreground hover:text-primary;
+  /* High contrast buttons */
+  .button-high-contrast {
+    @apply bg-primary text-secondary border-primary;
   }
   
-  .dark .form-label {
+  /* Improved icons and buttons */
+  .icon-button-contrast {
+    @apply text-primary bg-secondary hover:bg-secondary/90 hover:text-primary/90;
+  }
+  
+  /* Improved form elements contrast */
+  .form-input-contrast {
+    @apply bg-secondary/80 border-secondary-foreground/30 text-foreground placeholder:text-foreground/70;
+  }
+  
+  /* Improved form labels contrast */
+  .form-label-contrast {
     @apply text-foreground/90;
   }
 }

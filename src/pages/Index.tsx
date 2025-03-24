@@ -1,9 +1,9 @@
+
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { VideoFormat } from "@/components/VideoFormatSelector";
 import DownloadProgress from "@/components/DownloadProgress";
-import { DownloadItem } from "@/components/DownloadHistory";
 import AppHeader from "@/components/AppHeader";
 import UrlInputSection from "@/components/UrlInputSection";
 import FormatSelectionSection from "@/components/FormatSelectionSection";
@@ -68,7 +68,7 @@ const Index = () => {
       selectedFormat.id.split('-')[0]
     );
     
-    const newDownloadItem: DownloadItem = {
+    const newDownloadItem = {
       id: Date.now().toString(),
       title: videoInfo.title,
       thumbnailUrl: videoInfo.thumbnailUrl,
@@ -100,10 +100,6 @@ const Index = () => {
     setSelectedFormat(null);
   };
 
-  const handleOpenFile = (item: DownloadItem) => {
-    openFileLocation(item.filePath);
-  };
-
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-background to-secondary/30">
       <AppHeader downloadsCount={downloads.length} />
@@ -111,34 +107,7 @@ const Index = () => {
       <main className="flex-1 container max-w-4xl mx-auto px-4 pb-10 pt-4 flex flex-col">
         <div className="space-y-6 flex-1">
           {appState === AppState.INPUT_URL && (
-            <>
-              <UrlInputSection
-                onUrlSubmit={handleUrlSubmit}
-                downloads={downloads}
-                onClearHistory={clearHistory}
-                onOpenFile={handleOpenFile}
-              />
-              
-              <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Button 
-                  variant="outline" 
-                  onClick={() => navigate('/contact')}
-                  className="w-full sm:w-auto bg-white border border-secondary/70"
-                >
-                  <MessageSquare className="h-4 w-4 mr-2" />
-                  Request Feature / Report Bugs
-                </Button>
-                
-                <Button 
-                  variant="outline" 
-                  onClick={() => setNewsletterOpen(true)}
-                  className="w-full sm:w-auto bg-white border border-secondary/70"
-                >
-                  <Mail className="h-4 w-4 mr-2" />
-                  Subscribe to Newsletter
-                </Button>
-              </div>
-            </>
+            <UrlInputSection onUrlSubmit={handleUrlSubmit} />
           )}
           
           {appState === AppState.SELECT_FORMAT && videoInfo && (

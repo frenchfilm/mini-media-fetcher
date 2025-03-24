@@ -54,10 +54,10 @@ const VideoUrlInput = ({ onSubmit, isLoading = false, onFolderSelect }: VideoUrl
         {onFolderSelect && (
           <Button
             type="button"
-            variant="outline"
+            variant="contrast"
             size="icon"
             onClick={onFolderSelect}
-            className="h-12 w-12 rounded-md bg-white border border-secondary/70 text-primary dark:bg-secondary dark:text-foreground dark:border-border"
+            className="h-12 w-12 rounded-md bg-secondary border border-secondary/70 text-primary dark:bg-primary dark:text-secondary dark:border-primary/70"
             disabled={showLoading}
           >
             <FolderOpen className="h-5 w-5" />
@@ -71,7 +71,7 @@ const VideoUrlInput = ({ onSubmit, isLoading = false, onFolderSelect }: VideoUrl
             placeholder="Paste URL here"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
-            className="border-0 h-12 px-4 bg-transparent text-foreground focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-muted-foreground/70 dark:placeholder:text-muted-foreground/70"
+            className="border-0 h-12 px-4 bg-transparent text-foreground focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-muted-foreground/70 dark:placeholder:text-secondary-foreground/70 dark:text-secondary-foreground"
             disabled={showLoading}
           />
           
@@ -81,7 +81,7 @@ const VideoUrlInput = ({ onSubmit, isLoading = false, onFolderSelect }: VideoUrl
               variant="ghost"
               size="icon"
               onClick={clearInput}
-              className="mr-1 h-8 w-8 rounded-full text-muted-foreground hover:text-foreground dark:text-muted-foreground dark:hover:text-foreground"
+              className="mr-1 h-8 w-8 rounded-full text-muted-foreground hover:text-foreground dark:text-secondary-foreground dark:hover:text-secondary-foreground"
             >
               <X className="h-4 w-4" />
               <span className="sr-only">Clear</span>
@@ -91,9 +91,10 @@ const VideoUrlInput = ({ onSubmit, isLoading = false, onFolderSelect }: VideoUrl
         
         <Button
           type="submit"
+          variant="contrast"
           size="icon"
           disabled={showLoading || !url.trim()}
-          className="h-12 w-12 rounded-md bg-white border border-secondary/70 text-primary dark:bg-secondary dark:text-foreground dark:border-border"
+          className="h-12 w-12 rounded-md bg-secondary border border-secondary/70 text-primary dark:bg-primary dark:text-secondary dark:border-primary/70"
         >
           {showLoading ? (
             <Loader2 className="h-5 w-5 animate-spin" />
