@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -112,20 +113,20 @@
   
   /* High contrast buttons for dark mode */
   .dark .softbare-button {
-    @apply bg-primary text-secondary-foreground hover:bg-primary/90;
+    @apply bg-primary text-secondary-foreground hover:bg-primary/90 font-semibold;
   }
   
   .dark .button-contrast {
-    @apply bg-primary text-secondary-foreground hover:bg-primary/90;
+    @apply bg-primary text-secondary-foreground hover:bg-primary/90 font-semibold;
   }
   
   /* Improved styling for dark mode buttons */
   .dark .settings-button {
-    @apply bg-primary text-secondary-foreground hover:bg-primary/90 border-primary;
+    @apply bg-primary text-secondary-foreground hover:bg-primary/90 border-primary font-semibold;
   }
   
   .dark .action-button {
-    @apply bg-primary text-secondary-foreground border-primary/50;
+    @apply bg-primary text-secondary-foreground border-primary/50 font-semibold;
   }
 }
 
@@ -165,7 +166,7 @@
   }
   
   .softbare-button {
-    @apply bg-secondary hover:bg-secondary/80 text-primary font-medium px-4 py-2 rounded-md transition-all-200 border border-secondary/70;
+    @apply bg-primary hover:bg-primary/90 text-white font-medium px-4 py-2 rounded-md transition-all-200 border border-primary/70;
   }
   
   .softbare-button-dark {
@@ -178,7 +179,11 @@
   
   /* High contrast buttons */
   .button-high-contrast {
-    @apply bg-primary text-secondary border-primary hover:bg-primary/90;
+    @apply bg-primary text-white border-primary hover:bg-primary/90 font-semibold;
+  }
+
+  .dark .button-high-contrast {
+    @apply bg-primary text-secondary border-primary hover:bg-primary/90 font-semibold;
   }
   
   /* Improved icons and buttons */
@@ -194,5 +199,22 @@
   /* Improved form labels contrast */
   .form-label-contrast {
     @apply text-foreground/90;
+  }
+
+  /* Better contrast for tabs */
+  .tab-high-contrast {
+    @apply bg-primary text-white font-medium;
+  }
+  
+  .tab-secondary {
+    @apply bg-secondary/70 text-primary hover:bg-secondary/90 font-medium;
+  }
+  
+  .dark .tab-high-contrast {
+    @apply bg-primary text-secondary font-medium;
+  }
+  
+  .dark .tab-secondary {
+    @apply bg-secondary text-primary font-medium;
   }
 }

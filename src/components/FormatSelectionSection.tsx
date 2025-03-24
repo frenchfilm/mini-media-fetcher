@@ -54,9 +54,9 @@ const FormatSelectionSection = ({
         <Button
           onClick={onStartDownload}
           disabled={!selectedFormat}
-          className="px-6 bg-secondary border border-secondary/70 text-primary dark:bg-primary dark:text-secondary dark:border-primary/70"
+          className="px-6"
           size="lg"
-          variant="contrast"
+          variant="highContrast"
         >
           <Download className="h-4 w-4 mr-2" />
           Start Download
@@ -66,7 +66,7 @@ const FormatSelectionSection = ({
           variant="outline"
           onClick={onCancel}
           size="lg"
-          className="bg-background text-primary dark:bg-secondary dark:text-secondary-foreground"
+          className="bg-secondary text-primary font-medium border-primary/30 hover:bg-secondary/80 hover:text-primary/90"
         >
           Cancel
         </Button>
