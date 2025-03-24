@@ -26,18 +26,17 @@ const AboutSettings = ({ licenseKey }: AboutSettingsProps) => {
   return (
     <>
       <div className="flex items-center flex-col text-center p-4">
-        <div className="flex flex-col items-center mb-3">
+        <div className="flex flex-col items-center mb-6">
           <img 
             src="/lovable-uploads/ee37b3bc-4867-4363-924f-9090d70c081a.png" 
             alt="SoftBare Logo" 
             className="h-16 w-auto mb-3" 
           />
           <h3 className="text-lg font-fraunces">SoftBare Video Downloader</h3>
+          <p className="text-sm text-muted-foreground mb-2">{version}</p>
         </div>
         
-        <p className="text-sm text-muted-foreground mb-2">{version}</p>
-        
-        <p className="text-sm max-w-xs mb-4">
+        <p className="text-sm max-w-xs mb-8">
           Plain functionality, bare code, lightweight, portable, cross-platform, hosted locally, no bloat-, ad- or spyware. Apps as nature intended them.
         </p>
         
@@ -45,14 +44,13 @@ const AboutSettings = ({ licenseKey }: AboutSettingsProps) => {
           Copyright © {currentYear} SoftBare. All rights reserved.
         </p>
         
-        <div className="flex justify-center mt-2 pt-2 border-t border-border w-full gap-3">
-          <Button variant="outline" size="sm" className="text-xs" onClick={checkForUpdates}>
+        <div className="flex justify-center mt-6 gap-3">
+          <Button variant="outline" className="softbare-button" onClick={checkForUpdates}>
             Check for Updates
           </Button>
           <Button 
             variant="outline" 
-            size="sm" 
-            className="text-xs"
+            className="softbare-button"
             onClick={() => window.open("https://softbare.com", "_blank")}
           >
             <ExternalLink className="h-3.5 w-3.5 mr-1.5" />
@@ -74,7 +72,7 @@ const AboutSettings = ({ licenseKey }: AboutSettingsProps) => {
             <p className="text-sm">
               Please purchase a license key from our website to access software updates and premium features.
             </p>
-            <Button onClick={() => window.open("https://softbare.com", "_blank")}>
+            <Button onClick={() => window.open("https://softbare.com", "_blank")} className="softbare-button">
               <ExternalLink className="h-4 w-4 mr-2" />
               Visit SoftBare.com
             </Button>

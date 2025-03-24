@@ -5,65 +5,65 @@
 
 @layer base {
   :root {
-    --background: 210 20% 98%;
-    --foreground: 222 47% 11%;
+    --background: 40 70% 90%;
+    --foreground: 20 30% 10%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card: 40 60% 96%;
+    --card-foreground: 20 30% 10%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover: 40 60% 96%;
+    --popover-foreground: 20 30% 10%;
 
-    --primary: 210 100% 60%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 20 30% 7%;
+    --primary-foreground: 40 60% 96%;
 
-    --secondary: 210 30% 96%;
-    --secondary-foreground: 222 47% 11%;
+    --secondary: 38 57% 80%;
+    --secondary-foreground: 20 30% 10%;
 
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 38 30% 85%;
+    --muted-foreground: 20 30% 30%;
 
-    --accent: 210 40% 96%;
-    --accent-foreground: 222 47% 11%;
+    --accent: 38 57% 80%;
+    --accent-foreground: 20 30% 10%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 40 60% 96%;
 
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 210 100% 60%;
+    --border: 38 30% 75%;
+    --input: 38 30% 75%;
+    --ring: 20 30% 10%;
 
     --radius: 0.75rem;
   }
   
   .dark {
-    --background: 224 71% 4%;
-    --foreground: 213 31% 91%;
+    --background: 20 30% 10%;
+    --foreground: 40 60% 96%;
 
-    --card: 224 71% 4%;
-    --card-foreground: 213 31% 91%;
+    --card: 20 30% 12%;
+    --card-foreground: 40 60% 96%;
 
-    --popover: 224 71% 4%;
-    --popover-foreground: 213 31% 91%;
+    --popover: 20 30% 12%;
+    --popover-foreground: 40 60% 96%;
 
-    --primary: 210 100% 60%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 38 57% 80%;
+    --primary-foreground: 20 30% 10%;
 
-    --secondary: 222 47% 12%;
-    --secondary-foreground: 213 31% 91%;
+    --secondary: 20 25% 20%;
+    --secondary-foreground: 40 60% 96%;
 
-    --muted: 223 47% 11%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 20 25% 20%;
+    --muted-foreground: 20 30% 70%;
 
-    --accent: 222 47% 12%;
-    --accent-foreground: 213 31% 91%;
+    --accent: 20 25% 20%;
+    --accent-foreground: 40 60% 96%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 40 60% 96%;
 
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 210 100% 60%;
+    --border: 20 30% 25%;
+    --input: 20 30% 25%;
+    --ring: 38 57% 80%;
   }
 }
 
@@ -118,12 +118,12 @@
   }
   
   .glass-panel {
-    @apply bg-white/80 backdrop-blur-8 border border-white/20 shadow-sm;
+    @apply bg-secondary/50 border border-secondary/70 shadow-sm;
   }
   
   .glass-button {
-    @apply bg-white/90 backdrop-blur-8 border border-white/20 shadow-sm 
-           hover:bg-white/95 active:bg-white/80 transition-all-200;
+    @apply bg-secondary border border-secondary/70 shadow-sm 
+           hover:bg-secondary/80 active:bg-secondary/90 transition-all-200;
   }
   
   .app-logo {
@@ -132,5 +132,17 @@
   
   .app-title {
     @apply font-fraunces text-primary-dark;
+  }
+  
+  .softbare-button {
+    @apply bg-secondary hover:bg-secondary/80 text-primary font-medium px-4 py-2 rounded-md transition-all-200 border border-secondary/70;
+  }
+  
+  .softbare-button-dark {
+    @apply bg-primary hover:bg-primary/80 text-secondary font-medium px-4 py-2 rounded-md transition-all-200 border border-primary/70;
+  }
+  
+  .softbare-footer {
+    @apply text-center text-sm text-muted-foreground mt-8 pb-4;
   }
 }

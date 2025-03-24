@@ -20,6 +20,12 @@ const DownloadProgress = ({ videoUrl, selectedFormat, onComplete, onCancel }: Do
   const [elapsedTime, setElapsedTime] = useState(0);
   const [estimatedTimeLeft, setEstimatedTimeLeft] = useState<number | null>(null);
   const [downloadSpeed, setDownloadSpeed] = useState<string | null>(null);
+  const [downloadedSize, setDownloadedSize] = useState(0);
+  const totalSize = 128.5; // Mock total size in MB
+  
+  // Mock video details
+  const videoTitle = "Sample Video Title - Amazing Content";
+  const videoDuration = "10:42";
   
   // Simulate download progress
   useEffect(() => {
@@ -39,6 +45,9 @@ const DownloadProgress = ({ videoUrl, selectedFormat, onComplete, onCancel }: Do
         setProgress(prevProgress => {
           const increment = Math.random() * 5 + 1;
           const newProgress = Math.min(prevProgress + increment, 100);
+          
+          // Update downloaded size
+          setDownloadedSize((newProgress / 100) * totalSize);
           
           // Update download speed (simulate between 1-10 MB/s)
           const speed = (Math.random() * 9 + 1).toFixed(1);
@@ -94,95 +103,92 @@ const DownloadProgress = ({ videoUrl, selectedFormat, onComplete, onCancel }: Do
   };
 
   return (
-    <Card className="glass-panel rounded-2xl p-6 w-full max-w-xl mx-auto shadow-sm animate-slide-up">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-base font-medium flex items-center">
-          {status === 'preparing' && 'Preparing download...'}
-          {status === 'downloading' && 'Downloading...'}
-          {status === 'paused' && 'Download paused'}
-          {status === 'complete' && (
-            <>
-              <CheckCircle2 className="h-4 w-4 mr-1.5 text-green-500" />
-              <span>Download complete</span>
-            </>
-          )}
-        </h3>
-        
-        {status !== 'complete' && (
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={handleCancel}
-            className="h-8 w-8 rounded-full"
-          >
-            <X className="h-4 w-4" />
-            <span className="sr-only">Cancel</span>
-          </Button>
-        )}
+    <div className="p-6 w-full max-w-xl mx-auto">
+      <div className="flex justify-between items-center mb-6">
+        <Button 
+          variant="outline" 
+          className="softbare-button"
+          onClick={onCancel}
+        >
+          ← Back
+        </Button>
+        <h2 className="text-xl font-fraunces text-center">Download Progress</h2>
+        <div className="w-[80px]"></div> {/* Empty div for flex spacing */}
       </div>
       
-      <Progress 
-        value={progress} 
-        className={`h-2 ${status === 'complete' ? 'bg-green-100' : 'bg-muted'}`}
-        indicatorClassName={status === 'complete' ? 'bg-green-500' : undefined}
-      />
-      
-      <div className="mt-4 space-y-3">
-        <div className="flex justify-between text-sm text-muted-foreground">
-          <span>{progress.toFixed(0)}% complete</span>
-          {downloadSpeed && status === 'downloading' && (
-            <span>{downloadSpeed}</span>
-          )}
+      <div className="mb-6 flex">
+        <div className="bg-muted w-96 h-48 flex items-center justify-center rounded-md mr-4">
+          <div className="text-muted-foreground">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.85.84 6.72 2.28"/>
+              <path d="M21 3v9h-9"/>
+            </svg>
+          </div>
         </div>
         
-        <div className="flex justify-between text-sm text-muted-foreground">
-          <span>
-            {elapsedTime > 0 && `Elapsed: ${formatTime(elapsedTime)}`}
-          </span>
-          <span>
-            {estimatedTimeLeft && status === 'downloading' && 
-              `Remaining: ${formatTime(estimatedTimeLeft)}`}
-          </span>
-        </div>
-        
-        <div className="bg-muted/40 rounded-lg p-3 text-sm">
-          <div className="flex justify-between">
-            <span className="text-muted-foreground">Format:</span>
-            <span>{selectedFormat.quality} ({selectedFormat.resolution})</span>
+        <div className="flex-1 space-y-2">
+          <h3 className="text-lg font-medium">{videoTitle}</h3>
+          <div className="text-sm">
+            <p>Duration: {videoDuration}</p>
+            <p>Size: {totalSize.toFixed(1)} MB</p>
+          </div>
+          
+          <div className="mt-4">
+            <p className="text-sm font-medium mb-1">Format:</p>
+            <select className="w-full rounded-md bg-secondary/50 border border-secondary px-3 py-2 text-sm">
+              <option>{selectedFormat.quality} MP4 ({totalSize.toFixed(1)} MB)</option>
+            </select>
           </div>
         </div>
       </div>
       
-      {status !== 'complete' && status !== 'preparing' && (
-        <div className="mt-5 flex gap-3">
-          <Button 
-            onClick={togglePause} 
-            variant={status === 'paused' ? 'default' : 'outline'}
-            className="flex-1"
-          >
-            {status === 'paused' ? (
-              <>
-                <Download className="h-4 w-4 mr-2" />
-                Resume
-              </>
-            ) : (
-              <>
-                <Pause className="h-4 w-4 mr-2" />
-                Pause
-              </>
-            )}
-          </Button>
-          
-          <Button 
-            variant="outline" 
-            onClick={handleCancel}
-            className="flex-1"
-          >
-            Cancel
-          </Button>
+      <div className="space-y-2 mb-6">
+        <div className="flex justify-between text-sm">
+          <span>Download Progress</span>
+          <span>{progress.toFixed(0)}%</span>
         </div>
-      )}
-    </Card>
+        
+        <Progress value={progress} className="h-2" />
+        
+        <div className="flex justify-between text-sm text-muted-foreground">
+          <span>Downloading...</span>
+          <span>{downloadedSize.toFixed(1)} MB / {totalSize.toFixed(1)} MB</span>
+        </div>
+      </div>
+      
+      <div className="flex gap-4">
+        <Button 
+          onClick={togglePause} 
+          className="softbare-button flex-1"
+        >
+          {status === 'paused' ? (
+            <>
+              <Download className="h-4 w-4 mr-2" />
+              Resume
+            </>
+          ) : (
+            <>
+              <Pause className="h-4 w-4 mr-2" />
+              Pause
+            </>
+          )}
+        </Button>
+        
+        <Button 
+          variant="outline" 
+          onClick={handleCancel}
+          className="softbare-button-dark flex-1"
+        >
+          <X className="h-4 w-4 mr-2" />
+          Cancel
+        </Button>
+      </div>
+      
+      <div className="softbare-footer">
+        <p className="font-medium">Our Apps are bare - as Nature intended them.</p>
+        <p>Quiet by design, lightweight, no ads, no tracking, just plain function.</p>
+      </div>
+    </div>
   );
 };
 

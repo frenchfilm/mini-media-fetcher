@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useTheme } from "@/components/ThemeProvider";
@@ -25,7 +26,7 @@ const AppSettings = ({ licenseKey, onLicenseKeyChange }: AppSettingsProps) => {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       <div className="space-y-2">
         <Label htmlFor="license-key">License Key</Label>
         <Input 
@@ -33,67 +34,53 @@ const AppSettings = ({ licenseKey, onLicenseKeyChange }: AppSettingsProps) => {
           value={licenseKey}
           onChange={(e) => onLicenseKeyChange(e.target.value)}
           placeholder="Enter your license key"
+          className="bg-white border-secondary"
         />
-        <p className="text-xs text-muted-foreground">
-          Enter your license key to unlock all features
-        </p>
       </div>
       
-      <div className="flex items-center justify-between">
-        <Label htmlFor="startup">Launch on startup</Label>
-        <Switch 
+      <div className="flex items-center space-x-2">
+        <Checkbox 
           id="startup" 
           checked={launchOnStartup}
-          onCheckedChange={setLaunchOnStartup}
+          onCheckedChange={(checked) => setLaunchOnStartup(checked === true)}
         />
+        <Label htmlFor="startup">Launch on startup</Label>
       </div>
       
-      <div className="flex items-center justify-between">
-        <Label htmlFor="updates">Check for updates automatically</Label>
-        <Switch 
+      <div className="flex items-center space-x-2">
+        <Checkbox 
           id="updates" 
           checked={autoUpdate}
-          onCheckedChange={setAutoUpdate}
+          onCheckedChange={(checked) => setAutoUpdate(checked === true)}
         />
+        <Label htmlFor="updates">Check for updates automatically</Label>
       </div>
       
-      <div className="flex items-center justify-between">
-        <Label>Theme</Label>
-        <div className="flex items-center space-x-2">
-          <Button
-            variant={theme === "light" ? "default" : "outline"}
-            size="icon"
-            onClick={() => setTheme("light")}
-            className="h-8 w-8"
-          >
-            <Sun className="h-4 w-4" />
-            <span className="sr-only">Light</span>
-          </Button>
-          <Button
-            variant={theme === "dark" ? "default" : "outline"}
-            size="icon"
-            onClick={() => setTheme("dark")}
-            className="h-8 w-8"
-          >
-            <Moon className="h-4 w-4" />
-            <span className="sr-only">Dark</span>
-          </Button>
-        </div>
+      <div className="space-y-2">
+        <Label htmlFor="theme">Theme</Label>
+        <select 
+          id="theme"
+          value={theme}
+          onChange={(e) => setTheme(e.target.value)}
+          className="flex h-10 w-full rounded-md border border-secondary bg-white px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
       </div>
       
-      <div className="pt-2">
-        <p className="text-sm font-medium mb-2">Newsletter Preferences</p>
+      <div className="pt-4 border-t">
+        <h4 className="font-medium mb-2">Newsletter Preferences</h4>
         {isSubscribed ? (
           <Button 
             variant="outline" 
-            size="sm" 
             onClick={handleUnsubscribe}
-            className="w-full"
+            className="softbare-button w-full"
           >
             Unsubscribe from Newsletter
           </Button>
         ) : (
-          <p className="text-xs text-muted-foreground">
+          <p className="text-sm text-muted-foreground">
             You are not subscribed to our newsletter.
           </p>
         )}

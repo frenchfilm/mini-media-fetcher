@@ -4,7 +4,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { VideoFormat } from "./VideoFormatSelector";
-import { Download, Trash2, FolderOpen, Clock } from "lucide-react";
+import { Download, Trash2, FolderOpen, Clock, Play, FilePenLine } from 'lucide-react';
 import { toast } from "sonner";
 
 export interface DownloadItem {
@@ -15,6 +15,8 @@ export interface DownloadItem {
   format: VideoFormat;
   downloadDate: Date;
   filePath?: string;
+  fileSize?: string;
+  duration?: string;
 }
 
 interface DownloadHistoryProps {
@@ -27,11 +29,9 @@ const DownloadHistory = ({ downloads, onClearHistory, onOpenFile }: DownloadHist
   // Format date to readable format
   const formatDate = (date: Date): string => {
     return new Intl.DateTimeFormat('en-US', {
-      month: 'short',
-      day: 'numeric',
-      hour: 'numeric',
-      minute: '2-digit',
-      hour12: true
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
     }).format(date);
   };
 
@@ -43,79 +43,105 @@ const DownloadHistory = ({ downloads, onClearHistory, onOpenFile }: DownloadHist
   };
 
   return (
-    <Card className="glass-panel rounded-2xl p-5 w-full max-w-xl mx-auto shadow-sm animate-slide-up">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-base font-medium flex items-center">
-          <Clock className="h-4 w-4 mr-2 text-muted-foreground" />
-          Download History
-        </h3>
-        
-        {downloads.length > 0 && (
-          <Button 
-            variant="ghost" 
-            size="sm" 
-            onClick={handleClearHistory}
-            className="h-8 text-xs text-muted-foreground hover:text-destructive"
-          >
-            <Trash2 className="h-3.5 w-3.5 mr-1" />
-            Clear
-          </Button>
-        )}
+    <div className="w-full max-w-xl mx-auto">
+      <div className="flex justify-between items-center mb-6">
+        <Button 
+          variant="outline" 
+          className="softbare-button"
+          onClick={() => window.history.back()}
+        >
+          ← Back
+        </Button>
+        <h2 className="text-xl font-fraunces">Downloaded Videos</h2>
+        <Button
+          variant="outline"
+          className="softbare-button"
+          onClick={() => toast.info("Open download folder")}
+        >
+          <FolderOpen className="h-4 w-4 mr-2" />
+          Open Folder
+        </Button>
       </div>
       
       {downloads.length === 0 ? (
-        <div className="text-center py-8 text-muted-foreground">
-          <Download className="h-8 w-8 mx-auto mb-2 opacity-30" />
-          <p className="text-sm">Your download history will appear here</p>
+        <div className="text-center py-20 text-muted-foreground">
+          <Download className="h-12 w-12 mx-auto mb-4 opacity-30" />
+          <p className="text-lg">Your download history will appear here</p>
         </div>
       ) : (
-        <ScrollArea className="h-[280px] pr-3 -mr-3">
-          <div className="space-y-3">
-            {downloads.map((item) => (
+        <div className="space-y-4">
+          {downloads.map((item) => (
+            <div 
+              key={item.id} 
+              className="flex gap-4 p-4 rounded-md bg-muted/40 border border-muted"
+            >
               <div 
-                key={item.id} 
-                className="flex gap-3 p-3 rounded-xl bg-white border border-border/50 hover:border-border transition-all-200"
+                className="w-36 h-24 rounded bg-muted flex-shrink-0 overflow-hidden bg-cover bg-center flex items-center justify-center"
+                style={{ 
+                  backgroundImage: item.thumbnailUrl ? `url(${item.thumbnailUrl})` : undefined,
+                  backgroundColor: !item.thumbnailUrl ? '#e9e2d0' : undefined
+                }}
               >
-                <div 
-                  className="w-20 h-12 rounded bg-muted flex-shrink-0 overflow-hidden bg-cover bg-center"
-                  style={{ 
-                    backgroundImage: item.thumbnailUrl ? `url(${item.thumbnailUrl})` : undefined,
-                    backgroundColor: !item.thumbnailUrl ? '#f1f5f9' : undefined
-                  }}
-                />
+                {!item.thumbnailUrl && (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground/30">
+                    <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.85.84 6.72 2.28"/>
+                    <path d="M21 3v9h-9"/>
+                  </svg>
+                )}
+              </div>
+              
+              <div className="flex-1 min-w-0">
+                <h4 className="text-base font-medium">{item.title}</h4>
                 
-                <div className="flex-1 min-w-0">
-                  <h4 className="text-sm font-medium truncate">{item.title}</h4>
-                  
-                  <div className="flex flex-wrap gap-1.5 mt-1">
-                    <Badge variant="outline" className="text-[10px] h-5 px-1.5 bg-muted/50">
-                      {item.format.quality}
-                    </Badge>
-                    <Badge variant="outline" className="text-[10px] h-5 px-1.5 bg-muted/50">
-                      {item.format.resolution}
-                    </Badge>
-                    <span className="text-[10px] text-muted-foreground flex items-center">
-                      <Clock className="h-3 w-3 mr-0.5" />
-                      {formatDate(item.downloadDate)}
-                    </span>
+                <div className="grid grid-cols-2 gap-x-2 gap-y-1 mt-2 text-sm">
+                  <div className="flex">
+                    <span className="text-muted-foreground mr-2">Size:</span>
+                    <span>{item.fileSize || '128.5 MB'}</span>
+                  </div>
+                  <div className="flex">
+                    <span className="text-muted-foreground mr-2">Format:</span>
+                    <span>{item.format.quality} MP4</span>
+                  </div>
+                  <div className="flex">
+                    <span className="text-muted-foreground mr-2">Duration:</span>
+                    <span>{item.duration || '10:42'}</span>
+                  </div>
+                  <div className="flex">
+                    <span className="text-muted-foreground mr-2">Date:</span>
+                    <span>{formatDate(item.downloadDate)}</span>
                   </div>
                 </div>
-                
+              </div>
+              
+              <div className="flex flex-col space-y-2">
                 <Button
                   size="icon"
-                  variant="ghost"
-                  onClick={() => onOpenFile(item)}
-                  className="h-8 w-8 rounded-lg bg-muted/50 hover:bg-primary/10 hover:text-primary"
+                  className="h-8 w-8 rounded-md bg-secondary text-primary"
+                  onClick={() => toast.info(`Playing ${item.title}`)}
                 >
-                  <FolderOpen className="h-4 w-4" />
-                  <span className="sr-only">Open file</span>
+                  <Play className="h-4 w-4" />
+                  <span className="sr-only">Play</span>
+                </Button>
+                <Button
+                  size="icon"
+                  variant="outline"
+                  className="h-8 w-8 rounded-md bg-primary text-secondary"
+                  onClick={() => toast.info(`Delete ${item.title}`)}
+                >
+                  <Trash2 className="h-4 w-4" />
+                  <span className="sr-only">Delete</span>
                 </Button>
               </div>
-            ))}
-          </div>
-        </ScrollArea>
+            </div>
+          ))}
+        </div>
       )}
-    </Card>
+      
+      <div className="softbare-footer">
+        <p className="font-medium">Our Apps are bare - as Nature intended them.</p>
+        <p>Quiet by design, lightweight, no ads, no tracking, just plain function.</p>
+      </div>
+    </div>
   );
 };
 
