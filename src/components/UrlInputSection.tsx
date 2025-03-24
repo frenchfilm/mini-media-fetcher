@@ -69,7 +69,7 @@ const UrlInputSection = ({ onUrlSubmit }: UrlInputSectionProps) => {
         <Button 
           variant="contrast" 
           onClick={() => toast.info("Request feature or report bugs")}
-          className="w-full sm:w-auto bg-primary text-white dark:bg-primary dark:text-secondary dark:border-primary/70"
+          className="w-full sm:w-auto action-button-dark dark:bg-primary dark:text-secondary dark:border-primary/70"
         >
           <MessageSquare className="h-4 w-4 mr-2" />
           Request Feature / Report Bugs
@@ -78,7 +78,7 @@ const UrlInputSection = ({ onUrlSubmit }: UrlInputSectionProps) => {
         <Button 
           variant="contrast" 
           onClick={() => toast.info("Subscribe to newsletter")}
-          className="w-full sm:w-auto bg-primary text-white dark:bg-primary dark:text-secondary dark:border-primary/70"
+          className="w-full sm:w-auto action-button-dark dark:bg-primary dark:text-secondary dark:border-primary/70"
         >
           <Mail className="h-4 w-4 mr-2" />
           Subscribe to Newsletter

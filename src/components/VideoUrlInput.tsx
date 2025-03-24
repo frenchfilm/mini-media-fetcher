@@ -57,7 +57,7 @@ const VideoUrlInput = ({ onSubmit, isLoading = false, onFolderSelect }: VideoUrl
             variant="contrast"
             size="icon"
             onClick={onFolderSelect}
-            className="h-12 w-12 rounded-md bg-secondary border border-secondary/70 text-primary dark:bg-primary dark:text-secondary dark:border-primary/70"
+            className="h-12 w-12 rounded-md folder-button"
             disabled={showLoading}
           >
             <FolderOpen className="h-5 w-5" />
@@ -94,7 +94,7 @@ const VideoUrlInput = ({ onSubmit, isLoading = false, onFolderSelect }: VideoUrl
           variant="contrast"
           size="icon"
           disabled={showLoading || !url.trim()}
-          className="h-12 w-12 rounded-md bg-secondary border border-secondary/70 text-primary dark:bg-primary dark:text-secondary dark:border-primary/70"
+          className="h-12 w-12 rounded-md action-button-dark"
         >
           {showLoading ? (
             <Loader2 className="h-5 w-5 animate-spin" />

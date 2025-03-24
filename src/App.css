@@ -116,3 +116,58 @@
   color: #221F26;
   border-color: #f4e7cd;
 }
+
+/* Enhanced higher contrast buttons for light mode */
+.folder-button {
+  background-color: #221F26 !important;
+  color: white !important;
+  border-color: #221F26 !important;
+}
+
+.folder-button:hover {
+  background-color: #3a3640 !important;
+}
+
+.action-button-dark {
+  background-color: #221F26 !important;
+  color: white !important;
+  border-color: #221F26 !important;
+}
+
+.action-button-dark:hover {
+  background-color: #3a3640 !important;
+}
+
+/* Settings buttons with better contrast */
+.settings-button-high-contrast {
+  background-color: #221F26 !important;
+  color: white !important;
+  border-color: #221F26 !important;
+}
+
+.settings-button-high-contrast:hover {
+  background-color: #3a3640 !important;
+}
+
+.dark .settings-button-high-contrast {
+  background-color: #f4e7cd !important;
+  color: #221F26 !important;
+  border-color: #f4e7cd !important;
+}
+
+.dark .settings-button-high-contrast:hover {
+  background-color: #e4d7bd !important;
+}
+
+/* Format selection buttons high contrast */
+.format-button-selected {
+  background-color: #221F26 !important;
+  color: white !important;
+  border-color: #221F26 !important;
+}
+
+.dark .format-button-selected {
+  background-color: #f4e7cd !important;
+  color: #221F26 !important;
+  border-color: #f4e7cd !important;
+}
