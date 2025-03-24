@@ -5,8 +5,6 @@ import { useNavigate } from "react-router-dom";
 import VideoUrlInput from "@/components/VideoUrlInput";
 import { getVideoDetails } from "@/utils/videoDetails";
 import { isDesktopEnvironment } from "@/utils/fileSystem";
-import { Button } from "@/components/ui/button";
-import { MessageSquare, Mail } from "lucide-react";
 
 interface UrlInputSectionProps {
   onUrlSubmit: (url: string, videoInfo: any) => void;
@@ -67,26 +65,6 @@ const UrlInputSection = ({ onUrlSubmit, onOpenNewsletter }: UrlInputSectionProps
         isLoading={isLoading} 
         onFolderSelect={handleFolderSelect}
       />
-      
-      <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-        <Button 
-          variant="contrast" 
-          onClick={() => navigate("/contact")}
-          className="w-full sm:w-auto action-button-dark dark:bg-primary dark:text-secondary dark:border-primary/70"
-        >
-          <MessageSquare className="h-4 w-4 mr-2" />
-          Request Feature / Report Bugs
-        </Button>
-        
-        <Button 
-          variant="contrast" 
-          onClick={onOpenNewsletter}
-          className="w-full sm:w-auto action-button-dark dark:bg-primary dark:text-secondary dark:border-primary/70"
-        >
-          <Mail className="h-4 w-4 mr-2" />
-          Subscribe to Newsletter
-        </Button>
-      </div>
     </>
   );
 };

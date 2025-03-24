@@ -139,6 +139,28 @@ const Index = () => {
         </div>
       </main>
       
+      <div className="mt-auto container max-w-4xl mx-auto px-4 py-4">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+          <Button 
+            variant="contrast" 
+            onClick={() => navigate("/contact")}
+            className="w-full sm:w-auto action-button-dark dark:bg-primary dark:text-secondary dark:border-primary/70"
+          >
+            <MessageSquare className="h-4 w-4 mr-2" />
+            Request Feature / Report Bugs
+          </Button>
+          
+          <Button 
+            variant="contrast" 
+            onClick={handleOpenNewsletter}
+            className="w-full sm:w-auto action-button-dark dark:bg-primary dark:text-secondary dark:border-primary/70"
+          >
+            <Mail className="h-4 w-4 mr-2" />
+            Subscribe to Newsletter
+          </Button>
+        </div>
+      </div>
+      
       <NewsletterDialog
         open={newsletterOpen}
         onOpenChange={setNewsletterOpen}
