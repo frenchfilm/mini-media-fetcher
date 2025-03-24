@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Settings } from "lucide-react";
 import SettingsDialog from "./settings/SettingsDialog";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
 
 interface AppHeaderProps {
   downloadsCount: number;
@@ -15,12 +16,12 @@ const AppHeader = ({ downloadsCount }: AppHeaderProps) => {
   const version = "v1.0.0";
 
   const handleCheckUpdates = () => {
-    if (!licenseKey.trim()) {
-      setSettingsOpen(true);
-    } else {
-      // Simulate checking for updates with a valid license
-      alert("You're using the latest version of SoftBare Video Downloader!");
-    }
+    toast.info("Checking for updates...");
+    
+    // Simulate checking for updates
+    setTimeout(() => {
+      toast.success("Your app is up to date!");
+    }, 1500);
   };
 
   return (
