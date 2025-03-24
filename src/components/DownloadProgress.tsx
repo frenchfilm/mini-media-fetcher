@@ -107,7 +107,7 @@ const DownloadProgress = ({ videoUrl, selectedFormat, onComplete, onCancel }: Do
       <div className="flex justify-between items-center mb-6">
         <Button 
           variant="outline" 
-          className="button-high-contrast dark:bg-primary dark:text-secondary-foreground dark:hover:bg-primary/90 dark:border-primary/70"
+          className="bg-primary text-white dark:bg-primary dark:text-secondary-foreground dark:hover:bg-primary/90 dark:border-primary/70"
           onClick={onCancel}
         >
           ← Back
@@ -159,7 +159,7 @@ const DownloadProgress = ({ videoUrl, selectedFormat, onComplete, onCancel }: Do
       <div className="flex gap-4">
         <Button 
           onClick={togglePause} 
-          className="button-high-contrast flex-1 dark:bg-primary dark:text-secondary-foreground dark:hover:bg-primary/90 dark:border-primary/70"
+          className="bg-primary text-white flex-1 dark:bg-primary dark:text-secondary-foreground dark:hover:bg-primary/90 dark:border-primary/70"
         >
           {status === 'paused' ? (
             <>
@@ -177,7 +177,7 @@ const DownloadProgress = ({ videoUrl, selectedFormat, onComplete, onCancel }: Do
         <Button 
           variant="outline" 
           onClick={handleCancel}
-          className="bg-primary text-secondary flex-1 dark:bg-secondary dark:border-secondary dark:text-primary"
+          className="bg-primary text-white flex-1 dark:bg-secondary dark:border-secondary dark:text-primary"
         >
           <X className="h-4 w-4 mr-2" />
           Cancel

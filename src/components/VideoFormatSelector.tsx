@@ -48,7 +48,9 @@ const VideoFormatSelector = ({ onSelect }: VideoFormatSelectorProps) => {
             variant={selectedFormat === format.id ? "contrast" : "outline"}
             size="sm"
             className={`h-auto py-2 justify-start ${
-              selectedFormat === format.id ? 'bg-primary text-secondary border-primary/50 dark:bg-primary dark:text-secondary' : 'border-border bg-secondary/50 text-primary dark:bg-secondary dark:text-primary'
+              selectedFormat === format.id 
+                ? 'bg-primary text-white border-primary/50 dark:bg-primary dark:text-secondary dark:border-primary/50' 
+                : 'border-border bg-secondary/50 text-primary dark:bg-secondary dark:text-primary'
             }`}
             onClick={() => handleFormatChange(format.id)}
           >

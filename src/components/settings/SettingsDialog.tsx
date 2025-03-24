@@ -32,7 +32,7 @@ const SettingsDialog = ({
         <div className="flex justify-between items-center p-4 border-b">
           <Button 
             variant="contrast" 
-            className="bg-secondary border border-secondary/70 text-primary dark:bg-primary dark:text-secondary dark:border-primary/70"
+            className="bg-primary text-white dark:bg-primary dark:text-secondary dark:border-primary/70"
             onClick={() => onOpenChange(false)}
           >
             ← Back
@@ -40,7 +40,7 @@ const SettingsDialog = ({
           <DialogTitle className="text-xl font-fraunces">Settings</DialogTitle>
           <Button 
             variant="contrast"
-            className="bg-secondary border border-secondary/70 text-primary dark:bg-primary dark:text-secondary dark:border-primary/70"
+            className="bg-primary text-white dark:bg-primary dark:text-secondary dark:border-primary/70"
             onClick={handleSave}
           >
             Save
