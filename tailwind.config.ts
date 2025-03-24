@@ -1,5 +1,5 @@
 
-import type { Config } from "tailwindcss";
+import { type Config } from "tailwindcss";
 
 export default {
   darkMode: ["class"],
@@ -8,6 +8,7 @@ export default {
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
+    "./index.html",
   ],
   prefix: "",
   theme: {
@@ -20,9 +21,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        'barlow': ['Barlow Condensed', 'sans-serif'],
-        'fraunces': ['Fraunces', 'serif'],
-        'worksans': ['Work Sans', 'sans-serif'],
+        barlow: ["'Barlow Condensed'", "sans-serif"],
+        fraunces: ["'Fraunces'", "serif"],
+        worksans: ["'Work Sans'", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -33,12 +34,12 @@ export default {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
-          dark: "#0f1118", // SoftBare primary
+          dark: "#0f1118",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
-          light: "#e8d1aa", // SoftBare secondary
+          light: "#e8d1aa",
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",

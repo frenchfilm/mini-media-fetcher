@@ -25,6 +25,12 @@ const AppSettings = ({ licenseKey, onLicenseKeyChange }: AppSettingsProps) => {
     setIsSubscribed(false);
   };
 
+  const handleThemeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    // Type assertion to ensure the value is treated as a valid theme
+    const newTheme = e.target.value as "light" | "dark" | "system";
+    setTheme(newTheme);
+  };
+
   return (
     <div className="space-y-6">
       <div className="space-y-2">
@@ -61,11 +67,12 @@ const AppSettings = ({ licenseKey, onLicenseKeyChange }: AppSettingsProps) => {
         <select 
           id="theme"
           value={theme}
-          onChange={(e) => setTheme(e.target.value)}
+          onChange={handleThemeChange}
           className="flex h-10 w-full rounded-md border border-secondary bg-white px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
         >
           <option value="light">Light</option>
           <option value="dark">Dark</option>
+          <option value="system">System</option>
         </select>
       </div>
       
