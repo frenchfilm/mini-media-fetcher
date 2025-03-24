@@ -103,7 +103,7 @@ const DownloadProgress = ({ videoUrl, selectedFormat, onComplete, onCancel }: Do
   };
 
   return (
-    <div className="p-6 w-full max-w-xl mx-auto">
+    <div className="w-full max-w-4xl mx-auto">
       <div className="flex justify-between items-center mb-6">
         <Button 
           variant="outline" 
@@ -116,8 +116,9 @@ const DownloadProgress = ({ videoUrl, selectedFormat, onComplete, onCancel }: Do
         <div className="w-[80px]"></div> {/* Empty div for flex spacing */}
       </div>
       
-      <div className="mb-6 flex">
-        <div className="bg-muted w-96 h-48 flex items-center justify-center rounded-md mr-4">
+      <div className="mb-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Thumbnail column */}
+        <div className="bg-muted rounded-md flex items-center justify-center h-48">
           <div className="text-muted-foreground">
             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
               <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.85.84 6.72 2.28"/>
@@ -126,36 +127,53 @@ const DownloadProgress = ({ videoUrl, selectedFormat, onComplete, onCancel }: Do
           </div>
         </div>
         
-        <div className="flex-1 space-y-2">
-          <h3 className="text-lg font-medium">{videoTitle}</h3>
-          <div className="text-sm">
-            <p>Duration: {videoDuration}</p>
-            <p>Size: {totalSize.toFixed(1)} MB</p>
+        {/* Video details column */}
+        <div className="md:col-span-2 space-y-4">
+          <h3 className="text-xl font-medium">{videoTitle}</h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <p className="text-base mb-1"><span className="font-medium">Duration:</span> {videoDuration}</p>
+              <p className="text-base mb-1"><span className="font-medium">Size:</span> {totalSize.toFixed(1)} MB</p>
+            </div>
+            
+            <div>
+              <p className="text-base font-medium mb-1">Format:</p>
+              <select className="w-full rounded-md bg-secondary/50 border border-secondary px-3 py-2 text-base">
+                <option>{selectedFormat.quality} MP4 ({totalSize.toFixed(1)} MB)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Progress section */}
+      <Card className="p-6 mb-6">
+        <div className="space-y-3">
+          <div className="flex justify-between text-base">
+            <span className="font-medium">Download Progress</span>
+            <span className="font-medium">{progress.toFixed(0)}%</span>
           </div>
           
-          <div className="mt-4">
-            <p className="text-sm font-medium mb-1">Format:</p>
-            <select className="w-full rounded-md bg-secondary/50 border border-secondary px-3 py-2 text-sm">
-              <option>{selectedFormat.quality} MP4 ({totalSize.toFixed(1)} MB)</option>
-            </select>
+          <Progress value={progress} className="h-3" />
+          
+          <div className="flex justify-between text-base text-muted-foreground">
+            <span>{status === 'preparing' ? 'Preparing...' : 'Downloading...'}</span>
+            <span>{downloadedSize.toFixed(1)} MB / {totalSize.toFixed(1)} MB</span>
           </div>
+          
+          {downloadSpeed && (
+            <div className="flex justify-between text-sm text-muted-foreground">
+              <span>Speed: {downloadSpeed}</span>
+              {estimatedTimeLeft !== null && (
+                <span>Time left: {formatTime(estimatedTimeLeft)}</span>
+              )}
+            </div>
+          )}
         </div>
-      </div>
+      </Card>
       
-      <div className="space-y-2 mb-6">
-        <div className="flex justify-between text-sm">
-          <span>Download Progress</span>
-          <span>{progress.toFixed(0)}%</span>
-        </div>
-        
-        <Progress value={progress} className="h-2" />
-        
-        <div className="flex justify-between text-sm text-muted-foreground">
-          <span>Downloading...</span>
-          <span>{downloadedSize.toFixed(1)} MB / {totalSize.toFixed(1)} MB</span>
-        </div>
-      </div>
-      
+      {/* Action buttons */}
       <div className="flex gap-4">
         <Button 
           onClick={togglePause} 
