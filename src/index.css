@@ -53,7 +53,7 @@
     --secondary-foreground: 40 60% 96%;
 
     --muted: 20 25% 20%;
-    --muted-foreground: 20 30% 70%;
+    --muted-foreground: 40 60% 85%;
 
     --accent: 20 25% 20%;
     --accent-foreground: 40 60% 96%;
@@ -101,7 +101,18 @@
   /* Ensure placeholders are readable in dark mode */
   .dark input::placeholder,
   .dark textarea::placeholder {
-    @apply text-muted-foreground opacity-70;
+    @apply text-muted-foreground/70;
+  }
+  
+  /* Add higher contrast for dark mode inputs */
+  .dark input,
+  .dark textarea,
+  .dark select {
+    @apply text-foreground bg-secondary border-secondary-foreground/30;
+  }
+  
+  .dark .softbare-button {
+    @apply bg-primary text-secondary-foreground hover:bg-primary/90;
   }
 }
 
@@ -150,5 +161,14 @@
   
   .softbare-footer {
     @apply text-center text-sm text-muted-foreground mt-8 pb-4;
+  }
+  
+  /* Improved contrast for dark mode */
+  .dark .icon-button {
+    @apply text-foreground hover:text-primary;
+  }
+  
+  .dark .form-label {
+    @apply text-foreground/90;
   }
 }

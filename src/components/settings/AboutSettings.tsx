@@ -30,9 +30,9 @@ const AboutSettings = ({ licenseKey }: AboutSettingsProps) => {
           <img 
             src="/lovable-uploads/ee37b3bc-4867-4363-924f-9090d70c081a.png" 
             alt="SoftBare Logo" 
-            className="h-24 w-auto mb-3" 
+            className="h-32 w-auto mb-3" 
           />
-          <h3 className="text-lg font-fraunces">SoftBare Video Downloader</h3>
+          <h3 className="text-lg font-fraunces text-foreground">SoftBare Video Downloader</h3>
           <p className="text-sm text-muted-foreground mb-2">{version}</p>
         </div>
         
@@ -41,12 +41,16 @@ const AboutSettings = ({ licenseKey }: AboutSettingsProps) => {
         </p>
         
         <div className="flex justify-center mt-4 gap-3">
-          <Button variant="outline" className="softbare-button" onClick={checkForUpdates}>
+          <Button 
+            variant="outline" 
+            className="softbare-button dark:bg-primary dark:text-secondary-foreground dark:hover:bg-primary/90 dark:border-primary/70" 
+            onClick={checkForUpdates}
+          >
             Check for Updates
           </Button>
           <Button 
             variant="outline" 
-            className="softbare-button"
+            className="softbare-button dark:bg-primary dark:text-secondary-foreground dark:hover:bg-primary/90 dark:border-primary/70"
             onClick={() => window.open("https://softbare.com", "_blank")}
           >
             <ExternalLink className="h-3.5 w-3.5 mr-1.5" />
@@ -68,7 +72,10 @@ const AboutSettings = ({ licenseKey }: AboutSettingsProps) => {
             <p className="text-sm">
               Please purchase a license key from our website to access software updates and premium features.
             </p>
-            <Button onClick={() => window.open("https://softbare.com", "_blank")} className="softbare-button">
+            <Button 
+              onClick={() => window.open("https://softbare.com", "_blank")} 
+              className="softbare-button dark:bg-primary dark:text-secondary-foreground dark:hover:bg-primary/90 dark:border-primary/70"
+            >
               <ExternalLink className="h-4 w-4 mr-2" />
               Visit SoftBare.com
             </Button>

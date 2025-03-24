@@ -34,13 +34,13 @@ const AppSettings = ({ licenseKey, onLicenseKeyChange }: AppSettingsProps) => {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <Label htmlFor="license-key">License Key</Label>
+        <Label htmlFor="license-key" className="text-foreground">License Key</Label>
         <Input 
           id="license-key" 
           value={licenseKey}
           onChange={(e) => onLicenseKeyChange(e.target.value)}
           placeholder="Enter your license key"
-          className="bg-white border-secondary"
+          className="bg-white border-secondary dark:bg-secondary dark:border-border dark:text-foreground dark:placeholder:text-muted-foreground"
         />
       </div>
       
@@ -49,8 +49,9 @@ const AppSettings = ({ licenseKey, onLicenseKeyChange }: AppSettingsProps) => {
           id="startup" 
           checked={launchOnStartup}
           onCheckedChange={(checked) => setLaunchOnStartup(checked === true)}
+          className="data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
         />
-        <Label htmlFor="startup">Launch on startup</Label>
+        <Label htmlFor="startup" className="text-foreground">Launch on startup</Label>
       </div>
       
       <div className="flex items-center space-x-2">
@@ -58,17 +59,18 @@ const AppSettings = ({ licenseKey, onLicenseKeyChange }: AppSettingsProps) => {
           id="updates" 
           checked={autoUpdate}
           onCheckedChange={(checked) => setAutoUpdate(checked === true)}
+          className="data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
         />
-        <Label htmlFor="updates">Check for updates automatically</Label>
+        <Label htmlFor="updates" className="text-foreground">Check for updates automatically</Label>
       </div>
       
       <div className="space-y-2">
-        <Label htmlFor="theme">Theme</Label>
+        <Label htmlFor="theme" className="text-foreground">Theme</Label>
         <select 
           id="theme"
           value={theme}
           onChange={handleThemeChange}
-          className="flex h-10 w-full rounded-md border border-secondary bg-white px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+          className="flex h-10 w-full rounded-md border border-secondary bg-white px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 dark:bg-secondary dark:border-border dark:text-foreground"
         >
           <option value="light">Light</option>
           <option value="dark">Dark</option>
@@ -76,13 +78,13 @@ const AppSettings = ({ licenseKey, onLicenseKeyChange }: AppSettingsProps) => {
         </select>
       </div>
       
-      <div className="pt-4 border-t">
-        <h4 className="font-medium mb-2">Newsletter Preferences</h4>
+      <div className="pt-4 border-t border-border">
+        <h4 className="font-medium mb-2 text-foreground">Newsletter Preferences</h4>
         {isSubscribed ? (
           <Button 
             variant="outline" 
             onClick={handleUnsubscribe}
-            className="softbare-button w-full"
+            className="softbare-button w-full dark:bg-primary dark:text-secondary-foreground dark:hover:bg-primary/90 dark:border-primary/70"
           >
             Unsubscribe from Newsletter
           </Button>

@@ -36,52 +36,54 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-background to-secondary/30">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-background to-secondary/30 dark:from-background dark:to-secondary/10">
       <header className="py-4 px-6 border-b">
         <div className="container max-w-4xl mx-auto flex items-center">
           <Button 
             variant="ghost" 
             onClick={() => navigate("/")}
-            className="mr-4"
+            className="mr-4 text-foreground"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back
           </Button>
-          <h1 className="text-2xl font-fraunces">Contact Us</h1>
+          <h1 className="text-2xl font-fraunces text-foreground">Contact Us</h1>
         </div>
       </header>
       
       <main className="flex-1 container max-w-2xl mx-auto px-4 py-8">
-        <div className="bg-white rounded-lg shadow-sm border p-6">
-          <h2 className="text-xl font-fraunces mb-6">Send us a message</h2>
+        <div className="bg-white rounded-lg shadow-sm border p-6 dark:bg-secondary dark:border-border">
+          <h2 className="text-xl font-fraunces mb-6 text-foreground">Send us a message</h2>
           
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="firstName">First Name</Label>
+                <Label htmlFor="firstName" className="text-foreground">First Name</Label>
                 <Input
                   id="firstName"
                   name="firstName"
                   value={formData.firstName}
                   onChange={handleChange}
                   required
+                  className="dark:bg-secondary dark:border-border dark:text-foreground"
                 />
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="lastName">Last Name</Label>
+                <Label htmlFor="lastName" className="text-foreground">Last Name</Label>
                 <Input
                   id="lastName"
                   name="lastName"
                   value={formData.lastName}
                   onChange={handleChange}
                   required
+                  className="dark:bg-secondary dark:border-border dark:text-foreground"
                 />
               </div>
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email" className="text-foreground">Email</Label>
               <Input
                 id="email"
                 name="email"
@@ -89,11 +91,12 @@ const Contact = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
+                className="dark:bg-secondary dark:border-border dark:text-foreground"
               />
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="message">Message</Label>
+              <Label htmlFor="message" className="text-foreground">Message</Label>
               <Textarea
                 id="message"
                 name="message"
@@ -101,12 +104,13 @@ const Contact = () => {
                 onChange={handleChange}
                 rows={5}
                 required
+                className="dark:bg-secondary dark:border-border dark:text-foreground"
               />
             </div>
             
             <Button 
               type="submit" 
-              className="w-full"
+              className="w-full dark:bg-primary dark:text-secondary-foreground"
               disabled={isSending}
             >
               {isSending ? "Sending..." : "Send Message"}
