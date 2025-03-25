@@ -28,20 +28,20 @@ const AppFooter: React.FC<AppFooterProps> = ({
 
   return (
     <footer className="h-auto min-h-[60px] w-full absolute bottom-0 left-0 right-0">
-      <div className={`w-full flex ${isMobile ? 'flex-col-reverse gap-2' : 'flex-row'} px-2 sm:px-4`}>
+      <div className="w-full flex flex-col-reverse px-0 sm:px-4">
         {/* Left Column - Logo, App Name, Version, Update Link */}
-        <div className={`${isMobile ? 'w-full' : 'w-1/2'} flex items-start justify-center sm:justify-start mt-2 sm:mt-0`}>
+        <div className="w-full flex items-start justify-center sm:justify-start mt-2 sm:mt-0">
           <div className="flex items-start">
-            <div className={`${isMobile ? 'h-[50px]' : 'h-[72px]'} flex items-center`}>
+            <div className="h-[50px] sm:h-[72px] flex items-center">
               <img 
                 src="/lovable-uploads/ee37b3bc-4867-4363-924f-9090d70c081a.png" 
                 alt="SoftBare Logo" 
-                className={`${isMobile ? 'h-[50px]' : 'h-[72px]'} w-auto mr-2`} 
+                className="h-[50px] sm:h-[72px] w-auto mr-2" 
                 style={{ marginTop: "-12px" }} 
               />
             </div>
             <div className="flex flex-col items-start">
-              <h1 className={`${isMobile ? 'text-sm' : 'text-base'} font-worksans font-semibold leading-tight`}>SoftBare Video Downloader</h1>
+              <h1 className="text-sm sm:text-base font-worksans font-semibold leading-tight">SoftBare Video Downloader</h1>
               <div className="flex flex-col items-start text-[10px]">
                 <span>{version}</span>
                 <button 
@@ -56,7 +56,7 @@ const AppFooter: React.FC<AppFooterProps> = ({
         </div>
         
         {/* Right Column - Buttons */}
-        <div className={`${isMobile ? 'w-full' : 'w-1/2'} flex items-center ${isMobile ? 'justify-center' : 'justify-end'} gap-1`}>
+        <div className="w-full flex items-center justify-center sm:justify-end gap-1 mb-2 sm:mb-0">
           <Button 
             variant="contrast" 
             onClick={onContactClick}
