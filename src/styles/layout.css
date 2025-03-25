@@ -59,19 +59,4 @@
     max-width: 800px;
     height: 600px;
   }
-  
-  /* Mobile-specific sizing adjustments */
-  @media (max-width: 375px), (html.mobile-view) {
-    h1, h2, h3 {
-      font-size: 90%;
-    }
-    
-    p, span, div {
-      font-size: 90%;
-    }
-    
-    .button, .input {
-      padding: 0.25rem 0.5rem;
-    }
-  }
 }

@@ -30,7 +30,7 @@ window.addEventListener('resize', () => {
   const windowWidth = window.innerWidth;
   
   // Adjust for different window sizes while maintaining minimum and maximum constraints
-  if (windowWidth < 375) {
+  if (windowWidth < 800) {
     rootElement.style.width = "100%";
     document.documentElement.classList.add('mobile-view');
   } else {

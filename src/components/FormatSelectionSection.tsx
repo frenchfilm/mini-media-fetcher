@@ -44,9 +44,9 @@ const FormatSelectionSection = ({
         <p className="text-xs text-muted-foreground truncate max-w-[280px] sm:max-w-full mx-auto">{videoUrl}</p>
       </div>
       
-      <div className="grid grid-cols-1 gap-2">
-        <div className="flex flex-col p-1 sm:p-3 rounded-xl">
-          <div className={`flex-1 ${isMobile ? 'h-[140px]' : 'h-[330px]'} mb-2`}>
+      <div className="grid grid-cols-1 gap-4">
+        <div className="flex flex-col p-2 sm:p-3 rounded-xl">
+          <div className={`flex-1 ${isMobile ? 'h-[200px]' : 'h-[330px]'} mb-3`}>
             {displayImage && (
               <VideoThumbnailPreview 
                 src={displayImage} 
@@ -58,24 +58,24 @@ const FormatSelectionSection = ({
           <div className="flex gap-2 justify-center mt-auto">
             <Button
               onClick={onStartDownload}
-              className="px-2 py-1 h-7 text-xs bg-primary text-white dark:bg-primary dark:text-secondary dark:border-primary/70 font-semibold"
+              className="px-3 py-1 h-8 text-xs bg-primary text-white dark:bg-primary dark:text-secondary dark:border-primary/70 font-semibold"
               variant="highContrast"
             >
               <Download className="h-3 w-3 mr-1" />
-              Download
+              Start Download
             </Button>
             
             <Button
               variant="outline"
               onClick={onCancel}
-              className="px-2 py-1 h-7 text-xs font-semibold bg-secondary text-secondary-foreground hover:bg-secondary/80 dark:bg-secondary-light dark:text-primary-dark dark:border-primary/50 border-primary/30 hover:text-primary/90"
+              className="px-3 py-1 h-8 text-xs font-semibold bg-secondary text-secondary-foreground hover:bg-secondary/80 dark:bg-secondary-light dark:text-primary-dark dark:border-primary/50 border-primary/30 hover:text-primary/90"
             >
               Cancel
             </Button>
           </div>
         </div>
         
-        <div className="flex max-h-[180px] overflow-auto">
+        <div className="flex">
           <VideoFormatSelector onSelect={onFormatSelect} />
         </div>
       </div>
