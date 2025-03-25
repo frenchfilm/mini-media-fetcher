@@ -45,24 +45,19 @@ const FormatSelectionSection = ({
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-        {/* Left Column - Video Preview */}
-        <div className="flex flex-col h-[200px]">
-          {displayImage && (
-            <VideoThumbnailPreview 
-              src={displayImage} 
-              alt={videoInfo.title} 
-            />
-          )}
-        </div>
-        
-        {/* Right Column */}
-        <div className="flex flex-col h-full">
-          {/* Right Column Section 1: Format Selector */}
-          <div className="mb-3">
-            <VideoFormatSelector onSelect={onFormatSelect} />
+        {/* Left Column - Video Preview and Action Buttons */}
+        <div className="flex flex-col gap-3">
+          {/* Video Thumbnail */}
+          <div className="h-[200px]">
+            {displayImage && (
+              <VideoThumbnailPreview 
+                src={displayImage} 
+                alt={videoInfo.title} 
+              />
+            )}
           </div>
           
-          {/* Right Column Section 2: Action Buttons */}
+          {/* Action Buttons */}
           <div className="flex gap-2 justify-center">
             <Button
               onClick={onStartDownload}
@@ -81,6 +76,11 @@ const FormatSelectionSection = ({
               Cancel
             </Button>
           </div>
+        </div>
+        
+        {/* Right Column - Format Selector */}
+        <div className="flex flex-col">
+          <VideoFormatSelector onSelect={onFormatSelect} />
         </div>
       </div>
     </>
