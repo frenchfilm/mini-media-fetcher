@@ -49,13 +49,13 @@ const VideoFormatSelector = ({ onSelect }: VideoFormatSelectorProps) => {
     <Card className="glass-panel p-2 rounded-xl w-full mx-auto animate-slide-up shadow-sm">
       <h3 className="text-xs font-medium text-foreground mb-2">Select Format & Quality</h3>
       
-      <div className="grid grid-cols-3 gap-1">
+      <div className="grid grid-cols-2 gap-2">
         {FORMATS.map((format) => (
           <Button
             key={format.id}
             variant={selectedFormat === format.id ? "highContrast" : "secondaryHighContrast"}
             size="sm"
-            className={`h-auto py-1 px-1 text-xs justify-start ${
+            className={`h-auto py-2 px-2 text-xs justify-start ${
               selectedFormat === format.id 
                 ? 'bg-primary text-white border-primary/50 dark:bg-primary dark:text-secondary dark:border-primary/50' 
                 : 'bg-secondary text-primary border-primary/30 dark:bg-secondary dark:text-primary'
@@ -63,11 +63,11 @@ const VideoFormatSelector = ({ onSelect }: VideoFormatSelectorProps) => {
             onClick={() => handleFormatChange(format.id)}
           >
             <div className="flex flex-col items-start text-left">
-              <span className="text-[10px] font-medium">{format.quality}</span>
-              <span className="text-[8px] opacity-80">{format.resolution} • {format.fileSize}</span>
+              <span className="text-xs font-medium">{format.quality}</span>
+              <span className="text-[10px] opacity-80">{format.resolution} • {format.fileSize}</span>
             </div>
             {selectedFormat === format.id && (
-              <Check className="h-2 w-2 ml-1 shrink-0" />
+              <Check className="h-3 w-3 ml-1 shrink-0" />
             )}
           </Button>
         ))}
