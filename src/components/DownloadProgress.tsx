@@ -103,67 +103,63 @@ const DownloadProgress = ({ videoUrl, selectedFormat, onComplete, onCancel }: Do
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto">
-      <div className="flex justify-between items-center mb-6">
+    <div className="w-full max-w-3xl mx-auto">
+      <div className="flex justify-between items-center mb-4">
         <Button 
           variant="outline" 
+          size="sm"
           className="bg-primary text-white dark:bg-primary dark:text-secondary-foreground dark:hover:bg-primary/90 dark:border-primary/70"
           onClick={onCancel}
         >
           ← Back
         </Button>
-        <h2 className="text-xl font-fraunces text-center">Download Progress</h2>
-        <div className="w-[80px]"></div> {/* Empty div for flex spacing */}
+        <h2 className="text-lg font-fraunces text-center">Download Progress</h2>
+        <div className="w-[60px]"></div> {/* Empty div for flex spacing */}
       </div>
       
-      <div className="mb-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Thumbnail column */}
-        <div className="bg-muted rounded-md flex items-center justify-center h-48">
-          <div className="text-muted-foreground">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.85.84 6.72 2.28"/>
-              <path d="M21 3v9h-9"/>
-            </svg>
+      {/* Compact video details & thumbnail */}
+      <Card className="p-4 mb-4 bg-card/80">
+        <div className="flex gap-4">
+          {/* Thumbnail */}
+          <div className="bg-muted rounded-md flex items-center justify-center w-24 h-24 flex-shrink-0">
+            <div className="text-muted-foreground">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.85.84 6.72 2.28"/>
+                <path d="M21 3v9h-9"/>
+              </svg>
+            </div>
           </div>
-        </div>
-        
-        {/* Video details column */}
-        <div className="md:col-span-2 space-y-4">
-          <h3 className="text-xl font-medium">{videoTitle}</h3>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <p className="text-base mb-1"><span className="font-medium">Duration:</span> {videoDuration}</p>
-              <p className="text-base mb-1"><span className="font-medium">Size:</span> {totalSize.toFixed(1)} MB</p>
-            </div>
+          {/* Video details in a compact layout */}
+          <div className="space-y-2 flex-1 overflow-hidden">
+            <h3 className="text-base font-medium truncate">{videoTitle}</h3>
             
-            <div>
-              <p className="text-base font-medium mb-1">Format:</p>
-              <select className="w-full rounded-md bg-secondary/50 border border-secondary px-3 py-2 text-base">
-                <option>{selectedFormat.quality} MP4 ({totalSize.toFixed(1)} MB)</option>
-              </select>
+            <div className="grid grid-cols-2 gap-2 text-sm">
+              <p><span className="font-medium">Duration:</span> {videoDuration}</p>
+              <p><span className="font-medium">Size:</span> {totalSize.toFixed(1)} MB</p>
+              <p><span className="font-medium">Format:</span> {selectedFormat.quality} MP4</p>
             </div>
           </div>
         </div>
-      </div>
+      </Card>
       
       {/* Progress section */}
-      <Card className="p-6 mb-6">
-        <div className="space-y-3">
-          <div className="flex justify-between text-base">
+      <Card className="p-4 mb-4 bg-card/80">
+        <div className="space-y-2">
+          <div className="flex justify-between text-sm">
             <span className="font-medium">Download Progress</span>
             <span className="font-medium">{progress.toFixed(0)}%</span>
           </div>
           
-          <Progress value={progress} className="h-3" />
+          <Progress value={progress} className="h-2" />
           
-          <div className="flex justify-between text-base text-muted-foreground">
+          <div className="flex justify-between text-sm text-muted-foreground">
             <span>{status === 'preparing' ? 'Preparing...' : 'Downloading...'}</span>
             <span>{downloadedSize.toFixed(1)} MB / {totalSize.toFixed(1)} MB</span>
           </div>
           
           {downloadSpeed && (
-            <div className="flex justify-between text-sm text-muted-foreground">
+            <div className="flex justify-between text-xs text-muted-foreground">
               <span>Speed: {downloadSpeed}</span>
               {estimatedTimeLeft !== null && (
                 <span>Time left: {formatTime(estimatedTimeLeft)}</span>
@@ -174,19 +170,20 @@ const DownloadProgress = ({ videoUrl, selectedFormat, onComplete, onCancel }: Do
       </Card>
       
       {/* Action buttons */}
-      <div className="flex gap-4">
+      <div className="flex gap-3">
         <Button 
           onClick={togglePause} 
+          size="sm"
           className="bg-primary text-white flex-1 dark:bg-primary dark:text-secondary-foreground dark:hover:bg-primary/90 dark:border-primary/70"
         >
           {status === 'paused' ? (
             <>
-              <Download className="h-4 w-4 mr-2" />
+              <Download className="h-3.5 w-3.5 mr-1.5" />
               Resume
             </>
           ) : (
             <>
-              <Pause className="h-4 w-4 mr-2" />
+              <Pause className="h-3.5 w-3.5 mr-1.5" />
               Pause
             </>
           )}
@@ -194,10 +191,11 @@ const DownloadProgress = ({ videoUrl, selectedFormat, onComplete, onCancel }: Do
         
         <Button 
           variant="outline" 
+          size="sm"
           onClick={handleCancel}
           className="bg-primary text-white flex-1 dark:bg-secondary dark:border-secondary dark:text-primary"
         >
-          <X className="h-4 w-4 mr-2" />
+          <X className="h-3.5 w-3.5 mr-1.5" />
           Cancel
         </Button>
       </div>
