@@ -23,7 +23,7 @@ const AppLayout = ({
   };
 
   return (
-    <div className="w-[800px] h-[600px] bg-gradient-to-b from-background to-secondary/30 flex flex-col">
+    <div className="w-[800px] h-[600px] bg-gradient-to-b from-background to-secondary/30 flex flex-col relative">
       {/* Body Section with proper padding */}
       <main className="h-[528px] w-full overflow-hidden p-6">
         {children}
