@@ -37,7 +37,7 @@ const AppFooter: React.FC<AppFooterProps> = ({
             className="h-[72px] w-auto mr-2" 
           />
           <div className="flex flex-col items-start">
-            <h1 className="text-base font-worksans font-semibold leading-tight">SoftBare Video Downloader</h1>
+            <h1 className="text-base font-worksans font-semibold leading-tight">SoftBare</h1>
             <div className="flex flex-col items-start text-xs">
               <span>{version}</span>
               <button 
