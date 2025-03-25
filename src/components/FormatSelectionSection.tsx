@@ -38,13 +38,13 @@ const FormatSelectionSection = ({
   
   return (
     <>
-      <div className="text-center mb-8 animate-slide-down">
+      <div className="text-center mb-4 animate-slide-down">
         <h2 className="text-xl font-medium mb-2">{videoInfo.title}</h2>
         <p className="text-sm text-muted-foreground">{videoUrl}</p>
       </div>
       
       {displayImage && (
-        <div className="relative w-full max-w-md mx-auto mb-4 animate-slide-up rounded-2xl overflow-hidden shadow-sm">
+        <div className="relative w-full max-w-xs mx-auto mb-4 animate-slide-up rounded-xl overflow-hidden shadow-sm">
           <img 
             src={displayImage} 
             alt={videoInfo.title}
@@ -63,7 +63,7 @@ const FormatSelectionSection = ({
         </div>
       )}
       
-      <div className="flex gap-3 justify-center mt-2 mb-8 animate-slide-up">
+      <div className="flex gap-3 justify-center mt-2 mb-4 animate-slide-up">
         <Button
           onClick={onStartDownload}
           className="px-6"
