@@ -1,0 +1,72 @@
+
+@layer base {
+  .dark {
+    --background: 229 31% 8%;
+    --foreground: 40 50% 79%;
+
+    --card: 229 31% 12%;
+    --card-foreground: 40 50% 79%;
+
+    --popover: 229 31% 12%;
+    --popover-foreground: 40 50% 79%;
+
+    --primary: 40 50% 79%;
+    --primary-foreground: 229 31% 8%;
+
+    --secondary: 229 20% 15%;
+    --secondary-foreground: 40 50% 79%;
+
+    --muted: 229 25% 20%;
+    --muted-foreground: 40 40% 80%;
+
+    --accent: 229 25% 20%;
+    --accent-foreground: 40 50% 79%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 40 50% 79%;
+
+    --border: 229 31% 25%;
+    --input: 229 31% 25%;
+    --ring: 40 50% 79%;
+    
+    /* New tab colors for better contrast */
+    --tab-inactive: 229 31% 20%;
+  }
+
+  /* Dark mode input styles */
+  .dark input::placeholder,
+  .dark textarea::placeholder {
+    @apply text-secondary-foreground/70;
+    opacity: 1;
+  }
+  
+  .dark input,
+  .dark textarea,
+  .dark select {
+    @apply text-foreground bg-secondary border-secondary-foreground/30;
+  }
+  
+  /* Button styles for dark mode */
+  .dark .softbare-button,
+  .dark .button-contrast {
+    @apply bg-primary text-secondary-foreground hover:bg-primary/90 font-semibold;
+  }
+  
+  .dark .settings-button,
+  .dark .action-button {
+    @apply bg-primary text-secondary-foreground border-primary/50 font-semibold;
+  }
+
+  /* Tabs styling for dark mode */
+  .dark .settings-tabs-list {
+    @apply bg-secondary/70 border border-border;
+  }
+
+  .dark .settings-tab-active {
+    @apply bg-primary text-secondary font-medium;
+  }
+
+  .dark .settings-tab-inactive {
+    @apply bg-[hsl(var(--tab-inactive))] text-primary hover:bg-secondary/80 font-medium;
+  }
+}

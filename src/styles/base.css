@@ -1,0 +1,74 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== BASE STYLES ===== */
+@layer base {
+  :root {
+    --background: 40 50% 79%;
+    --foreground: 229 31% 8%;
+
+    --card: 40 55% 88%;
+    --card-foreground: 229 31% 8%;
+
+    --popover: 40 55% 88%;
+    --popover-foreground: 229 31% 8%;
+
+    --primary: 229 31% 8%;
+    --primary-foreground: 40 55% 88%;
+
+    --secondary: 40 50% 79%;
+    --secondary-foreground: 229 31% 8%;
+
+    --muted: 40 35% 80%;
+    --muted-foreground: 229 31% 30%;
+
+    --accent: 40 45% 75%;
+    --accent-foreground: 229 31% 8%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 40 55% 88%;
+
+    --border: 40 35% 75%;
+    --input: 40 35% 75%;
+    --ring: 229 31% 8%;
+
+    --radius: 0.75rem;
+    
+    /* New tab colors for better contrast */
+    --tab-inactive: 40 35% 68%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased font-worksans;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-fraunces;
+  }
+  
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/20 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/30;
+  }
+}

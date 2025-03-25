@@ -1,0 +1,15 @@
+
+@layer base {
+  /* Tabs styling for light mode */
+  .settings-tabs-list {
+    @apply bg-muted border border-border;
+  }
+
+  .settings-tab-active {
+    @apply bg-primary text-primary-foreground font-medium;
+  }
+
+  .settings-tab-inactive {
+    @apply bg-[hsl(var(--tab-inactive))] text-foreground hover:bg-muted/80 font-medium;
+  }
+}

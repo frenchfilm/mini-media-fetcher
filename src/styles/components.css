@@ -1,0 +1,56 @@
+
+@layer utilities {
+  /* Component styles */
+  .glass-panel {
+    @apply bg-secondary/50 border border-secondary/70 shadow-sm;
+  }
+  
+  .glass-button {
+    @apply bg-secondary border border-secondary/70 shadow-sm 
+           hover:bg-secondary/80 active:bg-secondary/90 transition-all-200;
+  }
+  
+  /* Typography styles */
+  .app-logo {
+    @apply font-barlow text-primary-dark;
+  }
+  
+  .app-title {
+    @apply font-fraunces text-primary-dark;
+  }
+  
+  /* Button styles */
+  .softbare-button {
+    @apply bg-primary hover:bg-primary/90 text-white font-medium px-4 py-2 rounded-md transition-all-200 border border-primary/70;
+  }
+  
+  .softbare-button-dark {
+    @apply bg-primary hover:bg-primary/80 text-secondary font-medium px-4 py-2 rounded-md transition-all-200 border border-primary/70;
+  }
+  
+  .softbare-footer {
+    @apply text-center text-sm text-muted-foreground mt-8 pb-4;
+  }
+  
+  /* High contrast buttons */
+  .button-high-contrast {
+    @apply bg-primary text-white border-primary hover:bg-primary/90 font-semibold;
+  }
+
+  .dark .button-high-contrast {
+    @apply bg-primary text-secondary border-primary hover:bg-primary/90 font-semibold;
+  }
+  
+  /* Icon and form styles */
+  .icon-button-contrast {
+    @apply text-primary bg-secondary hover:bg-secondary/90 hover:text-primary/90;
+  }
+  
+  .form-input-contrast {
+    @apply bg-secondary/80 border-secondary-foreground/30 text-foreground placeholder:text-foreground/70;
+  }
+  
+  .form-label-contrast {
+    @apply text-foreground/90;
+  }
+}
