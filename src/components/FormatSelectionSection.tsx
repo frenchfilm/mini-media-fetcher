@@ -39,14 +39,14 @@ const FormatSelectionSection = ({
   
   return (
     <>
-      <div className="text-center mb-3 animate-slide-down">
-        <h2 className="text-xl font-medium mb-1">{videoInfo.title}</h2>
-        <p className="text-sm text-muted-foreground truncate">{videoUrl}</p>
+      <div className="text-center mb-2 animate-slide-down">
+        <h2 className="text-lg font-medium mb-1 truncate">{videoInfo.title}</h2>
+        <p className="text-xs text-muted-foreground truncate">{videoUrl}</p>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         {/* Left Column - Video Preview */}
-        <div className="flex flex-col h-[250px]">
+        <div className="flex flex-col h-[200px]">
           {displayImage && (
             <VideoThumbnailPreview 
               src={displayImage} 
@@ -58,27 +58,25 @@ const FormatSelectionSection = ({
         {/* Right Column */}
         <div className="flex flex-col h-full">
           {/* Right Column Section 1: Format Selector */}
-          <div className="mb-4">
+          <div className="mb-3">
             <VideoFormatSelector onSelect={onFormatSelect} />
           </div>
           
           {/* Right Column Section 2: Action Buttons */}
-          <div className="flex gap-3 justify-center">
+          <div className="flex gap-2 justify-center">
             <Button
               onClick={onStartDownload}
-              className="px-4"
-              size="default"
+              className="px-3 py-1 h-8 text-xs"
               variant="highContrast"
             >
-              <Download className="h-4 w-4 mr-2" />
+              <Download className="h-3 w-3 mr-1" />
               Start Download
             </Button>
             
             <Button
               variant="outline"
               onClick={onCancel}
-              size="default"
-              className="bg-secondary text-primary font-medium border-primary/30 hover:bg-secondary/80 hover:text-primary/90"
+              className="px-3 py-1 h-8 text-xs bg-secondary text-primary font-medium border-primary/30 hover:bg-secondary/80 hover:text-primary/90"
             >
               Cancel
             </Button>

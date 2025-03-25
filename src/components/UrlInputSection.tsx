@@ -48,15 +48,15 @@ const UrlInputSection = ({ onUrlSubmit, onOpenNewsletter }: UrlInputSectionProps
 
   return (
     <>
-      <div className="text-center mt-10 mb-12">
-        <h1 className="text-3xl font-fraunces mb-4">
+      <div className="text-center mt-4 mb-6">
+        <h1 className="text-2xl font-fraunces mb-2">
           Download Videos with Ease
         </h1>
-        <p className="text-lg mb-2">
+        <p className="text-sm mb-1">
           Simply paste a video URL from any platform to get started.
         </p>
-        <p className="text-xs text-muted-foreground max-w-md mx-auto italic">
-          This tool is for personal use only. Downloading copyrighted or unauthorized content may violate platform rules and local laws. Use responsibly.
+        <p className="text-[10px] text-muted-foreground max-w-md mx-auto italic">
+          This tool is for personal use only. Downloading copyrighted content may violate platform rules.
         </p>
       </div>
       

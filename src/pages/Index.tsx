@@ -105,11 +105,11 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-background to-secondary/30 max-w-[800px] mx-auto">
+    <div className="h-[600px] flex flex-col bg-gradient-to-b from-background to-secondary/30 max-w-[800px] mx-auto">
       <AppHeader downloadsCount={downloads.length} />
       
-      <main className="flex-1 px-4 pb-6 pt-2 flex flex-col">
-        <div className="space-y-4 flex-1">
+      <main className="flex-1 px-4 pb-2 pt-1 flex flex-col overflow-hidden">
+        <div className="space-y-2 flex-1">
           {appState === AppState.INPUT_URL && (
             <UrlInputSection 
               onUrlSubmit={handleUrlSubmit} 
@@ -139,26 +139,26 @@ const Index = () => {
         </div>
       </main>
       
-      <div className="mt-auto px-4 py-3">
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-4">
+      <div className="px-4 py-2">
+        <div className="flex flex-row items-center justify-center gap-2 mb-2">
           <Button 
             variant="contrast" 
             onClick={() => navigate("/contact")}
-            className="w-full sm:w-auto action-button-dark dark:bg-primary dark:text-secondary dark:border-primary/70"
+            className="action-button-dark dark:bg-primary dark:text-secondary dark:border-primary/70"
             size="sm"
           >
-            <MessageSquare className="h-4 w-4 mr-2" />
-            Request Feature / Report Bugs
+            <MessageSquare className="h-3 w-3 mr-1" />
+            <span className="text-xs">Request Feature</span>
           </Button>
           
           <Button 
             variant="contrast" 
             onClick={handleOpenNewsletter}
-            className="w-full sm:w-auto action-button-dark dark:bg-primary dark:text-secondary dark:border-primary/70"
+            className="action-button-dark dark:bg-primary dark:text-secondary dark:border-primary/70"
             size="sm"
           >
-            <Mail className="h-4 w-4 mr-2" />
-            Subscribe to Newsletter
+            <Mail className="h-3 w-3 mr-1" />
+            <span className="text-xs">Newsletter</span>
           </Button>
         </div>
       </div>
@@ -168,10 +168,9 @@ const Index = () => {
         onOpenChange={setNewsletterOpen}
       />
       
-      <footer className="py-4 px-4 text-center text-sm text-muted-foreground">
+      <footer className="py-2 px-4 text-center text-xs text-muted-foreground">
         <p className="italic">
-          Our Apps are bare - quiet, private, ad-free and lightweight.<br />
-          Just plain functions, as Nature intended them.
+          Apps as nature intended them - quiet, private, ad-free.
         </p>
       </footer>
     </div>

@@ -15,21 +15,21 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-background to-secondary/30 p-4">
-      <div className="glass-panel rounded-2xl p-8 text-center max-w-md animate-fade-in shadow-sm">
-        <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-muted flex items-center justify-center">
-          <span className="text-3xl font-medium">404</span>
+    <div className="h-[600px] flex items-center justify-center bg-gradient-to-b from-background to-secondary/30 p-4 max-w-[800px] mx-auto">
+      <div className="glass-panel rounded-xl p-6 text-center max-w-md animate-fade-in shadow-sm">
+        <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-muted flex items-center justify-center">
+          <span className="text-xl font-medium">404</span>
         </div>
         
-        <h1 className="text-2xl font-medium mb-2">Page not found</h1>
+        <h1 className="text-xl font-medium mb-2">Page not found</h1>
         
-        <p className="text-muted-foreground mb-6">
+        <p className="text-sm text-muted-foreground mb-4">
           The page you're looking for doesn't exist or has been moved.
         </p>
         
-        <Button asChild className="w-full">
+        <Button asChild className="w-full h-8 text-sm">
           <a href="/">
-            <ArrowLeft className="h-4 w-4 mr-2" />
+            <ArrowLeft className="h-3 w-3 mr-1" />
             Return to Home
           </a>
         </Button>
