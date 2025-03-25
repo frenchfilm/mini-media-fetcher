@@ -8,6 +8,7 @@ import { toast } from 'sonner';
 import VideoDetailsCard from './download/VideoDetailsCard';
 import ProgressIndicator from './download/ProgressIndicator';
 import DownloadActionButtons from './download/DownloadActionButtons';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface DownloadProgressProps {
   videoUrl: string;
@@ -24,6 +25,7 @@ const DownloadProgress = ({ videoUrl, selectedFormat, onComplete, onCancel }: Do
   const [downloadSpeed, setDownloadSpeed] = useState<string | null>(null);
   const [downloadedSize, setDownloadedSize] = useState(0);
   const totalSize = 128.5; // Mock total size in MB
+  const isMobile = useIsMobile();
   
   // Mock video details
   const videoTitle = "Sample Video Title - Amazing Content";
@@ -98,7 +100,7 @@ const DownloadProgress = ({ videoUrl, selectedFormat, onComplete, onCancel }: Do
   };
 
   return (
-    <div className="w-full max-w-xl mx-auto">
+    <div className="w-full max-w-xl mx-auto px-1 sm:px-0">
       <div className="flex justify-between items-center mb-3">
         <Button 
           variant="outline" 
@@ -106,7 +108,7 @@ const DownloadProgress = ({ videoUrl, selectedFormat, onComplete, onCancel }: Do
           className="font-semibold dark:bg-secondary-light dark:text-primary-dark dark:hover:bg-secondary-light/90 dark:border-primary-dark/30"
           onClick={onCancel}
         >
-          ← Back
+          {isMobile ? "←" : "← Back"}
         </Button>
         <h2 className="text-base font-fraunces text-center">Download Progress</h2>
         <div className="w-[60px]"></div> {/* Empty div for flex spacing */}

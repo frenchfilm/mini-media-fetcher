@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import VideoUrlInput from "@/components/VideoUrlInput";
 import { getVideoDetails } from "@/utils/videoDetails";
 import { isDesktopEnvironment } from "@/utils/fileSystem";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface UrlInputSectionProps {
   onUrlSubmit: (url: string, videoInfo: any) => void;
@@ -14,6 +15,7 @@ interface UrlInputSectionProps {
 const UrlInputSection = ({ onUrlSubmit, onOpenNewsletter }: UrlInputSectionProps) => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const isMobile = useIsMobile();
   
   const handleUrlSubmit = async (url: string) => {
     setIsLoading(true);
@@ -47,15 +49,15 @@ const UrlInputSection = ({ onUrlSubmit, onOpenNewsletter }: UrlInputSectionProps
   };
 
   return (
-    <div className="flex-1 flex flex-col justify-center">
+    <div className="flex-1 flex flex-col justify-center px-1 sm:px-0">
       <div className="text-center mb-6">
-        <h1 className="text-2xl font-fraunces mb-2">
+        <h1 className="text-xl sm:text-2xl font-fraunces mb-2">
           Download Videos with Ease
         </h1>
-        <p className="text-sm mb-1">
+        <p className="text-xs sm:text-sm mb-1">
           Simply paste a video URL from any platform to get started.
         </p>
-        <p className="text-[10px] text-muted-foreground max-w-md mx-auto italic">
+        <p className="text-[10px] text-muted-foreground max-w-[280px] sm:max-w-md mx-auto italic">
           This tool is for personal use only. Downloading copyrighted content may violate platform rules and local laws. Use responsibly.
         </p>
       </div>
@@ -63,7 +65,7 @@ const UrlInputSection = ({ onUrlSubmit, onOpenNewsletter }: UrlInputSectionProps
       <VideoUrlInput 
         onSubmit={handleUrlSubmit} 
         isLoading={isLoading} 
-        onFolderSelect={handleFolderSelect}
+        onFolderSelect={isMobile ? undefined : handleFolderSelect}
       />
     </div>
   );

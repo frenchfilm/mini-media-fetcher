@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from 'sonner';
 import { ArrowRight, X, Loader2, FolderOpen } from 'lucide-react';
 import { validateUrl } from '@/utils/urlValidation';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface VideoUrlInputProps {
   onSubmit: (url: string) => void;
@@ -15,6 +16,7 @@ interface VideoUrlInputProps {
 const VideoUrlInput = ({ onSubmit, isLoading = false, onFolderSelect }: VideoUrlInputProps) => {
   const [url, setUrl] = useState('');
   const [isValidating, setIsValidating] = useState(false);
+  const isMobile = useIsMobile();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -48,10 +50,10 @@ const VideoUrlInput = ({ onSubmit, isLoading = false, onFolderSelect }: VideoUrl
   return (
     <form 
       onSubmit={handleSubmit} 
-      className="w-full max-w-2xl mx-auto"
+      className="w-full max-w-xs sm:max-w-2xl mx-auto"
     >
       <div className="flex items-stretch gap-1">
-        {onFolderSelect && (
+        {onFolderSelect && !isMobile && (
           <Button
             type="button"
             variant="contrast"

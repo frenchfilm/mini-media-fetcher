@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Download, Pause, X } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface DownloadActionButtonsProps {
   status: 'preparing' | 'downloading' | 'paused' | 'complete';
@@ -13,6 +14,8 @@ const DownloadActionButtons = ({
   onTogglePause, 
   onCancel 
 }: DownloadActionButtonsProps) => {
+  const isMobile = useIsMobile();
+  
   return (
     <div className="flex gap-2">
       <Button 
@@ -25,12 +28,12 @@ const DownloadActionButtons = ({
         {status === 'paused' ? (
           <>
             <Download className="h-3.5 w-3.5 mr-1.5" />
-            Resume
+            {isMobile ? "Resume" : "Resume"}
           </>
         ) : (
           <>
             <Pause className="h-3.5 w-3.5 mr-1.5" />
-            Pause
+            {isMobile ? "Pause" : "Pause"}
           </>
         )}
       </Button>

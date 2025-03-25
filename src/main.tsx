@@ -5,7 +5,9 @@ import './index.css'
 
 // Set up the root element
 const rootElement = document.getElementById("root")!;
-rootElement.style.width = "800px";
+rootElement.style.minWidth = "300px";
+rootElement.style.width = "100%";
+rootElement.style.maxWidth = "800px";
 rootElement.style.height = "600px";
 rootElement.style.position = "relative";
 rootElement.style.overflow = "hidden";

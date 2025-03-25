@@ -1,8 +1,10 @@
-import React, { useEffect, KeyboardEvent } from "react";
+
+import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 import VideoFormatSelector, { VideoFormat } from "@/components/VideoFormatSelector";
 import VideoThumbnailPreview from "@/components/VideoThumbnailPreview";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface FormatSelectionSectionProps {
   videoInfo: any;
@@ -22,6 +24,7 @@ const FormatSelectionSection = ({
   onCancel
 }: FormatSelectionSectionProps) => {
   const displayImage = videoInfo.previewImage || videoInfo.thumbnailUrl;
+  const isMobile = useIsMobile();
   
   useEffect(() => {
     const handleKeyDown = (e: globalThis.KeyboardEvent) => {
@@ -35,15 +38,15 @@ const FormatSelectionSection = ({
   }, [selectedFormat, onStartDownload]);
   
   return (
-    <>
+    <div className="w-full max-w-full px-1 sm:px-0">
       <div className="text-center mb-2 animate-slide-down">
-        <h2 className="text-lg font-medium mb-1 truncate">{videoInfo.title}</h2>
-        <p className="text-xs text-muted-foreground truncate">{videoUrl}</p>
+        <h2 className="text-lg font-medium mb-1 truncate max-w-[280px] sm:max-w-full mx-auto">{videoInfo.title}</h2>
+        <p className="text-xs text-muted-foreground truncate max-w-[280px] sm:max-w-full mx-auto">{videoUrl}</p>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="flex flex-col p-3 rounded-xl">
-          <div className="flex-1 h-[330px] mb-3">
+      <div className="grid grid-cols-1 gap-4">
+        <div className="flex flex-col p-2 sm:p-3 rounded-xl">
+          <div className={`flex-1 ${isMobile ? 'h-[200px]' : 'h-[330px]'} mb-3`}>
             {displayImage && (
               <VideoThumbnailPreview 
                 src={displayImage} 
@@ -55,7 +58,7 @@ const FormatSelectionSection = ({
           <div className="flex gap-2 justify-center mt-auto">
             <Button
               onClick={onStartDownload}
-              className="px-3 py-1 h-8 text-xs bg-primary text-white dark:bg-primary dark:text-secondary dark:border-primary/70"
+              className="px-3 py-1 h-8 text-xs bg-primary text-white dark:bg-primary dark:text-secondary dark:border-primary/70 font-semibold"
               variant="highContrast"
             >
               <Download className="h-3 w-3 mr-1" />
@@ -76,7 +79,7 @@ const FormatSelectionSection = ({
           <VideoFormatSelector onSelect={onFormatSelect} />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
