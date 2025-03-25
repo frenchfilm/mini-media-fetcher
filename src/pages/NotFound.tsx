@@ -15,8 +15,8 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="h-[600px] flex items-center justify-center bg-gradient-to-b from-background to-secondary/30 p-3 max-w-[800px] mx-auto overflow-hidden">
-      <div className="glass-panel rounded-xl p-4 text-center max-w-[380px] animate-fade-in shadow-sm">
+    <div className="h-[600px] flex items-center justify-center bg-gradient-to-b from-background to-secondary/30 p-3 overflow-hidden">
+      <div className="glass-panel rounded-xl p-4 text-center max-w-[480px] animate-fade-in shadow-sm">
         <div className="w-12 h-12 mx-auto mb-2 rounded-full bg-muted flex items-center justify-center">
           <span className="text-lg font-medium">404</span>
         </div>
