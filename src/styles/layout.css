@@ -55,24 +55,23 @@
   .app-container {
     resize: horizontal;
     overflow: auto;
-    min-width: 375px;
+    min-width: 300px;
     max-width: 800px;
     height: 600px;
   }
   
   /* Mobile-specific sizing adjustments */
-  @media (max-width: 375px), (html.mobile-view) {
+  @media (max-width: 320px), (html.mobile-view) {
     h1, h2, h3 {
-      font-size: 85%;
+      font-size: 90%;
     }
     
     p, span, div {
-      font-size: 85%;
+      font-size: 90%;
     }
     
     .button, .input {
-      padding: 0.2rem 0.4rem;
-      font-size: 85%;
+      padding: 0.25rem 0.5rem;
     }
   }
 }

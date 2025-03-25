@@ -5,7 +5,7 @@ import './index.css'
 
 // Set up the root element
 const rootElement = document.getElementById("root")!;
-rootElement.style.minWidth = "375px"; // Set minimum width for small screens
+rootElement.style.minWidth = "300px"; // Set minimum width for small screens
 rootElement.style.width = "100%";
 rootElement.style.maxWidth = "800px"; // Maximum width for the app
 rootElement.style.height = "600px";
