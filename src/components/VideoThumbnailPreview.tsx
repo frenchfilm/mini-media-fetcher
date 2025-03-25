@@ -1,10 +1,14 @@
 
 import { useRef, useEffect, useState } from 'react';
 
-export default function VideoThumbnailPreview({ src, alt = 'Video Thumbnail' }) {
-  const containerRef = useRef<HTMLDivElement>(null);
+interface VideoThumbnailPreviewProps {
+  src: string;
+  alt?: string;
+}
+
+export default function VideoThumbnailPreview({ src, alt = 'Video Thumbnail' }: VideoThumbnailPreviewProps) {
   const imgRef = useRef<HTMLImageElement>(null);
-  const [imageStyle, setImageStyle] = useState({});
+  const [isLandscape, setIsLandscape] = useState<boolean | null>(null);
   
   useEffect(() => {
     const img = imgRef.current;
@@ -12,38 +16,13 @@ export default function VideoThumbnailPreview({ src, alt = 'Video Thumbnail' }) 
     
     const handleLoad = () => {
       const { naturalWidth: w, naturalHeight: h } = img;
-      const container = containerRef.current;
-      
-      if (!container) return;
-      
-      const containerWidth = container.clientWidth;
-      const containerHeight = container.clientHeight;
-      
-      // Calculate aspect ratios
-      const imgRatio = w / h;
-      const containerRatio = containerWidth / containerHeight;
-      
-      // Determine if we should fit by width or height
-      if (imgRatio > containerRatio) {
-        // Landscape image - fit by width
-        setImageStyle({
-          width: '100%',
-          height: 'auto',
-          maxHeight: '100%'
-        });
-      } else {
-        // Portrait image - fit by height
-        setImageStyle({
-          width: 'auto',
-          height: '100%',
-          maxWidth: '100%'
-        });
-      }
+      // Set landscape mode if width >= height
+      setIsLandscape(w >= h);
     };
     
     img.addEventListener('load', handleLoad);
     
-    // Initial check if image is already loaded
+    // Check if image is already loaded
     if (img.complete) {
       handleLoad();
     }
@@ -52,15 +31,18 @@ export default function VideoThumbnailPreview({ src, alt = 'Video Thumbnail' }) 
   }, [src]);
   
   return (
-    <div 
-      ref={containerRef}
-      className="w-full h-full bg-black overflow-hidden rounded-xl flex items-center justify-center"
-    >
+    <div className="w-full h-full bg-black overflow-hidden rounded-xl flex items-center justify-center">
       <img
         ref={imgRef}
         src={src}
         alt={alt}
-        style={imageStyle}
+        className={
+          isLandscape === null
+            ? 'hidden' // Hide until we determine aspect ratio
+            : isLandscape
+              ? 'w-full h-auto object-contain' // Landscape image
+              : 'h-full w-auto object-contain' // Portrait image
+        }
       />
     </div>
   );
