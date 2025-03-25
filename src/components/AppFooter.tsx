@@ -22,7 +22,7 @@ const AppFooter: React.FC<AppFooterProps> = ({
   };
 
   return (
-    <footer className="h-[72px] w-full flex items-start pt-2">
+    <footer className="h-[72px] w-full flex items-center px-6 bg-secondary/10">
       {/* Left Column - Logo, App Name, Version, Update Link */}
       <div className="w-1/2 flex items-start">
         <div className="flex items-start">
@@ -47,7 +47,7 @@ const AppFooter: React.FC<AppFooterProps> = ({
       </div>
       
       {/* Right Column - Buttons */}
-      <div className="w-1/2 flex flex-col items-end gap-2">
+      <div className="w-1/2 flex items-center justify-end gap-2">
         <Button 
           variant="contrast" 
           onClick={onContactClick}
@@ -66,20 +66,6 @@ const AppFooter: React.FC<AppFooterProps> = ({
         >
           <Mail className="h-3 w-3 mr-1" />
           <span className="text-xs">Subscriptions</span>
-        </Button>
-        
-        <Button
-          variant="highContrast"
-          size="icon"
-          onClick={() => {
-            // Open settings dialog
-            const settingsEvent = new CustomEvent('openSettings');
-            document.dispatchEvent(settingsEvent);
-          }}
-          className="h-8 w-8 rounded-full shrink-0"
-        >
-          <Settings className="h-4 w-4" />
-          <span className="sr-only">Settings</span>
         </Button>
       </div>
     </footer>

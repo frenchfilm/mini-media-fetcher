@@ -10,5 +10,7 @@ rootElement.style.height = "600px";
 rootElement.style.position = "relative";
 rootElement.style.overflow = "hidden";
 rootElement.style.backgroundColor = "transparent";
+rootElement.style.padding = "0";
+rootElement.style.margin = "0";
 
 createRoot(rootElement).render(<App />);
