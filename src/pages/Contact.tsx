@@ -111,7 +111,7 @@ const Contact = () => {
             
             <Button 
               type="submit" 
-              className="w-full h-8 text-sm dark:bg-primary dark:text-secondary-foreground"
+              className="w-full h-8 text-sm text-white dark:bg-primary dark:text-secondary-foreground"
               disabled={isSending}
             >
               {isSending ? "Sending..." : "Send Message"}

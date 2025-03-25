@@ -69,7 +69,11 @@ const NewsletterDialog = ({ open, onOpenChange }: NewsletterDialogProps) => {
           </div>
           
           <DialogFooter className="pt-4">
-            <Button type="submit" disabled={isSubmitting}>
+            <Button 
+              type="submit" 
+              disabled={isSubmitting}
+              className="text-white dark:text-secondary"
+            >
               {isSubmitting ? "Subscribing..." : "Subscribe"}
             </Button>
           </DialogFooter>
