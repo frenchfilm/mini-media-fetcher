@@ -20,18 +20,15 @@ const AppFooter: React.FC<AppFooterProps> = ({
 
   const handleCheckUpdates = () => {
     console.log("Checking for updates...");
-    // Add update check functionality here
   };
 
   const handleOpenSettings = () => {
-    // Dispatch the event to open settings
     document.dispatchEvent(new Event('openSettings'));
   };
 
   return (
-    <footer className="h-auto min-h-[60px] w-full flex flex-col items-center">
-      {/* Use flex-col-reverse to put right column on top and left column on bottom */}
-      <div className={`w-full flex ${isMobile ? 'flex-col-reverse gap-2' : 'flex-row'}`}>
+    <footer className="h-auto min-h-[60px] w-full absolute bottom-0 left-0 right-0">
+      <div className={`w-full flex ${isMobile ? 'flex-col-reverse gap-2' : 'flex-row'} px-2 sm:px-4`}>
         {/* Left Column - Logo, App Name, Version, Update Link */}
         <div className={`${isMobile ? 'w-full' : 'w-1/2'} flex items-start justify-center sm:justify-start mt-2 sm:mt-0`}>
           <div className="flex items-start">
