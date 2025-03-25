@@ -31,7 +31,7 @@ const DownloadSettings = () => {
           <Button 
             variant="highContrast" 
             size="icon" 
-            className="dark:bg-primary dark:text-secondary-foreground dark:border-primary/70"
+            className="dark:bg-primary dark:text-secondary dark:border-primary/70"
           >
             <FolderOpen className="h-4 w-4" />
           </Button>
