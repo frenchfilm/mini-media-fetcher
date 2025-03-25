@@ -38,7 +38,7 @@ const DownloadActionButtons = ({
         variant="outline" 
         size="sm"
         onClick={onCancel}
-        className="bg-primary text-white flex-1 dark:bg-secondary dark:border-secondary dark:text-primary"
+        className="bg-secondary text-primary flex-1 dark:bg-secondary dark:text-primary dark:border-primary/50 dark:hover:bg-secondary/80"
       >
         <X className="h-3.5 w-3.5 mr-1.5" />
         Cancel
