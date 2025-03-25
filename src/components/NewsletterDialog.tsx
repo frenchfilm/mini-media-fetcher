@@ -51,6 +51,7 @@ const NewsletterDialog = ({ open, onOpenChange }: NewsletterDialogProps) => {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="your.email@example.com"
               required
+              className="bg-white"
             />
           </div>
           
