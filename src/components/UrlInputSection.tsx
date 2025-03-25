@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
@@ -65,7 +64,7 @@ const UrlInputSection = ({ onUrlSubmit, onOpenNewsletter }: UrlInputSectionProps
       <VideoUrlInput 
         onSubmit={handleUrlSubmit} 
         isLoading={isLoading} 
-        onFolderSelect={isMobile ? undefined : handleFolderSelect}
+        onFolderSelect={handleFolderSelect}
       />
     </div>
   );

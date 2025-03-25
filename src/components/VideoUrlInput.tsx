@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -53,7 +52,7 @@ const VideoUrlInput = ({ onSubmit, isLoading = false, onFolderSelect }: VideoUrl
       className="w-full max-w-xs sm:max-w-2xl mx-auto"
     >
       <div className="flex items-stretch gap-1">
-        {onFolderSelect && !isMobile && (
+        {onFolderSelect && (
           <Button
             type="button"
             variant="contrast"
