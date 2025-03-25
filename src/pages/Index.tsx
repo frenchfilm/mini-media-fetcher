@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { VideoFormat } from "@/components/VideoFormatSelector";
@@ -9,6 +8,7 @@ import NewsletterDialog from "@/components/NewsletterDialog";
 import ContactDialog from "@/components/ContactDialog";
 import AppLayout from "@/components/AppLayout";
 import AppHeader from "@/components/AppHeader";
+import SettingsDialog from "@/components/settings/SettingsDialog";
 import { 
   getVideoFilePath, 
   ensureDownloadDirectoryExists, 
@@ -29,6 +29,8 @@ const Index = () => {
   const [selectedFormat, setSelectedFormat] = useState<VideoFormat | null>(null);
   const [newsletterOpen, setNewsletterOpen] = useState<boolean>(false);
   const [contactOpen, setContactOpen] = useState<boolean>(false);
+  const [settingsOpen, setSettingsOpen] = useState<boolean>(false);
+  const [licenseKey, setLicenseKey] = useState<string>("");
   const { downloads, addDownload, clearHistory } = useDownloadHistory();
   
   useEffect(() => {
@@ -40,6 +42,16 @@ const Index = () => {
     if (!isDesktopEnvironment()) {
       console.log("Running in simulation mode - file system operations are simulated");
     }
+    
+    const handleOpenSettings = () => {
+      setSettingsOpen(true);
+    };
+    
+    document.addEventListener('openSettings', handleOpenSettings);
+    
+    return () => {
+      document.removeEventListener('openSettings', handleOpenSettings);
+    };
   }, []);
   
   const handleUrlSubmit = (url: string, videoDetails: any) => {
@@ -108,7 +120,6 @@ const Index = () => {
 
   return (
     <>
-      <AppHeader downloadsCount={downloads.length} />
       <AppLayout 
         onOpenNewsletter={handleOpenNewsletter}
         onOpenContact={handleOpenContact}
@@ -151,6 +162,13 @@ const Index = () => {
         <ContactDialog
           open={contactOpen}
           onOpenChange={setContactOpen}
+        />
+        
+        <SettingsDialog
+          open={settingsOpen}
+          onOpenChange={setSettingsOpen}
+          licenseKey={licenseKey}
+          onLicenseKeyChange={setLicenseKey}
         />
       </AppLayout>
     </>
