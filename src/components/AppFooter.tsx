@@ -29,7 +29,7 @@ const AppFooter: React.FC<AppFooterProps> = ({
           <img 
             src="/lovable-uploads/ee37b3bc-4867-4363-924f-9090d70c081a.png" 
             alt="SoftBare Logo" 
-            className="h-10 w-auto mr-2" 
+            className="h-12 w-auto mr-2" 
           />
           <div className="flex flex-col items-start">
             <h1 className="text-base font-worksans font-semibold leading-tight">SoftBare</h1>
