@@ -67,32 +67,32 @@ const FormatSelectionSection = ({
           )}
         </div>
         
-        {/* Right Column: Format selector */}
-        <div className="flex items-start justify-center">
+        {/* Right Column: Format selector and action buttons */}
+        <div className="flex flex-col items-start">
           <VideoFormatSelector onSelect={onFormatSelect} />
+          
+          {/* Action buttons below format selector */}
+          <div className="flex gap-3 justify-center w-full mt-6">
+            <Button
+              onClick={onStartDownload}
+              className="px-6"
+              size="lg"
+              variant="highContrast"
+            >
+              <Download className="h-4 w-4 mr-2" />
+              Start Download
+            </Button>
+            
+            <Button
+              variant="outline"
+              onClick={onCancel}
+              size="lg"
+              className="bg-secondary text-primary font-medium border-primary/30 hover:bg-secondary/80 hover:text-primary/90"
+            >
+              Cancel
+            </Button>
+          </div>
         </div>
-      </div>
-      
-      {/* Action buttons below both columns */}
-      <div className="flex gap-3 justify-center mt-6">
-        <Button
-          onClick={onStartDownload}
-          className="px-6"
-          size="lg"
-          variant="highContrast"
-        >
-          <Download className="h-4 w-4 mr-2" />
-          Start Download
-        </Button>
-        
-        <Button
-          variant="outline"
-          onClick={onCancel}
-          size="lg"
-          className="bg-secondary text-primary font-medium border-primary/30 hover:bg-secondary/80 hover:text-primary/90"
-        >
-          Cancel
-        </Button>
       </div>
     </>
   );
