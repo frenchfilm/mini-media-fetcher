@@ -43,15 +43,15 @@ const FormatSelectionSection = ({
         <p className="text-sm text-muted-foreground">{videoUrl}</p>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-slide-up items-start">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 animate-slide-up items-start">
         {/* Left Column: Preview image */}
-        <div className="flex flex-col">
+        <div className="flex flex-col justify-start items-center">
           {displayImage && (
-            <div className="relative w-full max-w-xs mx-auto rounded-xl overflow-hidden shadow-sm">
+            <div className="relative w-full h-auto aspect-video max-w-sm mx-auto rounded-xl overflow-hidden shadow-sm">
               <img 
                 src={displayImage} 
                 alt={videoInfo.title}
-                className="w-full h-auto object-cover" 
+                className="w-full h-full object-cover" 
                 onError={(e) => {
                   // If the preview image fails, fall back to thumbnail
                   if (e.currentTarget.src !== videoInfo.thumbnailUrl && videoInfo.thumbnailUrl) {
@@ -68,11 +68,11 @@ const FormatSelectionSection = ({
         </div>
         
         {/* Right Column: Format selector and action buttons */}
-        <div className="flex flex-col h-full">
+        <div className="flex flex-col space-y-4">
           <VideoFormatSelector onSelect={onFormatSelect} />
           
           {/* Action buttons below format selector */}
-          <div className="flex gap-3 justify-center w-full mt-6">
+          <div className="flex gap-3 justify-center w-full mt-2">
             <Button
               onClick={onStartDownload}
               className="px-6"
