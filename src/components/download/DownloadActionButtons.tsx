@@ -19,7 +19,8 @@ const DownloadActionButtons = ({
         onClick={onTogglePause} 
         size="sm"
         disabled={status === 'preparing' || status === 'complete'}
-        className="bg-primary text-primary-foreground flex-1 hover:bg-primary/90 dark:bg-primary dark:text-secondary-foreground dark:hover:bg-primary/90 dark:border-primary/70"
+        variant="default"
+        className="flex-1 dark:bg-secondary-light dark:text-primary-dark dark:hover:bg-secondary-light/90 dark:border-primary-dark/30"
       >
         {status === 'paused' ? (
           <>
@@ -38,7 +39,7 @@ const DownloadActionButtons = ({
         variant="outline" 
         size="sm"
         onClick={onCancel}
-        className="bg-secondary text-primary flex-1 hover:bg-secondary/80 dark:bg-secondary dark:text-primary dark:border-primary/50 dark:hover:bg-secondary/80"
+        className="flex-1 dark:bg-secondary dark:text-primary-foreground dark:border-border dark:hover:bg-secondary/80"
       >
         <X className="h-3.5 w-3.5 mr-1.5" />
         Cancel
