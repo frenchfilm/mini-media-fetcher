@@ -15,15 +15,15 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="h-[600px] flex items-center justify-center bg-gradient-to-b from-background to-secondary/30 p-4 max-w-[800px] mx-auto overflow-hidden">
-      <div className="glass-panel rounded-xl p-5 text-center max-w-[380px] animate-fade-in shadow-sm">
-        <div className="w-14 h-14 mx-auto mb-3 rounded-full bg-muted flex items-center justify-center">
+    <div className="h-[600px] flex items-center justify-center bg-gradient-to-b from-background to-secondary/30 p-3 max-w-[800px] mx-auto overflow-hidden">
+      <div className="glass-panel rounded-xl p-4 text-center max-w-[380px] animate-fade-in shadow-sm">
+        <div className="w-12 h-12 mx-auto mb-2 rounded-full bg-muted flex items-center justify-center">
           <span className="text-lg font-medium">404</span>
         </div>
         
-        <h1 className="text-lg font-medium mb-2">Page not found</h1>
+        <h1 className="text-lg font-medium mb-1.5">Page not found</h1>
         
-        <p className="text-xs text-muted-foreground mb-3">
+        <p className="text-xs text-muted-foreground mb-2.5">
           The page you're looking for doesn't exist or has been moved.
         </p>
         

@@ -10,5 +10,7 @@ rootElement.style.height = "600px";
 rootElement.style.margin = "0 auto";
 rootElement.style.overflow = "hidden"; // Prevent scrollbars
 rootElement.style.position = "relative"; // Added to improve positioning
+rootElement.style.display = "flex"; // Use flexbox
+rootElement.style.flexDirection = "column"; // Stack children vertically
 
 createRoot(rootElement).render(<App />);
