@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -102,7 +103,7 @@ const DownloadProgress = ({ videoUrl, selectedFormat, onComplete, onCancel }: Do
         <Button 
           variant="outline" 
           size="sm"
-          className="dark:bg-secondary-light dark:text-primary-dark dark:hover:bg-secondary-light/90 dark:border-primary-dark/30"
+          className="font-semibold dark:bg-secondary-light dark:text-primary-dark dark:hover:bg-secondary-light/90 dark:border-primary-dark/30"
           onClick={onCancel}
         >
           ← Back

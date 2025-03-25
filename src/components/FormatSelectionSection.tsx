@@ -1,4 +1,3 @@
-
 import React, { useEffect, KeyboardEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
@@ -22,10 +21,8 @@ const FormatSelectionSection = ({
   onStartDownload,
   onCancel
 }: FormatSelectionSectionProps) => {
-  // Use the best available image for display
   const displayImage = videoInfo.previewImage || videoInfo.thumbnailUrl;
   
-  // Handle keyboard events for Enter key
   useEffect(() => {
     const handleKeyDown = (e: globalThis.KeyboardEvent) => {
       if (e.key === 'Enter' && selectedFormat) {
@@ -45,9 +42,7 @@ const FormatSelectionSection = ({
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Left Column - Video Preview and Action Buttons */}
         <div className="flex flex-col p-3 rounded-xl">
-          {/* Video Thumbnail */}
           <div className="flex-1 h-[330px] mb-3">
             {displayImage && (
               <VideoThumbnailPreview 
@@ -57,7 +52,6 @@ const FormatSelectionSection = ({
             )}
           </div>
           
-          {/* Action Buttons */}
           <div className="flex gap-2 justify-center mt-auto">
             <Button
               onClick={onStartDownload}
@@ -71,14 +65,13 @@ const FormatSelectionSection = ({
             <Button
               variant="outline"
               onClick={onCancel}
-              className="px-3 py-1 h-8 text-xs bg-secondary text-secondary-foreground hover:bg-secondary/80 dark:bg-secondary-light dark:text-primary-dark dark:border-primary/50 font-medium border-primary/30 hover:text-primary/90"
+              className="px-3 py-1 h-8 text-xs font-semibold bg-secondary text-secondary-foreground hover:bg-secondary/80 dark:bg-secondary-light dark:text-primary-dark dark:border-primary/50 border-primary/30 hover:text-primary/90"
             >
               Cancel
             </Button>
           </div>
         </div>
         
-        {/* Right Column - Format Selector */}
         <div className="flex">
           <VideoFormatSelector onSelect={onFormatSelect} />
         </div>
