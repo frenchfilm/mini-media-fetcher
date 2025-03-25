@@ -1,4 +1,5 @@
-import { useEffect, KeyboardEvent } from "react";
+
+import React, { useEffect, KeyboardEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 import VideoFormatSelector, { VideoFormat } from "@/components/VideoFormatSelector";
@@ -70,7 +71,7 @@ const FormatSelectionSection = ({
             <Button
               variant="outline"
               onClick={onCancel}
-              className="px-3 py-1 h-8 text-xs bg-secondary text-primary dark:bg-secondary dark:text-primary dark:border-primary/50 font-medium border-primary/30 hover:bg-secondary/80 hover:text-primary/90"
+              className="px-3 py-1 h-8 text-xs bg-secondary text-secondary-foreground hover:bg-secondary/80 dark:bg-secondary-light dark:text-primary-dark dark:border-primary/50 font-medium border-primary/30 hover:text-primary/90"
             >
               Cancel
             </Button>
