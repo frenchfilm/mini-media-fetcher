@@ -51,7 +51,7 @@ const AppHeader = ({ downloadsCount }: AppHeaderProps) => {
           variant="highContrast"
           size="icon"
           onClick={() => setSettingsOpen(true)}
-          className="h-10 w-10 rounded-full"
+          className="h-10 w-10 rounded-full shrink-0"
         >
           <Settings className="h-5 w-5" />
           <span className="sr-only">Settings</span>

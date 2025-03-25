@@ -7,8 +7,8 @@ import './index.css'
 const rootElement = document.getElementById("root")!;
 rootElement.style.width = "800px";
 rootElement.style.height = "600px";
-rootElement.style.overflow = "hidden";
 rootElement.style.position = "relative";
+rootElement.style.overflow = "hidden";
 rootElement.style.backgroundColor = "transparent";
 
 createRoot(rootElement).render(<App />);

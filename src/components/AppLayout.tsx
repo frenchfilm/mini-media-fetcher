@@ -30,11 +30,11 @@ const AppLayout = ({
       <AppHeader downloadsCount={downloadsCount} />
       
       {/* Content Section */}
-      <main className="flex-1 mx-6 mt-2 mb-4 flex flex-col">
+      <main className="flex-1 mx-6 mt-2 mb-1 overflow-auto">
         {children}
       </main>
       
-      {/* Footer Section */}
+      {/* Footer Section with fixed height to ensure visibility */}
       <div className="px-6 pb-3 pt-1">
         <div className="flex flex-row items-center justify-center gap-2 mb-1">
           <Button 
@@ -58,7 +58,7 @@ const AppLayout = ({
           </Button>
         </div>
         
-        <footer className="text-center text-[10px] text-muted-foreground mt-1">
+        <footer className="text-center text-[10px] text-muted-foreground">
           <p className="italic">
             Apps as nature intended them - quiet, private, ad-free.
           </p>
