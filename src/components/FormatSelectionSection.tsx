@@ -52,7 +52,7 @@ const FormatSelectionSection = ({
                 <img 
                   src={displayImage} 
                   alt={videoInfo.title}
-                  className="object-contain max-h-full max-w-full" 
+                  className="object-cover w-full h-full" 
                   onError={(e) => {
                     // If the preview image fails, fall back to thumbnail
                     if (e.currentTarget.src !== videoInfo.thumbnailUrl && videoInfo.thumbnailUrl) {
