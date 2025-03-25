@@ -46,7 +46,7 @@ const FormatSelectionSection = ({
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Left Column - Video Preview and Action Buttons */}
-        <div className="flex flex-col">
+        <div className="flex flex-col p-3 rounded-xl">
           {/* Video Thumbnail */}
           <div className="flex-1 h-[330px] mb-3">
             {displayImage && (
