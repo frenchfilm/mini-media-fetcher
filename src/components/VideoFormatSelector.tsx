@@ -46,17 +46,17 @@ const VideoFormatSelector = ({ onSelect }: VideoFormatSelectorProps) => {
   };
 
   return (
-    <Card className="glass-panel p-5 rounded-xl w-full shadow-sm">
-      <h3 className="text-sm font-medium text-foreground mb-4 text-center">Select Format & Quality</h3>
+    <Card className="glass-panel p-6 rounded-xl w-full shadow-sm h-full flex-1">
+      <h3 className="text-sm font-medium text-foreground mb-5 text-center">Select Format & Quality</h3>
       
       {/* Top row for video formats */}
-      <div className="grid grid-cols-2 gap-3 mb-3">
+      <div className="grid grid-cols-2 gap-3 mb-4">
         {FORMATS.slice(0, 4).map((format) => (
           <Button
             key={format.id}
             variant={selectedFormat === format.id ? "highContrast" : "secondaryHighContrast"}
             size="sm"
-            className={`h-auto py-2.5 justify-start ${
+            className={`h-auto py-3 justify-start w-full ${
               selectedFormat === format.id 
                 ? 'bg-primary text-white border-primary/50 dark:bg-primary dark:text-secondary dark:border-primary/50' 
                 : 'bg-secondary text-primary border-primary/30 dark:bg-secondary dark:text-primary'
@@ -81,7 +81,7 @@ const VideoFormatSelector = ({ onSelect }: VideoFormatSelectorProps) => {
             key={format.id}
             variant={selectedFormat === format.id ? "highContrast" : "secondaryHighContrast"}
             size="sm"
-            className={`h-auto py-2.5 justify-start ${
+            className={`h-auto py-3 justify-start w-full ${
               selectedFormat === format.id 
                 ? 'bg-primary text-white border-primary/50 dark:bg-primary dark:text-secondary dark:border-primary/50' 
                 : 'bg-secondary text-primary border-primary/30 dark:bg-secondary dark:text-primary'
