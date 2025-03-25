@@ -26,12 +26,12 @@ const AppHeader = ({ downloadsCount }: AppHeaderProps) => {
 
   return (
     <>
-      <header className="w-full py-2 px-4 flex items-center justify-between z-10 bg-background">
+      <header className="w-full p-4 flex items-center justify-between z-10 bg-background">
         <div className="flex items-center">
           <img 
             src="/lovable-uploads/ee37b3bc-4867-4363-924f-9090d70c081a.png" 
             alt="SoftBare Logo" 
-            className="h-16 w-auto mr-4" 
+            className="h-20 w-auto mr-4" 
           />
           <div className="flex flex-col">
             <h1 className="text-xl font-worksans font-semibold leading-tight">SoftBare Video Downloader</h1>
