@@ -32,12 +32,12 @@ const AppLayout = ({
 
   return (
     <div className={`w-full ${isMobile ? 'min-w-[300px]' : 'w-[800px]'} min-h-[600px] bg-gradient-to-b from-background to-secondary/30 flex flex-col relative p-2 sm:p-6`}>
-      {/* Body Section with proper padding */}
-      <main className="flex-1 w-full overflow-auto mb-1">
+      {/* Body Section with proper padding, allowing proper scrolling */}
+      <main className="flex-1 w-full overflow-auto mb-2">
         {children}
       </main>
       
-      {/* Footer Section - Now flexible height for mobile */}
+      {/* Footer Section */}
       <AppFooter 
         onOpenNewsletter={handleOpenNewsletter}
         onContactClick={handleContactClick}
