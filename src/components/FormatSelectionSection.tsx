@@ -39,14 +39,14 @@ const FormatSelectionSection = ({
   
   return (
     <>
-      <div className="text-center mb-4 animate-slide-down">
-        <h2 className="text-xl font-medium mb-2">{videoInfo.title}</h2>
-        <p className="text-sm text-muted-foreground">{videoUrl}</p>
+      <div className="text-center mb-3 animate-slide-down">
+        <h2 className="text-xl font-medium mb-1">{videoInfo.title}</h2>
+        <p className="text-sm text-muted-foreground truncate">{videoUrl}</p>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Left Column - Video Preview */}
-        <div className="flex flex-col h-full">
+        <div className="flex flex-col h-[250px]">
           {displayImage && (
             <VideoThumbnailPreview 
               src={displayImage} 
@@ -66,8 +66,8 @@ const FormatSelectionSection = ({
           <div className="flex gap-3 justify-center">
             <Button
               onClick={onStartDownload}
-              className="px-6"
-              size="lg"
+              className="px-4"
+              size="default"
               variant="highContrast"
             >
               <Download className="h-4 w-4 mr-2" />
@@ -77,7 +77,7 @@ const FormatSelectionSection = ({
             <Button
               variant="outline"
               onClick={onCancel}
-              size="lg"
+              size="default"
               className="bg-secondary text-primary font-medium border-primary/30 hover:bg-secondary/80 hover:text-primary/90"
             >
               Cancel

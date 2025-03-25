@@ -22,7 +22,7 @@ export default function VideoThumbnailPreview({ src, alt = 'Video Thumbnail' }) 
   }, [src]);
 
   return (
-    <div className="relative w-full h-full bg-black overflow-hidden rounded-xl flex items-center justify-center">
+    <div className="w-full h-full bg-black overflow-hidden rounded-xl flex items-center justify-center">
       <img
         ref={imgRef}
         src={src}

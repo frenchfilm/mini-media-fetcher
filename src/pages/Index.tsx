@@ -105,11 +105,11 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-background to-secondary/30">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-background to-secondary/30 max-w-[800px] mx-auto">
       <AppHeader downloadsCount={downloads.length} />
       
-      <main className="flex-1 container max-w-4xl mx-auto px-4 pb-10 pt-4 flex flex-col">
-        <div className="space-y-6 flex-1">
+      <main className="flex-1 px-4 pb-6 pt-2 flex flex-col">
+        <div className="space-y-4 flex-1">
           {appState === AppState.INPUT_URL && (
             <UrlInputSection 
               onUrlSubmit={handleUrlSubmit} 
@@ -139,12 +139,13 @@ const Index = () => {
         </div>
       </main>
       
-      <div className="mt-auto container max-w-4xl mx-auto px-4 py-4">
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+      <div className="mt-auto px-4 py-3">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-4">
           <Button 
             variant="contrast" 
             onClick={() => navigate("/contact")}
             className="w-full sm:w-auto action-button-dark dark:bg-primary dark:text-secondary dark:border-primary/70"
+            size="sm"
           >
             <MessageSquare className="h-4 w-4 mr-2" />
             Request Feature / Report Bugs
@@ -154,6 +155,7 @@ const Index = () => {
             variant="contrast" 
             onClick={handleOpenNewsletter}
             className="w-full sm:w-auto action-button-dark dark:bg-primary dark:text-secondary dark:border-primary/70"
+            size="sm"
           >
             <Mail className="h-4 w-4 mr-2" />
             Subscribe to Newsletter
@@ -166,7 +168,7 @@ const Index = () => {
         onOpenChange={setNewsletterOpen}
       />
       
-      <footer className="py-6 px-6 text-center text-sm text-muted-foreground mt-auto">
+      <footer className="py-4 px-4 text-center text-sm text-muted-foreground">
         <p className="italic">
           Our Apps are bare - quiet, private, ad-free and lightweight.<br />
           Just plain functions, as Nature intended them.
