@@ -3,7 +3,6 @@ import { useEffect, KeyboardEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 import VideoFormatSelector, { VideoFormat } from "@/components/VideoFormatSelector";
-import { Card } from "@/components/ui/card";
 
 interface FormatSelectionSectionProps {
   videoInfo: any;
@@ -47,13 +46,13 @@ const FormatSelectionSection = ({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Left Column - Video Preview */}
         <div className="flex flex-col h-full">
-          <div className="h-full flex items-center justify-center bg-black rounded-xl">
+          <div className="h-full flex items-center justify-center bg-black rounded-xl overflow-hidden">
             {displayImage && (
               <div className="relative w-full h-full flex items-center justify-center">
                 <img 
                   src={displayImage} 
                   alt={videoInfo.title}
-                  className="object-contain max-h-full" 
+                  className="object-contain max-h-full max-w-full" 
                   onError={(e) => {
                     // If the preview image fails, fall back to thumbnail
                     if (e.currentTarget.src !== videoInfo.thumbnailUrl && videoInfo.thumbnailUrl) {
