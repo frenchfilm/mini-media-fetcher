@@ -21,6 +21,11 @@ const AppFooter: React.FC<AppFooterProps> = ({
     // Add update check functionality here
   };
 
+  const handleOpenSettings = () => {
+    // Dispatch the event to open settings
+    document.dispatchEvent(new Event('openSettings'));
+  };
+
   return (
     <footer className="h-[72px] w-full flex items-center px-6 bg-secondary/10">
       {/* Left Column - Logo, App Name, Version, Update Link */}
@@ -66,6 +71,16 @@ const AppFooter: React.FC<AppFooterProps> = ({
         >
           <Mail className="h-3 w-3 mr-1" />
           <span className="text-xs">Subscriptions</span>
+        </Button>
+
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={handleOpenSettings}
+          className="h-9 w-9 rounded-full bg-secondary/50 hover:bg-secondary text-foreground"
+        >
+          <Settings className="h-5 w-5" />
+          <span className="sr-only">Settings</span>
         </Button>
       </div>
     </footer>
