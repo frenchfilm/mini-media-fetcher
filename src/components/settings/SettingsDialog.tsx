@@ -26,10 +26,6 @@ const SettingsDialog = ({
     onOpenChange(false);
   };
   
-  const handleClose = () => {
-    onOpenChange(false);
-  };
-  
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-xl p-0 overflow-hidden border-none bg-background">
@@ -37,7 +33,7 @@ const SettingsDialog = ({
           <Button 
             variant="highContrast" 
             className="dark:bg-primary dark:text-secondary dark:border-primary/70"
-            onClick={handleClose}
+            onClick={() => onOpenChange(false)}
           >
             ← Back
           </Button>
