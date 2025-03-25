@@ -44,7 +44,7 @@ const FormatSelectionSection = ({
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-slide-up">
-        {/* Left Column: Preview image and action buttons */}
+        {/* Left Column: Preview image */}
         <div className="flex flex-col items-center">
           {displayImage && (
             <div className="relative w-full max-w-xs mx-auto mb-4 rounded-xl overflow-hidden shadow-sm">
@@ -65,33 +65,34 @@ const FormatSelectionSection = ({
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
             </div>
           )}
-          
-          <div className="flex gap-3 justify-center mt-2">
-            <Button
-              onClick={onStartDownload}
-              className="px-6"
-              size="lg"
-              variant="highContrast"
-            >
-              <Download className="h-4 w-4 mr-2" />
-              Start Download
-            </Button>
-            
-            <Button
-              variant="outline"
-              onClick={onCancel}
-              size="lg"
-              className="bg-secondary text-primary font-medium border-primary/30 hover:bg-secondary/80 hover:text-primary/90"
-            >
-              Cancel
-            </Button>
-          </div>
         </div>
         
         {/* Right Column: Format selector */}
         <div className="flex items-start justify-center">
           <VideoFormatSelector onSelect={onFormatSelect} />
         </div>
+      </div>
+      
+      {/* Action buttons below both columns */}
+      <div className="flex gap-3 justify-center mt-6">
+        <Button
+          onClick={onStartDownload}
+          className="px-6"
+          size="lg"
+          variant="highContrast"
+        >
+          <Download className="h-4 w-4 mr-2" />
+          Start Download
+        </Button>
+        
+        <Button
+          variant="outline"
+          onClick={onCancel}
+          size="lg"
+          className="bg-secondary text-primary font-medium border-primary/30 hover:bg-secondary/80 hover:text-primary/90"
+        >
+          Cancel
+        </Button>
       </div>
     </>
   );
