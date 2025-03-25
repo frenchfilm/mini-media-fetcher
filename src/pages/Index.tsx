@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { VideoFormat } from "@/components/VideoFormatSelector";
@@ -5,6 +6,7 @@ import DownloadProgress from "@/components/DownloadProgress";
 import UrlInputSection from "@/components/UrlInputSection";
 import FormatSelectionSection from "@/components/FormatSelectionSection";
 import NewsletterDialog from "@/components/NewsletterDialog";
+import ContactDialog from "@/components/ContactDialog";
 import AppLayout from "@/components/AppLayout";
 import AppHeader from "@/components/AppHeader";
 import { 
@@ -26,6 +28,7 @@ const Index = () => {
   const [videoInfo, setVideoInfo] = useState<any>(null);
   const [selectedFormat, setSelectedFormat] = useState<VideoFormat | null>(null);
   const [newsletterOpen, setNewsletterOpen] = useState<boolean>(false);
+  const [contactOpen, setContactOpen] = useState<boolean>(false);
   const { downloads, addDownload, clearHistory } = useDownloadHistory();
   
   useEffect(() => {
@@ -99,10 +102,18 @@ const Index = () => {
     setNewsletterOpen(true);
   };
 
+  const handleOpenContact = () => {
+    setContactOpen(true);
+  };
+
   return (
     <>
       <AppHeader downloadsCount={downloads.length} />
-      <AppLayout onOpenNewsletter={handleOpenNewsletter} downloadsCount={downloads.length}>
+      <AppLayout 
+        onOpenNewsletter={handleOpenNewsletter}
+        onOpenContact={handleOpenContact}
+        downloadsCount={downloads.length}
+      >
         <div className="h-full">
           {appState === AppState.INPUT_URL && (
             <UrlInputSection 
@@ -135,6 +146,11 @@ const Index = () => {
         <NewsletterDialog
           open={newsletterOpen}
           onOpenChange={setNewsletterOpen}
+        />
+        
+        <ContactDialog
+          open={contactOpen}
+          onOpenChange={setContactOpen}
         />
       </AppLayout>
     </>

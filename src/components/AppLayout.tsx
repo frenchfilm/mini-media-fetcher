@@ -2,24 +2,29 @@
 import React from 'react';
 import AppFooter from './AppFooter';
 import AppHeader from './AppHeader';
-import { useNavigate } from "react-router-dom";
 
 interface AppLayoutProps {
   children: React.ReactNode;
   onOpenNewsletter?: () => void;
+  onOpenContact?: () => void;
   downloadsCount?: number;
 }
 
 const AppLayout = ({ 
   children, 
   onOpenNewsletter,
+  onOpenContact,
   downloadsCount = 0
 }: AppLayoutProps) => {
-  const navigate = useNavigate();
-  
   const handleOpenNewsletter = () => {
     if (onOpenNewsletter) {
       onOpenNewsletter();
+    }
+  };
+
+  const handleContactClick = () => {
+    if (onOpenContact) {
+      onOpenContact();
     }
   };
 
@@ -36,7 +41,7 @@ const AppLayout = ({
       {/* Footer Section - Fixed 72px height */}
       <AppFooter 
         onOpenNewsletter={handleOpenNewsletter}
-        onContactClick={() => navigate("/contact")}
+        onContactClick={handleContactClick}
         downloadsCount={downloadsCount}
       />
     </div>
