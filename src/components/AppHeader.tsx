@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Settings } from "lucide-react";
 import SettingsDialog from "./settings/SettingsDialog";
@@ -26,12 +26,12 @@ const AppHeader = ({ downloadsCount }: AppHeaderProps) => {
 
   return (
     <>
-      <header className="w-full p-3 flex items-center justify-between z-10 bg-background">
+      <header className="w-full px-6 py-3 flex items-center justify-between">
         <div className="flex items-center">
           <img 
             src="/lovable-uploads/ee37b3bc-4867-4363-924f-9090d70c081a.png" 
             alt="SoftBare Logo" 
-            className="h-16 w-auto mr-3" 
+            className="h-12 w-auto mr-3" 
           />
           <div className="flex flex-col">
             <h1 className="text-xl font-worksans font-semibold leading-tight">SoftBare Video Downloader</h1>

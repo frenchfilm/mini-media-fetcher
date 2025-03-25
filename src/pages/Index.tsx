@@ -1,20 +1,19 @@
+
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { VideoFormat } from "@/components/VideoFormatSelector";
 import DownloadProgress from "@/components/DownloadProgress";
-import AppHeader from "@/components/AppHeader";
 import UrlInputSection from "@/components/UrlInputSection";
 import FormatSelectionSection from "@/components/FormatSelectionSection";
 import NewsletterDialog from "@/components/NewsletterDialog";
-import { Button } from "@/components/ui/button";
+import AppLayout from "@/components/AppLayout";
 import { 
   getVideoFilePath, 
   ensureDownloadDirectoryExists, 
   isDesktopEnvironment,
   openFileLocation
 } from "@/utils/videoUtils";
-import { MessageSquare, Mail } from "lucide-react";
 import { useDownloadHistory } from "@/hooks/useDownloadHistory";
 
 enum AppState {
@@ -104,75 +103,41 @@ const Index = () => {
   };
 
   return (
-    <div className="h-[600px] w-[800px] flex flex-col bg-gradient-to-b from-background to-secondary/30">
-      <AppHeader downloadsCount={downloads.length} />
-      
-      <main className="flex-1 px-4 pt-2 flex flex-col overflow-hidden">
-        <div className="space-y-2 flex-1">
-          {appState === AppState.INPUT_URL && (
-            <UrlInputSection 
-              onUrlSubmit={handleUrlSubmit} 
-              onOpenNewsletter={handleOpenNewsletter}
-            />
-          )}
-          
-          {appState === AppState.SELECT_FORMAT && videoInfo && (
-            <FormatSelectionSection
-              videoInfo={videoInfo}
-              videoUrl={videoUrl}
-              onFormatSelect={handleFormatSelect}
-              selectedFormat={selectedFormat}
-              onStartDownload={handleStartDownload}
-              onCancel={handleCancelDownload}
-            />
-          )}
-          
-          {appState === AppState.DOWNLOADING && videoUrl && selectedFormat && (
-            <DownloadProgress
-              videoUrl={videoUrl}
-              selectedFormat={selectedFormat}
-              onComplete={handleDownloadComplete}
-              onCancel={handleCancelDownload}
-            />
-          )}
-        </div>
-      </main>
-      
-      <div className="px-4 py-1 mt-auto">
-        <div className="flex flex-row items-center justify-center gap-2 mb-1">
-          <Button 
-            variant="contrast" 
-            onClick={() => navigate("/contact")}
-            className="action-button-dark dark:bg-primary dark:text-secondary dark:border-primary/70"
-            size="sm"
-          >
-            <MessageSquare className="h-3 w-3 mr-1" />
-            <span className="text-xs">Request Feature</span>
-          </Button>
-          
-          <Button 
-            variant="contrast" 
-            onClick={handleOpenNewsletter}
-            className="action-button-dark dark:bg-primary dark:text-secondary dark:border-primary/70"
-            size="sm"
-          >
-            <Mail className="h-3 w-3 mr-1" />
-            <span className="text-xs">Newsletter</span>
-          </Button>
-        </div>
+    <AppLayout onOpenNewsletter={handleOpenNewsletter} downloadsCount={downloads.length}>
+      <div className="flex-1 flex flex-col">
+        {appState === AppState.INPUT_URL && (
+          <UrlInputSection 
+            onUrlSubmit={handleUrlSubmit} 
+            onOpenNewsletter={handleOpenNewsletter}
+          />
+        )}
+        
+        {appState === AppState.SELECT_FORMAT && videoInfo && (
+          <FormatSelectionSection
+            videoInfo={videoInfo}
+            videoUrl={videoUrl}
+            onFormatSelect={handleFormatSelect}
+            selectedFormat={selectedFormat}
+            onStartDownload={handleStartDownload}
+            onCancel={handleCancelDownload}
+          />
+        )}
+        
+        {appState === AppState.DOWNLOADING && videoUrl && selectedFormat && (
+          <DownloadProgress
+            videoUrl={videoUrl}
+            selectedFormat={selectedFormat}
+            onComplete={handleDownloadComplete}
+            onCancel={handleCancelDownload}
+          />
+        )}
       </div>
       
       <NewsletterDialog
         open={newsletterOpen}
         onOpenChange={setNewsletterOpen}
       />
-      
-      <footer className="py-1 px-4 text-center text-[10px] text-muted-foreground">
-        <p className="italic">
-          Apps as nature intended them - quiet, private, ad-free.
-        </p>
-      </footer>
-    </div>
+    </AppLayout>
   );
 };
 

@@ -47,8 +47,8 @@ const UrlInputSection = ({ onUrlSubmit, onOpenNewsletter }: UrlInputSectionProps
   };
 
   return (
-    <>
-      <div className="text-center mt-4 mb-6">
+    <div className="flex-1 flex flex-col justify-center">
+      <div className="text-center mb-6">
         <h1 className="text-2xl font-fraunces mb-2">
           Download Videos with Ease
         </h1>
@@ -56,7 +56,7 @@ const UrlInputSection = ({ onUrlSubmit, onOpenNewsletter }: UrlInputSectionProps
           Simply paste a video URL from any platform to get started.
         </p>
         <p className="text-[10px] text-muted-foreground max-w-md mx-auto italic">
-          This tool is for personal use only. Downloading copyrighted content may violate platform rules.
+          This tool is for personal use only. Downloading copyrighted content may violate platform rules and local laws. Use responsibly.
         </p>
       </div>
       
@@ -65,7 +65,7 @@ const UrlInputSection = ({ onUrlSubmit, onOpenNewsletter }: UrlInputSectionProps
         isLoading={isLoading} 
         onFolderSelect={handleFolderSelect}
       />
-    </>
+    </div>
   );
 };
 
