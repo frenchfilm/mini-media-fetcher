@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { MessageSquare, Mail, Settings } from "lucide-react";
+import { MessageSquare, Mail } from "lucide-react";
 
 interface AppFooterProps {
   onOpenNewsletter?: () => void;
@@ -22,21 +22,21 @@ const AppFooter: React.FC<AppFooterProps> = ({
   };
 
   return (
-    <footer className="h-[72px] w-full flex items-center px-6 bg-secondary/10">
+    <footer className="h-[72px] w-full flex items-center px-6 bg-primary text-white">
       {/* Left Column - Logo, App Name, Version, Update Link */}
-      <div className="w-1/2 flex items-start">
-        <div className="flex items-start">
+      <div className="w-1/2 flex items-center">
+        <div className="flex items-center">
           <img 
             src="/lovable-uploads/ee37b3bc-4867-4363-924f-9090d70c081a.png" 
             alt="SoftBare Logo" 
-            className="h-12 w-auto mr-2" 
+            className="h-8 w-auto mr-2" 
           />
           <div className="flex flex-col items-start">
             <h1 className="text-base font-worksans font-semibold leading-tight">SoftBare</h1>
-            <div className="flex flex-col items-start text-xs">
+            <div className="flex flex-col items-start text-xs text-white/80">
               <span>{version}</span>
               <button 
-                className="text-xs underline text-primary/80 hover:text-primary"
+                className="text-xs underline text-white/80 hover:text-white"
                 onClick={handleCheckUpdates}
               >
                 Check for updates
@@ -49,9 +49,9 @@ const AppFooter: React.FC<AppFooterProps> = ({
       {/* Right Column - Buttons */}
       <div className="w-1/2 flex items-center justify-end gap-2">
         <Button 
-          variant="contrast" 
+          variant="outline" 
           onClick={onContactClick}
-          className="action-button-dark dark:bg-primary dark:text-secondary dark:border-primary/70"
+          className="bg-primary text-white border-white/20 hover:bg-primary/90 hover:text-white"
           size="sm"
         >
           <MessageSquare className="h-3 w-3 mr-1" />
@@ -59,9 +59,9 @@ const AppFooter: React.FC<AppFooterProps> = ({
         </Button>
         
         <Button 
-          variant="contrast" 
+          variant="outline" 
           onClick={onOpenNewsletter}
-          className="action-button-dark dark:bg-primary dark:text-secondary dark:border-primary/70"
+          className="bg-primary text-white border-white/20 hover:bg-primary/90 hover:text-white"
           size="sm"
         >
           <Mail className="h-3 w-3 mr-1" />
