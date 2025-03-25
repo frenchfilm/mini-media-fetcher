@@ -24,7 +24,7 @@ const AppFooter: React.FC<AppFooterProps> = ({
   return (
     <footer className="h-[72px] w-full flex items-start pt-2">
       {/* Left Column - Logo, App Name, Version, Update Link */}
-      <div className="w-1/3 flex items-start">
+      <div className="w-1/2 flex items-start">
         <div className="flex items-start">
           <img 
             src="/lovable-uploads/ee37b3bc-4867-4363-924f-9090d70c081a.png" 
@@ -46,15 +46,8 @@ const AppFooter: React.FC<AppFooterProps> = ({
         </div>
       </div>
       
-      {/* Middle Column - Slogan */}
-      <div className="w-1/3 flex justify-center">
-        <p className="text-sm italic text-muted-foreground mt-2">
-          Apps, bare and simple
-        </p>
-      </div>
-      
       {/* Right Column - Buttons */}
-      <div className="w-1/3 flex flex-col items-end gap-2">
+      <div className="w-1/2 flex flex-col items-end gap-2">
         <Button 
           variant="contrast" 
           onClick={onContactClick}
