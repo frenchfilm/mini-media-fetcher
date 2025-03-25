@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -105,10 +104,10 @@ const Index = () => {
   };
 
   return (
-    <div className="h-[600px] flex flex-col bg-gradient-to-b from-background to-secondary/30 overflow-hidden">
+    <div className="h-[600px] w-[800px] flex flex-col bg-gradient-to-b from-background to-secondary/30">
       <AppHeader downloadsCount={downloads.length} />
       
-      <main className="flex-1 px-6 pt-1 flex flex-col overflow-y-hidden overflow-x-hidden">
+      <main className="flex-1 px-4 pt-2 flex flex-col overflow-hidden">
         <div className="space-y-2 flex-1">
           {appState === AppState.INPUT_URL && (
             <UrlInputSection 
@@ -139,8 +138,8 @@ const Index = () => {
         </div>
       </main>
       
-      <div className="px-6 py-0.5 mt-auto">
-        <div className="flex flex-row items-center justify-center gap-2 mb-0.5">
+      <div className="px-4 py-1 mt-auto">
+        <div className="flex flex-row items-center justify-center gap-2 mb-1">
           <Button 
             variant="contrast" 
             onClick={() => navigate("/contact")}
@@ -168,7 +167,7 @@ const Index = () => {
         onOpenChange={setNewsletterOpen}
       />
       
-      <footer className="py-0.5 px-6 text-center text-[10px] text-muted-foreground flex-shrink-0">
+      <footer className="py-1 px-4 text-center text-[10px] text-muted-foreground">
         <p className="italic">
           Apps as nature intended them - quiet, private, ad-free.
         </p>
