@@ -66,7 +66,7 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
                 value={formData.firstName}
                 onChange={handleChange}
                 required
-                className="h-8 text-sm"
+                className="h-8 text-sm bg-white"
               />
             </div>
             
@@ -78,7 +78,7 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
                 value={formData.lastName}
                 onChange={handleChange}
                 required
-                className="h-8 text-sm"
+                className="h-8 text-sm bg-white"
               />
             </div>
           </div>
@@ -92,7 +92,7 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="h-8 text-sm"
+              className="h-8 text-sm bg-white"
             />
           </div>
           
@@ -105,7 +105,7 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
               onChange={handleChange}
               rows={3}
               required
-              className="text-sm"
+              className="text-sm bg-white"
             />
           </div>
           
