@@ -79,7 +79,7 @@ const AppFooter: React.FC<AppFooterProps> = ({
           onClick={handleOpenSettings}
           className="h-9 w-9 rounded-full bg-primary hover:bg-primary/90"
         >
-          <Settings className="h-5 w-5 text-secondary" />
+          <Settings className="h-5 w-5 text-white dark:text-secondary" />
           <span className="sr-only">Settings</span>
         </Button>
       </div>
