@@ -77,7 +77,7 @@ const AppFooter: React.FC<AppFooterProps> = ({
           variant="ghost"
           size="icon"
           onClick={handleOpenSettings}
-          className="h-9 w-9 rounded-full bg-secondary/50 hover:bg-secondary text-foreground"
+          className="h-9 w-9 rounded-full bg-primary text-secondary hover:bg-primary/90"
         >
           <Settings className="h-5 w-5" />
           <span className="sr-only">Settings</span>
