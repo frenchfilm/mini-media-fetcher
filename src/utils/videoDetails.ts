@@ -39,6 +39,7 @@ export const getVideoDetails = async (url: string) => {
         
         if (data.thumbnail_url) {
           thumbnailUrl = data.thumbnail_url;
+          // For oEmbed thumbnails, use the same URL for preview but try to get higher quality if possible
           previewImage = data.thumbnail_url;
         }
       }
@@ -50,10 +51,10 @@ export const getVideoDetails = async (url: string) => {
     // If oEmbed failed or didn't provide complete data, use platform-specific fallbacks
     if (!metadataFetched || !thumbnailUrl) {
       if (videoSource.platform === 'youtube') {
-        // YouTube provides different thumbnail qualities - try to get the highest quality
+        // YouTube provides different thumbnail qualities - try to get the highest quality first
         thumbnailUrl = thumbnailUrl || `https://img.youtube.com/vi/${videoSource.id}/mqdefault.jpg`;
-        // Try to get high-quality preview image
-        previewImage = `https://img.youtube.com/vi/${videoSource.id}/maxresdefault.jpg`;
+        // Always try to get high-quality preview image (maxresdefault is highest quality)
+        previewImage = `https://img.youtube.com/vi/${videoSource.id}/hqdefault.jpg`;
         
         if (!metadataFetched) {
           title = `YouTube Video`;
@@ -63,7 +64,7 @@ export const getVideoDetails = async (url: string) => {
         thumbnailUrl = `https://placeholder.pics/svg/300x200/DEDEDE/555555/Vimeo%20Video`;
       } else if (videoSource.platform === 'dailymotion' && !thumbnailUrl) {
         thumbnailUrl = `https://www.dailymotion.com/thumbnail/video/${videoSource.id}`;
-        previewImage = `https://www.dailymotion.com/thumbnail/video/${videoSource.id}/x1080`;
+        previewImage = `https://www.dailymotion.com/thumbnail/video/${videoSource.id}/720`;
       } else if (!thumbnailUrl) {
         // If we don't have a thumbnail URL at this point, use a generic one
         thumbnailUrl = `https://placeholder.pics/svg/300x200/DEDEDE/555555/Video%20from%20${videoSource.platform}`;
