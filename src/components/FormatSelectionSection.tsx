@@ -44,11 +44,11 @@ const FormatSelectionSection = ({
         <p className="text-xs text-muted-foreground truncate">{videoUrl}</p>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Left Column - Video Preview and Action Buttons */}
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col">
           {/* Video Thumbnail */}
-          <div className="h-[200px]">
+          <div className="flex-1 h-[330px] mb-3">
             {displayImage && (
               <VideoThumbnailPreview 
                 src={displayImage} 
@@ -58,7 +58,7 @@ const FormatSelectionSection = ({
           </div>
           
           {/* Action Buttons */}
-          <div className="flex gap-2 justify-center">
+          <div className="flex gap-2 justify-center mt-auto">
             <Button
               onClick={onStartDownload}
               className="px-3 py-1 h-8 text-xs"
@@ -79,7 +79,7 @@ const FormatSelectionSection = ({
         </div>
         
         {/* Right Column - Format Selector */}
-        <div className="flex flex-col">
+        <div className="flex">
           <VideoFormatSelector onSelect={onFormatSelect} />
         </div>
       </div>
