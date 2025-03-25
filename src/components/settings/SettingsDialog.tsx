@@ -53,22 +53,28 @@ const SettingsDialog = ({
             onValueChange={setActiveTab}
             className="w-full"
           >
-            <TabsList className="w-full grid grid-cols-3 mb-6">
+            <TabsList className="w-full grid grid-cols-3 mb-6 bg-muted p-1 rounded-md">
               <TabsTrigger 
                 value="download" 
-                className={`font-medium ${activeTab === 'download' ? 'bg-primary text-white dark:bg-primary dark:text-secondary' : 'bg-secondary/70 text-primary hover:bg-secondary/90 dark:bg-secondary dark:text-primary'}`}
+                className={`font-medium ${activeTab === 'download' 
+                  ? 'bg-primary text-primary-foreground dark:bg-primary dark:text-secondary' 
+                  : 'bg-muted text-foreground hover:bg-muted/80 dark:bg-secondary dark:text-primary'}`}
               >
                 Download
               </TabsTrigger>
               <TabsTrigger 
                 value="app" 
-                className={`font-medium ${activeTab === 'app' ? 'bg-primary text-white dark:bg-primary dark:text-secondary' : 'bg-secondary/70 text-primary hover:bg-secondary/90 dark:bg-secondary dark:text-primary'}`}
+                className={`font-medium ${activeTab === 'app' 
+                  ? 'bg-primary text-primary-foreground dark:bg-primary dark:text-secondary' 
+                  : 'bg-muted text-foreground hover:bg-muted/80 dark:bg-secondary dark:text-primary'}`}
               >
                 App
               </TabsTrigger>
               <TabsTrigger 
                 value="about" 
-                className={`font-medium ${activeTab === 'about' ? 'bg-primary text-white dark:bg-primary dark:text-secondary' : 'bg-secondary/70 text-primary hover:bg-secondary/90 dark:bg-secondary dark:text-primary'}`}
+                className={`font-medium ${activeTab === 'about' 
+                  ? 'bg-primary text-primary-foreground dark:bg-primary dark:text-secondary' 
+                  : 'bg-muted text-foreground hover:bg-muted/80 dark:bg-secondary dark:text-primary'}`}
               >
                 About
               </TabsTrigger>
