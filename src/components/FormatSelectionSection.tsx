@@ -43,48 +43,56 @@ const FormatSelectionSection = ({
         <p className="text-sm text-muted-foreground">{videoUrl}</p>
       </div>
       
-      {displayImage && (
-        <div className="relative w-full max-w-xs mx-auto mb-4 animate-slide-up rounded-xl overflow-hidden shadow-sm">
-          <img 
-            src={displayImage} 
-            alt={videoInfo.title}
-            className="w-full h-auto object-cover" 
-            onError={(e) => {
-              // If the preview image fails, fall back to thumbnail
-              if (e.currentTarget.src !== videoInfo.thumbnailUrl && videoInfo.thumbnailUrl) {
-                e.currentTarget.src = videoInfo.thumbnailUrl;
-              } else {
-                // If both fail, use a placeholder
-                e.currentTarget.src = "https://placeholder.pics/svg/300x200/DEDEDE/555555/Video";
-              }
-            }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-slide-up">
+        {/* Left Column: Preview image and action buttons */}
+        <div className="flex flex-col items-center">
+          {displayImage && (
+            <div className="relative w-full max-w-xs mx-auto mb-4 rounded-xl overflow-hidden shadow-sm">
+              <img 
+                src={displayImage} 
+                alt={videoInfo.title}
+                className="w-full h-auto object-cover" 
+                onError={(e) => {
+                  // If the preview image fails, fall back to thumbnail
+                  if (e.currentTarget.src !== videoInfo.thumbnailUrl && videoInfo.thumbnailUrl) {
+                    e.currentTarget.src = videoInfo.thumbnailUrl;
+                  } else {
+                    // If both fail, use a placeholder
+                    e.currentTarget.src = "https://placeholder.pics/svg/300x200/DEDEDE/555555/Video";
+                  }
+                }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+            </div>
+          )}
+          
+          <div className="flex gap-3 justify-center mt-2">
+            <Button
+              onClick={onStartDownload}
+              className="px-6"
+              size="lg"
+              variant="highContrast"
+            >
+              <Download className="h-4 w-4 mr-2" />
+              Start Download
+            </Button>
+            
+            <Button
+              variant="outline"
+              onClick={onCancel}
+              size="lg"
+              className="bg-secondary text-primary font-medium border-primary/30 hover:bg-secondary/80 hover:text-primary/90"
+            >
+              Cancel
+            </Button>
+          </div>
         </div>
-      )}
-      
-      <div className="flex gap-3 justify-center mt-2 mb-4 animate-slide-up">
-        <Button
-          onClick={onStartDownload}
-          className="px-6"
-          size="lg"
-          variant="highContrast"
-        >
-          <Download className="h-4 w-4 mr-2" />
-          Start Download
-        </Button>
         
-        <Button
-          variant="outline"
-          onClick={onCancel}
-          size="lg"
-          className="bg-secondary text-primary font-medium border-primary/30 hover:bg-secondary/80 hover:text-primary/90"
-        >
-          Cancel
-        </Button>
+        {/* Right Column: Format selector */}
+        <div className="flex items-start justify-center">
+          <VideoFormatSelector onSelect={onFormatSelect} />
+        </div>
       </div>
-      
-      <VideoFormatSelector onSelect={onFormatSelect} />
     </>
   );
 };
