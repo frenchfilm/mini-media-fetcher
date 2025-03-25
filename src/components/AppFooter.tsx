@@ -27,15 +27,18 @@ const AppFooter: React.FC<AppFooterProps> = ({
   };
 
   return (
-    <footer className="h-[72px] w-full flex items-center px-6 bg-secondary/10">
+    <footer className="h-[72px] w-full flex items-center mt-2">
       {/* Left Column - Logo, App Name, Version, Update Link */}
       <div className="w-1/2 flex items-start">
         <div className="flex items-start">
-          <img 
-            src="/lovable-uploads/ee37b3bc-4867-4363-924f-9090d70c081a.png" 
-            alt="SoftBare Logo" 
-            className="h-[72px] w-auto mr-2" 
-          />
+          <div className="h-[72px] flex items-center">
+            <img 
+              src="/lovable-uploads/ee37b3bc-4867-4363-924f-9090d70c081a.png" 
+              alt="SoftBare Logo" 
+              className="h-[72px] w-auto mr-2" 
+              style={{ marginTop: "-12px" }} 
+            />
+          </div>
           <div className="flex flex-col items-start">
             <h1 className="text-base font-worksans font-semibold leading-tight">SoftBare Video Downloader</h1>
             <div className="flex flex-col items-start text-xs">
