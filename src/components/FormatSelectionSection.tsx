@@ -48,11 +48,11 @@ const FormatSelectionSection = ({
         <div className="flex flex-col h-full">
           <div className="h-full flex items-center justify-center bg-black rounded-xl overflow-hidden">
             {displayImage && (
-              <div className="relative w-full h-full flex items-center justify-center">
+              <div className="relative w-full h-0 pb-[56.25%]">
                 <img 
                   src={displayImage} 
                   alt={videoInfo.title}
-                  className="object-contain max-h-full w-auto" 
+                  className="absolute inset-0 w-full h-full object-contain" 
                   onError={(e) => {
                     // If the preview image fails, fall back to thumbnail
                     if (e.currentTarget.src !== videoInfo.thumbnailUrl && videoInfo.thumbnailUrl) {

@@ -54,7 +54,7 @@ export const getVideoDetails = async (url: string) => {
         // YouTube provides different thumbnail qualities - try to get the highest quality first
         thumbnailUrl = thumbnailUrl || `https://img.youtube.com/vi/${videoSource.id}/mqdefault.jpg`;
         // Always try to get high-quality preview image (maxresdefault is highest quality)
-        previewImage = `https://img.youtube.com/vi/${videoSource.id}/hqdefault.jpg`;
+        previewImage = `https://img.youtube.com/vi/${videoSource.id}/maxresdefault.jpg`;
         
         if (!metadataFetched) {
           title = `YouTube Video`;
@@ -64,7 +64,7 @@ export const getVideoDetails = async (url: string) => {
         thumbnailUrl = `https://placeholder.pics/svg/300x200/DEDEDE/555555/Vimeo%20Video`;
       } else if (videoSource.platform === 'dailymotion' && !thumbnailUrl) {
         thumbnailUrl = `https://www.dailymotion.com/thumbnail/video/${videoSource.id}`;
-        previewImage = `https://www.dailymotion.com/thumbnail/video/${videoSource.id}/720`;
+        previewImage = `https://www.dailymotion.com/thumbnail/video/${videoSource.id}/1080`;
       } else if (!thumbnailUrl) {
         // If we don't have a thumbnail URL at this point, use a generic one
         thumbnailUrl = `https://placeholder.pics/svg/300x200/DEDEDE/555555/Video%20from%20${videoSource.platform}`;
