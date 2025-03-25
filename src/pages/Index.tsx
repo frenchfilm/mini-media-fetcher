@@ -7,7 +7,6 @@ import FormatSelectionSection from "@/components/FormatSelectionSection";
 import NewsletterDialog from "@/components/NewsletterDialog";
 import ContactDialog from "@/components/ContactDialog";
 import AppLayout from "@/components/AppLayout";
-import AppHeader from "@/components/AppHeader";
 import SettingsDialog from "@/components/settings/SettingsDialog";
 import { 
   getVideoFilePath, 
