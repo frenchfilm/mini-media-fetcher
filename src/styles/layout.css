@@ -61,17 +61,18 @@
   }
   
   /* Mobile-specific sizing adjustments */
-  @media (max-width: 320px), (html.mobile-view) {
+  @media (max-width: 300px), (html.mobile-view) {
     h1, h2, h3 {
-      font-size: 90%;
+      font-size: 85%;
     }
     
     p, span, div {
-      font-size: 90%;
+      font-size: 85%;
     }
     
     .button, .input {
-      padding: 0.25rem 0.5rem;
+      padding: 0.2rem 0.4rem;
+      font-size: 85%;
     }
   }
 }
