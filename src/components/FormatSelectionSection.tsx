@@ -43,11 +43,11 @@ const FormatSelectionSection = ({
         <p className="text-sm text-muted-foreground">{videoUrl}</p>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-slide-up">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-slide-up items-start">
         {/* Left Column: Preview image */}
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col">
           {displayImage && (
-            <div className="relative w-full max-w-xs mx-auto mb-4 rounded-xl overflow-hidden shadow-sm">
+            <div className="relative w-full max-w-xs mx-auto rounded-xl overflow-hidden shadow-sm">
               <img 
                 src={displayImage} 
                 alt={videoInfo.title}
@@ -68,7 +68,7 @@ const FormatSelectionSection = ({
         </div>
         
         {/* Right Column: Format selector and action buttons */}
-        <div className="flex flex-col items-start">
+        <div className="flex flex-col h-full">
           <VideoFormatSelector onSelect={onFormatSelect} />
           
           {/* Action buttons below format selector */}
