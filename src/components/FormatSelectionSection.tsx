@@ -1,4 +1,5 @@
 
+import { useEffect, KeyboardEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 import VideoFormatSelector, { VideoFormat } from "@/components/VideoFormatSelector";
@@ -22,6 +23,18 @@ const FormatSelectionSection = ({
 }: FormatSelectionSectionProps) => {
   // Use the best available image for display
   const displayImage = videoInfo.previewImage || videoInfo.thumbnailUrl;
+  
+  // Handle keyboard events for Enter key
+  useEffect(() => {
+    const handleKeyDown = (e: globalThis.KeyboardEvent) => {
+      if (e.key === 'Enter' && selectedFormat) {
+        onStartDownload();
+      }
+    };
+    
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedFormat, onStartDownload]);
   
   return (
     <>
@@ -53,7 +66,6 @@ const FormatSelectionSection = ({
       <div className="flex gap-3 justify-center mt-2 mb-8 animate-slide-up">
         <Button
           onClick={onStartDownload}
-          disabled={!selectedFormat}
           className="px-6"
           size="lg"
           variant="highContrast"

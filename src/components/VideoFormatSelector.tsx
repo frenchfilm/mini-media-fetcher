@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Check } from 'lucide-react';
@@ -28,6 +28,14 @@ interface VideoFormatSelectorProps {
 
 const VideoFormatSelector = ({ onSelect }: VideoFormatSelectorProps) => {
   const [selectedFormat, setSelectedFormat] = useState<string>(FORMATS[0].id);
+
+  // Select high quality format by default
+  useEffect(() => {
+    const highQualityFormat = FORMATS.find(f => f.id === 'mp4-1080p');
+    if (highQualityFormat) {
+      onSelect(highQualityFormat);
+    }
+  }, [onSelect]);
 
   const handleFormatChange = (value: string) => {
     setSelectedFormat(value);
