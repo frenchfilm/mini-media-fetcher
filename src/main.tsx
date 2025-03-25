@@ -9,5 +9,6 @@ rootElement.style.width = "800px";
 rootElement.style.height = "600px";
 rootElement.style.margin = "0 auto";
 rootElement.style.overflow = "hidden"; // Prevent scrollbars
+rootElement.style.position = "relative"; // Added to improve positioning
 
 createRoot(rootElement).render(<App />);
