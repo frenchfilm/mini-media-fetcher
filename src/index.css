@@ -1,7 +1,9 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ===== BASE STYLES ===== */
 @layer base {
   :root {
     --background: 40 50% 79%;
@@ -79,7 +81,7 @@
     @apply font-fraunces;
   }
   
-  /* Custom scrollbar */
+  /* Scrollbar styling */
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -97,38 +99,31 @@
     @apply bg-muted-foreground/30;
   }
 
-  /* Ensure placeholders are readable in dark mode */
+  /* Dark mode input styles */
   .dark input::placeholder,
   .dark textarea::placeholder {
     @apply text-secondary-foreground/70;
+    opacity: 1;
   }
   
-  /* Add higher contrast for dark mode inputs */
   .dark input,
   .dark textarea,
   .dark select {
     @apply text-foreground bg-secondary border-secondary-foreground/30;
   }
   
-  /* High contrast buttons for dark mode */
-  .dark .softbare-button {
-    @apply bg-primary text-secondary-foreground hover:bg-primary/90 font-semibold;
-  }
-  
+  /* Button styles for dark mode */
+  .dark .softbare-button,
   .dark .button-contrast {
     @apply bg-primary text-secondary-foreground hover:bg-primary/90 font-semibold;
   }
   
-  /* Improved styling for dark mode buttons */
-  .dark .settings-button {
-    @apply bg-primary text-secondary-foreground hover:bg-primary/90 border-primary font-semibold;
-  }
-  
+  .dark .settings-button,
   .dark .action-button {
     @apply bg-primary text-secondary-foreground border-primary/50 font-semibold;
   }
 
-  /* Better styling for tabs */
+  /* Tabs styling */
   .settings-tabs-list {
     @apply bg-muted border border-border;
   }
@@ -154,8 +149,9 @@
   }
 }
 
-/* Custom animations */
+/* ===== ANIMATIONS ===== */
 @layer utilities {
+  /* Animation utilities */
   .backdrop-blur-8 {
     backdrop-filter: blur(8px);
   }
@@ -171,7 +167,22 @@
   .transition-transform-200 {
     transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
   }
+
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
   
+  @keyframes logo-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .fade-in {
+    animation: fade-in 0.3s ease-out forwards;
+  }
+  
+  /* Component styles */
   .glass-panel {
     @apply bg-secondary/50 border border-secondary/70 shadow-sm;
   }
@@ -181,6 +192,7 @@
            hover:bg-secondary/80 active:bg-secondary/90 transition-all-200;
   }
   
+  /* Typography styles */
   .app-logo {
     @apply font-barlow text-primary-dark;
   }
@@ -189,6 +201,7 @@
     @apply font-fraunces text-primary-dark;
   }
   
+  /* Button styles */
   .softbare-button {
     @apply bg-primary hover:bg-primary/90 text-white font-medium px-4 py-2 rounded-md transition-all-200 border border-primary/70;
   }
@@ -210,22 +223,20 @@
     @apply bg-primary text-secondary border-primary hover:bg-primary/90 font-semibold;
   }
   
-  /* Improved icons and buttons */
+  /* Icon and form styles */
   .icon-button-contrast {
     @apply text-primary bg-secondary hover:bg-secondary/90 hover:text-primary/90;
   }
   
-  /* Improved form elements contrast */
   .form-input-contrast {
     @apply bg-secondary/80 border-secondary-foreground/30 text-foreground placeholder:text-foreground/70;
   }
   
-  /* Improved form labels contrast */
   .form-label-contrast {
     @apply text-foreground/90;
   }
 
-  /* Better contrast for tabs */
+  /* Tabs and buttons */
   .tab-high-contrast {
     @apply bg-primary text-primary-foreground font-medium;
   }
@@ -240,5 +251,112 @@
   
   .dark .tab-secondary {
     @apply bg-secondary text-primary font-medium;
+  }
+  
+  /* Layout styles */
+  #root {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .logo {
+    height: 6em;
+    padding: 1.5em;
+    will-change: filter;
+    transition: filter 300ms;
+  }
+  
+  .logo:hover {
+    filter: drop-shadow(0 0 2em #646cffaa);
+  }
+  
+  .logo.react:hover {
+    filter: drop-shadow(0 0 2em #61dafbaa);
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    a:nth-of-type(2) .logo {
+      animation: logo-spin infinite 20s linear;
+    }
+  }
+  
+  .card {
+    padding: 2em;
+  }
+  
+  .read-the-docs {
+    color: #888;
+  }
+  
+  /* Button variants */
+  .folder-button,
+  .action-button-dark {
+    @apply bg-primary text-white border-primary font-semibold;
+  }
+  
+  .folder-button:hover,
+  .action-button-dark:hover {
+    @apply bg-primary/90;
+  }
+  
+  .settings-button-high-contrast {
+    @apply bg-primary text-white border-primary font-semibold;
+  }
+  
+  .settings-button-high-contrast:hover {
+    @apply bg-primary/90;
+  }
+  
+  .dark .settings-button-high-contrast {
+    @apply bg-primary text-secondary border-primary;
+  }
+  
+  .dark .settings-button-high-contrast:hover {
+    @apply bg-primary/90;
+  }
+  
+  /* Format buttons */
+  .format-button-selected {
+    @apply bg-primary text-white border-primary font-semibold;
+  }
+  
+  .dark .format-button-selected {
+    @apply bg-primary text-secondary border-primary;
+  }
+  
+  /* Consistent button styles */
+  .contrast-button {
+    @apply bg-primary text-white border-primary font-semibold;
+  }
+  
+  .contrast-button:hover {
+    @apply bg-primary/90;
+  }
+  
+  .dark .contrast-button {
+    @apply bg-primary text-secondary border-primary;
+  }
+  
+  .dark .contrast-button:hover {
+    @apply bg-primary/90;
+  }
+  
+  .secondary-contrast-button {
+    @apply bg-secondary text-primary border-primary font-medium;
+  }
+  
+  .dark .secondary-contrast-button {
+    @apply bg-secondary/80 text-primary border-primary;
+  }
+  
+  /* App-wide button style */
+  .app-button {
+    @apply bg-primary text-white border-primary font-semibold;
+  }
+  
+  .dark .app-button {
+    @apply bg-primary text-secondary border-primary;
   }
 }
