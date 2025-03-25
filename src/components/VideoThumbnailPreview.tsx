@@ -28,6 +28,7 @@ export default function VideoThumbnailPreview({ src, alt = 'Video Thumbnail' }) 
         src={src}
         alt={alt}
         className={fitClass}
+        style={{ maxHeight: '100%', maxWidth: '100%' }}
       />
     </div>
   );
