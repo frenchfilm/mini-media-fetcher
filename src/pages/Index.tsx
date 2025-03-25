@@ -1,6 +1,4 @@
-
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { VideoFormat } from "@/components/VideoFormatSelector";
 import DownloadProgress from "@/components/DownloadProgress";
@@ -8,11 +6,11 @@ import UrlInputSection from "@/components/UrlInputSection";
 import FormatSelectionSection from "@/components/FormatSelectionSection";
 import NewsletterDialog from "@/components/NewsletterDialog";
 import AppLayout from "@/components/AppLayout";
+import AppHeader from "@/components/AppHeader";
 import { 
   getVideoFilePath, 
   ensureDownloadDirectoryExists, 
   isDesktopEnvironment,
-  openFileLocation
 } from "@/utils/videoUtils";
 import { useDownloadHistory } from "@/hooks/useDownloadHistory";
 
@@ -23,7 +21,6 @@ enum AppState {
 }
 
 const Index = () => {
-  const navigate = useNavigate();
   const [appState, setAppState] = useState<AppState>(AppState.INPUT_URL);
   const [videoUrl, setVideoUrl] = useState<string>("");
   const [videoInfo, setVideoInfo] = useState<any>(null);
@@ -103,41 +100,44 @@ const Index = () => {
   };
 
   return (
-    <AppLayout onOpenNewsletter={handleOpenNewsletter} downloadsCount={downloads.length}>
-      <div className="flex-1 flex flex-col">
-        {appState === AppState.INPUT_URL && (
-          <UrlInputSection 
-            onUrlSubmit={handleUrlSubmit} 
-            onOpenNewsletter={handleOpenNewsletter}
-          />
-        )}
+    <>
+      <AppHeader downloadsCount={downloads.length} />
+      <AppLayout onOpenNewsletter={handleOpenNewsletter} downloadsCount={downloads.length}>
+        <div className="h-full">
+          {appState === AppState.INPUT_URL && (
+            <UrlInputSection 
+              onUrlSubmit={handleUrlSubmit} 
+              onOpenNewsletter={handleOpenNewsletter}
+            />
+          )}
+          
+          {appState === AppState.SELECT_FORMAT && videoInfo && (
+            <FormatSelectionSection
+              videoInfo={videoInfo}
+              videoUrl={videoUrl}
+              onFormatSelect={handleFormatSelect}
+              selectedFormat={selectedFormat}
+              onStartDownload={handleStartDownload}
+              onCancel={handleCancelDownload}
+            />
+          )}
+          
+          {appState === AppState.DOWNLOADING && videoUrl && selectedFormat && (
+            <DownloadProgress
+              videoUrl={videoUrl}
+              selectedFormat={selectedFormat}
+              onComplete={handleDownloadComplete}
+              onCancel={handleCancelDownload}
+            />
+          )}
+        </div>
         
-        {appState === AppState.SELECT_FORMAT && videoInfo && (
-          <FormatSelectionSection
-            videoInfo={videoInfo}
-            videoUrl={videoUrl}
-            onFormatSelect={handleFormatSelect}
-            selectedFormat={selectedFormat}
-            onStartDownload={handleStartDownload}
-            onCancel={handleCancelDownload}
-          />
-        )}
-        
-        {appState === AppState.DOWNLOADING && videoUrl && selectedFormat && (
-          <DownloadProgress
-            videoUrl={videoUrl}
-            selectedFormat={selectedFormat}
-            onComplete={handleDownloadComplete}
-            onCancel={handleCancelDownload}
-          />
-        )}
-      </div>
-      
-      <NewsletterDialog
-        open={newsletterOpen}
-        onOpenChange={setNewsletterOpen}
-      />
-    </AppLayout>
+        <NewsletterDialog
+          open={newsletterOpen}
+          onOpenChange={setNewsletterOpen}
+        />
+      </AppLayout>
+    </>
   );
 };
 

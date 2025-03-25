@@ -1,8 +1,6 @@
 
 import React from 'react';
-import AppHeader from './AppHeader';
-import { Button } from "@/components/ui/button";
-import { MessageSquare, Mail } from "lucide-react";
+import AppFooter from './AppFooter';
 import { useNavigate } from "react-router-dom";
 
 interface AppLayoutProps {
@@ -25,45 +23,18 @@ const AppLayout = ({
   };
 
   return (
-    <div className="h-[600px] w-[800px] flex flex-col bg-gradient-to-b from-background to-secondary/30">
-      {/* Header Section */}
-      <AppHeader downloadsCount={downloadsCount} />
-      
-      {/* Content Section */}
-      <main className="flex-1 mx-6 mt-2 mb-1 overflow-auto">
+    <div className="w-[800px] h-[600px] bg-gradient-to-b from-background to-secondary/30 flex flex-col p-6">
+      {/* Body Section - Fixed 480px height */}
+      <main className="h-[480px] w-full overflow-hidden">
         {children}
       </main>
       
-      {/* Footer Section with fixed height to ensure visibility */}
-      <div className="px-6 pb-3 pt-1">
-        <div className="flex flex-row items-center justify-center gap-2 mb-1">
-          <Button 
-            variant="contrast" 
-            onClick={() => navigate("/contact")}
-            className="action-button-dark dark:bg-primary dark:text-secondary dark:border-primary/70"
-            size="sm"
-          >
-            <MessageSquare className="h-3 w-3 mr-1" />
-            <span className="text-xs">Request Feature</span>
-          </Button>
-          
-          <Button 
-            variant="contrast" 
-            onClick={handleOpenNewsletter}
-            className="action-button-dark dark:bg-primary dark:text-secondary dark:border-primary/70"
-            size="sm"
-          >
-            <Mail className="h-3 w-3 mr-1" />
-            <span className="text-xs">Newsletter</span>
-          </Button>
-        </div>
-        
-        <footer className="text-center text-[10px] text-muted-foreground">
-          <p className="italic">
-            Apps as nature intended them - quiet, private, ad-free.
-          </p>
-        </footer>
-      </div>
+      {/* Footer Section - Fixed 72px height */}
+      <AppFooter 
+        onOpenNewsletter={handleOpenNewsletter}
+        onContactClick={() => navigate("/contact")}
+        downloadsCount={downloadsCount}
+      />
     </div>
   );
 };
