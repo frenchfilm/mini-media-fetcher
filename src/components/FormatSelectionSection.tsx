@@ -47,7 +47,7 @@ const FormatSelectionSection = ({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Left Column - Video Preview */}
         <div className="flex flex-col h-full">
-          <Card className="h-full p-4 rounded-xl shadow-sm flex items-center justify-center">
+          <div className="h-full flex items-center justify-center bg-black rounded-xl">
             {displayImage && (
               <div className="relative w-full h-full flex items-center justify-center">
                 <img 
@@ -66,7 +66,7 @@ const FormatSelectionSection = ({
                 />
               </div>
             )}
-          </Card>
+          </div>
         </div>
         
         {/* Right Column */}
