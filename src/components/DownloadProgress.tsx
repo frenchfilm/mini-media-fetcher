@@ -102,7 +102,7 @@ const DownloadProgress = ({ videoUrl, selectedFormat, onComplete, onCancel }: Do
         <Button 
           variant="outline" 
           size="sm"
-          className="bg-primary text-white dark:bg-primary dark:text-secondary-foreground dark:hover:bg-primary/90 dark:border-primary/70"
+          className="bg-primary text-primary-foreground hover:bg-primary/90 dark:bg-primary dark:text-secondary-foreground dark:hover:bg-primary/90 dark:border-primary/70"
           onClick={onCancel}
         >
           ← Back
