@@ -1,4 +1,3 @@
-
 import { useEffect, KeyboardEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
@@ -61,7 +60,7 @@ const FormatSelectionSection = ({
           <div className="flex gap-2 justify-center mt-auto">
             <Button
               onClick={onStartDownload}
-              className="px-3 py-1 h-8 text-xs"
+              className="px-3 py-1 h-8 text-xs bg-primary text-white dark:bg-primary dark:text-secondary dark:border-primary/70"
               variant="highContrast"
             >
               <Download className="h-3 w-3 mr-1" />
@@ -71,7 +70,7 @@ const FormatSelectionSection = ({
             <Button
               variant="outline"
               onClick={onCancel}
-              className="px-3 py-1 h-8 text-xs bg-secondary text-primary font-medium border-primary/30 hover:bg-secondary/80 hover:text-primary/90"
+              className="px-3 py-1 h-8 text-xs bg-secondary text-primary dark:bg-secondary dark:text-primary dark:border-primary/50 font-medium border-primary/30 hover:bg-secondary/80 hover:text-primary/90"
             >
               Cancel
             </Button>
