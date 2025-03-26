@@ -85,7 +85,7 @@ const VideoFormatSelector = ({ onSelect }: VideoFormatSelectorProps) => {
     );
   }
 
-  // Desktop version with grid layout (unchanged)
+  // Desktop version with grid layout - keeping format buttons as they are
   return (
     <Card className="glass-panel p-3 rounded-xl w-full h-full flex flex-col animate-slide-up shadow-sm">
       <h3 className="text-sm font-medium text-foreground mb-3">Select Format & Quality</h3>
@@ -98,7 +98,7 @@ const VideoFormatSelector = ({ onSelect }: VideoFormatSelectorProps) => {
             size="sm"
             className={`h-auto py-3 px-3 text-xs justify-start ${
               selectedFormat === format.id 
-                ? 'bg-primary text-white border-primary/50 dark:bg-primary dark:text-secondary dark:border-primary/50' 
+                ? 'format-button-selected' 
                 : 'bg-secondary text-primary border-primary/30 dark:bg-secondary dark:text-primary'
             }`}
             onClick={() => handleFormatChange(format.id)}

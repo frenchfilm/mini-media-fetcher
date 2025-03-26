@@ -70,7 +70,7 @@ const AppFooter: React.FC<AppFooterProps> = ({
           <Button 
             variant="contrast" 
             onClick={onContactClick}
-            className="action-button-dark dark:bg-primary dark:text-secondary dark:border-primary/70 font-semibold"
+            className="app-wide-button-high-contrast font-semibold"
             size="sm"
           >
             <MessageSquare className="h-3 w-3 mr-1" />
@@ -80,7 +80,7 @@ const AppFooter: React.FC<AppFooterProps> = ({
           <Button 
             variant="contrast" 
             onClick={onOpenNewsletter}
-            className="action-button-dark dark:bg-primary dark:text-secondary dark:border-primary/70 font-semibold"
+            className="app-wide-button-high-contrast font-semibold"
             size="sm"
           >
             <Mail className="h-3 w-3 mr-1" />
@@ -91,9 +91,9 @@ const AppFooter: React.FC<AppFooterProps> = ({
             variant="ghost"
             size="icon"
             onClick={handleOpenSettings}
-            className="h-9 w-9 rounded-full bg-primary hover:bg-primary/90"
+            className="h-9 w-9 rounded-full app-wide-button-high-contrast"
           >
-            <Settings className="h-5 w-5 text-white dark:text-secondary" />
+            <Settings className="h-5 w-5" />
             <span className="sr-only">Settings</span>
           </Button>
         </div>

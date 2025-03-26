@@ -112,7 +112,7 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
           <DialogFooter className="pt-4">
             <Button 
               type="submit" 
-              className="text-white dark:text-secondary"
+              className="app-wide-button-high-contrast"
               disabled={isSending}
             >
               {isSending ? "Sending..." : "Send Message"}
