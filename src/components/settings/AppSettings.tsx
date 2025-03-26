@@ -33,8 +33,8 @@ const AppSettings = ({ licenseKey, onLicenseKeyChange }: AppSettingsProps) => {
 
   return (
     <div className="space-y-4">
-      <div className="space-y-2">
-        <Label htmlFor="license-key" className="text-foreground">License Key</Label>
+      <div className="space-y-2 text-left">
+        <Label htmlFor="license-key" className="text-foreground text-left">License Key</Label>
         <Input 
           id="license-key" 
           value={licenseKey}
@@ -64,8 +64,8 @@ const AppSettings = ({ licenseKey, onLicenseKeyChange }: AppSettingsProps) => {
         <Label htmlFor="updates" className="text-foreground">Check for updates automatically</Label>
       </div>
       
-      <div className="space-y-2">
-        <Label htmlFor="theme" className="text-foreground">Theme</Label>
+      <div className="space-y-2 text-left">
+        <Label htmlFor="theme" className="text-foreground text-left">Theme</Label>
         <select 
           id="theme"
           value={theme}
