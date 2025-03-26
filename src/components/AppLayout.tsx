@@ -44,7 +44,7 @@ const AppLayout = ({
       {/* Footer Section - Now flexible height for mobile */}
       <AppFooter 
         onOpenNewsletter={handleOpenNewsletter}
-        onContactClick={handleContactClick}
+        onOpenContact={handleContactClick}
         downloadsCount={downloadsCount}
       />
     </div>
