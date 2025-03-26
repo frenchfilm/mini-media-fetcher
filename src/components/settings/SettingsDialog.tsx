@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -28,7 +29,7 @@ const SettingsDialog = ({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-xl p-0 overflow-hidden border-none bg-background">
-        <div className="flex justify-between items-center p-4 border-b">
+        <div className="flex justify-between items-center p-3 border-b">
           <Button 
             variant="highContrast" 
             className="dark:bg-primary dark:text-secondary dark:border-primary/70"
@@ -46,13 +47,13 @@ const SettingsDialog = ({
           </Button>
         </div>
         
-        <div className="p-6">
+        <div className="px-4 pt-2 pb-4">
           <Tabs 
             value={activeTab} 
             onValueChange={setActiveTab}
             className="w-full"
           >
-            <TabsList className="w-full grid grid-cols-3 mb-6 bg-muted p-1 rounded-md">
+            <TabsList className="w-full grid grid-cols-3 mb-2 bg-muted p-1 rounded-md">
               <TabsTrigger 
                 value="download" 
                 className={`font-medium ${activeTab === 'download' 
@@ -79,21 +80,21 @@ const SettingsDialog = ({
               </TabsTrigger>
             </TabsList>
             
-            <div className="h-[400px] overflow-y-auto">
-              <TabsContent value="download" className="space-y-4 mt-2 h-full">
-                <h3 className="text-lg font-fraunces mb-4">Download Settings</h3>
+            <div className="h-[400px] overflow-y-auto pb-2">
+              <TabsContent value="download" className="space-y-3 mt-1 h-full">
+                <h3 className="text-lg font-fraunces mb-2">Download Settings</h3>
                 <DownloadSettings />
               </TabsContent>
               
-              <TabsContent value="app" className="space-y-4 mt-2 h-full">
-                <h3 className="text-lg font-fraunces mb-4">Application Settings</h3>
+              <TabsContent value="app" className="space-y-3 mt-1 h-full">
+                <h3 className="text-lg font-fraunces mb-2">Application Settings</h3>
                 <AppSettings 
                   licenseKey={licenseKey}
                   onLicenseKeyChange={onLicenseKeyChange}
                 />
               </TabsContent>
               
-              <TabsContent value="about" className="mt-2 h-full">
+              <TabsContent value="about" className="mt-1 h-full">
                 <AboutSettings 
                   licenseKey={licenseKey}
                 />

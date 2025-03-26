@@ -32,7 +32,7 @@ const AppSettings = ({ licenseKey, onLicenseKeyChange }: AppSettingsProps) => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <div className="space-y-2">
         <Label htmlFor="license-key" className="text-foreground">License Key</Label>
         <Input 
@@ -78,7 +78,7 @@ const AppSettings = ({ licenseKey, onLicenseKeyChange }: AppSettingsProps) => {
         </select>
       </div>
       
-      <div className="pt-4 border-t border-border">
+      <div className="pt-3 border-t border-border">
         <h4 className="font-medium mb-2 text-foreground">Newsletter Preferences</h4>
         {isSubscribed ? (
           <Button 
