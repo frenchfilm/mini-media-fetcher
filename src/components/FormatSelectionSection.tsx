@@ -45,8 +45,8 @@ const FormatSelectionSection = ({
       </div>
       
       <div className="grid grid-cols-1 gap-4">
-        <div className="flex flex-col p-2 sm:p-3 rounded-xl">
-          <div className={`flex-1 ${isMobile ? 'h-[200px]' : 'h-[330px]'} mb-3`}>
+        <div className="flex flex-col items-center p-2 sm:p-3 rounded-xl">
+          <div className={`w-full flex justify-center ${isMobile ? 'h-[200px]' : 'h-[330px]'} mb-3`}>
             {displayImage && (
               <VideoThumbnailPreview 
                 src={displayImage} 
@@ -81,6 +81,6 @@ const FormatSelectionSection = ({
       </div>
     </div>
   );
-};
+}
 
 export default FormatSelectionSection;

@@ -1,5 +1,7 @@
 
 import { useRef, useEffect, useState } from 'react';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface VideoThumbnailPreviewProps {
   src: string;
@@ -9,6 +11,7 @@ interface VideoThumbnailPreviewProps {
 export default function VideoThumbnailPreview({ src, alt = 'Video Thumbnail' }: VideoThumbnailPreviewProps) {
   const imgRef = useRef<HTMLImageElement>(null);
   const [isLandscape, setIsLandscape] = useState<boolean | null>(null);
+  const isMobile = useIsMobile();
   
   useEffect(() => {
     const img = imgRef.current;
@@ -30,20 +33,24 @@ export default function VideoThumbnailPreview({ src, alt = 'Video Thumbnail' }: 
     return () => img.removeEventListener('load', handleLoad);
   }, [src]);
   
+  // Calculate the max width and height constraints based on viewport
+  const maxWidth = isMobile ? 'max-w-[280px]' : 'max-w-[640px]';
+  const maxHeight = isMobile ? 'max-h-[180px]' : 'max-h-[320px]';
+  
   return (
-    <div className="w-full h-full bg-black overflow-hidden rounded-xl flex items-center justify-center">
-      <img
-        ref={imgRef}
-        src={src}
-        alt={alt}
-        className={
-          isLandscape === null
-            ? 'hidden' // Hide until we determine aspect ratio
-            : isLandscape
-              ? 'w-full h-auto object-contain' // Landscape image
-              : 'h-full w-auto object-contain' // Portrait image
-        }
-      />
+    <div className={`mx-auto ${maxWidth} ${maxHeight} bg-black overflow-hidden rounded-xl flex items-center justify-center`}>
+      <div className="relative w-full h-full">
+        {isLandscape !== null && (
+          <AspectRatio ratio={isLandscape ? 16/9 : 9/16} className="overflow-hidden">
+            <img
+              ref={imgRef}
+              src={src}
+              alt={alt}
+              className="object-contain w-full h-full"
+            />
+          </AspectRatio>
+        )}
+      </div>
     </div>
   );
 }
