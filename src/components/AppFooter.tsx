@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { Mail, Settings } from "lucide-react";
+import { Mail, Settings, HandRaised } from "lucide-react";
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useTheme } from '@/components/ThemeProvider';
 
@@ -77,13 +77,12 @@ const AppFooter: React.FC<AppFooterProps> = ({
           </Button>
           
           <Button 
-            variant="contrast" 
+            size="icon"
             onClick={onOpenNewsletter}
-            className="app-wide-button-high-contrast font-semibold"
-            size="sm"
+            className="h-9 w-9 rounded-full app-wide-button-high-contrast"
           >
-            <Mail className="h-3 w-3 mr-1" />
-            <span className="text-xs">Subscriptions</span>
+            <HandRaised className="h-5 w-5" />
+            <span className="sr-only">Subscriptions</span>
           </Button>
 
           <Button
