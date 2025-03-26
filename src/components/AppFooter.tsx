@@ -68,30 +68,30 @@ const AppFooter: React.FC<AppFooterProps> = ({
         {/* Right Column - Buttons */}
         <div className={`${isMobile ? 'w-full' : 'w-1/2'} flex items-center ${isMobile ? 'justify-center' : 'justify-end'} gap-2`}>
           <Button 
-            variant="contrast" 
+            variant="ghost"
             onClick={onContactClick}
-            className="action-button-dark dark:bg-primary dark:text-secondary dark:border-primary/70 font-semibold"
-            size="sm"
+            className="h-9 w-9 aspect-square rounded-full bg-primary hover:bg-primary/90"
+            size="icon"
           >
-            <MessageSquare className="h-3 w-3 mr-1" />
-            <span className="text-xs">Requests / Bugs</span>
+            <MessageSquare className="h-5 w-5 text-white dark:text-secondary" />
+            <span className="sr-only">Requests / Bugs</span>
           </Button>
           
           <Button 
-            variant="contrast" 
+            variant="ghost" 
             onClick={onOpenNewsletter}
-            className="action-button-dark dark:bg-primary dark:text-secondary dark:border-primary/70 font-semibold"
-            size="sm"
+            className="h-9 w-9 aspect-square rounded-full bg-primary hover:bg-primary/90"
+            size="icon"
           >
-            <Mail className="h-3 w-3 mr-1" />
-            <span className="text-xs">Subscriptions</span>
+            <Mail className="h-5 w-5 text-white dark:text-secondary" />
+            <span className="sr-only">Subscriptions</span>
           </Button>
 
           <Button
             variant="ghost"
             size="icon"
             onClick={handleOpenSettings}
-            className="h-9 w-9 rounded-full bg-primary hover:bg-primary/90"
+            className="h-9 w-9 aspect-square rounded-full bg-primary hover:bg-primary/90"
           >
             <Settings className="h-5 w-5 text-white dark:text-secondary" />
             <span className="sr-only">Settings</span>
