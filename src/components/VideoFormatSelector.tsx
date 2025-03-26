@@ -1,8 +1,15 @@
-
 import { useState, useEffect } from 'react';
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Check } from 'lucide-react';
+import { Check, ChevronDown } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export type VideoFormat = {
   id: string;
@@ -28,6 +35,7 @@ interface VideoFormatSelectorProps {
 
 const VideoFormatSelector = ({ onSelect }: VideoFormatSelectorProps) => {
   const [selectedFormat, setSelectedFormat] = useState<string>(FORMATS[0].id);
+  const isMobile = useIsMobile();
 
   // Select high quality format by default
   useEffect(() => {
@@ -45,6 +53,48 @@ const VideoFormatSelector = ({ onSelect }: VideoFormatSelectorProps) => {
     }
   };
 
+  // Mobile version with dropdown
+  if (isMobile) {
+    return (
+      <Card className="glass-panel p-3 rounded-xl w-full flex flex-col animate-slide-up shadow-sm">
+        <h3 className="text-sm font-medium text-foreground mb-3">Select Format & Quality</h3>
+        
+        <Select value={selectedFormat} onValueChange={handleFormatChange}>
+          <SelectTrigger className="mb-2">
+            <SelectValue placeholder="Select quality" />
+          </SelectTrigger>
+          <SelectContent>
+            {FORMATS.map((format) => (
+              <SelectItem key={format.id} value={format.id}>
+                <div className="flex flex-col">
+                  <span className="font-medium">{format.quality}</span>
+                  <span className="text-xs opacity-80">{format.resolution} • {format.fileSize}</span>
+                </div>
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        
+        {/* Display currently selected format for better UX */}
+        {selectedFormat && (
+          <div className="mt-2 p-2 bg-secondary/50 rounded-md text-sm">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="font-medium">{FORMATS.find(f => f.id === selectedFormat)?.quality}</p>
+                <p className="text-xs opacity-80">
+                  {FORMATS.find(f => f.id === selectedFormat)?.resolution} • 
+                  {FORMATS.find(f => f.id === selectedFormat)?.fileSize}
+                </p>
+              </div>
+              <Check className="h-4 w-4 text-primary" />
+            </div>
+          </div>
+        )}
+      </Card>
+    );
+  }
+
+  // Desktop version with grid layout (unchanged)
   return (
     <Card className="glass-panel p-3 rounded-xl w-full h-full flex flex-col animate-slide-up shadow-sm">
       <h3 className="text-sm font-medium text-foreground mb-3">Select Format & Quality</h3>
