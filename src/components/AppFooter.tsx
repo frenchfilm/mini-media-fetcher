@@ -1,18 +1,19 @@
+
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { Mail, Settings, Megaphone } from "lucide-react";
+import { Mail, Settings, Megaphone, RectangleVertical, RectangleHorizontal } from "lucide-react";
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useTheme } from '@/components/ThemeProvider';
 
 interface AppFooterProps {
   onOpenNewsletter?: () => void;
-  onContactClick?: () => void;
+  onOpenContact?: () => void;
   downloadsCount?: number;
 }
 
 const AppFooter: React.FC<AppFooterProps> = ({ 
   onOpenNewsletter, 
-  onContactClick,
+  onOpenContact,
   downloadsCount = 0
 }) => {
   const version = "v1.0.0";
@@ -27,6 +28,18 @@ const AppFooter: React.FC<AppFooterProps> = ({
   const handleOpenSettings = () => {
     // Dispatch the event to open settings
     document.dispatchEvent(new Event('openSettings'));
+  };
+
+  const toggleViewMode = () => {
+    if (isMobile) {
+      // Switch to desktop view
+      document.documentElement.classList.remove('mobile-view');
+    } else {
+      // Switch to mobile view
+      document.documentElement.classList.add('mobile-view');
+    }
+    // Trigger resize to update UI components
+    window.dispatchEvent(new Event('resize'));
   };
 
   // Determine which logo to use based on current theme
@@ -68,7 +81,21 @@ const AppFooter: React.FC<AppFooterProps> = ({
         <div className={`${isMobile ? 'w-full' : 'w-1/2'} flex items-center ${isMobile ? 'justify-center' : 'justify-end'} gap-2`}>
           <Button 
             size="icon"
-            onClick={onContactClick}
+            onClick={toggleViewMode}
+            className="h-9 w-9 rounded-full app-wide-button-high-contrast"
+            title={isMobile ? "Switch to Desktop View" : "Switch to Mobile View"}
+          >
+            {isMobile ? (
+              <RectangleHorizontal className="h-5 w-5" />
+            ) : (
+              <RectangleVertical className="h-5 w-5" />
+            )}
+            <span className="sr-only">{isMobile ? "Desktop View" : "Mobile View"}</span>
+          </Button>
+          
+          <Button 
+            size="icon"
+            onClick={onOpenContact}
             className="h-9 w-9 rounded-full app-wide-button-high-contrast"
           >
             <Mail className="h-5 w-5" />
