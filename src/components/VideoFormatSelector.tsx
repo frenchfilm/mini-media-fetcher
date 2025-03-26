@@ -68,6 +68,7 @@ const VideoFormatSelector = ({ onSelect }: VideoFormatSelectorProps) => {
             align="start" 
             className="max-h-[35vh] overflow-y-auto z-50 bg-popover shadow-lg"
             avoidCollisions={true}
+            side="top" // Change to top to move dropdown up
           >
             {FORMATS.map((format) => (
               <SelectItem key={format.id} value={format.id} className="py-2">
