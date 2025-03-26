@@ -42,23 +42,26 @@ export default function VideoThumbnailPreview({ src, alt = 'Video Thumbnail' }: 
     };
   }, [src]);
   
+  // Log the source to debug
+  console.log("VideoThumbnailPreview rendering with src:", src);
+  
   return (
     <div className="mx-auto w-[250px] h-[200px] bg-black overflow-hidden rounded-xl flex items-center justify-center relative">
       <div className="relative w-full h-full">
-        {!imageError && isLandscape !== null && (
-          <AspectRatio ratio={isLandscape ? 16/9 : 9/16} className="overflow-hidden">
+        {!imageError && (
+          <div className="w-full h-full flex items-center justify-center">
             <img
               ref={imgRef}
               src={src}
               alt={alt}
-              className="object-contain w-full h-full"
+              className="max-h-full max-w-full object-contain"
             />
             <div className="absolute inset-0 flex items-center justify-center bg-black/30">
               <div className="rounded-full bg-white/25 p-3 backdrop-blur-sm">
                 <Play className="h-8 w-8 text-white" fill="white" />
               </div>
             </div>
-          </AspectRatio>
+          </div>
         )}
         
         {imageError && (

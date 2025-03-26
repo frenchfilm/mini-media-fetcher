@@ -23,7 +23,11 @@ const FormatSelectionSection = ({
   onStartDownload,
   onCancel
 }: FormatSelectionSectionProps) => {
-  const displayImage = videoInfo.previewImage || videoInfo.thumbnailUrl;
+  // Make sure we have the correct image property, log it for debugging
+  const displayImage = videoInfo.thumbnailUrl || videoInfo.previewImage;
+  console.log("Display image URL:", displayImage);
+  console.log("Video info:", videoInfo);
+  
   const isMobile = useIsMobile();
   
   useEffect(() => {
@@ -46,7 +50,7 @@ const FormatSelectionSection = ({
       
       <div className="grid grid-cols-1 gap-4">
         <div className="flex flex-col items-center p-2 sm:p-3 rounded-xl">
-          <div className={`w-full flex justify-center ${isMobile ? 'h-[200px]' : 'h-[330px]'} mb-3`}>
+          <div className="w-full flex justify-center mb-3">
             {displayImage && (
               <VideoThumbnailPreview 
                 src={displayImage} 
