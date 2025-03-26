@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { MessageSquare, Mail, Settings, Smartphone, Monitor } from "lucide-react";
@@ -46,7 +47,6 @@ const AppFooter: React.FC<AppFooterProps> = ({
 
   return (
     <footer className="h-auto min-h-[72px] w-full flex flex-col items-center mt-2">
-      {/* Use flex-col-reverse to put right column on top and left column on bottom */}
       <div className={`w-full flex ${isMobile ? 'flex-col-reverse gap-4' : 'flex-row'}`}>
         {/* Left Column - Logo, App Name, Version, Update Link */}
         <div className={`${isMobile ? 'w-full items-start justify-start' : 'w-1/2'} flex items-start sm:justify-start mt-2 sm:mt-0`}>
@@ -81,11 +81,11 @@ const AppFooter: React.FC<AppFooterProps> = ({
             variant="ghost"
             size="icon"
             onClick={toggleDeviceView}
-            className="h-9 w-9 p-0 flex items-center justify-center rounded-full aspect-square"
+            className="h-9 w-9 p-0 flex items-center justify-center rounded-full aspect-square bg-primary text-white dark:bg-primary dark:text-secondary hover:bg-primary/90"
           >
             {isMobile ? 
-              <Monitor className="h-5 w-5 text-white dark:text-secondary" /> : 
-              <Smartphone className="h-5 w-5 text-white dark:text-secondary" />
+              <Monitor className="h-5 w-5" /> : 
+              <Smartphone className="h-5 w-5" />
             }
             <span className="sr-only">{isMobile ? "Switch to desktop view" : "Switch to mobile view"}</span>
           </Button>
@@ -115,9 +115,9 @@ const AppFooter: React.FC<AppFooterProps> = ({
             variant="ghost"
             size="icon"
             onClick={handleOpenSettings}
-            className="h-9 w-9 p-0 flex items-center justify-center rounded-full aspect-square"
+            className="h-9 w-9 p-0 flex items-center justify-center rounded-full aspect-square bg-primary text-white dark:bg-primary dark:text-secondary hover:bg-primary/90"
           >
-            <Settings className="h-5 w-5 text-white dark:text-secondary" />
+            <Settings className="h-5 w-5" />
             <span className="sr-only">Settings</span>
           </Button>
         </div>
