@@ -67,4 +67,24 @@
     perspective: 1px;
     contain: layout;
   }
+  
+  /* Fixed height styles for dialog elements */
+  .dialog-fixed-height {
+    height: 570px;
+  }
+  
+  .dialog-content-fixed-height {
+    height: 430px;
+    overflow-y: auto;
+  }
+  
+  @media (max-width: 640px) {
+    .dialog-fixed-height {
+      height: 540px;
+    }
+    
+    .dialog-content-fixed-height {
+      height: 400px;
+    }
+  }
 }

@@ -29,13 +29,15 @@ const SettingsDialog = ({
     onOpenChange(false);
   };
 
-  // Adjust the dialog content height based on viewport
-  const tabContentHeight = isMobile ? "350px" : "400px";
+  // Fixed dialog content height for all tabs
+  const dialogHeight = isMobile ? "540px" : "570px";
+  const contentHeight = isMobile ? "400px" : "430px";
   
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent 
-        className="sm:max-w-xl p-0 overflow-hidden border-none bg-background max-h-[85vh]"
+        className="sm:max-w-xl p-0 overflow-hidden border-none bg-background"
+        style={{ height: dialogHeight }}
       >
         <div className="flex justify-between items-center p-3 border-b">
           <Button 
@@ -55,11 +57,11 @@ const SettingsDialog = ({
           </Button>
         </div>
         
-        <div className="px-4 pt-2 pb-4">
+        <div className="px-4 pt-2 pb-4 flex flex-col h-full">
           <Tabs 
             value={activeTab} 
             onValueChange={setActiveTab}
-            className="w-full"
+            className="w-full flex flex-col flex-1"
           >
             <TabsList className="w-full grid grid-cols-3 mb-2 bg-muted p-1 rounded-md">
               <TabsTrigger 
@@ -88,36 +90,36 @@ const SettingsDialog = ({
               </TabsTrigger>
             </TabsList>
             
-            <div className="h-auto">
-              <TabsContent value="download" className="space-y-3 mt-1 h-full">
+            <div className="flex-1 h-full" style={{ height: contentHeight }}>
+              <TabsContent value="download" className="h-full mt-1 data-[state=active]:flex data-[state=active]:flex-col">
                 <h3 className="text-lg font-fraunces mb-2">Download Settings</h3>
-                <ScrollArea className={`h-[${tabContentHeight}]`}>
-                  <div className="pr-4">
+                <div className="flex-1 overflow-hidden">
+                  <ScrollArea className="h-full pr-4">
                     <DownloadSettings />
-                  </div>
-                </ScrollArea>
+                  </ScrollArea>
+                </div>
               </TabsContent>
               
-              <TabsContent value="app" className="space-y-3 mt-1 h-full">
+              <TabsContent value="app" className="h-full mt-1 data-[state=active]:flex data-[state=active]:flex-col">
                 <h3 className="text-lg font-fraunces mb-2">Application Settings</h3>
-                <ScrollArea className={`h-[${tabContentHeight}]`}>
-                  <div className="pr-4">
+                <div className="flex-1 overflow-hidden">
+                  <ScrollArea className="h-full pr-4">
                     <AppSettings 
                       licenseKey={licenseKey}
                       onLicenseKeyChange={onLicenseKeyChange}
                     />
-                  </div>
-                </ScrollArea>
+                  </ScrollArea>
+                </div>
               </TabsContent>
               
-              <TabsContent value="about" className="mt-1 h-full">
-                <ScrollArea className={`h-[${tabContentHeight}]`}>
-                  <div className="pr-4">
+              <TabsContent value="about" className="h-full mt-1 data-[state=active]:flex data-[state=active]:flex-col">
+                <div className="flex-1 overflow-hidden">
+                  <ScrollArea className="h-full pr-4">
                     <AboutSettings 
                       licenseKey={licenseKey}
                     />
-                  </div>
-                </ScrollArea>
+                  </ScrollArea>
+                </div>
               </TabsContent>
             </div>
           </Tabs>
