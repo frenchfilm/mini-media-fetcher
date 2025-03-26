@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 import VideoFormatSelector, { VideoFormat } from "@/components/VideoFormatSelector";
 import VideoThumbnailPreview from "@/components/VideoThumbnailPreview";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface FormatSelectionSectionProps {
   videoInfo: any;
@@ -92,7 +92,7 @@ const FormatSelectionSection = ({
             </Button>
           </div>
           
-          {/* Format selection below everything else */}
+          {/* Format selection - now just the dropdown */}
           <div className="flex">
             <VideoFormatSelector onSelect={onFormatSelect} />
           </div>
