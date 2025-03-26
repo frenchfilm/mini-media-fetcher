@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -59,7 +58,9 @@ const VideoFormatSelector = ({ onSelect }: VideoFormatSelectorProps) => {
     return (
       <div className="w-full">
         <Select value={selectedFormat} onValueChange={handleFormatChange}>
-          <SelectTrigger className="w-full">
+          <SelectTrigger 
+            className="w-full border-2 border-primary/50 hover:border-primary light:border-primary/60 light:hover:border-primary/80" 
+          >
             <SelectValue placeholder="Select quality" />
           </SelectTrigger>
           <SelectContent 
@@ -68,7 +69,7 @@ const VideoFormatSelector = ({ onSelect }: VideoFormatSelectorProps) => {
             align="start" 
             className="max-h-[35vh] overflow-y-auto z-50 bg-popover shadow-lg"
             avoidCollisions={true}
-            side="top" // Change to top to move dropdown up
+            side="top"
           >
             {FORMATS.map((format) => (
               <SelectItem key={format.id} value={format.id} className="py-2">
