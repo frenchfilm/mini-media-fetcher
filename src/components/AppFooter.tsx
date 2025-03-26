@@ -33,7 +33,7 @@ const AppFooter: React.FC<AppFooterProps> = ({
       {/* Use flex-col-reverse to put right column on top and left column on bottom */}
       <div className={`w-full flex ${isMobile ? 'flex-col-reverse gap-4' : 'flex-row'}`}>
         {/* Left Column - Logo, App Name, Version, Update Link */}
-        <div className={`${isMobile ? 'w-full' : 'w-1/2'} flex items-start justify-center sm:justify-start mt-2 sm:mt-0`}>
+        <div className={`${isMobile ? 'w-full items-start justify-start' : 'w-1/2'} flex items-start sm:justify-start mt-2 sm:mt-0`}>
           <div className="flex items-start">
             <div className="h-[72px] flex items-center">
               <img 
@@ -96,3 +96,4 @@ const AppFooter: React.FC<AppFooterProps> = ({
 };
 
 export default AppFooter;
+
