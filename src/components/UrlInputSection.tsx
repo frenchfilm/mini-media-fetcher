@@ -1,10 +1,14 @@
+
 import { useState, useEffect, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from 'sonner';
 import { ArrowRight, X, Loader2, FolderOpen } from 'lucide-react';
 import { validateUrl } from '@/utils/urlValidation';
+import { getVideoDetails } from '@/utils/videoUtils';
+import { isDesktopEnvironment } from '@/utils/videoUtils';
 import { useIsMobile } from '@/hooks/use-mobile';
+import VideoUrlInput from "@/components/VideoUrlInput";
 
 interface UrlInputSectionProps {
   onUrlSubmit: (url: string, videoInfo: any) => void;
@@ -12,18 +16,9 @@ interface UrlInputSectionProps {
 }
 
 const UrlInputSection = ({ onUrlSubmit, onOpenNewsletter }: UrlInputSectionProps) => {
-  const [url, setUrl] = useState('');
-  const [isValidating, setIsValidating] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const isMobile = useIsMobile();
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  // Automatically focus the input when the component mounts
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, []);
-
+  
   const handleUrlSubmit = async (url: string) => {
     setIsLoading(true);
     
