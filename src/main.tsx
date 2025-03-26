@@ -57,6 +57,10 @@ window.addEventListener('resize', () => {
   }
 });
 
+// Define styles to ensure dialogs and other fixed elements respect app boundaries
+document.documentElement.style.setProperty('--app-width', '800px');
+document.documentElement.style.setProperty('--app-height', '600px');
+
 // Trigger resize event on load to set initial state
 window.dispatchEvent(new Event('resize'));
 

@@ -36,14 +36,6 @@ const SettingsDialog = ({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent 
         className="sm:max-w-xl p-0 overflow-hidden border-none bg-background max-h-[85vh]"
-        style={{
-          position: 'fixed',
-          inset: '0',
-          margin: 'auto',
-          width: 'calc(100% - 48px)',
-          height: 'fit-content',
-          maxWidth: '500px'
-        }}
       >
         <div className="flex justify-between items-center p-3 border-b">
           <Button 
