@@ -41,16 +41,14 @@ const SettingsDialog = ({
         {/* Fixed header section - absolute positioning */}
         <div className="absolute top-0 left-0 right-0 z-10 flex justify-between items-center p-3 border-b w-full bg-background">
           <Button 
-            variant="highContrast" 
-            className="dark:bg-primary dark:text-secondary dark:border-primary/70"
+            className="app-wide-button-high-contrast"
             onClick={() => onOpenChange(false)}
           >
             ← Back
           </Button>
           <DialogTitle className="text-xl font-fraunces">Settings</DialogTitle>
           <Button 
-            variant="highContrast"
-            className="dark:bg-primary dark:text-secondary dark:border-primary/70"
+            className="app-wide-button-high-contrast"
             onClick={handleSave}
           >
             Save

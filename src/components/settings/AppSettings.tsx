@@ -82,9 +82,8 @@ const AppSettings = ({ licenseKey, onLicenseKeyChange }: AppSettingsProps) => {
         <h4 className="font-medium mb-2 text-foreground">Newsletter Preferences</h4>
         {isSubscribed ? (
           <Button 
-            variant="highContrast" 
             onClick={handleUnsubscribe}
-            className="w-full dark:bg-primary dark:text-secondary dark:border-primary/70"
+            className="w-full app-wide-button-high-contrast"
           >
             Unsubscribe from Newsletter
           </Button>

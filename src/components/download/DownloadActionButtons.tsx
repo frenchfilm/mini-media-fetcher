@@ -22,8 +22,7 @@ const DownloadActionButtons = ({
         onClick={onTogglePause} 
         size="sm"
         disabled={status === 'preparing' || status === 'complete'}
-        variant="highContrast"
-        className="flex-1 px-3 py-1 h-8 text-xs font-semibold dark:bg-primary dark:text-secondary dark:border-primary/70"
+        className="flex-1 px-3 py-1 h-8 text-xs font-semibold app-wide-button-high-contrast"
       >
         {status === 'paused' ? (
           <>
@@ -39,10 +38,9 @@ const DownloadActionButtons = ({
       </Button>
       
       <Button 
-        variant="highContrast" 
         size="sm"
         onClick={onCancel}
-        className="flex-1 px-3 py-1 h-8 text-xs font-semibold dark:bg-primary dark:text-secondary dark:border-primary/70"
+        className="flex-1 px-3 py-1 h-8 text-xs font-semibold app-wide-button-high-contrast"
       >
         <X className="h-3.5 w-3.5 mr-1.5" />
         Cancel

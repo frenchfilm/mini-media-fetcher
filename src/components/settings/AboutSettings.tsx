@@ -37,16 +37,14 @@ const AboutSettings = ({ licenseKey }: AboutSettingsProps) => {
       
       <div className="space-y-4">
         <Button 
-          variant="highContrast" 
-          className="w-full dark:bg-primary dark:text-secondary dark:border-primary/70"
+          className="w-full app-wide-button-high-contrast"
           onClick={handleCheckForUpdates}
         >
           Check for Updates
         </Button>
         
         <Button 
-          variant="highContrast" 
-          className="w-full dark:bg-primary dark:text-secondary dark:border-primary/70"
+          className="w-full app-wide-button-high-contrast"
           onClick={() => window.open("https://example.com", "_blank")}
         >
           <ExternalLink className="h-4 w-4 mr-2" />

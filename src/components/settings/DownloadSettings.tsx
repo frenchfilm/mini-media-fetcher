@@ -29,9 +29,8 @@ const DownloadSettings = () => {
             className="flex-1 bg-white border-secondary dark:bg-secondary dark:border-border dark:text-foreground"
           />
           <Button 
-            variant="highContrast" 
             size="icon" 
-            className="dark:bg-primary dark:text-secondary dark:border-primary/70"
+            className="app-wide-button-high-contrast"
           >
             <FolderOpen className="h-4 w-4" />
           </Button>
