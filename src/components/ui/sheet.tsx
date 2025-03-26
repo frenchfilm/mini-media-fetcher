@@ -61,10 +61,6 @@ const SheetContent = React.forwardRef<
     <SheetPrimitive.Content
       ref={ref}
       className={cn(sheetVariants({ side }), className)}
-      style={{
-        maxHeight: 'calc(100% - 2rem)',
-        ...(side === 'top' || side === 'bottom' ? {} : { top: '50%', transform: 'translateY(-50%)' })
-      }}
       {...props}
     >
       {children}
@@ -133,3 +129,4 @@ export {
   Sheet, SheetClose,
   SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetOverlay, SheetPortal, SheetTitle, SheetTrigger
 }
+
