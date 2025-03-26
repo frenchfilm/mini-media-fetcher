@@ -103,9 +103,9 @@ const DownloadProgress = ({ videoUrl, selectedFormat, onComplete, onCancel }: Do
     <div className="w-full max-w-xl mx-auto px-1 sm:px-0">
       <div className="flex justify-between items-center mb-3">
         <Button 
-          variant="outline" 
+          variant="highContrast"
           size="sm"
-          className="font-semibold dark:bg-secondary-light dark:text-primary-dark dark:hover:bg-secondary-light/90 dark:border-primary-dark/30"
+          className="px-3 py-1 h-8 text-xs font-semibold"
           onClick={onCancel}
         >
           {isMobile ? "←" : "← Back"}
