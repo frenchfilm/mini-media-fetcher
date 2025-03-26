@@ -19,8 +19,8 @@ const DownloadSettings = () => {
 
   return (
     <div className="space-y-6">
-      <div className="space-y-2 text-left">
-        <Label htmlFor="download-folder" className="text-foreground text-left">Default Download Location</Label>
+      <div className="space-y-2">
+        <Label htmlFor="download-folder" className="text-foreground">Default Download Location</Label>
         <div className="flex gap-2">
           <Input 
             id="download-folder" 
@@ -38,8 +38,8 @@ const DownloadSettings = () => {
         </div>
       </div>
       
-      <div className="space-y-2 text-left">
-        <Label htmlFor="default-quality" className="text-foreground text-left">Default Format</Label>
+      <div className="space-y-2">
+        <Label htmlFor="default-quality" className="text-foreground">Default Format</Label>
         <select 
           id="default-quality"
           value={quality}
