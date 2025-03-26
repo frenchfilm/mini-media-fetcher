@@ -43,6 +43,19 @@ const FormatSelectionSection = ({
   
   return (
     <div className="w-full max-w-full px-1 sm:px-0">
+      <div className="flex justify-between items-center mb-3">
+        <Button 
+          variant="outline" 
+          size="sm"
+          className="font-semibold dark:bg-secondary-light dark:text-primary-dark dark:hover:bg-secondary-light/90 dark:border-primary-dark/30"
+          onClick={onCancel}
+        >
+          {isMobile ? "←" : "← Back"}
+        </Button>
+        <h2 className="text-base font-fraunces text-center">Download</h2>
+        <div className="w-[60px]"></div> {/* Empty div for flex spacing */}
+      </div>
+      
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Video Preview Column */}
         <div className="flex flex-col items-center p-2 sm:p-3 rounded-xl">
