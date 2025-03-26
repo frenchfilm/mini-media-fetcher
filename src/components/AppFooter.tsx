@@ -81,7 +81,7 @@ const AppFooter: React.FC<AppFooterProps> = ({
             variant="ghost"
             size="icon"
             onClick={toggleDeviceView}
-            className="h-9 w-9 p-0 flex items-center justify-center rounded-full"
+            className="h-9 w-9 p-0 flex items-center justify-center rounded-full bg-primary dark:bg-primary hover:bg-primary/90"
           >
             {isMobile ? 
               <Monitor className="h-5 w-5 text-white dark:text-secondary" /> : 
@@ -114,7 +114,7 @@ const AppFooter: React.FC<AppFooterProps> = ({
             variant="ghost"
             size="icon"
             onClick={handleOpenSettings}
-            className="h-9 w-9 p-0 flex items-center justify-center rounded-full"
+            className="h-9 w-9 p-0 flex items-center justify-center rounded-full bg-primary dark:bg-primary hover:bg-primary/90"
           >
             <Settings className="h-5 w-5 text-white dark:text-secondary" />
             <span className="sr-only">Settings</span>
