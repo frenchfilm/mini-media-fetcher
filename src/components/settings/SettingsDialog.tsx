@@ -39,6 +39,7 @@ const SettingsDialog = ({
         className="sm:max-w-xl p-0 overflow-hidden border-none bg-background top-0 translate-y-0"
         style={{ height: dialogHeight }}
       >
+        {/* Fixed header section */}
         <div className="flex justify-between items-center p-3 border-b">
           <Button 
             variant="highContrast" 
@@ -57,42 +58,53 @@ const SettingsDialog = ({
           </Button>
         </div>
         
-        <div className="px-4 pt-2 pb-4 flex flex-col h-full">
-          <Tabs 
-            value={activeTab} 
-            onValueChange={setActiveTab}
-            className="w-full flex flex-col flex-1"
-          >
-            <TabsList className="w-full grid grid-cols-3 mb-2 bg-muted p-1 rounded-md">
-              <TabsTrigger 
-                value="download" 
-                className={`font-medium ${activeTab === 'download' 
-                  ? 'settings-tab-active' 
-                  : 'settings-tab-inactive'}`}
-              >
-                Download
-              </TabsTrigger>
-              <TabsTrigger 
-                value="app" 
-                className={`font-medium ${activeTab === 'app' 
-                  ? 'settings-tab-active' 
-                  : 'settings-tab-inactive'}`}
-              >
-                App
-              </TabsTrigger>
-              <TabsTrigger 
-                value="about" 
-                className={`font-medium ${activeTab === 'about' 
-                  ? 'settings-tab-active' 
-                  : 'settings-tab-inactive'}`}
-              >
-                About
-              </TabsTrigger>
-            </TabsList>
-            
-            <div className="flex-1 h-full" style={{ height: contentHeight }}>
-              <TabsContent value="download" className="h-full mt-1 data-[state=active]:flex data-[state=active]:flex-col">
-                <h3 className="text-lg font-fraunces mb-2">Download Settings</h3>
+        {/* Fixed layout with consistent spacing */}
+        <div className="flex flex-col h-full">
+          {/* Fixed tabs section */}
+          <div className="px-4 pt-2 pb-3">
+            <Tabs 
+              value={activeTab} 
+              onValueChange={setActiveTab}
+              className="w-full"
+            >
+              <TabsList className="w-full grid grid-cols-3 bg-muted p-1 rounded-md">
+                <TabsTrigger 
+                  value="download" 
+                  className={`font-medium ${activeTab === 'download' 
+                    ? 'settings-tab-active' 
+                    : 'settings-tab-inactive'}`}
+                >
+                  Download
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="app" 
+                  className={`font-medium ${activeTab === 'app' 
+                    ? 'settings-tab-active' 
+                    : 'settings-tab-inactive'}`}
+                >
+                  App
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="about" 
+                  className={`font-medium ${activeTab === 'about' 
+                    ? 'settings-tab-active' 
+                    : 'settings-tab-inactive'}`}
+                >
+                  About
+                </TabsTrigger>
+              </TabsList>
+            </Tabs>
+          </div>
+          
+          {/* Content area with fixed height and consistent padding */}
+          <div className="px-4 pb-4 flex-1 overflow-hidden">
+            <Tabs 
+              value={activeTab} 
+              onValueChange={setActiveTab}
+              className="w-full h-full"
+            >
+              <TabsContent value="download" className="h-full mt-0 data-[state=active]:flex data-[state=active]:flex-col">
+                <h3 className="text-lg font-fraunces mb-3">Download Settings</h3>
                 <div className="flex-1 overflow-hidden">
                   <ScrollArea className="h-full pr-4">
                     <DownloadSettings />
@@ -100,8 +112,8 @@ const SettingsDialog = ({
                 </div>
               </TabsContent>
               
-              <TabsContent value="app" className="h-full mt-1 data-[state=active]:flex data-[state=active]:flex-col">
-                <h3 className="text-lg font-fraunces mb-2">Application Settings</h3>
+              <TabsContent value="app" className="h-full mt-0 data-[state=active]:flex data-[state=active]:flex-col">
+                <h3 className="text-lg font-fraunces mb-3">Application Settings</h3>
                 <div className="flex-1 overflow-hidden">
                   <ScrollArea className="h-full pr-4">
                     <AppSettings 
@@ -112,7 +124,8 @@ const SettingsDialog = ({
                 </div>
               </TabsContent>
               
-              <TabsContent value="about" className="h-full mt-1 data-[state=active]:flex data-[state=active]:flex-col">
+              <TabsContent value="about" className="h-full mt-0 data-[state=active]:flex data-[state=active]:flex-col">
+                <h3 className="text-lg font-fraunces mb-3">About</h3>
                 <div className="flex-1 overflow-hidden">
                   <ScrollArea className="h-full pr-4">
                     <AboutSettings 
@@ -122,7 +135,7 @@ const SettingsDialog = ({
                 </div>
               </TabsContent>
             </div>
-          </Tabs>
+          </div>
         </div>
       </DialogContent>
     </Dialog>
