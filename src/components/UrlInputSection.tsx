@@ -1,11 +1,10 @@
-
-import { useState } from "react";
-import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
-import VideoUrlInput from "@/components/VideoUrlInput";
-import { getVideoDetails } from "@/utils/videoDetails";
-import { isDesktopEnvironment } from "@/utils/fileSystem";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { useState, useEffect, useRef } from 'react';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { toast } from 'sonner';
+import { ArrowRight, X, Loader2, FolderOpen } from 'lucide-react';
+import { validateUrl } from '@/utils/urlValidation';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface UrlInputSectionProps {
   onUrlSubmit: (url: string, videoInfo: any) => void;
@@ -13,10 +12,18 @@ interface UrlInputSectionProps {
 }
 
 const UrlInputSection = ({ onUrlSubmit, onOpenNewsletter }: UrlInputSectionProps) => {
-  const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
+  const [url, setUrl] = useState('');
+  const [isValidating, setIsValidating] = useState(false);
   const isMobile = useIsMobile();
-  
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // Automatically focus the input when the component mounts
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
+
   const handleUrlSubmit = async (url: string) => {
     setIsLoading(true);
     
@@ -49,7 +56,7 @@ const UrlInputSection = ({ onUrlSubmit, onOpenNewsletter }: UrlInputSectionProps
   };
 
   return (
-    <div className="flex-1 flex flex-col justify-center px-1 sm:px-0">
+    <div className="flex-1 flex flex-col justify-center px-1 sm:px-0 pt-[15%]">
       <div className="text-center mb-6">
         <h1 className="text-xl sm:text-2xl font-fraunces mb-2">
           Download Videos with Ease
