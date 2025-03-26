@@ -48,7 +48,8 @@ const FormatSelectionSection = ({
         <p className="text-xs text-muted-foreground truncate max-w-[280px] sm:max-w-full mx-auto">{videoUrl}</p>
       </div>
       
-      <div className="grid grid-cols-1 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Video Preview Column */}
         <div className="flex flex-col items-center p-2 sm:p-3 rounded-xl">
           <div className="w-full flex justify-center mb-3">
             {displayImage && (
@@ -79,6 +80,7 @@ const FormatSelectionSection = ({
           </div>
         </div>
         
+        {/* Format Selection Column */}
         <div className="flex">
           <VideoFormatSelector onSelect={onFormatSelect} />
         </div>

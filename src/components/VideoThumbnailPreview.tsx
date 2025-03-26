@@ -1,6 +1,5 @@
 
 import { useRef, useEffect, useState } from 'react';
-import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Play } from 'lucide-react';
 
 interface VideoThumbnailPreviewProps {
@@ -10,7 +9,6 @@ interface VideoThumbnailPreviewProps {
 
 export default function VideoThumbnailPreview({ src, alt = 'Video Thumbnail' }: VideoThumbnailPreviewProps) {
   const imgRef = useRef<HTMLImageElement>(null);
-  const [isLandscape, setIsLandscape] = useState<boolean | null>(null);
   const [imageError, setImageError] = useState(false);
   
   useEffect(() => {
@@ -18,9 +16,7 @@ export default function VideoThumbnailPreview({ src, alt = 'Video Thumbnail' }: 
     if (!img) return;
     
     const handleLoad = () => {
-      const { naturalWidth: w, naturalHeight: h } = img;
-      // Set landscape mode if width >= height
-      setIsLandscape(w >= h);
+      console.log("Image loaded successfully:", src);
     };
     
     const handleError = () => {

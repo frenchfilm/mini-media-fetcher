@@ -49,7 +49,7 @@ const VideoFormatSelector = ({ onSelect }: VideoFormatSelectorProps) => {
     <Card className="glass-panel p-3 rounded-xl w-full h-full flex flex-col animate-slide-up shadow-sm">
       <h3 className="text-sm font-medium text-foreground mb-3">Select Format & Quality</h3>
       
-      <div className="grid grid-cols-2 gap-3 flex-1">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 flex-1">
         {FORMATS.map((format) => (
           <Button
             key={format.id}
