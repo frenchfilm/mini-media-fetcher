@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -80,7 +79,7 @@ const SettingsDialog = ({
               </TabsTrigger>
             </TabsList>
             
-            <div className="h-[460px] overflow-y-auto">
+            <div className="h-[400px] overflow-y-auto">
               <TabsContent value="download" className="space-y-4 mt-2 h-full">
                 <h3 className="text-lg font-fraunces mb-4">Download Settings</h3>
                 <DownloadSettings />
