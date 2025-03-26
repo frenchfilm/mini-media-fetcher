@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
@@ -57,7 +56,7 @@ const FormatSelectionSection = ({
       </div>
       
       {isMobile ? (
-        // Mobile Layout - Stack everything vertically
+        // Mobile Layout - Streamlined version
         <div className="flex flex-col gap-3">
           <div className="text-center w-full mb-2 animate-slide-down">
             <h2 className="text-lg font-medium mb-1 mx-auto">{videoInfo.title}</h2>
@@ -92,10 +91,14 @@ const FormatSelectionSection = ({
             </Button>
           </div>
           
-          {/* Format selection - now just the dropdown */}
-          <div className="flex">
-            <VideoFormatSelector onSelect={onFormatSelect} />
+          {/* Format selection - now in a 2-column layout */}
+          <div className="grid grid-cols-2 gap-2 items-center">
+            <h3 className="text-sm font-medium text-foreground">Select Format & Quality</h3>
+            <div className="flex">
+              <VideoFormatSelector onSelect={onFormatSelect} />
+            </div>
           </div>
+          {/* No more content below this section */}
         </div>
       ) : (
         // Desktop Layout - Two column grid
