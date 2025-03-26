@@ -24,7 +24,7 @@ const AboutSettings = ({ licenseKey }: AboutSettingsProps) => {
     <div className="space-y-6">
       <div className="flex items-center justify-center mb-8">
         <div className="text-center">
-          <h3 className="text-xl font-medium mb-2">SoftBare Video Downloader</h3>
+          <h3 className="text-xl font-medium mb-2">VideoDownloader</h3>
           <p className="text-xs text-muted-foreground">Version {appVersion}</p>
           {isRegistered && (
             <div className="flex items-center justify-center text-green-500 mt-2">

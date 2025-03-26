@@ -1,5 +1,4 @@
-
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from 'sonner';
@@ -17,14 +16,6 @@ const VideoUrlInput = ({ onSubmit, isLoading = false, onFolderSelect }: VideoUrl
   const [url, setUrl] = useState('');
   const [isValidating, setIsValidating] = useState(false);
   const isMobile = useIsMobile();
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  // Automatically focus the input when the component mounts
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -50,9 +41,6 @@ const VideoUrlInput = ({ onSubmit, isLoading = false, onFolderSelect }: VideoUrl
 
   const clearInput = () => {
     setUrl('');
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
   };
 
   // Show loading state from either local validation or parent metadata loading
@@ -80,7 +68,6 @@ const VideoUrlInput = ({ onSubmit, isLoading = false, onFolderSelect }: VideoUrl
         
         <div className="rounded-md bg-white border border-secondary/70 flex items-center overflow-hidden flex-1 dark:bg-secondary dark:border-border">
           <Input
-            ref={inputRef}
             type="text"
             placeholder="Paste URL here"
             value={url}

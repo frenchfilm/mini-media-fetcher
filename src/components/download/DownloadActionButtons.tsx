@@ -23,7 +23,7 @@ const DownloadActionButtons = ({
         size="sm"
         disabled={status === 'preparing' || status === 'complete'}
         variant="highContrast"
-        className="flex-1 px-3 py-1 h-8 text-xs font-semibold dark:bg-primary dark:text-secondary dark:border-primary/70"
+        className="flex-1 px-3 py-1 h-8 text-xs font-semibold"
       >
         {status === 'paused' ? (
           <>
@@ -42,7 +42,7 @@ const DownloadActionButtons = ({
         variant="highContrast" 
         size="sm"
         onClick={onCancel}
-        className="flex-1 px-3 py-1 h-8 text-xs font-semibold dark:bg-primary dark:text-secondary dark:border-primary/70"
+        className="flex-1 px-3 py-1 h-8 text-xs font-semibold"
       >
         <X className="h-3.5 w-3.5 mr-1.5" />
         Cancel

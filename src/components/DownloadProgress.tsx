@@ -105,7 +105,7 @@ const DownloadProgress = ({ videoUrl, selectedFormat, onComplete, onCancel }: Do
         <Button 
           variant="highContrast"
           size="sm"
-          className="px-3 py-1 h-8 text-xs font-semibold dark:bg-primary dark:text-secondary dark:border-primary/70"
+          className="px-3 py-1 h-8 text-xs font-semibold"
           onClick={onCancel}
         >
           {isMobile ? "←" : "← Back"}

@@ -53,26 +53,19 @@ const VideoFormatSelector = ({ onSelect }: VideoFormatSelectorProps) => {
     }
   };
 
-  // Mobile version with dropdown only, no wrapper card
+  // Mobile version with dropdown
   if (isMobile) {
     return (
-      <div className="w-full">
+      <Card className="glass-panel p-3 rounded-xl w-full flex flex-col animate-slide-up shadow-sm">
+        <h3 className="text-sm font-medium text-foreground mb-3">Select Format & Quality</h3>
+        
         <Select value={selectedFormat} onValueChange={handleFormatChange}>
-          <SelectTrigger 
-            className="w-full border-2 border-primary/50 hover:border-primary light:border-primary/60 light:hover:border-primary/80" 
-          >
+          <SelectTrigger className="mb-2">
             <SelectValue placeholder="Select quality" />
           </SelectTrigger>
-          <SelectContent 
-            position="popper" 
-            sideOffset={5} 
-            align="start" 
-            className="max-h-[35vh] overflow-y-auto z-50 bg-popover shadow-lg"
-            avoidCollisions={true}
-            side="top"
-          >
+          <SelectContent>
             {FORMATS.map((format) => (
-              <SelectItem key={format.id} value={format.id} className="py-2">
+              <SelectItem key={format.id} value={format.id}>
                 <div className="flex flex-col">
                   <span className="font-medium">{format.quality}</span>
                   <span className="text-xs opacity-80">{format.resolution} • {format.fileSize}</span>
@@ -81,7 +74,23 @@ const VideoFormatSelector = ({ onSelect }: VideoFormatSelectorProps) => {
             ))}
           </SelectContent>
         </Select>
-      </div>
+        
+        {/* Display currently selected format for better UX */}
+        {selectedFormat && (
+          <div className="mt-2 p-2 bg-secondary/50 rounded-md text-sm">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="font-medium">{FORMATS.find(f => f.id === selectedFormat)?.quality}</p>
+                <p className="text-xs opacity-80">
+                  {FORMATS.find(f => f.id === selectedFormat)?.resolution} • 
+                  {FORMATS.find(f => f.id === selectedFormat)?.fileSize}
+                </p>
+              </div>
+              <Check className="h-4 w-4 text-primary" />
+            </div>
+          </div>
+        )}
+      </Card>
     );
   }
 

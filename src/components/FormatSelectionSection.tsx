@@ -1,9 +1,10 @@
+
 import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 import VideoFormatSelector, { VideoFormat } from "@/components/VideoFormatSelector";
 import VideoThumbnailPreview from "@/components/VideoThumbnailPreview";
-import { useIsMobile } from '@/hooks/use-mobile';
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface FormatSelectionSectionProps {
   videoInfo: any;
@@ -46,7 +47,7 @@ const FormatSelectionSection = ({
         <Button 
           variant="highContrast"
           size="sm"
-          className="px-3 py-1 h-8 text-xs font-semibold dark:bg-primary dark:text-secondary dark:border-primary/70"
+          className="px-3 py-1 h-8 text-xs font-semibold"
           onClick={onCancel}
         >
           {isMobile ? "←" : "← Back"}
@@ -56,7 +57,7 @@ const FormatSelectionSection = ({
       </div>
       
       {isMobile ? (
-        // Mobile Layout - Streamlined version
+        // Mobile Layout - Stack everything vertically
         <div className="flex flex-col gap-3">
           <div className="text-center w-full mb-2 animate-slide-down">
             <h2 className="text-lg font-medium mb-1 mx-auto">{videoInfo.title}</h2>
@@ -76,7 +77,7 @@ const FormatSelectionSection = ({
             <Button
               onClick={onStartDownload}
               variant="highContrast"
-              className="px-3 py-1 h-8 text-xs font-semibold dark:bg-primary dark:text-secondary dark:border-primary/70"
+              className="px-3 py-1 h-8 text-xs font-semibold"
             >
               <Download className="h-3 w-3 mr-1" />
               Start Download
@@ -85,20 +86,16 @@ const FormatSelectionSection = ({
             <Button
               variant="highContrast"
               onClick={onCancel}
-              className="px-3 py-1 h-8 text-xs font-semibold dark:bg-primary dark:text-secondary dark:border-primary/70"
+              className="px-3 py-1 h-8 text-xs font-semibold"
             >
               Cancel
             </Button>
           </div>
           
-          {/* Format selection - now in a 2-column layout */}
-          <div className="grid grid-cols-2 gap-2 items-center">
-            <h3 className="text-sm font-medium text-foreground">Select Format & Quality</h3>
-            <div className="flex">
-              <VideoFormatSelector onSelect={onFormatSelect} />
-            </div>
+          {/* Format selection below everything else */}
+          <div className="flex">
+            <VideoFormatSelector onSelect={onFormatSelect} />
           </div>
-          {/* No more content below this section */}
         </div>
       ) : (
         // Desktop Layout - Two column grid
@@ -123,7 +120,7 @@ const FormatSelectionSection = ({
               <Button
                 onClick={onStartDownload}
                 variant="highContrast"
-                className="px-3 py-1 h-8 text-xs font-semibold dark:bg-primary dark:text-secondary dark:border-primary/70"
+                className="px-3 py-1 h-8 text-xs font-semibold"
               >
                 <Download className="h-3 w-3 mr-1" />
                 Start Download
@@ -132,7 +129,7 @@ const FormatSelectionSection = ({
               <Button
                 variant="highContrast"
                 onClick={onCancel}
-                className="px-3 py-1 h-8 text-xs font-semibold dark:bg-primary dark:text-secondary dark:border-primary/70"
+                className="px-3 py-1 h-8 text-xs font-semibold"
               >
                 Cancel
               </Button>
