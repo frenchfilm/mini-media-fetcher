@@ -1,8 +1,15 @@
-
 import { useState, useEffect } from 'react';
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Check } from 'lucide-react';
+import { Check, ChevronDown } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export type VideoFormat = {
   id: string;
@@ -28,6 +35,7 @@ interface VideoFormatSelectorProps {
 
 const VideoFormatSelector = ({ onSelect }: VideoFormatSelectorProps) => {
   const [selectedFormat, setSelectedFormat] = useState<string>(FORMATS[0].id);
+  const isMobile = useIsMobile();
 
   // Select high quality format by default
   useEffect(() => {
@@ -45,11 +53,44 @@ const VideoFormatSelector = ({ onSelect }: VideoFormatSelectorProps) => {
     }
   };
 
+  // Mobile version with dropdown only, no wrapper card
+  if (isMobile) {
+    return (
+      <div className="w-full">
+        <Select value={selectedFormat} onValueChange={handleFormatChange}>
+          <SelectTrigger 
+            className="w-full border-2 border-primary/50 hover:border-primary light:border-primary/60 light:hover:border-primary/80" 
+          >
+            <SelectValue placeholder="Select quality" />
+          </SelectTrigger>
+          <SelectContent 
+            position="popper" 
+            sideOffset={5} 
+            align="start" 
+            className="max-h-[35vh] overflow-y-auto z-50 bg-popover shadow-lg"
+            avoidCollisions={true}
+            side="top"
+          >
+            {FORMATS.map((format) => (
+              <SelectItem key={format.id} value={format.id} className="py-2">
+                <div className="flex flex-col">
+                  <span className="font-medium">{format.quality}</span>
+                  <span className="text-xs opacity-80">{format.resolution} • {format.fileSize}</span>
+                </div>
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+    );
+  }
+
+  // Desktop version with grid layout (unchanged)
   return (
     <Card className="glass-panel p-3 rounded-xl w-full h-full flex flex-col animate-slide-up shadow-sm">
       <h3 className="text-sm font-medium text-foreground mb-3">Select Format & Quality</h3>
       
-      <div className="grid grid-cols-2 gap-3 flex-1">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 flex-1">
         {FORMATS.map((format) => (
           <Button
             key={format.id}

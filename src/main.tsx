@@ -17,11 +17,11 @@ rootElement.style.margin = "0 auto"; // This centers the element horizontally
 rootElement.style.left = "0";
 rootElement.style.right = "0";
 
-// Align the app to the top with some padding and set body background to black
+// Align the app to the top with padding and set body background to black
 document.body.style.display = "flex";
 document.body.style.justifyContent = "center";
-document.body.style.alignItems = "flex-start"; // Changed from center to flex-start
-document.body.style.paddingTop = "2rem"; // Add some padding at the top
+document.body.style.alignItems = "flex-start"; // Align to top
+document.body.style.paddingTop = "1rem"; // Reduced padding to provide more space
 document.body.style.minHeight = "100vh";
 document.body.style.margin = "0";
 document.body.style.padding = "0";
@@ -35,14 +35,33 @@ window.addEventListener('resize', () => {
   if (windowWidth < 800) {
     rootElement.style.width = "100%";
     document.documentElement.classList.add('mobile-view');
+    
+    // Set more conservative max-height for popover elements on mobile to prevent them from extending beyond viewport
+    document.documentElement.style.setProperty('--radix-popover-content-available-height', '35vh');
+    document.documentElement.style.setProperty('--radix-select-content-available-height', '35vh');
+    
+    // Add styles to ensure dropdowns stay within container
+    document.documentElement.style.setProperty('--radix-popover-content-transform-origin', 'var(--radix-popper-transform-origin)');
+    document.documentElement.style.setProperty('--radix-select-content-transform-origin', 'var(--radix-popper-transform-origin)');
+    document.documentElement.style.setProperty('--radix-dropdown-menu-content-transform-origin', 'var(--radix-popper-transform-origin)');
   } else {
     rootElement.style.width = "800px";
     document.documentElement.classList.remove('mobile-view');
+    
+    // Reset height variables for desktop
+    document.documentElement.style.removeProperty('--radix-popover-content-available-height');
+    document.documentElement.style.removeProperty('--radix-select-content-available-height');
+    document.documentElement.style.removeProperty('--radix-popover-content-transform-origin');
+    document.documentElement.style.removeProperty('--radix-select-content-transform-origin');
+    document.documentElement.style.removeProperty('--radix-dropdown-menu-content-transform-origin');
   }
 });
+
+// Define styles to ensure dialogs and other fixed elements respect app boundaries
+document.documentElement.style.setProperty('--app-width', '800px');
+document.documentElement.style.setProperty('--app-height', '600px');
 
 // Trigger resize event on load to set initial state
 window.dispatchEvent(new Event('resize'));
 
 createRoot(rootElement).render(<App />);
-

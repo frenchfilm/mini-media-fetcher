@@ -13,3 +13,13 @@
     @apply bg-[hsl(var(--tab-inactive))] text-foreground hover:bg-muted/80 font-medium;
   }
 }
+
+/* Tab content container styles */
+.settings-tab-content {
+  @apply mt-0 h-full;
+}
+
+/* Tab content header styles */
+.settings-tab-header {
+  @apply text-lg font-medium mb-3;
+}

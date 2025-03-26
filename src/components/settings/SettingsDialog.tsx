@@ -6,6 +6,8 @@ import DownloadSettings from "./DownloadSettings";
 import AppSettings from "./AppSettings";
 import AboutSettings from "./AboutSettings";
 import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface SettingsDialogProps {
   open: boolean;
@@ -21,15 +23,23 @@ const SettingsDialog = ({
   onLicenseKeyChange
 }: SettingsDialogProps) => {
   const [activeTab, setActiveTab] = useState("download");
+  const isMobile = useIsMobile();
   
   const handleSave = () => {
     onOpenChange(false);
   };
+
+  // Fixed dialog content height for all tabs
+  const dialogHeight = isMobile ? "540px" : "570px";
   
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-xl p-0 overflow-hidden border-none bg-background">
-        <div className="flex justify-between items-center p-4 border-b">
+      <DialogContent 
+        className="sm:max-w-xl p-0 overflow-hidden border-none bg-background"
+        style={{ height: dialogHeight }}
+      >
+        {/* Fixed header section - absolute positioning */}
+        <div className="absolute top-0 left-0 right-0 z-10 flex justify-between items-center p-3 border-b w-full bg-background">
           <Button 
             variant="highContrast" 
             className="dark:bg-primary dark:text-secondary dark:border-primary/70"
@@ -47,13 +57,14 @@ const SettingsDialog = ({
           </Button>
         </div>
         
-        <div className="p-6">
+        {/* Fixed tabs section - absolute positioning */}
+        <div className="absolute top-16 left-0 right-0 z-10 px-4 py-3 bg-background">
           <Tabs 
             value={activeTab} 
             onValueChange={setActiveTab}
             className="w-full"
           >
-            <TabsList className="w-full grid grid-cols-3 mb-6 bg-muted p-1 rounded-md">
+            <TabsList className="w-full grid grid-cols-3 bg-muted p-1 rounded-md">
               <TabsTrigger 
                 value="download" 
                 className={`font-medium ${activeTab === 'download' 
@@ -79,27 +90,47 @@ const SettingsDialog = ({
                 About
               </TabsTrigger>
             </TabsList>
+          </Tabs>
+        </div>
+        
+        {/* Content area with padding to account for fixed header and tabs */}
+        <div className="pt-32 px-4 pb-4 h-full overflow-hidden">
+          <Tabs 
+            value={activeTab} 
+            onValueChange={setActiveTab}
+            className="w-full h-full"
+          >
+            <TabsContent value="download" className="h-full mt-0 data-[state=active]:flex data-[state=active]:flex-col">
+              <h3 className="text-lg font-fraunces mb-3">Download Settings</h3>
+              <div className="flex-1 overflow-hidden">
+                <ScrollArea className="h-full pr-4">
+                  <DownloadSettings />
+                </ScrollArea>
+              </div>
+            </TabsContent>
             
-            <div className="min-h-[400px]">
-              <TabsContent value="download" className="space-y-4 mt-2">
-                <h3 className="text-lg font-fraunces mb-4">Download Settings</h3>
-                <DownloadSettings />
-              </TabsContent>
-              
-              <TabsContent value="app" className="space-y-4 mt-2">
-                <h3 className="text-lg font-fraunces mb-4">Application Settings</h3>
-                <AppSettings 
-                  licenseKey={licenseKey}
-                  onLicenseKeyChange={onLicenseKeyChange}
-                />
-              </TabsContent>
-              
-              <TabsContent value="about" className="mt-2">
-                <AboutSettings 
-                  licenseKey={licenseKey}
-                />
-              </TabsContent>
-            </div>
+            <TabsContent value="app" className="h-full mt-0 data-[state=active]:flex data-[state=active]:flex-col">
+              <h3 className="text-lg font-fraunces mb-3">Application Settings</h3>
+              <div className="flex-1 overflow-hidden">
+                <ScrollArea className="h-full pr-4">
+                  <AppSettings 
+                    licenseKey={licenseKey}
+                    onLicenseKeyChange={onLicenseKeyChange}
+                  />
+                </ScrollArea>
+              </div>
+            </TabsContent>
+            
+            <TabsContent value="about" className="h-full mt-0 data-[state=active]:flex data-[state=active]:flex-col">
+              <h3 className="text-lg font-fraunces mb-3">About</h3>
+              <div className="flex-1 overflow-hidden">
+                <ScrollArea className="h-full pr-4">
+                  <AboutSettings 
+                    licenseKey={licenseKey}
+                  />
+                </ScrollArea>
+              </div>
+            </TabsContent>
           </Tabs>
         </div>
       </DialogContent>

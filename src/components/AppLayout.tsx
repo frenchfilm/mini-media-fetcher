@@ -31,7 +31,11 @@ const AppLayout = ({
   };
 
   return (
-    <div className={`w-full ${isMobile ? 'min-w-[300px]' : 'w-[800px]'} min-h-[600px] bg-background flex flex-col relative p-2 sm:p-6`}>
+    <div 
+      className={`w-full ${isMobile ? 'min-w-[300px]' : 'w-[800px]'} min-h-[600px] bg-background flex flex-col relative p-2 sm:p-6`} 
+      id="app-container"
+      style={{ position: 'relative', overflow: 'hidden' }}
+    >
       {/* Body Section with proper padding */}
       <main className="flex-1 w-full overflow-auto mb-2">
         {children}
