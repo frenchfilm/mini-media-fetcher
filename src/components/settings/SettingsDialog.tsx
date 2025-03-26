@@ -6,6 +6,7 @@ import DownloadSettings from "./DownloadSettings";
 import AppSettings from "./AppSettings";
 import AboutSettings from "./AboutSettings";
 import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface SettingsDialogProps {
   open: boolean;
@@ -80,24 +81,30 @@ const SettingsDialog = ({
               </TabsTrigger>
             </TabsList>
             
-            <div className="h-[400px] overflow-y-auto pb-2">
+            <div className="h-[400px]">
               <TabsContent value="download" className="space-y-3 mt-1 h-full">
                 <h3 className="text-lg font-fraunces mb-2">Download Settings</h3>
-                <DownloadSettings />
+                <ScrollArea className="h-[360px] pr-4">
+                  <DownloadSettings />
+                </ScrollArea>
               </TabsContent>
               
               <TabsContent value="app" className="space-y-3 mt-1 h-full">
                 <h3 className="text-lg font-fraunces mb-2">Application Settings</h3>
-                <AppSettings 
-                  licenseKey={licenseKey}
-                  onLicenseKeyChange={onLicenseKeyChange}
-                />
+                <ScrollArea className="h-[360px] pr-4">
+                  <AppSettings 
+                    licenseKey={licenseKey}
+                    onLicenseKeyChange={onLicenseKeyChange}
+                  />
+                </ScrollArea>
               </TabsContent>
               
               <TabsContent value="about" className="mt-1 h-full">
-                <AboutSettings 
-                  licenseKey={licenseKey}
-                />
+                <ScrollArea className="h-[370px] pr-4">
+                  <AboutSettings 
+                    licenseKey={licenseKey}
+                  />
+                </ScrollArea>
               </TabsContent>
             </div>
           </Tabs>
