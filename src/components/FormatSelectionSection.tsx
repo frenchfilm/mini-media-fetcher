@@ -46,7 +46,7 @@ const FormatSelectionSection = ({
         <Button 
           variant="highContrast"
           size="sm"
-          className="px-3 py-1 h-8 text-xs font-semibold"
+          className="px-3 py-1 h-8 text-xs font-semibold dark:bg-primary dark:text-secondary dark:border-primary/70"
           onClick={onCancel}
         >
           {isMobile ? "←" : "← Back"}
@@ -76,7 +76,7 @@ const FormatSelectionSection = ({
             <Button
               onClick={onStartDownload}
               variant="highContrast"
-              className="px-3 py-1 h-8 text-xs font-semibold"
+              className="px-3 py-1 h-8 text-xs font-semibold dark:bg-primary dark:text-secondary dark:border-primary/70"
             >
               <Download className="h-3 w-3 mr-1" />
               Start Download
@@ -85,7 +85,7 @@ const FormatSelectionSection = ({
             <Button
               variant="highContrast"
               onClick={onCancel}
-              className="px-3 py-1 h-8 text-xs font-semibold"
+              className="px-3 py-1 h-8 text-xs font-semibold dark:bg-primary dark:text-secondary dark:border-primary/70"
             >
               Cancel
             </Button>
@@ -123,7 +123,7 @@ const FormatSelectionSection = ({
               <Button
                 onClick={onStartDownload}
                 variant="highContrast"
-                className="px-3 py-1 h-8 text-xs font-semibold"
+                className="px-3 py-1 h-8 text-xs font-semibold dark:bg-primary dark:text-secondary dark:border-primary/70"
               >
                 <Download className="h-3 w-3 mr-1" />
                 Start Download
@@ -132,7 +132,7 @@ const FormatSelectionSection = ({
               <Button
                 variant="highContrast"
                 onClick={onCancel}
-                className="px-3 py-1 h-8 text-xs font-semibold"
+                className="px-3 py-1 h-8 text-xs font-semibold dark:bg-primary dark:text-secondary dark:border-primary/70"
               >
                 Cancel
               </Button>
