@@ -1,6 +1,7 @@
 
 import { useRef, useEffect, useState } from 'react';
 import { Play } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface VideoThumbnailPreviewProps {
   src: string;
@@ -10,6 +11,7 @@ interface VideoThumbnailPreviewProps {
 export default function VideoThumbnailPreview({ src, alt = 'Video Thumbnail' }: VideoThumbnailPreviewProps) {
   const imgRef = useRef<HTMLImageElement>(null);
   const [imageError, setImageError] = useState(false);
+  const isMobile = useIsMobile();
   
   useEffect(() => {
     const img = imgRef.current;
@@ -42,7 +44,7 @@ export default function VideoThumbnailPreview({ src, alt = 'Video Thumbnail' }: 
   console.log("VideoThumbnailPreview rendering with src:", src);
   
   return (
-    <div className="mx-auto w-[250px] h-[200px] bg-black overflow-hidden rounded-xl flex items-center justify-center relative">
+    <div className={`mx-auto ${isMobile ? 'w-[200px] h-[160px]' : 'w-[250px] h-[200px]'} bg-black overflow-hidden rounded-xl flex items-center justify-center relative`}>
       <div className="relative w-full h-full">
         {!imageError && (
           <div className="w-full h-full flex items-center justify-center">
@@ -70,3 +72,4 @@ export default function VideoThumbnailPreview({ src, alt = 'Video Thumbnail' }: 
     </div>
   );
 }
+
