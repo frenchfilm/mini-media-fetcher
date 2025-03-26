@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { Mail, Settings, Hand } from "lucide-react";
+import { Mail, Settings } from "lucide-react";
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useTheme } from '@/components/ThemeProvider';
 
@@ -81,7 +81,11 @@ const AppFooter: React.FC<AppFooterProps> = ({
             onClick={onOpenNewsletter}
             className="h-9 w-9 rounded-full app-wide-button-high-contrast"
           >
-            <Hand className="h-5 w-5" />
+            <img 
+              src="/lovable-uploads/HandWave.svg" 
+              alt="Subscribe" 
+              className="h-5 w-5" 
+            />
             <span className="sr-only">Subscriptions</span>
           </Button>
 
