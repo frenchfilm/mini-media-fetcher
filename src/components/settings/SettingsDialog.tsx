@@ -36,7 +36,7 @@ const SettingsDialog = ({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent 
-        className="sm:max-w-xl p-0 overflow-hidden border-none bg-background"
+        className="sm:max-w-xl p-0 overflow-hidden border-none bg-background top-0 translate-y-0"
         style={{ height: dialogHeight }}
       >
         <div className="flex justify-between items-center p-3 border-b">
