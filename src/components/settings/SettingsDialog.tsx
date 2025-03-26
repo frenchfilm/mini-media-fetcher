@@ -134,7 +134,7 @@ const SettingsDialog = ({
                   </ScrollArea>
                 </div>
               </TabsContent>
-            </Tabs>
+            </div>
           </div>
         </div>
       </DialogContent>
