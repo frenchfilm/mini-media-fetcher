@@ -62,7 +62,13 @@ const VideoFormatSelector = ({ onSelect }: VideoFormatSelectorProps) => {
           <SelectTrigger className="w-full">
             <SelectValue placeholder="Select quality" />
           </SelectTrigger>
-          <SelectContent position="popper" sideOffset={5} align="start" className="max-h-[50vh] overflow-y-auto z-50 bg-popover shadow-lg">
+          <SelectContent 
+            position="popper" 
+            sideOffset={5} 
+            align="start" 
+            className="max-h-[35vh] overflow-y-auto z-50 bg-popover shadow-lg"
+            avoidCollisions={true}
+          >
             {FORMATS.map((format) => (
               <SelectItem key={format.id} value={format.id} className="py-2">
                 <div className="flex flex-col">
