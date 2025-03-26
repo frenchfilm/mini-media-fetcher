@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { Mail, Settings } from "lucide-react";
+import { Mail, Settings, Megaphone } from "lucide-react";
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useTheme } from '@/components/ThemeProvider';
 
@@ -80,11 +80,7 @@ const AppFooter: React.FC<AppFooterProps> = ({
             onClick={onOpenNewsletter}
             className="h-9 w-9 rounded-full app-wide-button-high-contrast"
           >
-            <img 
-              src="/lovable-uploads/HandWave.svg" 
-              alt="Subscribe" 
-              className={`h-5 w-5 ${theme === 'dark' ? 'invert' : ''}`} 
-            />
+            <Megaphone className="h-5 w-5" />
             <span className="sr-only">Subscriptions</span>
           </Button>
 
