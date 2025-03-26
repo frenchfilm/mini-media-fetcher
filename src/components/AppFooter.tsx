@@ -34,11 +34,17 @@ const AppFooter: React.FC<AppFooterProps> = ({
     if (isMobile) {
       // Switch to desktop view
       document.documentElement.classList.remove('mobile-view');
+      console.log("Switching to desktop view");
     } else {
       // Switch to mobile view
       document.documentElement.classList.add('mobile-view');
+      console.log("Switching to mobile view");
     }
-    // Trigger resize to update UI components
+    
+    // Fire a custom event to ensure all listeners know about the change
+    document.documentElement.dispatchEvent(new CustomEvent('classChange'));
+    
+    // Also trigger resize to update UI components
     window.dispatchEvent(new Event('resize'));
   };
 

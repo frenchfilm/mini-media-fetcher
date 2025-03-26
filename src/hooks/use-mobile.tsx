@@ -18,18 +18,21 @@ export function useIsMobile() {
     setIsMobile(checkMobileView());
     
     // Listen for both window resize and a custom mobile-view-change event
-    const handleResize = () => {
+    const handleChange = () => {
       setIsMobile(checkMobileView());
+      console.log("Mobile state updated:", checkMobileView());
     };
     
-    window.addEventListener("resize", handleResize);
-    document.documentElement.addEventListener("classChange", handleResize);
+    window.addEventListener("resize", handleChange);
+    
+    // Listen for the custom classChange event
+    document.documentElement.addEventListener("classChange", handleChange);
     
     // Watch for class changes on documentElement 
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (mutation.attributeName === 'class') {
-          setIsMobile(checkMobileView());
+          handleChange();
         }
       });
     });
@@ -37,8 +40,8 @@ export function useIsMobile() {
     observer.observe(document.documentElement, { attributes: true });
     
     return () => {
-      window.removeEventListener("resize", handleResize);
-      document.documentElement.removeEventListener("classChange", handleResize);
+      window.removeEventListener("resize", handleChange);
+      document.documentElement.removeEventListener("classChange", handleChange);
       observer.disconnect();
     };
   }, []);

@@ -27,14 +27,14 @@ document.body.style.margin = "0";
 document.body.style.padding = "0";
 document.body.style.backgroundColor = "black"; // Set body background to black
 
-// Allow the app to maintain aspect ratio and fit responsive windows
-window.addEventListener('resize', () => {
+// Handle mobile view toggle
+const handleViewModeChange = () => {
   const windowWidth = window.innerWidth;
+  const isMobileView = document.documentElement.classList.contains('mobile-view');
   
   // Adjust for different window sizes while maintaining minimum and maximum constraints
-  if (windowWidth < 800) {
+  if (windowWidth < 800 || isMobileView) {
     rootElement.style.width = "100%";
-    document.documentElement.classList.add('mobile-view');
     
     // Set more conservative max-height for popover elements on mobile to prevent them from extending beyond viewport
     document.documentElement.style.setProperty('--radix-popover-content-available-height', '35vh');
@@ -46,7 +46,6 @@ window.addEventListener('resize', () => {
     document.documentElement.style.setProperty('--radix-dropdown-menu-content-transform-origin', 'var(--radix-popper-transform-origin)');
   } else {
     rootElement.style.width = "800px";
-    document.documentElement.classList.remove('mobile-view');
     
     // Reset height variables for desktop
     document.documentElement.style.removeProperty('--radix-popover-content-available-height');
@@ -55,7 +54,13 @@ window.addEventListener('resize', () => {
     document.documentElement.style.removeProperty('--radix-select-content-transform-origin');
     document.documentElement.style.removeProperty('--radix-dropdown-menu-content-transform-origin');
   }
-});
+};
+
+// Attach resize event listener
+window.addEventListener('resize', handleViewModeChange);
+
+// Also listen for custom classChange event for manual view mode toggling
+document.documentElement.addEventListener('classChange', handleViewModeChange);
 
 // Define styles to ensure dialogs and other fixed elements respect app boundaries
 document.documentElement.style.setProperty('--app-width', '800px');
