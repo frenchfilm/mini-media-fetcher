@@ -80,7 +80,7 @@ const AppFooter: React.FC<AppFooterProps> = ({
             onClick={onOpenNewsletter}
             className="h-9 w-9 rounded-full app-wide-button-high-contrast"
           >
-            <Megaphone className="h-5 w-5" />
+            <Megaphone className="h-6 w-6" />
             <span className="sr-only">Subscriptions</span>
           </Button>
 
