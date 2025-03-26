@@ -80,13 +80,13 @@ const SettingsDialog = ({
               </TabsTrigger>
             </TabsList>
             
-            <div className="min-h-[400px]">
-              <TabsContent value="download" className="space-y-4 mt-2">
+            <div className="h-[460px] overflow-y-auto">
+              <TabsContent value="download" className="space-y-4 mt-2 h-full">
                 <h3 className="text-lg font-fraunces mb-4">Download Settings</h3>
                 <DownloadSettings />
               </TabsContent>
               
-              <TabsContent value="app" className="space-y-4 mt-2">
+              <TabsContent value="app" className="space-y-4 mt-2 h-full">
                 <h3 className="text-lg font-fraunces mb-4">Application Settings</h3>
                 <AppSettings 
                   licenseKey={licenseKey}
@@ -94,7 +94,7 @@ const SettingsDialog = ({
                 />
               </TabsContent>
               
-              <TabsContent value="about" className="mt-2">
+              <TabsContent value="about" className="mt-2 h-full">
                 <AboutSettings 
                   licenseKey={licenseKey}
                 />
