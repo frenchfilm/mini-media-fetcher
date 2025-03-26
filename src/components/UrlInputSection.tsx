@@ -6,13 +6,21 @@ import VideoUrlInput from "@/components/VideoUrlInput";
 import { getVideoDetails } from "@/utils/videoDetails";
 import { isDesktopEnvironment } from "@/utils/fileSystem";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { VideoFormat } from "@/components/VideoFormatSelector";
 
 interface UrlInputSectionProps {
   onUrlSubmit: (url: string, videoInfo: any) => void;
   onOpenNewsletter: () => void;
+  onFormatSelect?: (format: VideoFormat) => void;
+  onOpenHistory?: () => void;
 }
 
-const UrlInputSection = ({ onUrlSubmit, onOpenNewsletter }: UrlInputSectionProps) => {
+const UrlInputSection = ({ 
+  onUrlSubmit, 
+  onOpenNewsletter, 
+  onFormatSelect,
+  onOpenHistory 
+}: UrlInputSectionProps) => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const isMobile = useIsMobile();
@@ -66,6 +74,8 @@ const UrlInputSection = ({ onUrlSubmit, onOpenNewsletter }: UrlInputSectionProps
         onSubmit={handleUrlSubmit} 
         isLoading={isLoading} 
         onFolderSelect={handleFolderSelect}
+        onFormatSelect={onFormatSelect}
+        onOpenHistory={onOpenHistory}
       />
     </div>
   );

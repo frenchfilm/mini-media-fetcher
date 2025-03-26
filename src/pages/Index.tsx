@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { VideoFormat } from "@/components/VideoFormatSelector";
@@ -8,10 +9,13 @@ import NewsletterDialog from "@/components/NewsletterDialog";
 import ContactDialog from "@/components/ContactDialog";
 import AppLayout from "@/components/AppLayout";
 import SettingsDialog from "@/components/settings/SettingsDialog";
+import DownloadHistory from "@/components/DownloadHistory";
+import { Button } from "@/components/ui/button";
 import { 
   getVideoFilePath, 
   ensureDownloadDirectoryExists, 
   isDesktopEnvironment,
+  openFileLocation,
 } from "@/utils/videoUtils";
 import { useDownloadHistory } from "@/hooks/useDownloadHistory";
 
@@ -19,6 +23,7 @@ enum AppState {
   INPUT_URL = "input_url",
   SELECT_FORMAT = "select_format",
   DOWNLOADING = "downloading",
+  HISTORY = "history",
 }
 
 const Index = () => {
@@ -26,6 +31,7 @@ const Index = () => {
   const [videoUrl, setVideoUrl] = useState<string>("");
   const [videoInfo, setVideoInfo] = useState<any>(null);
   const [selectedFormat, setSelectedFormat] = useState<VideoFormat | null>(null);
+  const [defaultFormat, setDefaultFormat] = useState<VideoFormat | null>(null);
   const [newsletterOpen, setNewsletterOpen] = useState<boolean>(false);
   const [contactOpen, setContactOpen] = useState<boolean>(false);
   const [settingsOpen, setSettingsOpen] = useState<boolean>(false);
@@ -56,12 +62,25 @@ const Index = () => {
   const handleUrlSubmit = (url: string, videoDetails: any) => {
     setVideoUrl(url);
     setVideoInfo(videoDetails);
-    setAppState(AppState.SELECT_FORMAT);
-    toast.success("Video information retrieved successfully");
+    
+    // If there's a default format selected for the session, use it automatically
+    if (defaultFormat) {
+      setSelectedFormat(defaultFormat);
+      setAppState(AppState.SELECT_FORMAT);
+      toast.success("Video information retrieved successfully");
+    } else {
+      setAppState(AppState.SELECT_FORMAT);
+      toast.success("Video information retrieved successfully");
+    }
   };
 
   const handleFormatSelect = (format: VideoFormat) => {
     setSelectedFormat(format);
+  };
+  
+  const handleDefaultFormatSelect = (format: VideoFormat) => {
+    setDefaultFormat(format);
+    toast.success(`Default format set to ${format.quality} (${format.resolution})`);
   };
 
   const handleStartDownload = () => {
@@ -116,6 +135,23 @@ const Index = () => {
   const handleOpenContact = () => {
     setContactOpen(true);
   };
+  
+  const handleOpenHistory = () => {
+    setAppState(AppState.HISTORY);
+  };
+  
+  const handleBackFromHistory = () => {
+    setAppState(AppState.INPUT_URL);
+  };
+  
+  const handleOpenFile = (item: any) => {
+    if (isDesktopEnvironment()) {
+      openFileLocation(item.filePath || '');
+      toast.success(`Opening file location: ${item.title}`);
+    } else {
+      toast.info("This feature is only available in desktop environments.");
+    }
+  };
 
   return (
     <>
@@ -129,6 +165,8 @@ const Index = () => {
             <UrlInputSection 
               onUrlSubmit={handleUrlSubmit} 
               onOpenNewsletter={handleOpenNewsletter}
+              onFormatSelect={handleDefaultFormatSelect}
+              onOpenHistory={handleOpenHistory}
             />
           )}
           
@@ -150,6 +188,26 @@ const Index = () => {
               onComplete={handleDownloadComplete}
               onCancel={handleCancelDownload}
             />
+          )}
+          
+          {appState === AppState.HISTORY && (
+            <div className="p-4 h-full">
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-xl font-semibold">Download History</h2>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleBackFromHistory}
+                >
+                  Back
+                </Button>
+              </div>
+              <DownloadHistory 
+                downloads={downloads} 
+                onClearHistory={clearHistory}
+                onOpenFile={handleOpenFile}
+              />
+            </div>
           )}
         </div>
         
