@@ -17,7 +17,7 @@ rootElement.style.margin = "0 auto"; // This centers the element horizontally
 rootElement.style.left = "0";
 rootElement.style.right = "0";
 
-// Align the app to the top with some padding
+// Align the app to the top with some padding and set body background to black
 document.body.style.display = "flex";
 document.body.style.justifyContent = "center";
 document.body.style.alignItems = "flex-start"; // Changed from center to flex-start
@@ -25,6 +25,7 @@ document.body.style.paddingTop = "2rem"; // Add some padding at the top
 document.body.style.minHeight = "100vh";
 document.body.style.margin = "0";
 document.body.style.padding = "0";
+document.body.style.backgroundColor = "black"; // Set body background to black
 
 // Allow the app to maintain aspect ratio and fit responsive windows
 window.addEventListener('resize', () => {
@@ -44,3 +45,4 @@ window.addEventListener('resize', () => {
 window.dispatchEvent(new Event('resize'));
 
 createRoot(rootElement).render(<App />);
+
