@@ -68,7 +68,6 @@ const AppFooter: React.FC<AppFooterProps> = ({
         {/* Right Column - Buttons */}
         <div className={`${isMobile ? 'w-full' : 'w-1/2'} flex items-center ${isMobile ? 'justify-center' : 'justify-end'} gap-2`}>
           <Button 
-            variant="ghost"
             size="icon"
             onClick={onContactClick}
             className="h-9 w-9 rounded-full app-wide-button-high-contrast"
@@ -88,7 +87,6 @@ const AppFooter: React.FC<AppFooterProps> = ({
           </Button>
 
           <Button
-            variant="ghost"
             size="icon"
             onClick={handleOpenSettings}
             className="h-9 w-9 rounded-full app-wide-button-high-contrast"

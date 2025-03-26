@@ -17,7 +17,7 @@ const buttonVariants = cva(
           "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
+        ghost: "", // Removed color control from ghost variant
         link: "text-primary underline-offset-4 hover:underline",
         contrast: "bg-primary text-white hover:bg-primary/90 border border-primary/80 font-semibold",
         highContrast: "bg-primary text-white hover:bg-primary/90 border border-primary/80 font-semibold",
