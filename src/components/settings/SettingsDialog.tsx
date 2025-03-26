@@ -7,7 +7,6 @@ import AppSettings from "./AppSettings";
 import AboutSettings from "./AboutSettings";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 interface SettingsDialogProps {
   open: boolean;
@@ -23,20 +22,14 @@ const SettingsDialog = ({
   onLicenseKeyChange
 }: SettingsDialogProps) => {
   const [activeTab, setActiveTab] = useState("download");
-  const isMobile = useIsMobile();
   
   const handleSave = () => {
     onOpenChange(false);
   };
-
-  // Adjust the dialog content height based on viewport
-  const tabContentHeight = isMobile ? "350px" : "400px";
   
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent 
-        className="sm:max-w-xl p-0 overflow-hidden border-none bg-background max-h-[85vh]"
-      >
+      <DialogContent className="sm:max-w-xl p-0 overflow-hidden border-none bg-background">
         <div className="flex justify-between items-center p-3 border-b">
           <Button 
             variant="highContrast" 
@@ -88,35 +81,29 @@ const SettingsDialog = ({
               </TabsTrigger>
             </TabsList>
             
-            <div className="h-auto">
+            <div className="h-[400px]">
               <TabsContent value="download" className="space-y-3 mt-1 h-full">
                 <h3 className="text-lg font-fraunces mb-2">Download Settings</h3>
-                <ScrollArea className={`h-[${tabContentHeight}]`}>
-                  <div className="pr-4">
-                    <DownloadSettings />
-                  </div>
+                <ScrollArea className="h-[360px] pr-4">
+                  <DownloadSettings />
                 </ScrollArea>
               </TabsContent>
               
               <TabsContent value="app" className="space-y-3 mt-1 h-full">
                 <h3 className="text-lg font-fraunces mb-2">Application Settings</h3>
-                <ScrollArea className={`h-[${tabContentHeight}]`}>
-                  <div className="pr-4">
-                    <AppSettings 
-                      licenseKey={licenseKey}
-                      onLicenseKeyChange={onLicenseKeyChange}
-                    />
-                  </div>
+                <ScrollArea className="h-[360px] pr-4">
+                  <AppSettings 
+                    licenseKey={licenseKey}
+                    onLicenseKeyChange={onLicenseKeyChange}
+                  />
                 </ScrollArea>
               </TabsContent>
               
               <TabsContent value="about" className="mt-1 h-full">
-                <ScrollArea className={`h-[${tabContentHeight}]`}>
-                  <div className="pr-4">
-                    <AboutSettings 
-                      licenseKey={licenseKey}
-                    />
-                  </div>
+                <ScrollArea className="h-[370px] pr-4">
+                  <AboutSettings 
+                    licenseKey={licenseKey}
+                  />
                 </ScrollArea>
               </TabsContent>
             </div>
