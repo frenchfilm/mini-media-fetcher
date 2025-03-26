@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { MessageSquare, Mail, Settings } from "lucide-react";
+import { Mail, Settings } from "lucide-react";
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useTheme } from '@/components/ThemeProvider';
 
@@ -68,13 +68,13 @@ const AppFooter: React.FC<AppFooterProps> = ({
         {/* Right Column - Buttons */}
         <div className={`${isMobile ? 'w-full' : 'w-1/2'} flex items-center ${isMobile ? 'justify-center' : 'justify-end'} gap-2`}>
           <Button 
-            variant="contrast" 
+            variant="ghost"
+            size="icon"
             onClick={onContactClick}
-            className="app-wide-button-high-contrast font-semibold"
-            size="sm"
+            className="h-9 w-9 rounded-full app-wide-button-high-contrast"
           >
-            <MessageSquare className="h-3 w-3 mr-1" />
-            <span className="text-xs">Requests / Bugs</span>
+            <Mail className="h-5 w-5" />
+            <span className="sr-only">Requests / Bugs</span>
           </Button>
           
           <Button 
