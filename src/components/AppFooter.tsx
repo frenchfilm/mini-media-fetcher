@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { MessageSquare, Mail, Settings, Smartphone, Monitor } from "lucide-react";
+import { MessageSquare, Mail, Settings } from "lucide-react";
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useTheme } from '@/components/ThemeProvider';
 
@@ -30,16 +30,6 @@ const AppFooter: React.FC<AppFooterProps> = ({
     document.dispatchEvent(new Event('openSettings'));
   };
 
-  const toggleDeviceView = () => {
-    if (document.documentElement.classList.contains('mobile-view')) {
-      document.documentElement.classList.remove('mobile-view');
-    } else {
-      document.documentElement.classList.add('mobile-view');
-    }
-    // Dispatch a custom event to notify about the class change
-    document.documentElement.dispatchEvent(new Event('classChange'));
-  };
-
   // Determine which logo to use based on current theme
   const logoSrc = theme === 'dark' 
     ? "/lovable-uploads/33093e4b-79d8-4352-af38-2ba842f18a32.png" 
@@ -47,6 +37,7 @@ const AppFooter: React.FC<AppFooterProps> = ({
 
   return (
     <footer className="h-auto min-h-[72px] w-full flex flex-col items-center mt-2">
+      {/* Use flex-col-reverse to put right column on top and left column on bottom */}
       <div className={`w-full flex ${isMobile ? 'flex-col-reverse gap-4' : 'flex-row'}`}>
         {/* Left Column - Logo, App Name, Version, Update Link */}
         <div className={`${isMobile ? 'w-full items-start justify-start' : 'w-1/2'} flex items-start sm:justify-start mt-2 sm:mt-0`}>
@@ -76,20 +67,6 @@ const AppFooter: React.FC<AppFooterProps> = ({
         
         {/* Right Column - Buttons */}
         <div className={`${isMobile ? 'w-full' : 'w-1/2'} flex items-center ${isMobile ? 'justify-center' : 'justify-end'} gap-2`}>
-          {/* Device view toggle button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={toggleDeviceView}
-            className="h-9 w-9 p-0 flex items-center justify-center rounded-full aspect-square bg-primary text-white dark:bg-primary dark:text-secondary hover:bg-primary/90"
-          >
-            {isMobile ? 
-              <Monitor className="h-5 w-5" /> : 
-              <Smartphone className="h-5 w-5" />
-            }
-            <span className="sr-only">{isMobile ? "Switch to desktop view" : "Switch to mobile view"}</span>
-          </Button>
-          
           <Button 
             variant="contrast" 
             onClick={onContactClick}
@@ -110,14 +87,13 @@ const AppFooter: React.FC<AppFooterProps> = ({
             <span className="text-xs">Subscriptions</span>
           </Button>
 
-          {/* Settings button */}
           <Button
             variant="ghost"
             size="icon"
             onClick={handleOpenSettings}
-            className="h-9 w-9 p-0 flex items-center justify-center rounded-full aspect-square bg-primary text-white dark:bg-primary dark:text-secondary hover:bg-primary/90"
+            className="h-9 w-9 rounded-full bg-primary hover:bg-primary/90"
           >
-            <Settings className="h-5 w-5" />
+            <Settings className="h-5 w-5 text-white dark:text-secondary" />
             <span className="sr-only">Settings</span>
           </Button>
         </div>
