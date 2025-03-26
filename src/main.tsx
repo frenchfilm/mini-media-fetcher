@@ -35,9 +35,17 @@ window.addEventListener('resize', () => {
   if (windowWidth < 800) {
     rootElement.style.width = "100%";
     document.documentElement.classList.add('mobile-view');
+    
+    // Set a max-height for popover elements on mobile to prevent them from extending beyond viewport
+    document.documentElement.style.setProperty('--radix-popover-content-available-height', '50vh');
+    document.documentElement.style.setProperty('--radix-select-content-available-height', '50vh');
   } else {
     rootElement.style.width = "800px";
     document.documentElement.classList.remove('mobile-view');
+    
+    // Reset height variables for desktop
+    document.documentElement.style.removeProperty('--radix-popover-content-available-height');
+    document.documentElement.style.removeProperty('--radix-select-content-available-height');
   }
 });
 
@@ -45,4 +53,3 @@ window.addEventListener('resize', () => {
 window.dispatchEvent(new Event('resize'));
 
 createRoot(rootElement).render(<App />);
-

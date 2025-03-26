@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -61,9 +62,9 @@ const VideoFormatSelector = ({ onSelect }: VideoFormatSelectorProps) => {
           <SelectTrigger className="w-full">
             <SelectValue placeholder="Select quality" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent position="popper" sideOffset={5} align="start" className="max-h-[50vh] overflow-y-auto z-50 bg-popover shadow-lg">
             {FORMATS.map((format) => (
-              <SelectItem key={format.id} value={format.id}>
+              <SelectItem key={format.id} value={format.id} className="py-2">
                 <div className="flex flex-col">
                   <span className="font-medium">{format.quality}</span>
                   <span className="text-xs opacity-80">{format.resolution} • {format.fileSize}</span>
