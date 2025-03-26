@@ -9,7 +9,15 @@ const Dialog = DialogPrimitive.Root
 
 const DialogTrigger = DialogPrimitive.Trigger
 
-const DialogPortal = DialogPrimitive.Portal
+const DialogPortal = ({
+  container = document.getElementById("app-container"),
+  ...props
+}: DialogPrimitive.DialogPortalProps & {
+  container?: HTMLElement | null;
+}) => {
+  // Use app-container element as the portal container if it exists
+  return <DialogPrimitive.Portal container={container} {...props} />
+}
 
 const DialogClose = DialogPrimitive.Close
 
