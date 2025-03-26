@@ -46,9 +46,9 @@ const FormatSelectionSection = ({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Video Preview Column */}
         <div className="flex flex-col items-center p-2 sm:p-3 rounded-xl">
-          <div className="text-center mb-3 animate-slide-down">
-            <h2 className="text-lg font-medium mb-1 truncate max-w-[280px] sm:max-w-full mx-auto">{videoInfo.title}</h2>
-            <p className="text-xs text-muted-foreground truncate max-w-[280px] sm:max-w-full mx-auto">{videoUrl}</p>
+          <div className="text-left w-full mb-3 animate-slide-down">
+            <h2 className="text-lg font-medium mb-1">{videoInfo.title}</h2>
+            <p className="text-xs text-muted-foreground break-words w-full text-left">{videoUrl}</p>
           </div>
           
           <div className="w-full flex justify-center mb-3">
