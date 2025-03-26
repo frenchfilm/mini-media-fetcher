@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Mail, Settings } from "lucide-react";
@@ -84,7 +83,7 @@ const AppFooter: React.FC<AppFooterProps> = ({
             <img 
               src="/lovable-uploads/HandWave.svg" 
               alt="Subscribe" 
-              className="h-5 w-5" 
+              className={`h-5 w-5 ${theme === 'dark' ? 'invert' : ''}`} 
             />
             <span className="sr-only">Subscriptions</span>
           </Button>
