@@ -29,12 +29,14 @@ const SettingsDialog = ({
     onOpenChange(false);
   };
 
-  // Adjust the dialog content max height based on viewport height  
-  const tabContentHeight = isMobile ? "350px" : "380px";
+  // Adjust the dialog content height based on viewport
+  const tabContentHeight = isMobile ? "350px" : "400px";
   
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-xl p-0 overflow-hidden border-none bg-background max-h-[90vh]">
+      <DialogContent 
+        className="sm:max-w-xl p-0 overflow-hidden border-none bg-background max-h-[85vh]"
+      >
         <div className="flex justify-between items-center p-3 border-b">
           <Button 
             variant="highContrast" 
@@ -89,26 +91,32 @@ const SettingsDialog = ({
             <div className="h-auto">
               <TabsContent value="download" className="space-y-3 mt-1 h-full">
                 <h3 className="text-lg font-fraunces mb-2">Download Settings</h3>
-                <ScrollArea className={`h-[${tabContentHeight}] pr-4`}>
-                  <DownloadSettings />
+                <ScrollArea className={`h-[${tabContentHeight}]`}>
+                  <div className="pr-4">
+                    <DownloadSettings />
+                  </div>
                 </ScrollArea>
               </TabsContent>
               
               <TabsContent value="app" className="space-y-3 mt-1 h-full">
                 <h3 className="text-lg font-fraunces mb-2">Application Settings</h3>
-                <ScrollArea className={`h-[${tabContentHeight}] pr-4`}>
-                  <AppSettings 
-                    licenseKey={licenseKey}
-                    onLicenseKeyChange={onLicenseKeyChange}
-                  />
+                <ScrollArea className={`h-[${tabContentHeight}]`}>
+                  <div className="pr-4">
+                    <AppSettings 
+                      licenseKey={licenseKey}
+                      onLicenseKeyChange={onLicenseKeyChange}
+                    />
+                  </div>
                 </ScrollArea>
               </TabsContent>
               
               <TabsContent value="about" className="mt-1 h-full">
-                <ScrollArea className={`h-[${tabContentHeight}] pr-4`}>
-                  <AboutSettings 
-                    licenseKey={licenseKey}
-                  />
+                <ScrollArea className={`h-[${tabContentHeight}]`}>
+                  <div className="pr-4">
+                    <AboutSettings 
+                      licenseKey={licenseKey}
+                    />
+                  </div>
                 </ScrollArea>
               </TabsContent>
             </div>

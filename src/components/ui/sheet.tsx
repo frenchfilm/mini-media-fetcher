@@ -1,3 +1,4 @@
+
 import * as SheetPrimitive from "@radix-ui/react-dialog"
 import { cva, type VariantProps } from "class-variance-authority"
 import { X } from "lucide-react"
@@ -60,6 +61,10 @@ const SheetContent = React.forwardRef<
     <SheetPrimitive.Content
       ref={ref}
       className={cn(sheetVariants({ side }), className)}
+      style={{
+        maxHeight: 'calc(100% - 2rem)',
+        ...(side === 'top' || side === 'bottom' ? {} : { top: '50%', transform: 'translateY(-50%)' })
+      }}
       {...props}
     >
       {children}
