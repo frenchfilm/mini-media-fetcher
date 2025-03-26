@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { MessageSquare, Mail, Settings } from "lucide-react";
+import { MessageSquare, Mail, Settings, Smartphone, Monitor } from "lucide-react";
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useTheme } from '@/components/ThemeProvider';
 
@@ -28,6 +28,16 @@ const AppFooter: React.FC<AppFooterProps> = ({
   const handleOpenSettings = () => {
     // Dispatch the event to open settings
     document.dispatchEvent(new Event('openSettings'));
+  };
+
+  const toggleDeviceView = () => {
+    if (document.documentElement.classList.contains('mobile-view')) {
+      document.documentElement.classList.remove('mobile-view');
+    } else {
+      document.documentElement.classList.add('mobile-view');
+    }
+    // Dispatch a custom event to notify about the class change
+    document.documentElement.dispatchEvent(new Event('classChange'));
   };
 
   // Determine which logo to use based on current theme
@@ -67,6 +77,21 @@ const AppFooter: React.FC<AppFooterProps> = ({
         
         {/* Right Column - Buttons */}
         <div className={`${isMobile ? 'w-full' : 'w-1/2'} flex items-center ${isMobile ? 'justify-center' : 'justify-end'} gap-2`}>
+          {/* Device view toggle button */}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={toggleDeviceView}
+            className="h-9 w-9 rounded-full bg-accent/70 hover:bg-accent/90"
+            title={isMobile ? "Switch to desktop view" : "Switch to mobile view"}
+          >
+            {isMobile ? 
+              <Monitor className="h-5 w-5 text-foreground" /> : 
+              <Smartphone className="h-5 w-5 text-foreground" />
+            }
+            <span className="sr-only">{isMobile ? "Switch to desktop view" : "Switch to mobile view"}</span>
+          </Button>
+          
           <Button 
             variant="contrast" 
             onClick={onContactClick}
