@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { MessageSquare, Mail, Settings, Smartphone, Monitor } from "lucide-react";
@@ -82,12 +81,11 @@ const AppFooter: React.FC<AppFooterProps> = ({
             variant="ghost"
             size="icon"
             onClick={toggleDeviceView}
-            className="h-9 w-9 rounded-full bg-accent/70 hover:bg-accent/90"
-            title={isMobile ? "Switch to desktop view" : "Switch to mobile view"}
+            className="h-9 w-9 rounded-full bg-primary hover:bg-primary/90"
           >
             {isMobile ? 
-              <Monitor className="h-5 w-5 text-foreground" /> : 
-              <Smartphone className="h-5 w-5 text-foreground" />
+              <Monitor className="h-5 w-5 text-white dark:text-secondary" /> : 
+              <Smartphone className="h-5 w-5 text-white dark:text-secondary" />
             }
             <span className="sr-only">{isMobile ? "Switch to desktop view" : "Switch to mobile view"}</span>
           </Button>
