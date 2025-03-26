@@ -53,10 +53,6 @@
     @apply bg-primary text-secondary border-primary;
   }
   
-  .dark .format-button-selected:hover {
-    @apply bg-primary/90;
-  }
-  
   /* Consistent button styles */
   .contrast-button {
     @apply bg-primary text-white border-primary font-semibold;
@@ -78,16 +74,8 @@
     @apply bg-secondary text-primary border-primary font-medium;
   }
   
-  .secondary-contrast-button:hover {
-    @apply bg-secondary/90 text-primary;
-  }
-  
   .dark .secondary-contrast-button {
     @apply bg-secondary/80 text-primary border-primary;
-  }
-  
-  .dark .secondary-contrast-button:hover {
-    @apply bg-secondary/70 text-primary;
   }
   
   /* App-wide button style */
@@ -95,15 +83,8 @@
     @apply bg-primary text-white border-primary font-semibold;
   }
   
-  .app-button:hover {
-    @apply bg-primary/90;
-  }
-  
   .dark .app-button {
     @apply bg-primary text-secondary border-primary;
   }
-  
-  .dark .app-button:hover {
-    @apply bg-primary/90;
-  }
 }
+
