@@ -27,13 +27,11 @@ const HistoryPage = () => {
             onOpenContact={openContact}
             downloadsCount={downloads.length}
           >
-            <div className="h-full">
-              <DownloadHistory 
-                downloads={downloads} 
-                onClearHistory={clearHistory} 
-                onOpenFile={handleOpenFile} 
-              />
-            </div>
+            <DownloadHistory 
+              downloads={downloads} 
+              onClearHistory={clearHistory} 
+              onOpenFile={handleOpenFile} 
+            />
           </AppLayout>
         )}
       </DialogManager>
