@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Check, ExternalLink } from "lucide-react";
@@ -27,7 +26,7 @@ const AboutSettings = ({ licenseKey }: AboutSettingsProps) => {
         <div className="text-center">
           <h3 className="text-xl font-medium mb-2">SoftBare Video Downloader</h3>
           <p className="text-xs text-muted-foreground">Version {appVersion}</p>
-          <p className="text-xs text-muted-foreground italic mt-1">{appSlogan}</p>
+          <p className="text-base text-foreground font-medium mt-1">{appSlogan}</p>
           {isRegistered && (
             <div className="flex items-center justify-center text-green-500 mt-2">
               <Check className="h-4 w-4 mr-1" />
