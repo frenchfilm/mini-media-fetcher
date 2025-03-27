@@ -35,7 +35,7 @@ const AppLayout = ({
       style={{ position: 'relative', overflow: 'hidden' }}
     >
       {/* Body Section with scrolling content */}
-      <main className="flex-1 w-full overflow-y-auto mb-2 pb-4" style={{ maxHeight: 'calc(100% - 80px)' }}>
+      <main className="flex-1 w-full overflow-y-auto mb-[80px] pb-4 z-0" style={{ maxHeight: 'calc(100% - 80px)' }}>
         {children}
       </main>
       

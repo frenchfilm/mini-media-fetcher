@@ -94,7 +94,7 @@ const DownloadManager = () => {
         >
           <div className="flex-1 flex flex-col w-full max-w-xl mx-auto px-1 sm:px-0">
             <PageHeader title="Download Manager" />
-            <div className="overflow-y-auto">
+            <div className="overflow-y-auto flex-1">
               <VideoList videos={videos} onVideosChange={setVideos} />
             </div>
           </div>

@@ -86,6 +86,21 @@
     overflow-y: auto;
   }
   
+  /* Scrollbar styling for the main content area */
+  main::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  main::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  main::-webkit-scrollbar-thumb {
+    background-color: rgba(155, 155, 155, 0.5);
+    border-radius: 20px;
+    border: transparent;
+  }
+  
   @media (max-width: 640px) {
     .dialog-fixed-height {
       height: 540px;
