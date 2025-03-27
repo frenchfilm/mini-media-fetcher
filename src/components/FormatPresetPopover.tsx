@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { VideoFormat } from "@/components/VideoFormatSelector";
 
 export interface FormatPresetPopoverProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   onPresetChange: (preset: { format: VideoFormat | null, quality: string | null }) => void;
 }
 
