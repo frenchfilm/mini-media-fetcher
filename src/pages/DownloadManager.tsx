@@ -6,7 +6,7 @@ import DialogManager from '@/components/DialogManager';
 import VideoList, { VideoData } from '@/components/video/VideoList';
 import PageHeader from '@/components/video/PageHeader';
 
-const sampleVideos = [
+const sampleVideos: VideoData[] = [
   {
     id: '1',
     title: 'React Hooks Tutorial for Beginners',
@@ -67,6 +67,52 @@ const sampleVideos = [
     timeLeft: 0,
     error: 'Network connection lost',
     url: 'https://www.youtube.com/watch?v=4pO-HcG2igk'
+  },
+  // Additional videos to test scrolling
+  {
+    id: '5',
+    title: 'Advanced GraphQL Techniques',
+    thumbnail: 'https://i.ytimg.com/vi/ogVrm6_rNWE/default.jpg',
+    duration: '55:42',
+    size: '512 MB',
+    format: 'MP4 1080p',
+    date: '2023-06-25',
+    status: 'completed' as const,
+    progress: 100,
+    downloadedSize: 512,
+    totalSize: 512,
+    timeLeft: 0,
+    url: 'https://www.youtube.com/watch?v=ogVrm6_rNWE'
+  },
+  {
+    id: '6',
+    title: 'Docker and Kubernetes Workshop',
+    thumbnail: 'https://i.ytimg.com/vi/8h4FoWK7tIA/default.jpg',
+    duration: '1:22:15',
+    size: '768 MB',
+    format: 'MP4 4K',
+    date: '2023-06-28',
+    status: 'paused' as const,
+    progress: 40,
+    downloadedSize: 307.2,
+    totalSize: 768,
+    timeLeft: 300,
+    url: 'https://www.youtube.com/watch?v=8h4FoWK7tIA'
+  },
+  {
+    id: '7',
+    title: 'Machine Learning Fundamentals',
+    thumbnail: 'https://i.ytimg.com/vi/JcI5Vnb0I_k/default.jpg',
+    duration: '47:33',
+    size: '425 MB',
+    format: 'MP4 1080p',
+    date: '2023-07-02',
+    status: 'in_progress' as const,
+    progress: 75,
+    downloadedSize: 318.75,
+    totalSize: 425,
+    timeLeft: 60,
+    url: 'https://www.youtube.com/watch?v=JcI5Vnb0I_k'
   }
 ];
 
@@ -103,3 +149,4 @@ const DownloadManager = () => {
 };
 
 export default DownloadManager;
+
