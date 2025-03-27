@@ -87,16 +87,16 @@ const DownloadHistory = ({ downloads, onClearHistory, onOpenFile }: DownloadHist
               key={item.id} 
               className={`flex items-center p-2 rounded-md ${itemBgColor} border border-[#9c8e6c]/20`}
             >
-              {/* Smaller thumbnail */}
+              {/* Updated thumbnail size */}
               <div 
-                className="w-[27px] h-[18px] rounded bg-muted flex-shrink-0 overflow-hidden bg-cover bg-center mr-3"
+                className="w-[54px] h-[36px] rounded bg-muted flex-shrink-0 overflow-hidden bg-cover bg-center mr-3"
                 style={{ 
                   backgroundImage: item.thumbnailUrl ? `url(${item.thumbnailUrl})` : undefined,
                   backgroundColor: !item.thumbnailUrl ? '#e9e2d0' : undefined
                 }}
               >
                 {!item.thumbnailUrl && (
-                  <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground/30">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground/30">
                     <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.85.84 6.72 2.28"/>
                     <path d="M21 3v9h-9"/>
                   </svg>
@@ -157,3 +157,4 @@ const DownloadHistory = ({ downloads, onClearHistory, onOpenFile }: DownloadHist
 };
 
 export default DownloadHistory;
+
