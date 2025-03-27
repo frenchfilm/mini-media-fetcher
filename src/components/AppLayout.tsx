@@ -30,22 +30,17 @@ const AppLayout = ({
 
   return (
     <div 
-      className="w-full min-h-[600px] bg-background flex flex-col relative overflow-hidden"
+      className={`w-full ${isMobile ? 'min-w-[300px]' : 'w-[800px]'} min-h-[600px] bg-background flex flex-col relative p-2 sm:p-6`} 
       id="app-container"
-      style={{ 
-        width: isMobile ? '100%' : '800px',
-        minWidth: isMobile ? '300px' : 'auto',
-        padding: isMobile ? '8px' : '24px',
-        position: 'relative'
-      }}
+      style={{ position: 'relative', overflow: 'hidden' }}
     >
       {/* Body Section with scrolling content */}
-      <div className="flex-1 w-full overflow-y-auto z-0 pb-20" style={{ height: 'calc(100% - 72px)' }}>
+      <main className="flex-1 w-full overflow-y-auto mb-2 pb-4" style={{ maxHeight: 'calc(100% - 80px)' }}>
         {children}
-      </div>
+      </main>
       
-      {/* Footer Section - Fixed at bottom with higher z-index */}
-      <div className="absolute bottom-0 left-0 right-0 z-10 bg-background" style={{ padding: isMobile ? '8px' : '24px' }}>
+      {/* Footer Section - Fixed at bottom */}
+      <div className="relative z-10 bg-background w-full">
         <AppFooter 
           onOpenNewsletter={handleOpenNewsletter}
           onOpenContact={handleContactClick}
