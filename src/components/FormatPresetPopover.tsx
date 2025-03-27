@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { 
   Popover, 
@@ -65,10 +64,9 @@ const FormatPresetPopover = ({ children, onPresetChange }: FormatPresetPopoverPr
         {children}
       </PopoverTrigger>
       <PopoverContent 
-        className="w-80" 
+        className="w-80 z-50 sm:max-w-md p-4 border rounded-md bg-background shadow-md" 
         align="center"
         sideOffset={5}
-        className="z-50 sm:max-w-md p-4 border rounded-md bg-background shadow-md"
         container={document.getElementById("app-container")}
       >
         <div className="space-y-4">
