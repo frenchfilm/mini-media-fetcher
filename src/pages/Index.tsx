@@ -6,6 +6,9 @@ import AppLayout from "@/components/AppLayout";
 import DialogManager from "@/components/DialogManager";
 import MainContent from "@/components/MainContent";
 import { useAppState } from "@/hooks/useAppState";
+import { Button } from "@/components/ui/button";
+import { History, Star, Trash2 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   const {
@@ -60,6 +63,28 @@ const Index = () => {
           onOpenNewsletter={openNewsletter}
           onOpenContact={openContact}
         >
+          {/* Navigation buttons at the top */}
+          <div className="flex justify-center space-x-4 mb-4">
+            <Link to="/my-videos">
+              <Button variant="outline" className="flex items-center gap-2">
+                <History className="h-4 w-4" />
+                History
+              </Button>
+            </Link>
+            <Link to="/download-manager">
+              <Button variant="outline" className="flex items-center gap-2">
+                <Star className="h-4 w-4" />
+                Download Manager
+              </Button>
+            </Link>
+            <Link to="/download-history">
+              <Button variant="outline" className="flex items-center gap-2">
+                <Trash2 className="h-4 w-4" />
+                Download History
+              </Button>
+            </Link>
+          </div>
+          
           <MainContent
             appState={appState}
             videoUrl={videoUrl}

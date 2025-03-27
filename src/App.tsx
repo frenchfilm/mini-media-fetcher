@@ -8,6 +8,8 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import DownloadManager from "./pages/DownloadManager";
+import MyVideos from "./pages/MyVideos";
+import DownloadHistory from "./pages/DownloadHistory";
 
 const queryClient = new QueryClient();
 
@@ -20,7 +22,9 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/my-videos" element={<DownloadManager />} />
+            <Route path="/my-videos" element={<MyVideos />} />
+            <Route path="/download-manager" element={<DownloadManager />} />
+            <Route path="/download-history" element={<DownloadHistory />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
