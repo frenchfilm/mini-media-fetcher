@@ -9,6 +9,7 @@ interface AboutSettingsProps {
 
 const AboutSettings = ({ licenseKey }: AboutSettingsProps) => {
   const appVersion = "1.0.0";
+  const appSlogan = "Download Videos, Anytime, Anywhere";
   const isRegistered = licenseKey && licenseKey.length > 8;
 
   const handleCheckForUpdates = () => {
@@ -26,6 +27,7 @@ const AboutSettings = ({ licenseKey }: AboutSettingsProps) => {
         <div className="text-center">
           <h3 className="text-xl font-medium mb-2">SoftBare Video Downloader</h3>
           <p className="text-xs text-muted-foreground">Version {appVersion}</p>
+          <p className="text-xs text-muted-foreground italic mt-1">{appSlogan}</p>
           {isRegistered && (
             <div className="flex items-center justify-center text-green-500 mt-2">
               <Check className="h-4 w-4 mr-1" />
