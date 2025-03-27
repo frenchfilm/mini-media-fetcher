@@ -37,7 +37,9 @@ const DownloadProgress = ({ videoUrl, selectedFormat, onComplete, onCancel }: Do
     // This removes the blinking text cursor that appears inside the button on page load
     setTimeout(() => {
       const el = document.activeElement
-      if (el?.tagName === 'BUTTON') el.blur()
+      if (el instanceof HTMLElement && el.tagName === 'BUTTON') {
+        el.blur()
+      }
     }, 30)
   }, []);
   

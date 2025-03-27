@@ -1,4 +1,3 @@
-
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -84,7 +83,9 @@ const DownloadManager = () => {
     // This removes the blinking text cursor that appears inside the button on page load
     setTimeout(() => {
       const el = document.activeElement
-      if (el?.tagName === 'BUTTON') el.blur()
+      if (el instanceof HTMLElement && el.tagName === 'BUTTON') {
+        el.blur()
+      }
     }, 30)
   }, []);
 
