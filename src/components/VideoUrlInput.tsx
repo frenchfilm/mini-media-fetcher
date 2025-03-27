@@ -61,23 +61,9 @@ const VideoUrlInput = ({ onSubmit, isLoading = false, onFolderSelect }: VideoUrl
   return (
     <form 
       onSubmit={handleSubmit} 
-      className="w-full max-w-xs sm:max-w-2xl mx-auto"
+      className="w-full max-w-xs sm:max-w-2xl mx-auto flex flex-col items-center space-y-2"
     >
-      <div className="flex items-stretch gap-1">
-        {onFolderSelect && (
-          <Button
-            type="button"
-            variant="contrast"
-            size="icon"
-            onClick={onFolderSelect}
-            className="h-10 w-10 rounded-md app-wide-button-high-contrast"
-            disabled={showLoading}
-          >
-            <FolderOpen className="h-4 w-4" />
-            <span className="sr-only">Select folder</span>
-          </Button>
-        )}
-        
+      <div className="flex items-stretch gap-1 w-full">
         <div className="rounded-md bg-white border border-secondary/70 flex items-center overflow-hidden flex-1 dark:bg-secondary dark:border-border">
           <Input
             ref={inputRef}
@@ -118,8 +104,22 @@ const VideoUrlInput = ({ onSubmit, isLoading = false, onFolderSelect }: VideoUrl
           <span className="sr-only">Get Video</span>
         </Button>
       </div>
+
+      {onFolderSelect && (
+        <Button
+          type="button"
+          variant="contrast"
+          onClick={onFolderSelect}
+          className="w-full max-w-xs sm:max-w-2xl mt-2 app-wide-button-high-contrast"
+          disabled={showLoading}
+        >
+          <FolderOpen className="h-4 w-4 mr-2" />
+          Select Folder
+        </Button>
+      )}
     </form>
   );
 };
 
 export default VideoUrlInput;
+
