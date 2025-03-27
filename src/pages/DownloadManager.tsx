@@ -67,6 +67,67 @@ const sampleVideos: VideoData[] = [
     timeLeft: 0,
     error: 'Network connection lost',
     url: 'https://www.youtube.com/watch?v=4pO-HcG2igk'
+  },
+  {
+    id: '5',
+    title: 'Docker and Kubernetes Full Course',
+    thumbnail: 'https://i.ytimg.com/vi/Xy-y_u2sj5Q/default.jpg',
+    duration: '55:10',
+    size: '480 MB',
+    format: 'MP4 1080p',
+    date: '2023-07-01',
+    status: 'completed' as const,
+    progress: 100,
+    downloadedSize: 480,
+    totalSize: 480,
+    timeLeft: 0,
+    url: 'https://www.youtube.com/watch?v=Xy-y_u2sj5Q'
+  },
+  {
+    id: '6',
+    title: 'Advanced GraphQL Techniques',
+    thumbnail: 'https://i.ytimg.com/vi/qux4-ovmkTc/default.jpg',
+    duration: '44:55',
+    size: '350 MB',
+    format: 'MP4 1080p',
+    date: '2023-07-05',
+    status: 'in_progress' as const,
+    progress: 55,
+    downloadedSize: 192.5,
+    totalSize: 350,
+    timeLeft: 180,
+    url: 'https://www.youtube.com/watch?v=qux4-ovmkTc'
+  },
+  {
+    id: '7',
+    title: 'Machine Learning with Python',
+    thumbnail: 'https://i.ytimg.com/vi/EgRfLWvbjMw/default.jpg',
+    duration: '1:12:30',
+    size: '620 MB',
+    format: 'MP4 1080p',
+    date: '2023-07-10',
+    status: 'paused' as const,
+    progress: 35,
+    downloadedSize: 217,
+    totalSize: 620,
+    timeLeft: 600,
+    url: 'https://www.youtube.com/watch?v=EgRfLWvbjMw'
+  },
+  {
+    id: '8',
+    title: 'AWS Cloud Architecture Masterclass',
+    thumbnail: 'https://i.ytimg.com/vi/a9__D53WsUs/default.jpg',
+    duration: '1:35:45',
+    size: '720 MB',
+    format: 'MP4 1080p',
+    date: '2023-07-15',
+    status: 'aborted' as const,
+    progress: 20,
+    downloadedSize: 144,
+    totalSize: 720,
+    timeLeft: 0,
+    error: 'Insufficient disk space',
+    url: 'https://www.youtube.com/watch?v=a9__D53WsUs'
   }
 ];
 
