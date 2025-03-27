@@ -67,24 +67,30 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Contact & Subscriptions</DialogTitle>
-          <DialogDescription>
-            Manage your subscriptions or send us a message.
-          </DialogDescription>
+          <DialogTitle>Subscriptions</DialogTitle>
         </DialogHeader>
         
         {/* Subscription Section */}
-        <div className="border-b pb-3 space-y-3">
-          <div className="flex items-center justify-between">
-            <span className="text-sm">Manage subscription</span>
+        <div className="border-b pb-2 space-y-2">
+          <div className="flex items-center justify-between gap-2">
             <Button 
-              variant="ghost" 
-              size="sm" 
-              className="h-8 px-2"
+              className="app-wide-button-high-contrast flex-1 h-8 text-xs"
               onClick={handleManageSubscription}
             >
-              Manage <ExternalLink className="h-3 w-3 ml-1" />
+              Manage Subscriptions <ExternalLink className="h-3 w-3 ml-1" />
             </Button>
+            
+            <a 
+              href="https://t.me/softbare" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              <Button 
+                className="app-wide-button-high-contrast h-8 text-xs"
+              >
+                Crypto
+              </Button>
+            </a>
           </div>
 
           <div className="flex items-center justify-between">
@@ -110,29 +116,45 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
               Subscribe
             </Button>
           </form>
-
-          <div className="flex items-center justify-between pt-1">
-            <span className="text-sm">Do you crypto?</span>
-            <a 
-              href="https://t.me/softbare" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-sm text-primary hover:underline"
-            >
-              Join our Telegram
-            </a>
-          </div>
         </div>
         
         {/* Contact Form Section */}
-        <form onSubmit={handleSubmit} className="space-y-3 py-3">
-          <div className="grid grid-cols-2 gap-3">
+        <div className="py-2">
+          <h3 className="font-semibold mb-2">Contact</h3>
+          <form onSubmit={handleSubmit} className="space-y-2">
+            <div className="grid grid-cols-2 gap-2">
+              <div className="space-y-1">
+                <Label htmlFor="firstName" className="text-foreground text-xs">First Name</Label>
+                <Input
+                  id="firstName"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  required
+                  className="h-8 text-sm bg-white"
+                />
+              </div>
+              
+              <div className="space-y-1">
+                <Label htmlFor="lastName" className="text-foreground text-xs">Last Name</Label>
+                <Input
+                  id="lastName"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  required
+                  className="h-8 text-sm bg-white"
+                />
+              </div>
+            </div>
+            
             <div className="space-y-1">
-              <Label htmlFor="firstName" className="text-foreground text-xs">First Name</Label>
+              <Label htmlFor="email" className="text-foreground text-xs">Email</Label>
               <Input
-                id="firstName"
-                name="firstName"
-                value={formData.firstName}
+                id="email"
+                name="email"
+                type="email"
+                value={formData.email}
                 onChange={handleChange}
                 required
                 className="h-8 text-sm bg-white"
@@ -140,55 +162,30 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
             </div>
             
             <div className="space-y-1">
-              <Label htmlFor="lastName" className="text-foreground text-xs">Last Name</Label>
-              <Input
-                id="lastName"
-                name="lastName"
-                value={formData.lastName}
+              <Label htmlFor="message" className="text-foreground text-xs">Message</Label>
+              <Textarea
+                id="message"
+                name="message"
+                value={formData.message}
                 onChange={handleChange}
+                rows={2}
                 required
-                className="h-8 text-sm bg-white"
+                className="text-sm bg-white"
               />
             </div>
-          </div>
-          
-          <div className="space-y-1">
-            <Label htmlFor="email" className="text-foreground text-xs">Email</Label>
-            <Input
-              id="email"
-              name="email"
-              type="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="h-8 text-sm bg-white"
-            />
-          </div>
-          
-          <div className="space-y-1">
-            <Label htmlFor="message" className="text-foreground text-xs">Message</Label>
-            <Textarea
-              id="message"
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              rows={3}
-              required
-              className="text-sm bg-white"
-            />
-          </div>
-          
-          <DialogFooter className="pt-2">
-            <Button 
-              type="submit" 
-              className="app-wide-button-high-contrast"
-              disabled={isSending}
-            >
-              {isSending ? "Sending..." : "Send Message"}
-              {!isSending && <Send className="ml-1 h-3 w-3" />}
-            </Button>
-          </DialogFooter>
-        </form>
+            
+            <DialogFooter className="pt-2">
+              <Button 
+                type="submit" 
+                className="app-wide-button-high-contrast"
+                disabled={isSending}
+              >
+                {isSending ? "Sending..." : "Send Message"}
+                {!isSending && <Send className="ml-1 h-3 w-3" />}
+              </Button>
+            </DialogFooter>
+          </form>
+        </div>
       </DialogContent>
     </Dialog>
   );
