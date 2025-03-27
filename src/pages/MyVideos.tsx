@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import AppLayout from '@/components/AppLayout';
 import DialogManager from '@/components/DialogManager';
-import { Play, Trash2, FolderOpen, RotateCcw, Copy } from 'lucide-react';
+import { Trash2, FolderOpen } from 'lucide-react';
 import { Progress } from "@/components/ui/progress";
 import { useState } from 'react';
 import { toast } from "sonner";
@@ -206,7 +206,7 @@ const MyVideos = () => {
                               <span className="sr-only">Delete</span>
                             </Button>
                           </>
-                        ) : (
+                        ) : video.status === 'completed' ? (
                           <>
                             <Button 
                               variant="ghost" 
@@ -236,7 +236,7 @@ const MyVideos = () => {
                               <span className="sr-only">Open Folder</span>
                             </Button>
                           </>
-                        )}
+                        ) : null}
                       </div>
                     </div>
                     
