@@ -79,7 +79,8 @@ const FormatPresetPopover = ({ children, onPresetChange }: FormatPresetPopoverPr
           left: '50%',
           transform: 'translateX(-50%)',
           top: '50%',
-          marginTop: '-150px'
+          marginTop: '-150px',
+          zIndex: 100
         }}
       >
         <div className="space-y-4">

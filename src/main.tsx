@@ -16,6 +16,7 @@ rootElement.style.padding = "0";
 rootElement.style.margin = "0 auto"; // This centers the element horizontally
 rootElement.style.left = "0";
 rootElement.style.right = "0";
+rootElement.id = "app-container"; // Add ID to the root element
 
 // Align the app to the top with padding and set body background to black
 document.body.style.display = "flex";
