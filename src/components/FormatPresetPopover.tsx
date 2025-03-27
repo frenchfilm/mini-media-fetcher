@@ -73,6 +73,14 @@ const FormatPresetPopover = ({ children, onPresetChange }: FormatPresetPopoverPr
         sticky="always"
         container={document.getElementById("app-container")}
         avoidCollisions={true}
+        forceMount
+        style={{
+          position: 'fixed',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          top: '50%',
+          marginTop: '-150px'
+        }}
       >
         <div className="space-y-4">
           <h3 className="font-medium text-sm">Format & Quality Presets</h3>
