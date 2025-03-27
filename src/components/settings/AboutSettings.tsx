@@ -56,7 +56,7 @@ const AboutSettings = ({ licenseKey }: AboutSettingsProps) => {
       
       <div className="border-t border-border pt-4 mt-6">
         <p className="text-xs text-center text-muted-foreground">
-          © 2024 SoftBare. All rights reserved.
+          © 2025 SoftBare. All rights reserved.
         </p>
       </div>
     </div>
