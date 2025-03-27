@@ -93,12 +93,10 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
           </a>
         </div>
         
-        {/* Newsletter Section - Reduced bottom padding */}
+        {/* Newsletter Section - Updated padding to 1.5rem */}
         <div className="border-b pb-1.5 mb-2 space-y-2">
-          <h4 className="text-sm font-medium">Newsletter</h4>
-          
           <div className="flex items-center justify-between">
-            <span className="text-sm">Subscribe to updates</span>
+            <span className="text-sm font-fraunces">Subscribe to Newsletter</span>
             <Switch 
               checked={newsletterEnabled} 
               onCheckedChange={setNewsletterEnabled} 
