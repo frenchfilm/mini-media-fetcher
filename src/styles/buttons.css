@@ -6,11 +6,11 @@
 }
 
 .app-wide-button-high-contrast {
-  @apply bg-primary text-white border-primary font-semibold;
+  @apply bg-primary text-white border-primary font-semibold rounded-md;
 }
 
 .app-wide-button-high-contrast:hover {
-  @apply bg-primary/90;
+  @apply bg-primary/90 transform scale-[1.02];
 }
 
 .dark .app-wide-button-high-contrast {
@@ -18,10 +18,27 @@
 }
 
 .dark .app-wide-button-high-contrast:hover {
-  @apply bg-primary/90;
+  @apply bg-primary/90 transform scale-[1.02];
 }
 
 /* Prevent text cursor in all buttons */
 button {
   caret-color: transparent;
+}
+
+/* Add a subtle pulse effect to primary action buttons */
+.app-wide-button-primary-action {
+  @apply relative overflow-hidden;
+}
+
+.app-wide-button-primary-action::after {
+  content: '';
+  @apply absolute inset-0 bg-white opacity-0 pointer-events-none;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0; }
+  50% { opacity: 0.1; }
+  100% { opacity: 0; }
 }

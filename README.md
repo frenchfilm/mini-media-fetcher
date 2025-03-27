@@ -5,6 +5,17 @@
 
 **URL**: https://lovable.dev/projects/6ff1feab-13b5-47b0-979f-7c7a04cb94cf
 
+## About SoftBare Video Downloader
+
+SoftBare Video Downloader is a powerful desktop application that allows you to download videos from various platforms. With an intuitive interface and robust features, you can easily manage your downloads, choose quality settings, and organize your media library.
+
+### Key Features
+- Download videos from multiple platforms
+- Select video quality and format
+- Track download progress
+- Manage download history
+- Customize application settings
+
 ## How can I edit this code?
 
 There are several ways of editing your application.
@@ -53,7 +64,7 @@ npm run dev
 
 ## What technologies are used for this project?
 
-This project is built with .
+This project is built with:
 
 - Vite
 - TypeScript
