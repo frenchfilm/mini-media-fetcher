@@ -112,17 +112,6 @@ const VideoUrlInput = ({
       </div>
 
       <div className="flex items-center gap-2 w-full max-w-xs sm:max-w-2xl">
-        {onPresetChange && (
-          <div onClick={(e) => e.stopPropagation()}>
-            <FormatPresetPopover onPresetChange={onPresetChange}>
-              <div className="h-10 w-10 rounded-md app-wide-button-high-contrast flex items-center justify-center">
-                <Settings2 className="h-4 w-4" />
-                <span className="sr-only">Format preset settings</span>
-              </div>
-            </FormatPresetPopover>
-          </div>
-        )}
-
         {onFolderSelect && (
           <Button
             type="button"
@@ -135,6 +124,17 @@ const VideoUrlInput = ({
             <FolderOpen className="h-4 w-4" />
             <span className="sr-only">Select folder</span>
           </Button>
+        )}
+
+        {onPresetChange && (
+          <div onClick={(e) => e.stopPropagation()}>
+            <FormatPresetPopover onPresetChange={onPresetChange}>
+              <div className="h-10 w-10 rounded-md app-wide-button-high-contrast flex items-center justify-center">
+                <Settings2 className="h-4 w-4" />
+                <span className="sr-only">Format preset settings</span>
+              </div>
+            </FormatPresetPopover>
+          </div>
         )}
         
         {onCameraSelect && (
