@@ -1,9 +1,10 @@
+
 import { Card } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { VideoFormat } from "./VideoFormatSelector";
-import { Download, Trash2, FolderOpen, Clock, Play, FilePenLine } from 'lucide-react';
+import { Download, Trash2, FolderOpen, Clock, Play, FilePenLine, ArrowLeft } from 'lucide-react';
 import { toast } from "sonner";
 import { useTheme } from "@/components/ThemeProvider";
 
