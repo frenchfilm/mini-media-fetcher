@@ -26,8 +26,9 @@ const AppFooter: React.FC<AppFooterProps> = ({
   };
 
   const handleOpenSettings = () => {
-    // Dispatch the event to open settings
-    document.dispatchEvent(new Event('openSettings'));
+    // Create and dispatch the custom event to open settings
+    const event = new Event('openSettings');
+    document.dispatchEvent(event);
   };
 
   const toggleViewMode = () => {

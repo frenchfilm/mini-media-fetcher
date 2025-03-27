@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import NewsletterDialog from "@/components/NewsletterDialog";
 import ContactDialog from "@/components/ContactDialog";
 import SettingsDialog from "@/components/settings/SettingsDialog";
@@ -21,6 +21,19 @@ const DialogManager = ({ children }: DialogManagerProps) => {
   const openNewsletter = () => setNewsletterOpen(true);
   const openContact = () => setContactOpen(true);
   const openSettings = () => setSettingsOpen(true);
+
+  // Add event listener for the openSettings event
+  useEffect(() => {
+    const handleOpenSettingsEvent = () => {
+      openSettings();
+    };
+    
+    document.addEventListener('openSettings', handleOpenSettingsEvent);
+    
+    return () => {
+      document.removeEventListener('openSettings', handleOpenSettingsEvent);
+    };
+  }, []);
 
   return (
     <>
