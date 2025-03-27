@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Send, ExternalLink } from "lucide-react";
 import { toast } from "sonner";
 import { Switch } from "@/components/ui/switch";
+import { useTheme } from "@/components/ThemeProvider";
 
 interface ContactDialogProps {
   open: boolean;
@@ -15,6 +16,7 @@ interface ContactDialogProps {
 }
 
 const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
+  const { theme } = useTheme();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -86,8 +88,15 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
             className="w-full"
           >
             <Button 
-              className="app-wide-button-high-contrast h-8 text-xs w-full"
+              className="app-wide-button-high-contrast h-8 text-xs w-full flex items-center gap-2"
             >
+              <img 
+                src={theme === 'dark' 
+                  ? "/public/lovable-uploads/telegram-dark.svg" 
+                  : "/public/lovable-uploads/telegram-light.svg"} 
+                alt="Telegram" 
+                className="h-4 w-4"
+              />
               Crypto
             </Button>
           </a>
