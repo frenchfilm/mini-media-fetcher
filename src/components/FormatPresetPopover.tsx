@@ -66,22 +66,10 @@ const FormatPresetPopover = ({ children, onPresetChange }: FormatPresetPopoverPr
       </PopoverTrigger>
       <PopoverContent 
         className="w-80" 
-        align="center" 
-        side="top" 
+        align="center"
         sideOffset={5}
-        collisionPadding={20}
-        sticky="always"
+        className="z-50 sm:max-w-md p-4 border rounded-md bg-background shadow-md"
         container={document.getElementById("app-container")}
-        avoidCollisions={true}
-        forceMount
-        style={{
-          position: 'fixed',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          top: '50%',
-          marginTop: '-150px',
-          zIndex: 100
-        }}
       >
         <div className="space-y-4">
           <h3 className="font-medium text-sm">Format & Quality Presets</h3>
