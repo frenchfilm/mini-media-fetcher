@@ -4,6 +4,7 @@ import { getVideoDetails, isDesktopEnvironment } from '@/utils/videoUtils';
 import { useIsMobile } from '@/hooks/use-mobile';
 import VideoUrlInput from "@/components/VideoUrlInput";
 import { VideoFormat } from '@/components/VideoFormatSelector';
+import { useNavigate } from 'react-router-dom';
 
 interface UrlInputSectionProps {
   onUrlSubmit: (url: string, videoInfo: any) => void;
@@ -14,6 +15,7 @@ interface UrlInputSectionProps {
 const UrlInputSection = ({ onUrlSubmit, onOpenNewsletter, onPresetChange }: UrlInputSectionProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const isMobile = useIsMobile();
+  const navigate = useNavigate();
   
   const handleUrlSubmit = async (url: string) => {
     setIsLoading(true);
@@ -45,13 +47,7 @@ const UrlInputSection = ({ onUrlSubmit, onOpenNewsletter, onPresetChange }: UrlI
   };
 
   const handleCameraSelect = () => {
-    if (!isDesktopEnvironment()) {
-      toast.info("Camera selection is only available in desktop environments.");
-      return;
-    }
-    
-    toast.info("This would open a camera selection dialog in a desktop environment");
-    console.log("Opening camera selection dialog (simulation)");
+    navigate('/my-videos');
   };
 
   return (
