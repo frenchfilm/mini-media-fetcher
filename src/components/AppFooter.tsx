@@ -53,7 +53,7 @@ const AppFooter: React.FC<AppFooterProps> = ({
     : "/lovable-uploads/7029e891-526b-4b46-a124-2069241819d7.png";
 
   return (
-    <footer className="h-auto min-h-[72px] w-full flex flex-col items-center mt-2">
+    <footer className="absolute bottom-0 left-0 right-0 h-auto min-h-[72px] w-full flex flex-col items-center mt-2 z-10">
       {/* Use flex-col-reverse to put right column on top and left column on bottom */}
       <div className={`w-full flex ${isMobile ? 'flex-col-reverse gap-4' : 'flex-row'}`}>
         {/* Left Column - Logo, App Name, Version, Update Link */}
