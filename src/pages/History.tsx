@@ -13,7 +13,12 @@ const History = () => {
   };
 
   return (
-    <div className={theme === "dark" ? "bg-[#111827]" : "bg-[#e9e2d0]"} style={{ minHeight: "100vh" }}>
+    <div 
+      className={`
+        ${theme === "dark" ? "bg-[#111827]" : "bg-[#e4d2af]"} 
+        min-h-screen
+      `}
+    >
       <DownloadHistory 
         downloads={downloads} 
         onClearHistory={clearHistory} 
