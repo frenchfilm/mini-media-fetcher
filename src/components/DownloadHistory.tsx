@@ -103,27 +103,16 @@ const DownloadHistory = ({ downloads, onClearHistory, onOpenFile }: DownloadHist
                 )}
               </div>
               
-              {/* Title */}
-              <div className="flex-1 min-w-0 mr-2">
+              {/* Two-line layout for video details */}
+              <div className="flex-1 min-w-0 flex flex-col">
+                {/* Top line: title */}
                 <h4 className={`text-sm font-medium truncate ${textColor}`}>{item.title}</h4>
-              </div>
-              
-              {/* Metadata in a compact row */}
-              <div className="flex items-center space-x-4 mr-2 flex-shrink-0">
-                <div className="flex items-center text-xs">
-                  <span className={`${mutedTextColor} mr-1`}>Size:</span>
-                  <span className={textColor}>{item.fileSize || '128.5 MB'}</span>
-                </div>
-                <div className="flex items-center text-xs">
-                  <span className={`${mutedTextColor} mr-1`}>Format:</span>
-                  <span className={textColor}>{item.format.quality} MP4</span>
-                </div>
-                <div className="flex items-center text-xs">
-                  <span className={`${mutedTextColor} mr-1`}>Duration:</span>
+                
+                {/* Bottom line: duration, format, size, date */}
+                <div className="flex items-center space-x-2 text-xs">
                   <span className={textColor}>{item.duration || '10:42'}</span>
-                </div>
-                <div className="flex items-center text-xs">
-                  <span className={`${mutedTextColor} mr-1`}>Date:</span>
+                  <span className={textColor}>{item.format.quality} MP4</span>
+                  <span className={textColor}>{item.fileSize || '128.5 MB'}</span>
                   <span className={textColor}>{formatDate(item.downloadDate)}</span>
                 </div>
               </div>
@@ -157,4 +146,3 @@ const DownloadHistory = ({ downloads, onClearHistory, onOpenFile }: DownloadHist
 };
 
 export default DownloadHistory;
-
