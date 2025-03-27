@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -74,7 +74,7 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
         <div className="border-b pb-2 space-y-2">
           <div className="flex items-center justify-between gap-2">
             <Button 
-              className="app-wide-button-high-contrast flex-1 h-8 text-xs"
+              className="app-wide-button-high-contrast flex-1 h-8 text-xs w-full"
               onClick={handleManageSubscription}
             >
               Manage Subscriptions <ExternalLink className="h-3 w-3 ml-1" />
@@ -84,9 +84,10 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
               href="https://t.me/softbare" 
               target="_blank" 
               rel="noopener noreferrer"
+              className="w-full"
             >
               <Button 
-                className="app-wide-button-high-contrast h-8 text-xs"
+                className="app-wide-button-high-contrast h-8 text-xs w-full"
               >
                 Crypto
               </Button>
