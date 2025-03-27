@@ -64,7 +64,16 @@ const FormatPresetPopover = ({ children, onPresetChange }: FormatPresetPopoverPr
       <PopoverTrigger asChild>
         {children}
       </PopoverTrigger>
-      <PopoverContent className="w-80" align="end">
+      <PopoverContent 
+        className="w-80" 
+        align="end" 
+        side="top" 
+        sideOffset={5}
+        collisionPadding={20}
+        sticky="always"
+        container={document.getElementById("app-container")}
+        avoidCollisions={true}
+      >
         <div className="space-y-4">
           <h3 className="font-medium text-sm">Format & Quality Presets</h3>
           <p className="text-xs text-muted-foreground">
