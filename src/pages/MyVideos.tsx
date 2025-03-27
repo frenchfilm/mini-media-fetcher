@@ -4,11 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import AppLayout from '@/components/AppLayout';
 import DialogManager from '@/components/DialogManager';
-import { Play, Trash2, FolderOpen } from 'lucide-react';
+import { Play, Trash2, FolderOpen, RotateCcw, Copy } from 'lucide-react';
 import { Progress } from "@/components/ui/progress";
 import { useState } from 'react';
+import { toast } from "sonner";
 
-// Sample data for demonstration
+// Sample data including an aborted download
 const sampleVideos = [
   {
     id: '1',
@@ -22,7 +23,8 @@ const sampleVideos = [
     progress: 100,
     downloadedSize: 128,
     totalSize: 128,
-    timeLeft: 0
+    timeLeft: 0,
+    url: 'https://www.youtube.com/watch?v=dpw9EHDh2bM'
   },
   {
     id: '2',
@@ -36,7 +38,8 @@ const sampleVideos = [
     progress: 65,
     downloadedSize: 166.4,
     totalSize: 256,
-    timeLeft: 120
+    timeLeft: 120,
+    url: 'https://www.youtube.com/watch?v=mTz0GXj8NN0'
   },
   {
     id: '3',
@@ -50,20 +53,64 @@ const sampleVideos = [
     progress: 25,
     downloadedSize: 80,
     totalSize: 320,
-    timeLeft: 450
+    timeLeft: 450,
+    url: 'https://www.youtube.com/watch?v=BwuLxPH8IDs'
+  },
+  {
+    id: '4',
+    title: 'Failed Download: React State Management',
+    thumbnail: 'https://i.ytimg.com/vi/4pO-HcG2igk/default.jpg',
+    duration: '33:21',
+    size: '280 MB',
+    format: 'MP4 1080p',
+    date: '2023-06-20',
+    status: 'aborted',
+    progress: 45,
+    downloadedSize: 126,
+    totalSize: 280,
+    timeLeft: 0,
+    error: 'Network connection lost',
+    url: 'https://www.youtube.com/watch?v=4pO-HcG2igk'
   }
 ];
 
 const MyVideos = () => {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
-  const [videos] = useState(sampleVideos);
+  const [videos, setVideos] = useState(sampleVideos);
 
   // Format time display (convert seconds to mm:ss format)
   const formatTime = (seconds: number): string => {
     const mins = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
     return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+  };
+
+  // Handle retry download
+  const handleRetry = (videoId: string) => {
+    toast.success("Retrying download...");
+    setVideos(prevVideos =>
+      prevVideos.map(video =>
+        video.id === videoId ? { ...video, status: 'in_progress', progress: 0, timeLeft: 500 } : video
+      )
+    );
+  };
+
+  // Handle copy URL
+  const handleCopyUrl = (url: string) => {
+    navigator.clipboard.writeText(url).then(() => {
+      toast.success("URL copied to clipboard");
+    }).catch(() => {
+      toast.error("Failed to copy URL");
+    });
+  };
+
+  // Handle delete video
+  const handleDelete = (videoId: string) => {
+    if (confirm("Are you sure you want to delete this download?")) {
+      setVideos(prevVideos => prevVideos.filter(video => video.id !== videoId));
+      toast.success("Download removed");
+    }
   };
 
   return (
@@ -93,7 +140,11 @@ const MyVideos = () => {
             ) : (
               <div className="space-y-3">
                 {videos.map((video) => (
-                  <div key={video.id} className="rounded-lg border bg-card shadow-sm overflow-hidden">
+                  <div 
+                    key={video.id} 
+                    className={`rounded-lg border bg-card shadow-sm overflow-hidden 
+                      ${video.status === 'aborted' ? 'opacity-75 border-destructive/50' : ''}`}
+                  >
                     {/* 1st section: Video summary */}
                     <div className="p-3 flex items-center justify-between">
                       {/* Left column: Thumbnail */}
@@ -116,22 +167,76 @@ const MyVideos = () => {
                           <span>•</span>
                           <span>{video.date}</span>
                         </div>
+                        {video.status === 'aborted' && (
+                          <div className="mt-0.5 text-xs text-destructive">
+                            {video.error || 'Download failed'}
+                          </div>
+                        )}
                       </div>
                       
                       {/* Right column: Action icons */}
                       <div className="flex space-x-2 ml-2">
-                        <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground">
-                          <Play className="h-4 w-4" />
-                          <span className="sr-only">Play</span>
-                        </Button>
-                        <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground">
-                          <Trash2 className="h-4 w-4" />
-                          <span className="sr-only">Delete</span>
-                        </Button>
-                        <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground">
-                          <FolderOpen className="h-4 w-4" />
-                          <span className="sr-only">Open Folder</span>
-                        </Button>
+                        {video.status === 'aborted' ? (
+                          <>
+                            <Button 
+                              variant="ghost" 
+                              size="icon" 
+                              className="h-8 w-8 text-primary hover:text-primary/80"
+                              onClick={() => handleRetry(video.id)}
+                            >
+                              <RotateCcw className="h-4 w-4" />
+                              <span className="sr-only">Retry</span>
+                            </Button>
+                            <Button 
+                              variant="ghost" 
+                              size="icon" 
+                              className="h-8 w-8 text-primary hover:text-primary/80"
+                              onClick={() => handleCopyUrl(video.url)}
+                            >
+                              <Copy className="h-4 w-4" />
+                              <span className="sr-only">Copy URL</span>
+                            </Button>
+                            <Button 
+                              variant="ghost" 
+                              size="icon" 
+                              className="h-8 w-8 text-destructive hover:text-destructive/80"
+                              onClick={() => handleDelete(video.id)}
+                            >
+                              <Trash2 className="h-4 w-4" />
+                              <span className="sr-only">Delete</span>
+                            </Button>
+                          </>
+                        ) : (
+                          <>
+                            <Button 
+                              variant="ghost" 
+                              size="icon" 
+                              className="h-8 w-8 text-muted-foreground"
+                              onClick={() => toast.info(`Playing ${video.title}`)}
+                            >
+                              <Play className="h-4 w-4" />
+                              <span className="sr-only">Play</span>
+                            </Button>
+                            <Button 
+                              variant="ghost" 
+                              size="icon" 
+                              className="h-8 w-8 text-muted-foreground"
+                              onClick={() => handleDelete(video.id)}
+                            >
+                              <Trash2 className="h-4 w-4" />
+                              <span className="sr-only">Delete</span>
+                            </Button>
+                            <Button 
+                              variant="ghost" 
+                              size="icon" 
+                              className="h-8 w-8 text-muted-foreground"
+                              onClick={() => toast.info(`Opening folder for ${video.title}`)}
+                            >
+                              <FolderOpen className="h-4 w-4" />
+                              <span className="sr-only">Open Folder</span>
+                            </Button>
+                          </>
+                        )}
                       </div>
                     </div>
                     
