@@ -1,4 +1,3 @@
-
 import { Card } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
@@ -149,10 +148,6 @@ const DownloadHistory = ({ downloads, onClearHistory, onOpenFile }: DownloadHist
         </div>
       )}
       
-      <div className="softbare-footer">
-        <p className="font-medium">Our Apps are bare - as Nature intended them.</p>
-        <p>Quiet by design, lightweight, no ads, no tracking, just plain function.</p>
-      </div>
     </div>
   );
 };
