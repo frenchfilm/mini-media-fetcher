@@ -93,6 +93,35 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
           </a>
         </div>
         
+        {/* Newsletter Section - Moved back above Contact Us */}
+        <div className="border-b pb-3 mb-2 space-y-2">
+          <h4 className="text-sm font-medium">Newsletter</h4>
+          
+          <div className="flex items-center justify-between">
+            <span className="text-sm">Subscribe to updates</span>
+            <Switch 
+              checked={newsletterEnabled} 
+              onCheckedChange={setNewsletterEnabled} 
+            />
+          </div>
+
+          <form onSubmit={handleSubscribe} className="flex items-center gap-2">
+            <Input
+              type="email"
+              value={subscribeEmail}
+              onChange={(e) => setSubscribeEmail(e.target.value)}
+              placeholder="your.email@example.com"
+              className="h-8 text-sm flex-1 bg-white"
+            />
+            <Button 
+              type="submit" 
+              className="h-8 text-sm app-wide-button-high-contrast"
+            >
+              Subscribe
+            </Button>
+          </form>
+        </div>
+        
         {/* Contact Form Section */}
         <div className="py-1">
           <h3 className="font-semibold text-lg mb-2">Contact Us</h3>
@@ -161,38 +190,10 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
             </DialogFooter>
           </form>
         </div>
-        
-        {/* Newsletter Section - Moved to bottom with more spacing */}
-        <div className="border-t pt-3 mt-2 space-y-2">
-          <h4 className="text-sm font-medium">Newsletter</h4>
-          
-          <div className="flex items-center justify-between">
-            <span className="text-sm">Subscribe to updates</span>
-            <Switch 
-              checked={newsletterEnabled} 
-              onCheckedChange={setNewsletterEnabled} 
-            />
-          </div>
-
-          <form onSubmit={handleSubscribe} className="flex items-center gap-2">
-            <Input
-              type="email"
-              value={subscribeEmail}
-              onChange={(e) => setSubscribeEmail(e.target.value)}
-              placeholder="your.email@example.com"
-              className="h-8 text-sm flex-1 bg-white"
-            />
-            <Button 
-              type="submit" 
-              className="h-8 text-sm app-wide-button-high-contrast"
-            >
-              Subscribe
-            </Button>
-          </form>
-        </div>
       </DialogContent>
     </Dialog>
   );
 };
 
 export default ContactDialog;
+
