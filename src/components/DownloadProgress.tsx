@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
+
+import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CheckCircle2 } from 'lucide-react';
@@ -25,53 +26,47 @@ const DownloadProgress = ({ videoUrl, selectedFormat, onComplete, onCancel }: Do
   const [downloadedSize, setDownloadedSize] = useState(0);
   const totalSize = 128.5; // Mock total size in MB
   const isMobile = useIsMobile();
-  const containerRef = useRef<HTMLDivElement>(null);
-  
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (containerRef.current) {
-        containerRef.current.focus();
-      }
-      if (document.activeElement instanceof HTMLElement) {
-        document.activeElement.blur();
-      }
-    }, 100);
-    
-    return () => clearTimeout(timer);
-  }, []);
   
   // Mock video details
   const videoTitle = "Sample Video Title - Amazing Content";
   const videoDuration = "10:42";
   
+  // Simulate download progress
   useEffect(() => {
     if (status === 'paused' || status === 'complete') return;
     
     let interval: number;
     
     if (status === 'preparing') {
+      // Simulate preparation time (3 seconds)
       interval = window.setTimeout(() => {
         setStatus('downloading');
         toast.info("Download started");
       }, 3000);
     } else {
+      // Simulate download progress
       interval = window.setInterval(() => {
         setProgress(prevProgress => {
           const increment = Math.random() * 5 + 1;
           const newProgress = Math.min(prevProgress + increment, 100);
           
+          // Update downloaded size
           setDownloadedSize((newProgress / 100) * totalSize);
           
+          // Update download speed (simulate between 1-10 MB/s)
           const speed = (Math.random() * 9 + 1).toFixed(1);
           setDownloadSpeed(`${speed} MB/s`);
           
+          // Update elapsed time (in seconds)
           setElapsedTime(prev => prev + 1);
           
+          // Calculate estimated time left
           const remainingPercentage = 100 - newProgress;
           const timePerPercentage = elapsedTime / newProgress;
           const estimatedSeconds = remainingPercentage * timePerPercentage;
           setEstimatedTimeLeft(Math.round(estimatedSeconds));
           
+          // Complete the download when progress reaches 100%
           if (newProgress >= 100) {
             setStatus('complete');
             clearInterval(interval);
@@ -105,24 +100,20 @@ const DownloadProgress = ({ videoUrl, selectedFormat, onComplete, onCancel }: Do
   };
 
   return (
-    <div 
-      className="w-full max-w-xl mx-auto px-1 sm:px-0"
-      ref={containerRef}
-      tabIndex={-1}
-    >
+    <div className="w-full max-w-xl mx-auto px-1 sm:px-0">
       <div className="flex justify-between items-center mb-3">
         <Button 
           size="sm"
           className="px-3 py-1 h-8 text-xs font-semibold app-wide-button-high-contrast"
           onClick={onCancel}
-          autoFocus={false}
         >
           {isMobile ? "←" : "← Back"}
         </Button>
         <h2 className="text-base font-fraunces text-center">Download Progress</h2>
-        <div className="w-[60px]"></div>
+        <div className="w-[60px]"></div> {/* Empty div for flex spacing */}
       </div>
       
+      {/* Video details card */}
       <VideoDetailsCard 
         title={videoTitle}
         duration={videoDuration}
@@ -130,6 +121,7 @@ const DownloadProgress = ({ videoUrl, selectedFormat, onComplete, onCancel }: Do
         selectedFormat={selectedFormat}
       />
       
+      {/* Progress section */}
       <Card className="p-3 mb-3 bg-card/80">
         <ProgressIndicator 
           progress={progress}
@@ -141,6 +133,7 @@ const DownloadProgress = ({ videoUrl, selectedFormat, onComplete, onCancel }: Do
         />
       </Card>
       
+      {/* Action buttons */}
       <DownloadActionButtons
         status={status}
         onTogglePause={togglePause}

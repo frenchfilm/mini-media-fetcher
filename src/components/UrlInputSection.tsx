@@ -5,7 +5,6 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import VideoUrlInput from "@/components/VideoUrlInput";
 import { VideoFormat } from '@/components/VideoFormatSelector';
 import { useNavigate } from 'react-router-dom';
-import FocusableInput from './FocusableInput';
 
 interface UrlInputSectionProps {
   onUrlSubmit: (url: string, videoInfo: any) => void;

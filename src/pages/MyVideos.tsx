@@ -1,4 +1,3 @@
-
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -6,12 +5,10 @@ import AppLayout from '@/components/AppLayout';
 import DialogManager from '@/components/DialogManager';
 import { Trash2, FolderOpen, RotateCcw, Copy, Play, Pause, Square } from 'lucide-react';
 import { Progress } from "@/components/ui/progress";
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { toast } from "sonner";
-import { VideoData } from '@/types/video';
 
-// Sample data moved to a constant at the top of the file
-const sampleVideos: VideoData[] = [
+const sampleVideos = [
   {
     id: '1',
     title: 'React Hooks Tutorial for Beginners',
@@ -78,22 +75,7 @@ const sampleVideos: VideoData[] = [
 const MyVideos = () => {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
-  const [videos, setVideos] = useState<VideoData[]>(sampleVideos);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  // Add focus management
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (containerRef.current) {
-        containerRef.current.focus();
-      }
-      if (document.activeElement instanceof HTMLElement) {
-        document.activeElement.blur();
-      }
-    }, 100);
-    
-    return () => clearTimeout(timer);
-  }, []);
+  const [videos, setVideos] = useState(sampleVideos);
 
   const formatTime = (seconds: number): string => {
     const mins = Math.floor(seconds / 60);
@@ -155,17 +137,12 @@ const MyVideos = () => {
           onOpenNewsletter={openNewsletter}
           onOpenContact={openContact}
         >
-          <div 
-            className="flex-1 flex flex-col w-full max-w-xl mx-auto px-1 sm:px-0"
-            ref={containerRef}
-            tabIndex={-1}
-          >
+          <div className="flex-1 flex flex-col w-full max-w-xl mx-auto px-1 sm:px-0">
             <div className="flex justify-between items-center mb-3">
               <Button 
                 size="sm"
                 className="px-3 py-1 h-8 text-xs font-semibold app-wide-button-high-contrast"
                 onClick={() => navigate('/')}
-                autoFocus={false}
               >
                 {isMobile ? "←" : "← Back"}
               </Button>

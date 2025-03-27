@@ -1,11 +1,13 @@
 
-import { useState, useEffect, useRef } from 'react';
-import { Input } from "@/components/ui/input";
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from "@/components/ui/button";
-import { Folder, Camera } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { toast } from 'sonner';
+import { ArrowRight, X, Loader2, FolderOpen, Settings2, Clock } from 'lucide-react';
+import { validateUrl } from '@/utils/urlValidation';
 import { useIsMobile } from '@/hooks/use-mobile';
-import FormatPresetPopover from "./FormatPresetPopover";
-import { VideoFormat } from './VideoFormatSelector';
+import FormatPresetPopover from '@/components/FormatPresetPopover';
+import { VideoFormat } from '@/components/VideoFormatSelector';
 
 interface VideoUrlInputProps {
   onSubmit: (url: string) => void;
@@ -16,90 +18,138 @@ interface VideoUrlInputProps {
 }
 
 const VideoUrlInput = ({ 
-  onSubmit,
-  isLoading = false,
+  onSubmit, 
+  isLoading = false, 
   onFolderSelect,
   onPresetChange,
-  onCameraSelect
+  onCameraSelect 
 }: VideoUrlInputProps) => {
   const [url, setUrl] = useState('');
+  const [isValidating, setIsValidating] = useState(false);
   const isMobile = useIsMobile();
   const inputRef = useRef<HTMLInputElement>(null);
-  
-  // Auto-focus on the input when the component mounts
+
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
   }, []);
-  
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (url.trim()) {
-      onSubmit(url.trim());
+    if (!url.trim()) {
+      toast.error("Please enter a video URL");
+      return;
+    }
+    
+    setIsValidating(true);
+    
+    setTimeout(() => {
+      if (validateUrl(url)) {
+        onSubmit(url);
+      } else {
+        toast.error("Please enter a valid URL format");
+      }
+      setIsValidating(false);
+    }, 300);
+  };
+
+  const clearInput = () => {
+    setUrl('');
+    if (inputRef.current) {
+      inputRef.current.focus();
     }
   };
-  
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUrl(e.target.value);
-  };
-  
+
+  const showLoading = isValidating || isLoading;
+
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto">
-      <div className="relative flex items-center">
-        <Input
-          ref={inputRef}
-          type="text"
-          placeholder="Paste a YouTube URL here..."
-          value={url}
-          onChange={handleChange}
-          className="pr-24"
-          disabled={isLoading}
-        />
-        
-        <div className="absolute right-2 flex items-center">
-          {!isMobile && onFolderSelect && (
+    <form 
+      onSubmit={handleSubmit} 
+      className="w-full max-w-xs sm:max-w-2xl mx-auto flex flex-col items-center space-y-2"
+    >
+      <div className="flex items-stretch gap-1 w-full">
+        <div className="rounded-md bg-white border border-secondary/70 flex items-center overflow-hidden flex-1 dark:bg-secondary dark:border-border">
+          <Input
+            ref={inputRef}
+            type="text"
+            placeholder="Paste URL here"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            className="border-0 h-10 px-3 bg-transparent text-foreground focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-muted-foreground/70 dark:placeholder:text-secondary-foreground/70 dark:text-secondary-foreground"
+            disabled={showLoading}
+          />
+          
+          {url && !showLoading && (
             <Button
               type="button"
-              size="icon"
               variant="ghost"
-              className="h-8 w-8 mr-0.5"
-              onClick={onFolderSelect}
-              disabled={isLoading}
-            >
-              <Folder className="h-4 w-4" />
-              <span className="sr-only">Select Folder</span>
-            </Button>
-          )}
-          
-          {onCameraSelect && (
-            <Button
-              type="button"
               size="icon"
-              variant="ghost"
-              className="h-8 w-8 mr-0.5"
-              onClick={onCameraSelect}
-              disabled={isLoading}
+              onClick={clearInput}
+              className="mr-1 h-7 w-7 rounded-full text-muted-foreground hover:text-foreground dark:text-secondary-foreground dark:hover:text-secondary-foreground"
             >
-              <Camera className="h-4 w-4" />
-              <span className="sr-only">My Videos</span>
+              <X className="h-3 w-3" />
+              <span className="sr-only">Clear</span>
             </Button>
-          )}
-          
-          {onPresetChange && (
-            <FormatPresetPopover onChange={onPresetChange} />
           )}
         </div>
+        
+        <Button
+          type="submit"
+          variant="contrast"
+          size="icon"
+          disabled={showLoading || !url.trim()}
+          className="h-10 w-10 rounded-md app-wide-button-high-contrast"
+        >
+          {showLoading ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          ) : (
+            <ArrowRight className="h-4 w-4" />
+          )}
+          <span className="sr-only">Get Video</span>
+        </Button>
       </div>
-      
-      <Button
-        type="submit"
-        className="w-full mt-2"
-        disabled={!url.trim() || isLoading}
-      >
-        {isLoading ? 'Processing...' : 'Get Video'}
-      </Button>
+
+      <div className="flex items-center gap-2 w-full max-w-xs sm:max-w-2xl">
+        {onPresetChange && (
+          <div onClick={(e) => e.stopPropagation()}>
+            <FormatPresetPopover onPresetChange={onPresetChange}>
+              <div className="h-10 w-10 rounded-md app-wide-button-high-contrast flex items-center justify-center">
+                <Settings2 className="h-4 w-4" />
+                <span className="sr-only">Format preset settings</span>
+              </div>
+            </FormatPresetPopover>
+          </div>
+        )}
+
+        {onFolderSelect && (
+          <Button
+            type="button"
+            variant="contrast"
+            onClick={onFolderSelect}
+            size="icon"
+            className="h-10 w-10 rounded-md app-wide-button-high-contrast"
+            disabled={showLoading}
+          >
+            <FolderOpen className="h-4 w-4" />
+            <span className="sr-only">Select folder</span>
+          </Button>
+        )}
+        
+        {onCameraSelect && (
+          <Button
+            type="button"
+            onClick={onCameraSelect}
+            size="icon"
+            className="h-10 w-10 rounded-md app-wide-button-high-contrast"
+            disabled={showLoading}
+          >
+            <Clock className="h-4 w-4" />
+            <span className="sr-only">View Download History</span>
+          </Button>
+        )}
+      </div>
     </form>
   );
 };
