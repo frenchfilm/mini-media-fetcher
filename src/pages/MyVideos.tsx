@@ -25,7 +25,7 @@ const MyVideos = () => {
               >
                 {isMobile ? "←" : "← Back"}
               </Button>
-              <h2 className="text-base font-fraunces text-center">My Videos</h2>
+              <h2 className="text-base font-fraunces text-center">Download History</h2>
               <div className="w-[60px]"></div> {/* Empty div for flex spacing */}
             </div>
             
