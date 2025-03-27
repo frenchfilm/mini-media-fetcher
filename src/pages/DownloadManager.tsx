@@ -1,3 +1,4 @@
+
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -112,6 +113,15 @@ const DownloadManager = () => {
     setVideos(prevVideos =>
       prevVideos.map(video =>
         video.id === videoId ? { ...video, status: 'paused', timeLeft: video.timeLeft } : video
+      )
+    );
+  };
+
+  const handleResume = (videoId: string) => {
+    toast.info("Download resumed");
+    setVideos(prevVideos =>
+      prevVideos.map(video =>
+        video.id === videoId ? { ...video, status: 'in_progress', timeLeft: video.timeLeft } : video
       )
     );
   };
@@ -249,16 +259,20 @@ const DownloadManager = () => {
                               <span className="sr-only">Open Folder</span>
                             </Button>
                           </>
-                        ) : video.status === 'in_progress' ? (
+                        ) : video.status === 'in_progress' || video.status === 'paused' ? (
                           <>
                             <Button 
                               variant="ghost" 
                               size="icon" 
                               className="h-8 w-8 text-muted-foreground"
-                              onClick={() => handlePause(video.id)}
+                              onClick={() => video.status === 'paused' ? handleResume(video.id) : handlePause(video.id)}
                             >
-                              <Pause className="h-4 w-4" />
-                              <span className="sr-only">Pause</span>
+                              {video.status === 'paused' ? (
+                                <Play className="h-4 w-4" />
+                              ) : (
+                                <Pause className="h-4 w-4" />
+                              )}
+                              <span className="sr-only">{video.status === 'paused' ? 'Resume' : 'Pause'}</span>
                             </Button>
                             <Button 
                               variant="ghost" 
@@ -283,7 +297,7 @@ const DownloadManager = () => {
                       </div>
                     </div>
                     
-                    {video.status === 'in_progress' && (
+                    {(video.status === 'in_progress' || video.status === 'paused') && (
                       <div className="p-3 pt-0 border-t">
                         <div className="mb-1">
                           <Progress value={video.progress} className="h-1" />
@@ -294,7 +308,7 @@ const DownloadManager = () => {
                             {video.downloadedSize} MB / {video.totalSize} MB
                           </span>
                           <span>
-                            Time left: {formatTime(video.timeLeft)}
+                            {video.status === 'paused' ? 'Paused' : `Time left: ${formatTime(video.timeLeft)}`}
                           </span>
                         </div>
                       </div>
