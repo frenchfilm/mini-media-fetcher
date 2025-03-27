@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { VideoFormat } from "@/components/VideoFormatSelector";
 import { History } from "lucide-react";
@@ -57,11 +56,11 @@ const FormatPresetPopover = ({ children, onPresetChange }: FormatPresetPopoverPr
       
       <Button
         onClick={handleOpenHistory}
-        variant="outline"
-        size="icon"
+        className="p-0 m-0 h-auto bg-transparent hover:bg-transparent"
+        type="button"
         aria-label="View download history"
       >
-        <History className="h-4 w-4" />
+        <History className="w-4 h-4 text-muted-foreground" />
       </Button>
     </div>
   );
