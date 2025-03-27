@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -9,6 +10,7 @@ import ProgressIndicator from '../components/download/ProgressIndicator';
 import DownloadActionButtons from '../components/download/DownloadActionButtons';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useNavigate } from 'react-router-dom';
+import AppLayout from '@/components/AppLayout';
 
 const MyVideos = () => {
   const [progress, setProgress] = useState(0);
@@ -99,46 +101,48 @@ const MyVideos = () => {
   };
 
   return (
-    <div className="flex-1 flex flex-col w-full max-w-xl mx-auto px-1 sm:px-0">
-      <div className="flex justify-between items-center mb-3">
-        <Button 
-          size="sm"
-          className="px-3 py-1 h-8 text-xs font-semibold app-wide-button-high-contrast"
-          onClick={() => navigate('/')}
-        >
-          {isMobile ? "←" : "← Back"}
-        </Button>
-        <h2 className="text-base font-fraunces text-center">My Videos</h2>
-        <div className="w-[60px]"></div> {/* Empty div for flex spacing */}
-      </div>
-      
-      {/* Video details card */}
-      <VideoDetailsCard 
-        title={videoTitle}
-        duration={videoDuration}
-        totalSize={totalSize}
-        selectedFormat={selectedFormat}
-      />
-      
-      {/* Progress section */}
-      <Card className="p-3 mb-3 bg-card/80">
-        <ProgressIndicator 
-          progress={progress}
-          status={status}
-          downloadSpeed={downloadSpeed}
-          downloadedSize={downloadedSize}
+    <AppLayout>
+      <div className="flex-1 flex flex-col w-full max-w-xl mx-auto px-1 sm:px-0">
+        <div className="flex justify-between items-center mb-3">
+          <Button 
+            size="sm"
+            className="px-3 py-1 h-8 text-xs font-semibold app-wide-button-high-contrast"
+            onClick={() => navigate('/')}
+          >
+            {isMobile ? "←" : "← Back"}
+          </Button>
+          <h2 className="text-base font-fraunces text-center">My Videos</h2>
+          <div className="w-[60px]"></div> {/* Empty div for flex spacing */}
+        </div>
+        
+        {/* Video details card */}
+        <VideoDetailsCard 
+          title={videoTitle}
+          duration={videoDuration}
           totalSize={totalSize}
-          estimatedTimeLeft={estimatedTimeLeft}
+          selectedFormat={selectedFormat}
         />
-      </Card>
-      
-      {/* Action buttons */}
-      <DownloadActionButtons
-        status={status}
-        onTogglePause={togglePause}
-        onCancel={handleCancel}
-      />
-    </div>
+        
+        {/* Progress section */}
+        <Card className="p-3 mb-3 bg-card/80">
+          <ProgressIndicator 
+            progress={progress}
+            status={status}
+            downloadSpeed={downloadSpeed}
+            downloadedSize={downloadedSize}
+            totalSize={totalSize}
+            estimatedTimeLeft={estimatedTimeLeft}
+          />
+        </Card>
+        
+        {/* Action buttons */}
+        <DownloadActionButtons
+          status={status}
+          onTogglePause={togglePause}
+          onCancel={handleCancel}
+        />
+      </div>
+    </AppLayout>
   );
 };
 
