@@ -51,7 +51,7 @@ const DownloadHistory = ({ downloads, onClearHistory, onOpenFile }: DownloadHist
   const buttonBgColor = theme === "dark" ? "bg-[#e8d1aa] text-[#0f1118]" : "bg-[#0f1118] text-[#e8d1aa]";
 
   return (
-    <div className="w-full max-w-xl mx-auto">
+    <div className="w-full max-w-xl mx-auto h-full flex flex-col">
       <div className={`flex justify-between items-center mb-4 py-3 px-4 ${headerBgColor}`}>
         <Button 
           variant="highContrast" 
@@ -75,72 +75,74 @@ const DownloadHistory = ({ downloads, onClearHistory, onOpenFile }: DownloadHist
         </Button>
       </div>
       
-      {downloads.length === 0 ? (
-        <div className={`text-center py-16 ${mutedTextColor}`}>
-          <Download className="h-12 w-12 mx-auto mb-4 opacity-30" />
-          <p className="text-lg">Your download history will appear here</p>
-        </div>
-      ) : (
-        <div className="space-y-1 px-2">
-          {downloads.map((item) => (
-            <div 
-              key={item.id} 
-              className={`flex items-center p-2 rounded-md ${itemBgColor} border border-[#9c8e6c]/20`}
-            >
-              {/* Updated thumbnail size */}
+      <ScrollArea className="flex-1 overflow-auto">
+        {downloads.length === 0 ? (
+          <div className={`text-center py-16 ${mutedTextColor}`}>
+            <Download className="h-12 w-12 mx-auto mb-4 opacity-30" />
+            <p className="text-lg">Your download history will appear here</p>
+          </div>
+        ) : (
+          <div className="space-y-1 px-2 pb-4">
+            {downloads.map((item) => (
               <div 
-                className="w-[54px] h-[36px] rounded bg-muted flex-shrink-0 overflow-hidden bg-cover bg-center mr-3"
-                style={{ 
-                  backgroundImage: item.thumbnailUrl ? `url(${item.thumbnailUrl})` : undefined,
-                  backgroundColor: !item.thumbnailUrl ? '#e9e2d0' : undefined
-                }}
+                key={item.id} 
+                className={`flex items-center p-2 rounded-md ${itemBgColor} border border-[#9c8e6c]/20`}
               >
-                {!item.thumbnailUrl && (
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground/30">
-                    <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.85.84 6.72 2.28"/>
-                    <path d="M21 3v9h-9"/>
-                  </svg>
-                )}
-              </div>
-              
-              {/* Two-line layout for video details */}
-              <div className="flex-1 min-w-0 flex flex-col">
-                {/* Top line: title */}
-                <h4 className={`text-sm font-medium truncate ${textColor}`}>{item.title}</h4>
+                {/* Updated thumbnail size */}
+                <div 
+                  className="w-[54px] h-[36px] rounded bg-muted flex-shrink-0 overflow-hidden bg-cover bg-center mr-3"
+                  style={{ 
+                    backgroundImage: item.thumbnailUrl ? `url(${item.thumbnailUrl})` : undefined,
+                    backgroundColor: !item.thumbnailUrl ? '#e9e2d0' : undefined
+                  }}
+                >
+                  {!item.thumbnailUrl && (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground/30">
+                      <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.85.84 6.72 2.28"/>
+                      <path d="M21 3v9h-9"/>
+                    </svg>
+                  )}
+                </div>
                 
-                {/* Bottom line: duration, format, size, date */}
-                <div className="flex items-center space-x-2 text-xs">
-                  <span className={textColor}>{item.duration || '10:42'}</span>
-                  <span className={textColor}>{item.format.quality} MP4</span>
-                  <span className={textColor}>{item.fileSize || '128.5 MB'}</span>
-                  <span className={textColor}>{formatDate(item.downloadDate)}</span>
+                {/* Two-line layout for video details */}
+                <div className="flex-1 min-w-0 flex flex-col">
+                  {/* Top line: title */}
+                  <h4 className={`text-sm font-medium truncate ${textColor}`}>{item.title}</h4>
+                  
+                  {/* Bottom line: duration, format, size, date */}
+                  <div className="flex items-center space-x-2 text-xs">
+                    <span className={textColor}>{item.duration || '10:42'}</span>
+                    <span className={textColor}>{item.format.quality} MP4</span>
+                    <span className={textColor}>{item.fileSize || '128.5 MB'}</span>
+                    <span className={textColor}>{formatDate(item.downloadDate)}</span>
+                  </div>
+                </div>
+                
+                {/* Action buttons */}
+                <div className="flex space-x-1 flex-shrink-0">
+                  <Button
+                    size="icon"
+                    className={`h-6 w-6 rounded-md ${theme === "dark" ? "bg-[#e8d1aa] text-[#0f1118]" : "bg-[#e8d1aa] text-[#0f1118]"} hover:opacity-90`}
+                    onClick={() => toast.info(`Playing ${item.title}`)}
+                  >
+                    <Play className="h-3 w-3" />
+                    <span className="sr-only">Play</span>
+                  </Button>
+                  <Button
+                    size="icon"
+                    variant="outline"
+                    className={`h-6 w-6 rounded-md ${theme === "dark" ? "bg-[#e8d1aa] text-[#0f1118]" : "bg-[#e8d1aa] text-[#0f1118]"} border-none hover:opacity-90`}
+                    onClick={() => toast.info(`Delete ${item.title}`)}
+                  >
+                    <Trash2 className="h-3 w-3" />
+                    <span className="sr-only">Delete</span>
+                  </Button>
                 </div>
               </div>
-              
-              {/* Action buttons */}
-              <div className="flex space-x-1 flex-shrink-0">
-                <Button
-                  size="icon"
-                  className={`h-6 w-6 rounded-md ${theme === "dark" ? "bg-[#e8d1aa] text-[#0f1118]" : "bg-[#e8d1aa] text-[#0f1118]"} hover:opacity-90`}
-                  onClick={() => toast.info(`Playing ${item.title}`)}
-                >
-                  <Play className="h-3 w-3" />
-                  <span className="sr-only">Play</span>
-                </Button>
-                <Button
-                  size="icon"
-                  variant="outline"
-                  className={`h-6 w-6 rounded-md ${theme === "dark" ? "bg-[#e8d1aa] text-[#0f1118]" : "bg-[#e8d1aa] text-[#0f1118]"} border-none hover:opacity-90`}
-                  onClick={() => toast.info(`Delete ${item.title}`)}
-                >
-                  <Trash2 className="h-3 w-3" />
-                  <span className="sr-only">Delete</span>
-                </Button>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+            ))}
+          </div>
+        )}
+      </ScrollArea>
     </div>
   );
 };

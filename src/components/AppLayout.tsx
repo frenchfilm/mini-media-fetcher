@@ -37,16 +37,18 @@ const AppLayout = ({
       style={{ position: 'relative', overflow: 'hidden' }}
     >
       {/* Body Section with proper padding */}
-      <main className="flex-1 w-full overflow-auto mb-2">
+      <main className="flex-1 w-full overflow-hidden mb-2 relative">
         {children}
       </main>
       
-      {/* Footer Section - Now flexible height for mobile */}
-      <AppFooter 
-        onOpenNewsletter={handleOpenNewsletter}
-        onOpenContact={handleContactClick}
-        downloadsCount={downloadsCount}
-      />
+      {/* Footer Section - Now with higher z-index to sit on top */}
+      <div className="relative z-10 bg-background">
+        <AppFooter 
+          onOpenNewsletter={handleOpenNewsletter}
+          onOpenContact={handleContactClick}
+          downloadsCount={downloadsCount}
+        />
+      </div>
     </div>
   );
 };
