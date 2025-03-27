@@ -5,6 +5,7 @@ import AppLayout from '@/components/AppLayout';
 import DialogManager from '@/components/DialogManager';
 import VideoList, { VideoData } from '@/components/video/VideoList';
 import PageHeader from '@/components/video/PageHeader';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 const sampleVideos: VideoData[] = [
   {
@@ -138,11 +139,12 @@ const DownloadManager = () => {
           onOpenNewsletter={openNewsletter}
           onOpenContact={openContact}
         >
-          <div className="flex-1 flex flex-col w-full max-w-xl mx-auto px-1 sm:px-0">
+          <div className="flex flex-col w-full max-w-xl mx-auto h-full">
             <PageHeader title="Download Manager" />
-            <div className="overflow-y-auto">
+            
+            <ScrollArea className="flex-1 w-full pr-4">
               <VideoList videos={videos} onVideosChange={setVideos} />
-            </div>
+            </ScrollArea>
           </div>
         </AppLayout>
       )}
