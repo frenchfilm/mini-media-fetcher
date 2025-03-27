@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { getVideoDetails, isDesktopEnvironment } from '@/utils/videoUtils';
@@ -47,7 +48,7 @@ const UrlInputSection = ({ onUrlSubmit, onOpenNewsletter, onPresetChange }: UrlI
   };
 
   const handleCameraSelect = () => {
-    navigate('/my-videos');
+    navigate('/download-manager');
   };
 
   return (
