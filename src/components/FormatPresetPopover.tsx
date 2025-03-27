@@ -22,10 +22,10 @@ interface FormatPresetPopoverProps {
 }
 
 export const VIDEO_FORMATS: VideoFormat[] = [
-  { id: "mp4-video", label: "MP4 Video", ext: ".mp4", type: "video" },
-  { id: "webm-video", label: "WebM Video", ext: ".webm", type: "video" },
-  { id: "mp3-audio", label: "MP3 Audio", ext: ".mp3", type: "audio" },
-  { id: "wav-audio", label: "WAV Audio", ext: ".wav", type: "audio" },
+  { id: 'mp4-1080p', quality: 'High', resolution: '1080p', fileSize: '~120 MB' },
+  { id: 'mp4-720p', quality: 'Medium', resolution: '720p', fileSize: '~80 MB' },
+  { id: 'mp4-480p', quality: 'Low', resolution: '480p', fileSize: '~45 MB' },
+  { id: 'mp4-360p', quality: 'Very Low', resolution: '360p', fileSize: '~25 MB' },
 ];
 
 export const QUALITY_OPTIONS = [
@@ -86,7 +86,7 @@ const FormatPresetPopover = ({ children, onPresetChange }: FormatPresetPopoverPr
                 <SelectContent>
                   {VIDEO_FORMATS.map((format) => (
                     <SelectItem key={format.id} value={format.id}>
-                      {format.label}
+                      {format.quality} ({format.resolution})
                     </SelectItem>
                   ))}
                 </SelectContent>
