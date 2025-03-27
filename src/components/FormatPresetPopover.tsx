@@ -42,7 +42,7 @@ const FormatPresetPopover = ({ children, onPresetChange }: FormatPresetPopoverPr
     e.stopPropagation();
     
     // Navigate to history page
-    navigate('/history');
+    navigate('/history-page');
   };
 
   return (
