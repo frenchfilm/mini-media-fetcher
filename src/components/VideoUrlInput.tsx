@@ -128,9 +128,9 @@ const VideoUrlInput = ({
           <FormatPresetPopover onPresetChange={onPresetChange}>
             <Button
               type="button"
-              variant="outline"
+              variant="contrast"
               size="icon"
-              className="h-10 w-10 rounded-md border-primary/30"
+              className="h-10 w-10 rounded-md app-wide-button-high-contrast"
               disabled={showLoading}
             >
               <Settings2 className="h-4 w-4" />
