@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -27,11 +26,9 @@ const MyVideos = () => {
   const videoDuration = "10:42";
   const selectedFormat: VideoFormat = {
     id: 'mp4-1080p',
-    label: 'MP4 1080p',
-    icon: 'video',
-    type: 'video',
-    fileSize: '128.5 MB',
-    bitrate: '5 Mbps'
+    quality: 'High',
+    resolution: '1080p',
+    fileSize: '~120 MB'
   };
   
   // Simulate download progress
