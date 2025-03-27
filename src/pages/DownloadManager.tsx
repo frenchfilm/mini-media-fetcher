@@ -6,7 +6,7 @@ import AppLayout from '@/components/AppLayout';
 import DialogManager from '@/components/DialogManager';
 import { Trash2, FolderOpen, RotateCcw, Copy, Play, Pause, Square } from 'lucide-react';
 import { Progress } from "@/components/ui/progress";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { toast } from "sonner";
 
 const sampleVideos = [
@@ -77,6 +77,16 @@ const DownloadManager = () => {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
   const [videos, setVideos] = useState(sampleVideos);
+
+  // Prevent focus on back button after navigation
+  useEffect(() => {
+    // Prevent the browser from auto-focusing the ← Back button after page navigation
+    // This removes the blinking text cursor that appears inside the button on page load
+    setTimeout(() => {
+      const el = document.activeElement
+      if (el?.tagName === 'BUTTON') el.blur()
+    }, 30)
+  }, []);
 
   const formatTime = (seconds: number): string => {
     const mins = Math.floor(seconds / 60);

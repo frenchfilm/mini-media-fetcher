@@ -31,6 +31,16 @@ const DownloadProgress = ({ videoUrl, selectedFormat, onComplete, onCancel }: Do
   const videoTitle = "Sample Video Title - Amazing Content";
   const videoDuration = "10:42";
   
+  // Prevent focus on back button after navigation
+  useEffect(() => {
+    // Prevent the browser from auto-focusing the ← Back button after page navigation
+    // This removes the blinking text cursor that appears inside the button on page load
+    setTimeout(() => {
+      const el = document.activeElement
+      if (el?.tagName === 'BUTTON') el.blur()
+    }, 30)
+  }, []);
+  
   // Simulate download progress
   useEffect(() => {
     if (status === 'paused' || status === 'complete') return;

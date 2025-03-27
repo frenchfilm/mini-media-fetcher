@@ -54,6 +54,11 @@
     @apply font-fraunces;
   }
   
+  /* Prevent text cursor on buttons */
+  button {
+    caret-color: transparent;
+  }
+  
   /* Scrollbar styling */
   ::-webkit-scrollbar {
     width: 8px;
