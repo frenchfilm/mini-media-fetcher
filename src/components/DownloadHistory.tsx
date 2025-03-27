@@ -1,4 +1,3 @@
-
 import { Card } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
@@ -29,7 +28,6 @@ interface DownloadHistoryProps {
 const DownloadHistory = ({ downloads, onClearHistory, onOpenFile }: DownloadHistoryProps) => {
   const { theme } = useTheme();
   
-  // Format date to readable format
   const formatDate = (date: Date): string => {
     return new Intl.DateTimeFormat('en-US', {
       year: 'numeric',
@@ -45,7 +43,6 @@ const DownloadHistory = ({ downloads, onClearHistory, onOpenFile }: DownloadHist
     }
   };
 
-  // Determine background color based on theme
   const itemBgColor = theme === "dark" ? "bg-[#1e2130]" : "bg-[#9c8e6c]/40";
   const headerBgColor = theme === "dark" ? "bg-[#0f1118]" : "bg-transparent";
   const textColor = theme === "dark" ? "text-[#e8d1aa]" : "text-[#0f1118]";
@@ -56,17 +53,21 @@ const DownloadHistory = ({ downloads, onClearHistory, onOpenFile }: DownloadHist
     <div className="w-full max-w-xl mx-auto">
       <div className={`flex justify-between items-center mb-6 py-4 px-4 ${headerBgColor}`}>
         <Button 
-          variant="outline" 
-          className={`border-none ${textColor}`}
+          variant="highContrast" 
+          className="app-wide-button-high-contrast"
           onClick={() => window.history.back()}
         >
-          ← Back
+          <ArrowLeft className="h-4 w-4 mr-2" />
+          Back
         </Button>
         <h2 className={`text-xl font-fraunces ${textColor}`}>Downloaded Videos</h2>
         <Button
-          variant="outline"
-          className={`${buttonBgColor} border-none hover:opacity-90`}
-          onClick={() => toast.info("Open download folder")}
+          variant="highContrast"
+          className="app-wide-button-high-contrast"
+          onClick={() => {
+            toast.info("Open download folder");
+            // Add actual open folder functionality if needed
+          }}
         >
           <FolderOpen className="h-4 w-4 mr-2" />
           Open Folder
