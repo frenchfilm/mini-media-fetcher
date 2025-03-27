@@ -8,13 +8,11 @@ import { useTheme } from '@/components/ThemeProvider';
 interface AppFooterProps {
   onOpenNewsletter?: () => void;
   onOpenContact?: () => void;
-  downloadsCount?: number;
 }
 
 const AppFooter: React.FC<AppFooterProps> = ({ 
   onOpenNewsletter, 
-  onOpenContact,
-  downloadsCount = 0
+  onOpenContact
 }) => {
   const version = "v1.0.0";
   const isMobile = useIsMobile();

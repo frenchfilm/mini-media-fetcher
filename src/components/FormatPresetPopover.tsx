@@ -1,8 +1,6 @@
 
 import { Button } from "@/components/ui/button";
 import { VideoFormat } from "@/components/VideoFormatSelector";
-import { History } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 
 export interface FormatPresetPopoverProps {
   children: React.ReactNode;
@@ -24,8 +22,6 @@ export const QUALITY_OPTIONS = [
 ];
 
 const FormatPresetPopover = ({ children, onPresetChange }: FormatPresetPopoverProps) => {
-  const navigate = useNavigate();
-  
   const handleOpenFormatPresetDialog = (e: React.MouseEvent) => {
     // Prevent default behavior to avoid form submission
     e.preventDefault();
@@ -36,15 +32,6 @@ const FormatPresetPopover = ({ children, onPresetChange }: FormatPresetPopoverPr
     document.dispatchEvent(event);
   };
 
-  const handleOpenHistory = (e: React.MouseEvent) => {
-    // Prevent default behavior to avoid form submission
-    e.preventDefault();
-    e.stopPropagation();
-    
-    // Navigate to history page
-    navigate('/history-page');
-  };
-
   return (
     <div className="flex items-center space-x-2">
       <Button 
@@ -53,15 +40,6 @@ const FormatPresetPopover = ({ children, onPresetChange }: FormatPresetPopoverPr
         type="button" // Explicitly set as button type to prevent form submission
       >
         {children}
-      </Button>
-      
-      <Button
-        onClick={handleOpenHistory}
-        className="app-wide-button-high-contrast p-0 m-0 h-10 w-10 rounded-md"
-        type="button"
-        aria-label="View download history"
-      >
-        <History className="w-4 h-4" />
       </Button>
     </div>
   );

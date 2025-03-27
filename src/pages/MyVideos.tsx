@@ -15,7 +15,6 @@ const MyVideos = () => {
         <AppLayout
           onOpenNewsletter={openNewsletter}
           onOpenContact={openContact}
-          downloadsCount={0}
         >
           <div className="flex-1 flex flex-col w-full max-w-xl mx-auto px-1 sm:px-0">
             <div className="flex justify-between items-center mb-3">

@@ -3,7 +3,6 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { VideoFormat } from "@/components/VideoFormatSelector";
 import { getVideoFilePath, isDesktopEnvironment } from "@/utils/videoUtils";
-import { useDownloadHistory } from "@/hooks/useDownloadHistory";
 
 export enum AppState {
   INPUT_URL = "input_url",
@@ -22,7 +21,6 @@ export const useAppState = () => {
   const [videoInfo, setVideoInfo] = useState<any>(null);
   const [selectedFormat, setSelectedFormat] = useState<VideoFormat | null>(null);
   const [formatPreset, setFormatPreset] = useState<FormatPreset>({ format: null, quality: null });
-  const { downloads, addDownload, clearHistory } = useDownloadHistory();
   
   const handleUrlSubmit = (url: string, videoDetails: any) => {
     setVideoUrl(url);
@@ -54,23 +52,6 @@ export const useAppState = () => {
   const handleDownloadComplete = () => {
     if (!videoInfo || !selectedFormat) return;
     
-    const filePath = getVideoFilePath(
-      videoInfo.title, 
-      selectedFormat.id.split('-')[0]
-    );
-    
-    const newDownloadItem = {
-      id: Date.now().toString(),
-      title: videoInfo.title,
-      thumbnailUrl: videoInfo.thumbnailUrl,
-      url: videoUrl,
-      format: selectedFormat,
-      downloadDate: new Date(),
-      filePath: filePath
-    };
-    
-    addDownload(newDownloadItem);
-    
     if (!isDesktopEnvironment()) {
       toast.info("Download completed (simulation mode). In a desktop app, the file would be saved to your Downloads folder.");
     } else {
@@ -101,7 +82,6 @@ export const useAppState = () => {
     videoUrl,
     videoInfo,
     selectedFormat,
-    downloads,
     handleUrlSubmit,
     handleFormatSelect,
     handleStartDownload,

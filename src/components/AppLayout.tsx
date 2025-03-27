@@ -7,14 +7,12 @@ interface AppLayoutProps {
   children: React.ReactNode;
   onOpenNewsletter?: () => void;
   onOpenContact?: () => void;
-  downloadsCount?: number;
 }
 
 const AppLayout = ({ 
   children, 
   onOpenNewsletter,
-  onOpenContact,
-  downloadsCount = 0
+  onOpenContact
 }: AppLayoutProps) => {
   const isMobile = useIsMobile();
 
@@ -45,7 +43,6 @@ const AppLayout = ({
       <AppFooter 
         onOpenNewsletter={handleOpenNewsletter}
         onOpenContact={handleContactClick}
-        downloadsCount={downloadsCount}
       />
     </div>
   );

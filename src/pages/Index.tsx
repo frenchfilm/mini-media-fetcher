@@ -13,7 +13,6 @@ const Index = () => {
     videoUrl,
     videoInfo,
     selectedFormat,
-    downloads,
     handleUrlSubmit,
     handleFormatSelect,
     handleStartDownload,
@@ -60,7 +59,6 @@ const Index = () => {
         <AppLayout 
           onOpenNewsletter={openNewsletter}
           onOpenContact={openContact}
-          downloadsCount={downloads.length}
         >
           <MainContent
             appState={appState}
