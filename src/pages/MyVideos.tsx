@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import AppLayout from '@/components/AppLayout';
 import DialogManager from '@/components/DialogManager';
-import { Trash2, FolderOpen, RotateCcw, Copy, Play } from 'lucide-react';
+import { Trash2, FolderOpen, RotateCcw, Copy, Play, Pause, Square } from 'lucide-react';
 import { Progress } from "@/components/ui/progress";
 import { useState } from 'react';
 import { toast } from "sonner";
@@ -105,6 +105,29 @@ const MyVideos = () => {
       setVideos(prevVideos => prevVideos.filter(video => video.id !== videoId));
       toast.success("Download removed");
     }
+  };
+
+  const handlePause = (videoId: string) => {
+    toast.info("Download paused");
+    setVideos(prevVideos =>
+      prevVideos.map(video =>
+        video.id === videoId ? { ...video, status: 'paused', timeLeft: video.timeLeft } : video
+      )
+    );
+  };
+
+  const handleStop = (videoId: string) => {
+    toast.info("Download stopped");
+    setVideos(prevVideos =>
+      prevVideos.map(video =>
+        video.id === videoId ? { 
+          ...video, 
+          status: 'aborted', 
+          error: 'Download stopped by user',
+          timeLeft: 0 
+        } : video
+      )
+    );
   };
 
   return (
@@ -224,6 +247,36 @@ const MyVideos = () => {
                             >
                               <FolderOpen className="h-4 w-4" />
                               <span className="sr-only">Open Folder</span>
+                            </Button>
+                          </>
+                        ) : video.status === 'in_progress' ? (
+                          <>
+                            <Button 
+                              variant="ghost" 
+                              size="icon" 
+                              className="h-8 w-8 text-muted-foreground"
+                              onClick={() => handlePause(video.id)}
+                            >
+                              <Pause className="h-4 w-4" />
+                              <span className="sr-only">Pause</span>
+                            </Button>
+                            <Button 
+                              variant="ghost" 
+                              size="icon" 
+                              className="h-8 w-8 text-muted-foreground"
+                              onClick={() => handleStop(video.id)}
+                            >
+                              <Square className="h-4 w-4" />
+                              <span className="sr-only">Stop</span>
+                            </Button>
+                            <Button 
+                              variant="ghost" 
+                              size="icon" 
+                              className="h-8 w-8 text-destructive hover:text-destructive/80"
+                              onClick={() => handleDelete(video.id)}
+                            >
+                              <Trash2 className="h-4 w-4" />
+                              <span className="sr-only">Delete</span>
                             </Button>
                           </>
                         ) : null}
