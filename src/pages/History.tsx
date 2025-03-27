@@ -2,6 +2,7 @@
 import { useTheme } from "@/components/ThemeProvider";
 import DownloadHistory from "@/components/DownloadHistory";
 import { useDownloadHistory } from "@/hooks/useDownloadHistory";
+import AppLayout from "@/components/AppLayout";
 
 const History = () => {
   const { theme } = useTheme();
@@ -13,19 +14,22 @@ const History = () => {
   };
 
   return (
-    <div 
-      className={`
-        ${theme === "dark" ? "bg-[#111827]" : "bg-[#e4d2af]"} 
-        min-h-screen
-      `}
-    >
-      <DownloadHistory 
-        downloads={downloads} 
-        onClearHistory={clearHistory} 
-        onOpenFile={handleOpenFile} 
-      />
-    </div>
+    <AppLayout downloadsCount={downloads.length}>
+      <div 
+        className={`
+          ${theme === "dark" ? "bg-[#111827]" : "bg-[#e4d2af]"} 
+          min-h-screen
+        `}
+      >
+        <DownloadHistory 
+          downloads={downloads} 
+          onClearHistory={clearHistory} 
+          onOpenFile={handleOpenFile} 
+        />
+      </div>
+    </AppLayout>
   );
 };
 
 export default History;
+
