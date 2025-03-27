@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,7 +18,6 @@ const VideoUrlInput = ({ onSubmit, isLoading = false, onFolderSelect }: VideoUrl
   const isMobile = useIsMobile();
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Automatically focus the input when the component mounts
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
@@ -36,11 +34,9 @@ const VideoUrlInput = ({ onSubmit, isLoading = false, onFolderSelect }: VideoUrl
     
     setIsValidating(true);
     
-    // Validate URL using the improved validation function
     setTimeout(() => {
       if (validateUrl(url)) {
         onSubmit(url);
-        // Toast will be shown after metadata is fetched
       } else {
         toast.error("Please enter a valid URL format");
       }
@@ -55,7 +51,6 @@ const VideoUrlInput = ({ onSubmit, isLoading = false, onFolderSelect }: VideoUrl
     }
   };
 
-  // Show loading state from either local validation or parent metadata loading
   const showLoading = isValidating || isLoading;
 
   return (
@@ -110,11 +105,11 @@ const VideoUrlInput = ({ onSubmit, isLoading = false, onFolderSelect }: VideoUrl
           type="button"
           variant="contrast"
           onClick={onFolderSelect}
-          className="w-full max-w-xs sm:max-w-2xl mt-2 app-wide-button-high-contrast"
+          className="w-full max-w-xs sm:max-w-2xl mt-2 h-10 w-10 rounded-md app-wide-button-high-contrast"
           disabled={showLoading}
         >
-          <FolderOpen className="h-4 w-4 mr-2" />
-          Select Folder
+          <FolderOpen className="h-4 w-4" />
+          <span className="sr-only">Select folder</span>
         </Button>
       )}
     </form>
@@ -122,4 +117,3 @@ const VideoUrlInput = ({ onSubmit, isLoading = false, onFolderSelect }: VideoUrl
 };
 
 export default VideoUrlInput;
-
