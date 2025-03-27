@@ -32,11 +32,12 @@ const handleViewModeChange = () => {
   const windowWidth = window.innerWidth;
   const isMobileView = document.documentElement.classList.contains('mobile-view');
   
-  // Adjust for different window sizes while maintaining minimum and maximum constraints
-  if (windowWidth < 800 || isMobileView) {
-    rootElement.style.width = "100%";
+  if (isMobileView) {
+    // Force exact 375px width for mobile view
+    rootElement.style.width = "375px";
+    rootElement.style.maxWidth = "375px";
     
-    // Set more conservative max-height for popover elements on mobile to prevent them from extending beyond viewport
+    // Set more conservative max-height for popover elements on mobile
     document.documentElement.style.setProperty('--radix-popover-content-available-height', '35vh');
     document.documentElement.style.setProperty('--radix-select-content-available-height', '35vh');
     
@@ -44,8 +45,18 @@ const handleViewModeChange = () => {
     document.documentElement.style.setProperty('--radix-popover-content-transform-origin', 'var(--radix-popper-transform-origin)');
     document.documentElement.style.setProperty('--radix-select-content-transform-origin', 'var(--radix-popper-transform-origin)');
     document.documentElement.style.setProperty('--radix-dropdown-menu-content-transform-origin', 'var(--radix-popper-transform-origin)');
+  } else if (windowWidth < 800) {
+    // Responsive behavior for normal small screens (not mobile view)
+    rootElement.style.width = "100%";
+    rootElement.style.maxWidth = "800px";
+    
+    // Set more conservative max-height for popover elements on small screens
+    document.documentElement.style.setProperty('--radix-popover-content-available-height', '35vh');
+    document.documentElement.style.setProperty('--radix-select-content-available-height', '35vh');
   } else {
+    // Full desktop width
     rootElement.style.width = "800px";
+    rootElement.style.maxWidth = "800px";
     
     // Reset height variables for desktop
     document.documentElement.style.removeProperty('--radix-popover-content-available-height');
