@@ -1,15 +1,13 @@
-
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import AppLayout from '@/components/AppLayout';
 import DialogManager from '@/components/DialogManager';
-import { Trash2, FolderOpen } from 'lucide-react';
+import { Trash2, FolderOpen, RotateCcw, Copy, Play } from 'lucide-react';
 import { Progress } from "@/components/ui/progress";
 import { useState } from 'react';
 import { toast } from "sonner";
 
-// Sample data including an aborted download
 const sampleVideos = [
   {
     id: '1',
@@ -79,14 +77,12 @@ const MyVideos = () => {
   const navigate = useNavigate();
   const [videos, setVideos] = useState(sampleVideos);
 
-  // Format time display (convert seconds to mm:ss format)
   const formatTime = (seconds: number): string => {
     const mins = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
     return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
   };
 
-  // Handle retry download
   const handleRetry = (videoId: string) => {
     toast.success("Retrying download...");
     setVideos(prevVideos =>
@@ -96,7 +92,6 @@ const MyVideos = () => {
     );
   };
 
-  // Handle copy URL
   const handleCopyUrl = (url: string) => {
     navigator.clipboard.writeText(url).then(() => {
       toast.success("URL copied to clipboard");
@@ -105,7 +100,6 @@ const MyVideos = () => {
     });
   };
 
-  // Handle delete video
   const handleDelete = (videoId: string) => {
     if (confirm("Are you sure you want to delete this download?")) {
       setVideos(prevVideos => prevVideos.filter(video => video.id !== videoId));
@@ -130,7 +124,7 @@ const MyVideos = () => {
                 {isMobile ? "←" : "← Back"}
               </Button>
               <h2 className="text-base font-fraunces text-center">Download History</h2>
-              <div className="w-[60px]"></div> {/* Empty div for flex spacing */}
+              <div className="w-[60px]"></div>
             </div>
             
             {videos.length === 0 ? (
@@ -145,9 +139,7 @@ const MyVideos = () => {
                     className={`rounded-lg border bg-card shadow-sm overflow-hidden 
                       ${video.status === 'aborted' ? 'opacity-75 border-destructive/50' : ''}`}
                   >
-                    {/* 1st section: Video summary */}
                     <div className="p-3 flex items-center justify-between">
-                      {/* Left column: Thumbnail */}
                       <div className="flex-shrink-0 mr-3">
                         <div 
                           className="w-[54px] h-[36px] bg-muted rounded overflow-hidden"
@@ -155,7 +147,6 @@ const MyVideos = () => {
                         ></div>
                       </div>
                       
-                      {/* Middle column: Title and details */}
                       <div className="flex-1 min-w-0">
                         <h4 className="text-sm font-medium truncate">{video.title}</h4>
                         <div className="flex text-xs text-muted-foreground space-x-2">
@@ -174,7 +165,6 @@ const MyVideos = () => {
                         )}
                       </div>
                       
-                      {/* Right column: Action icons */}
                       <div className="flex space-x-2 ml-2">
                         {video.status === 'aborted' ? (
                           <>
@@ -240,15 +230,12 @@ const MyVideos = () => {
                       </div>
                     </div>
                     
-                    {/* 2nd section: Download progress (only for in-progress downloads) */}
                     {video.status === 'in_progress' && (
                       <div className="p-3 pt-0 border-t">
-                        {/* Progress bar */}
                         <div className="mb-1">
                           <Progress value={video.progress} className="h-1" />
                         </div>
                         
-                        {/* Download details */}
                         <div className="flex justify-between text-xs text-muted-foreground">
                           <span>
                             {video.downloadedSize} MB / {video.totalSize} MB
