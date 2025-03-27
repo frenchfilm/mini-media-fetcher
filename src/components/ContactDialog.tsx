@@ -67,7 +67,7 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle className="pb-2">Subscriptions</DialogTitle>
+          <DialogTitle className="pb-1.5 mb-2">Subscriptions</DialogTitle>
         </DialogHeader>
         
         {/* Top Buttons Section */}
