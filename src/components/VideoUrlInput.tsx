@@ -1,18 +1,27 @@
+
 import { useState, useEffect, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from 'sonner';
-import { ArrowRight, X, Loader2, FolderOpen } from 'lucide-react';
+import { ArrowRight, X, Loader2, FolderOpen, Settings2 } from 'lucide-react';
 import { validateUrl } from '@/utils/urlValidation';
 import { useIsMobile } from '@/hooks/use-mobile';
+import FormatPresetPopover from '@/components/FormatPresetPopover';
+import { VideoFormat } from '@/components/VideoFormatSelector';
 
 interface VideoUrlInputProps {
   onSubmit: (url: string) => void;
   isLoading?: boolean;
   onFolderSelect?: () => void;
+  onPresetChange?: (preset: { format: VideoFormat | null, quality: string | null }) => void;
 }
 
-const VideoUrlInput = ({ onSubmit, isLoading = false, onFolderSelect }: VideoUrlInputProps) => {
+const VideoUrlInput = ({ 
+  onSubmit, 
+  isLoading = false, 
+  onFolderSelect,
+  onPresetChange 
+}: VideoUrlInputProps) => {
   const [url, setUrl] = useState('');
   const [isValidating, setIsValidating] = useState(false);
   const isMobile = useIsMobile();
@@ -100,18 +109,36 @@ const VideoUrlInput = ({ onSubmit, isLoading = false, onFolderSelect }: VideoUrl
         </Button>
       </div>
 
-      {onFolderSelect && (
-        <Button
-          type="button"
-          variant="contrast"
-          onClick={onFolderSelect}
-          className="w-full max-w-xs sm:max-w-2xl mt-2 h-10 w-10 rounded-md app-wide-button-high-contrast"
-          disabled={showLoading}
-        >
-          <FolderOpen className="h-4 w-4" />
-          <span className="sr-only">Select folder</span>
-        </Button>
-      )}
+      <div className="flex items-center gap-2 w-full max-w-xs sm:max-w-2xl">
+        {onFolderSelect && (
+          <Button
+            type="button"
+            variant="contrast"
+            onClick={onFolderSelect}
+            size="icon"
+            className="h-10 w-10 rounded-md app-wide-button-high-contrast"
+            disabled={showLoading}
+          >
+            <FolderOpen className="h-4 w-4" />
+            <span className="sr-only">Select folder</span>
+          </Button>
+        )}
+        
+        {onPresetChange && (
+          <FormatPresetPopover onPresetChange={onPresetChange}>
+            <Button
+              type="button"
+              variant="outline"
+              size="icon"
+              className="h-10 w-10 rounded-md border-primary/30"
+              disabled={showLoading}
+            >
+              <Settings2 className="h-4 w-4" />
+              <span className="sr-only">Format preset settings</span>
+            </Button>
+          </FormatPresetPopover>
+        )}
+      </div>
     </form>
   );
 };

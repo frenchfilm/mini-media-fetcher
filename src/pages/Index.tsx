@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { VideoFormat } from "@/components/VideoFormatSelector";
@@ -21,6 +22,11 @@ enum AppState {
   DOWNLOADING = "downloading",
 }
 
+interface FormatPreset {
+  format: VideoFormat | null;
+  quality: string | null;
+}
+
 const Index = () => {
   const [appState, setAppState] = useState<AppState>(AppState.INPUT_URL);
   const [videoUrl, setVideoUrl] = useState<string>("");
@@ -30,6 +36,7 @@ const Index = () => {
   const [contactOpen, setContactOpen] = useState<boolean>(false);
   const [settingsOpen, setSettingsOpen] = useState<boolean>(false);
   const [licenseKey, setLicenseKey] = useState<string>("");
+  const [formatPreset, setFormatPreset] = useState<FormatPreset>({ format: null, quality: null });
   const { downloads, addDownload, clearHistory } = useDownloadHistory();
   
   useEffect(() => {
@@ -56,6 +63,17 @@ const Index = () => {
   const handleUrlSubmit = (url: string, videoDetails: any) => {
     setVideoUrl(url);
     setVideoInfo(videoDetails);
+    
+    // If we have a format preset, automatically select it
+    if (formatPreset.format) {
+      setSelectedFormat(formatPreset.format);
+      // If we have both format and quality preset, skip format selection and start download
+      if (formatPreset.quality) {
+        setAppState(AppState.DOWNLOADING);
+        return;
+      }
+    }
+    
     setAppState(AppState.SELECT_FORMAT);
     toast.success("Video information retrieved successfully");
   };
@@ -117,6 +135,11 @@ const Index = () => {
     setContactOpen(true);
   };
 
+  const handlePresetChange = (preset: FormatPreset) => {
+    setFormatPreset(preset);
+    console.log("Format preset updated:", preset);
+  };
+
   return (
     <>
       <AppLayout 
@@ -129,6 +152,7 @@ const Index = () => {
             <UrlInputSection 
               onUrlSubmit={handleUrlSubmit} 
               onOpenNewsletter={handleOpenNewsletter}
+              onPresetChange={handlePresetChange}
             />
           )}
           

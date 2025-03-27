@@ -1,21 +1,18 @@
 
-import { useState, useEffect, useRef } from 'react';
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { useState } from 'react';
 import { toast } from 'sonner';
-import { ArrowRight, X, Loader2, FolderOpen } from 'lucide-react';
-import { validateUrl } from '@/utils/urlValidation';
-import { getVideoDetails } from '@/utils/videoUtils';
-import { isDesktopEnvironment } from '@/utils/videoUtils';
+import { getVideoDetails, isDesktopEnvironment } from '@/utils/videoUtils';
 import { useIsMobile } from '@/hooks/use-mobile';
 import VideoUrlInput from "@/components/VideoUrlInput";
+import { VideoFormat } from '@/components/VideoFormatSelector';
 
 interface UrlInputSectionProps {
   onUrlSubmit: (url: string, videoInfo: any) => void;
   onOpenNewsletter: () => void;
+  onPresetChange?: (preset: { format: VideoFormat | null, quality: string | null }) => void;
 }
 
-const UrlInputSection = ({ onUrlSubmit, onOpenNewsletter }: UrlInputSectionProps) => {
+const UrlInputSection = ({ onUrlSubmit, onOpenNewsletter, onPresetChange }: UrlInputSectionProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const isMobile = useIsMobile();
   
@@ -68,6 +65,7 @@ const UrlInputSection = ({ onUrlSubmit, onOpenNewsletter }: UrlInputSectionProps
         onSubmit={handleUrlSubmit} 
         isLoading={isLoading} 
         onFolderSelect={handleFolderSelect}
+        onPresetChange={onPresetChange}
       />
     </div>
   );
