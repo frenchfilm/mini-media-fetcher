@@ -6,7 +6,19 @@
 }
 
 .app-wide-button-high-contrast {
-  @apply bg-primary/90 text-white hover:bg-primary transition-colors;
+  @apply bg-primary text-white border-primary font-semibold;
+}
+
+.app-wide-button-high-contrast:hover {
+  @apply bg-primary/90;
+}
+
+.dark .app-wide-button-high-contrast {
+  @apply bg-primary text-secondary border-primary;
+}
+
+.dark .app-wide-button-high-contrast:hover {
+  @apply bg-primary/90;
 }
 
 /* Prevent text cursor in all buttons */
