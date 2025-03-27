@@ -99,7 +99,7 @@ const SettingsDialog = ({
             className="w-full h-full"
           >
             <TabsContent value="download" className="h-full mt-0 data-[state=active]:flex data-[state=active]:flex-col">
-              <h3 className="text-lg font-fraunces mb-3">Download Settings</h3>
+              <h3 className="text-lg font-fraunces mb-3 text-center">Download Settings</h3>
               <div className="flex-1 overflow-hidden">
                 <ScrollArea className="h-full pr-4">
                   <DownloadSettings />
@@ -108,7 +108,7 @@ const SettingsDialog = ({
             </TabsContent>
             
             <TabsContent value="app" className="h-full mt-0 data-[state=active]:flex data-[state=active]:flex-col">
-              <h3 className="text-lg font-fraunces mb-3">Application Settings</h3>
+              <h3 className="text-lg font-fraunces mb-3 text-center">Application Settings</h3>
               <div className="flex-1 overflow-hidden">
                 <ScrollArea className="h-full pr-4">
                   <AppSettings 
@@ -120,7 +120,7 @@ const SettingsDialog = ({
             </TabsContent>
             
             <TabsContent value="about" className="h-full mt-0 data-[state=active]:flex data-[state=active]:flex-col">
-              <h3 className="text-lg font-fraunces mb-3">About</h3>
+              <h3 className="text-lg font-fraunces mb-3 text-center">About</h3>
               <div className="flex-1 overflow-hidden">
                 <ScrollArea className="h-full pr-4">
                   <AboutSettings 
