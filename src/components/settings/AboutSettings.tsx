@@ -9,7 +9,7 @@ interface AboutSettingsProps {
 
 const AboutSettings = ({ licenseKey }: AboutSettingsProps) => {
   const appVersion = "1.0.0";
-  const appSlogan = "Download Videos, Anytime, Anywhere";
+  const appSlogan = "Quiet by design, lightweight, no ads, no tracking, just plain function, our Apps are as Nature intended: bare.";
   const isRegistered = licenseKey && licenseKey.length > 8;
 
   const handleCheckForUpdates = () => {
