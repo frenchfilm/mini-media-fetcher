@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -66,7 +67,7 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Subscriptions</DialogTitle>
+          <DialogTitle className="pb-2">Subscriptions</DialogTitle>
         </DialogHeader>
         
         {/* Top Buttons Section */}
