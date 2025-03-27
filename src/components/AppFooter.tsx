@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { Mail, Settings, Megaphone, RectangleVertical, RectangleHorizontal } from "lucide-react";
+import { Settings, Megaphone, RectangleVertical, RectangleHorizontal, MessageSquare } from "lucide-react";
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useTheme } from '@/components/ThemeProvider';
 
@@ -103,7 +102,7 @@ const AppFooter: React.FC<AppFooterProps> = ({
             onClick={onOpenContact}
             className="h-9 w-9 rounded-full app-wide-button-high-contrast"
           >
-            <Mail className="h-5 w-5" />
+            <MessageSquare className="h-5 w-5" />
             <span className="sr-only">Requests / Bugs</span>
           </Button>
           
