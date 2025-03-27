@@ -4,6 +4,7 @@ import DownloadHistory from "@/components/DownloadHistory";
 import { useDownloadHistory } from "@/hooks/useDownloadHistory";
 import AppLayout from "@/components/AppLayout";
 import DialogManager from "@/components/DialogManager";
+import { Helmet } from "react-helmet";
 
 const HistoryPage = () => {
   const { theme } = useTheme();
@@ -15,23 +16,28 @@ const HistoryPage = () => {
   };
 
   return (
-    <DialogManager>
-      {({ openNewsletter, openContact, openSettings }) => (
-        <AppLayout 
-          onOpenNewsletter={openNewsletter}
-          onOpenContact={openContact}
-          downloadsCount={downloads.length}
-        >
-          <div className="h-full">
-            <DownloadHistory 
-              downloads={downloads} 
-              onClearHistory={clearHistory} 
-              onOpenFile={handleOpenFile} 
-            />
-          </div>
-        </AppLayout>
-      )}
-    </DialogManager>
+    <>
+      <Helmet>
+        <title>Download History | SoftBare Video Downloader</title>
+      </Helmet>
+      <DialogManager>
+        {({ openNewsletter, openContact, openSettings }) => (
+          <AppLayout 
+            onOpenNewsletter={openNewsletter}
+            onOpenContact={openContact}
+            downloadsCount={downloads.length}
+          >
+            <div className="h-full">
+              <DownloadHistory 
+                downloads={downloads} 
+                onClearHistory={clearHistory} 
+                onOpenFile={handleOpenFile} 
+              />
+            </div>
+          </AppLayout>
+        )}
+      </DialogManager>
+    </>
   );
 };
 
