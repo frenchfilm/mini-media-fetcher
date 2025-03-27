@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from 'sonner';
-import { ArrowRight, X, Loader2, FolderOpen, Settings2 } from 'lucide-react';
+import { ArrowRight, X, Loader2, FolderOpen, Settings2, Camera } from 'lucide-react';
 import { validateUrl } from '@/utils/urlValidation';
 import { useIsMobile } from '@/hooks/use-mobile';
 import FormatPresetPopover from '@/components/FormatPresetPopover';
@@ -14,13 +14,15 @@ interface VideoUrlInputProps {
   isLoading?: boolean;
   onFolderSelect?: () => void;
   onPresetChange?: (preset: { format: VideoFormat | null, quality: string | null }) => void;
+  onCameraSelect?: () => void;
 }
 
 const VideoUrlInput = ({ 
   onSubmit, 
   isLoading = false, 
   onFolderSelect,
-  onPresetChange 
+  onPresetChange,
+  onCameraSelect 
 }: VideoUrlInputProps) => {
   const [url, setUrl] = useState('');
   const [isValidating, setIsValidating] = useState(false);
@@ -112,7 +114,7 @@ const VideoUrlInput = ({
       <div className="flex items-center gap-2 w-full max-w-xs sm:max-w-2xl">
         {onFolderSelect && (
           <Button
-            type="button" // Explicitly set as button type to prevent form submission
+            type="button"
             variant="contrast"
             onClick={onFolderSelect}
             size="icon"
@@ -121,6 +123,19 @@ const VideoUrlInput = ({
           >
             <FolderOpen className="h-4 w-4" />
             <span className="sr-only">Select folder</span>
+          </Button>
+        )}
+        
+        {onCameraSelect && (
+          <Button
+            type="button"
+            onClick={onCameraSelect}
+            size="icon"
+            className="h-10 w-10 rounded-md app-wide-button-high-contrast"
+            disabled={showLoading}
+          >
+            <Camera className="h-4 w-4" />
+            <span className="sr-only">Open camera</span>
           </Button>
         )}
         

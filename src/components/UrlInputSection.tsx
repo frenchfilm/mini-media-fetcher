@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { getVideoDetails, isDesktopEnvironment } from '@/utils/videoUtils';
@@ -20,7 +19,6 @@ const UrlInputSection = ({ onUrlSubmit, onOpenNewsletter, onPresetChange }: UrlI
     setIsLoading(true);
     
     try {
-      // Get actual video details from the URL
       const videoDetails = await getVideoDetails(url);
       
       if (videoDetails) {
@@ -42,9 +40,18 @@ const UrlInputSection = ({ onUrlSubmit, onOpenNewsletter, onPresetChange }: UrlI
       return;
     }
     
-    // In a real desktop app (Electron/Tauri), this would open a folder picker
     toast.info("This would open a folder selection dialog in a desktop environment");
     console.log("Opening folder selection dialog (simulation)");
+  };
+
+  const handleCameraSelect = () => {
+    if (!isDesktopEnvironment()) {
+      toast.info("Camera selection is only available in desktop environments.");
+      return;
+    }
+    
+    toast.info("This would open a camera selection dialog in a desktop environment");
+    console.log("Opening camera selection dialog (simulation)");
   };
 
   return (
@@ -66,6 +73,7 @@ const UrlInputSection = ({ onUrlSubmit, onOpenNewsletter, onPresetChange }: UrlI
         isLoading={isLoading} 
         onFolderSelect={handleFolderSelect}
         onPresetChange={onPresetChange}
+        onCameraSelect={handleCameraSelect}
       />
     </div>
   );
