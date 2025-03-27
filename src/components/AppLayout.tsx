@@ -40,7 +40,7 @@ const AppLayout = ({
       </main>
       
       {/* Footer Section - Fixed at bottom */}
-      <div className="absolute bottom-0 left-0 right-0 z-10 bg-background w-full">
+      <div className="relative z-10 bg-background w-full">
         <AppFooter 
           onOpenNewsletter={handleOpenNewsletter}
           onOpenContact={handleContactClick}
