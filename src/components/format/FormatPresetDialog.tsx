@@ -134,7 +134,7 @@ const FormatPresetDialog = ({
                     <div className="border-t border-border pt-4">
                       <p className="text-xs text-muted-foreground">
                         These preferences will be applied to all new downloads during this session.
-                        For permanent format preferences, go to Settings > Download.
+                        For permanent format preferences, go to Settings &gt; Download.
                       </p>
                     </div>
                   </div>
