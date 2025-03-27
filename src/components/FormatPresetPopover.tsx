@@ -66,7 +66,7 @@ const FormatPresetPopover = ({ children, onPresetChange }: FormatPresetPopoverPr
       </PopoverTrigger>
       <PopoverContent 
         className="w-80" 
-        align="end" 
+        align="center" 
         side="top" 
         sideOffset={5}
         collisionPadding={20}
