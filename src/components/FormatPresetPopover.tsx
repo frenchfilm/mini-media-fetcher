@@ -22,7 +22,11 @@ export const QUALITY_OPTIONS = [
 ];
 
 const FormatPresetPopover = ({ children, onPresetChange }: FormatPresetPopoverProps) => {
-  const handleOpenFormatPresetDialog = () => {
+  const handleOpenFormatPresetDialog = (e: React.MouseEvent) => {
+    // Prevent default behavior to avoid form submission
+    e.preventDefault();
+    e.stopPropagation();
+    
     // Create and dispatch a custom event to open the format preset dialog
     const event = new Event('openFormatPreset');
     document.dispatchEvent(event);
@@ -32,6 +36,7 @@ const FormatPresetPopover = ({ children, onPresetChange }: FormatPresetPopoverPr
     <Button 
       onClick={handleOpenFormatPresetDialog}
       className="p-0 m-0 h-auto bg-transparent hover:bg-transparent"
+      type="button" // Explicitly set as button type to prevent form submission
     >
       {children}
     </Button>

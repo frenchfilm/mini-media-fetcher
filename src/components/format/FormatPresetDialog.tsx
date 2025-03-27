@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -57,6 +57,7 @@ const FormatPresetDialog = ({
       <DialogContent 
         className="sm:max-w-md p-0 overflow-hidden border-none bg-background"
         style={{ height: dialogHeight }}
+        aria-describedby="format-preset-description"
       >
         {/* Fixed header section - absolute positioning */}
         <div className="absolute top-0 left-0 right-0 z-10 flex justify-between items-center p-3 border-b w-full bg-background">
@@ -75,10 +76,15 @@ const FormatPresetDialog = ({
           </Button>
         </div>
         
+        {/* Hidden description for accessibility */}
+        <DialogDescription id="format-preset-description" className="sr-only">
+          Set your preferred format and quality for all downloads in this session
+        </DialogDescription>
+        
         {/* Content area with padding to account for fixed header */}
         <div className="pt-16 px-4 pb-4 h-full overflow-hidden">
           <div className="h-full flex flex-col">
-            <h3 className="text-lg font-fraunces mb-3">Default Format & Quality</h3>
+            <h3 className="text-lg font-fraunces mb-3">Default Format &amp; Quality</h3>
             <p className="text-sm text-muted-foreground mb-4">
               Set your preferred format and quality for all downloads in this session
             </p>

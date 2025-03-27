@@ -53,9 +53,12 @@ const DialogManager = ({ children }: DialogManagerProps) => {
     };
   }, []);
 
+  // Get the handlePresetChange function from the parent component via props
   const handlePresetChange = (preset: { format: VideoFormat | null, quality: string | null }) => {
-    console.log("Format preset changed:", preset);
-    // Handle the format preset change here, or pass down to the relevant components
+    // Find the onPresetChange prop in the app state
+    // This will be passed to the relevant components from Index
+    const event = new CustomEvent('formatPresetChanged', { detail: preset });
+    document.dispatchEvent(event);
   };
 
   return (

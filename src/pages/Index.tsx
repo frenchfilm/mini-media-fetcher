@@ -32,16 +32,27 @@ const Index = () => {
       console.log("Running in simulation mode - file system operations are simulated");
     }
     
+    // Handle settings dialog
     const handleOpenSettings = () => {
       document.dispatchEvent(new CustomEvent('openSettings'));
     };
     
     document.addEventListener('openSettings', handleOpenSettings);
     
+    // Handle format preset changes
+    const handleFormatPresetChanged = (event: any) => {
+      if (event.detail) {
+        handlePresetChange(event.detail);
+      }
+    };
+    
+    document.addEventListener('formatPresetChanged', handleFormatPresetChanged);
+    
     return () => {
       document.removeEventListener('openSettings', handleOpenSettings);
+      document.removeEventListener('formatPresetChanged', handleFormatPresetChanged);
     };
-  }, []);
+  }, [handlePresetChange]);
 
   return (
     <DialogManager>
@@ -64,7 +75,6 @@ const Index = () => {
             onOpenNewsletter={openNewsletter}
             onPresetChange={handlePresetChange}
           />
-          
         </AppLayout>
       )}
     </DialogManager>
