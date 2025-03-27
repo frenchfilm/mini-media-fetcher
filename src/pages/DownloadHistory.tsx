@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { toast } from "sonner";
 import AppLayout from '@/components/AppLayout';
@@ -15,11 +14,8 @@ const sampleDownloads: DownloadItem[] = [
     format: {
       id: '22',
       quality: '720p',
-      container: 'mp4',
-      hasVideo: true,
-      hasAudio: true,
-      isHD: true,
-      size: '120MB'
+      resolution: '1280x720',
+      fileSize: '120MB'
     },
     downloadDate: new Date('2023-06-10'),
     filePath: '/downloads/react-router-tutorial.mp4',
@@ -34,11 +30,8 @@ const sampleDownloads: DownloadItem[] = [
     format: {
       id: '18',
       quality: '360p',
-      container: 'mp4',
-      hasVideo: true,
-      hasAudio: true,
-      isHD: false,
-      size: '50MB'
+      resolution: '640x360',
+      fileSize: '50MB'
     },
     downloadDate: new Date('2023-06-15'),
     filePath: '/downloads/css-animation.mp4',
@@ -53,11 +46,8 @@ const sampleDownloads: DownloadItem[] = [
     format: {
       id: '22',
       quality: '1080p',
-      container: 'mp4',
-      hasVideo: true,
-      hasAudio: true,
-      isHD: true,
-      size: '450MB'
+      resolution: '1920x1080',
+      fileSize: '450MB'
     },
     downloadDate: new Date('2023-06-20'),
     filePath: '/downloads/typescript-crash-course.mp4',
