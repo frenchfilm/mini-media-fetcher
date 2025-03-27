@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Settings, RectangleVertical, RectangleHorizontal, MessageSquare } from "lucide-react";
@@ -52,7 +53,7 @@ const AppFooter: React.FC<AppFooterProps> = ({
     : "/lovable-uploads/7029e891-526b-4b46-a124-2069241819d7.png";
 
   return (
-    <footer className="h-auto min-h-[72px] w-full flex flex-col items-center px-6 py-2">
+    <footer className="h-auto min-h-[72px] w-full flex flex-col items-center px-6 py-6">
       <div className={`w-full flex ${isMobile ? 'flex-col-reverse gap-4' : 'flex-row'}`}>
         <div className={`${isMobile ? 'w-full items-start justify-start' : 'w-1/2'} flex items-start sm:justify-start mt-2 sm:mt-0`}>
           <div className="flex items-start">
