@@ -49,7 +49,15 @@
   
   /* Transition for smooth size changes */
   #root {
-    transition: width 0.3s ease-out;
+    transition: width 0.3s ease-out, height 0.3s ease-out;
+  }
+  
+  /* Mobile view specific styles */
+  html.mobile-view #root {
+    width: 100% !important;
+    max-width: 500px !important;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   }
   
   /* Allow app to be resizable by user */

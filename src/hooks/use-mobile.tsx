@@ -7,7 +7,7 @@ export function useIsMobile() {
   const [isMobile, setIsMobile] = React.useState<boolean | undefined>(undefined)
 
   React.useEffect(() => {
-    // Function to check if current view is mobile-sized
+    // Function to check if current view is mobile-sized or has mobile class
     const checkMobileView = () => {
       const isMobileSize = window.innerWidth < MOBILE_BREAKPOINT;
       const hasMobileClass = document.documentElement.classList.contains('mobile-view');
