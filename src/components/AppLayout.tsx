@@ -34,16 +34,18 @@ const AppLayout = ({
       id="app-container"
       style={{ position: 'relative', overflow: 'hidden' }}
     >
-      {/* Body Section with proper padding */}
-      <main className="flex-1 w-full overflow-auto mb-2">
+      {/* Body Section with scrolling content */}
+      <main className="flex-1 w-full overflow-y-auto mb-2 pb-4" style={{ maxHeight: 'calc(100% - 80px)' }}>
         {children}
       </main>
       
-      {/* Footer Section - Now flexible height for mobile */}
-      <AppFooter 
-        onOpenNewsletter={handleOpenNewsletter}
-        onOpenContact={handleContactClick}
-      />
+      {/* Footer Section - Fixed at bottom */}
+      <div className="relative z-10 bg-background w-full">
+        <AppFooter 
+          onOpenNewsletter={handleOpenNewsletter}
+          onOpenContact={handleContactClick}
+        />
+      </div>
     </div>
   );
 };

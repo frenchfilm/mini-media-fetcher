@@ -140,7 +140,9 @@ const DownloadManager = () => {
         >
           <div className="flex-1 flex flex-col w-full max-w-xl mx-auto px-1 sm:px-0">
             <PageHeader title="Download Manager" />
-            <VideoList videos={videos} onVideosChange={setVideos} />
+            <div className="overflow-y-auto">
+              <VideoList videos={videos} onVideosChange={setVideos} />
+            </div>
           </div>
         </AppLayout>
       )}
@@ -149,4 +151,3 @@ const DownloadManager = () => {
 };
 
 export default DownloadManager;
-
