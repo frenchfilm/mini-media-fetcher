@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -93,8 +92,8 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
           </a>
         </div>
         
-        {/* Newsletter Section - Moved back above Contact Us */}
-        <div className="border-b pb-3 mb-2 space-y-2">
+        {/* Newsletter Section - Reduced bottom padding */}
+        <div className="border-b pb-1.5 mb-2 space-y-2">
           <h4 className="text-sm font-medium">Newsletter</h4>
           
           <div className="flex items-center justify-between">
@@ -196,4 +195,3 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
 };
 
 export default ContactDialog;
-
