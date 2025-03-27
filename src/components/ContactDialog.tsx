@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -72,7 +71,6 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
           <DialogTitle className="pb-1.5 mb-2">Subscriptions</DialogTitle>
         </DialogHeader>
         
-        {/* Top Buttons Section */}
         <div className="flex items-center justify-between gap-2 mb-4">
           <Button 
             className="app-wide-button-high-contrast flex-1 h-8 text-xs w-full"
@@ -92,8 +90,8 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
             >
               <img 
                 src={theme === 'dark' 
-                  ? "/public/lovable-uploads/telegram-dark.svg" 
-                  : "/public/lovable-uploads/telegram-light.svg"} 
+                  ? "/lovable-uploads/telegram-dark.svg" 
+                  : "/lovable-uploads/telegram-light.svg"} 
                 alt="Telegram" 
                 className="h-4 w-4"
               />
@@ -102,7 +100,6 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
           </a>
         </div>
         
-        {/* Newsletter Section - Updated padding to 1.5rem */}
         <div className="border-b pb-1.5 mb-2 space-y-2">
           <div className="flex items-center justify-between">
             <span className="text-sm font-fraunces">Subscribe to Newsletter</span>
@@ -129,7 +126,6 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
           </form>
         </div>
         
-        {/* Contact Form Section */}
         <div className="py-1">
           <h3 className="font-semibold text-lg mb-2">Contact Us</h3>
           <form onSubmit={handleSubmit} className="space-y-1">
