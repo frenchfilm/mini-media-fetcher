@@ -18,7 +18,7 @@ interface VideoUrlInputProps {
   isLoading: boolean;
   onFolderSelect: () => void;
   onPresetChange?: (preset: { format: VideoFormat | null, quality: string | null }) => void;
-  onHistoryClick?: () => void; // Add this prop
+  onHistoryClick?: () => void;
 }
 
 const VideoUrlInput: React.FC<VideoUrlInputProps> = ({
@@ -26,7 +26,7 @@ const VideoUrlInput: React.FC<VideoUrlInputProps> = ({
   isLoading,
   onFolderSelect,
   onPresetChange,
-  onHistoryClick // destructure the new prop
+  onHistoryClick
 }) => {
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(urlSchema)
@@ -45,7 +45,7 @@ const VideoUrlInput: React.FC<VideoUrlInputProps> = ({
             {...register('url')}
             disabled={isLoading}
           />
-          {errors.url && <p className="text-red-500 text-sm">{errors.url.message}</p>}
+          {errors.url && <p className="text-red-500 text-sm">{errors.url.message as string}</p>}
         </div>
         <Button 
           type="submit" 
@@ -62,7 +62,7 @@ const VideoUrlInput: React.FC<VideoUrlInputProps> = ({
         >
           <Folder className="h-4 w-4" />
         </Button>
-        {onHistoryClick && ( // Conditionally render history button
+        {onHistoryClick && (
           <Button 
             type="button"
             variant="outline"

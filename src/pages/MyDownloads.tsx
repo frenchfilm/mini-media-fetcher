@@ -14,6 +14,10 @@ const MyDownloads = () => {
   const { downloads } = useDownloadHistory();
   const navigate = useNavigate();
 
+  const goToHome = () => {
+    navigate('/');
+  };
+
   return (
     <>
       <Helmet>
@@ -32,7 +36,7 @@ const MyDownloads = () => {
                 <Button 
                   variant="highContrast"
                   className="app-wide-button-high-contrast" 
-                  onClick={() => navigate("/")}
+                  onClick={goToHome}
                 >
                   <ArrowLeft className="h-4 w-4 mr-2" />
                   Back
