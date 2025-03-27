@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -99,7 +100,7 @@ const MyVideos = () => {
   };
 
   return (
-    <div className="flex-1 flex flex-col w-full max-w-xl mx-auto px-1 sm:px-0">
+    <div className="flex-1 flex flex-col w-full max-w-xl mx-auto px-1 sm:px-0 bg-background min-h-[600px]">
       <div className="flex justify-between items-center mb-3">
         <Button 
           size="sm"
