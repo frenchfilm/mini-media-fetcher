@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from 'sonner';
-import { ArrowRight, X, Loader2, FolderOpen, Settings2, Camera } from 'lucide-react';
+import { ArrowRight, X, Loader2, FolderOpen, Settings2, Clock } from 'lucide-react';
 import { validateUrl } from '@/utils/urlValidation';
 import { useIsMobile } from '@/hooks/use-mobile';
 import FormatPresetPopover from '@/components/FormatPresetPopover';
@@ -145,8 +145,8 @@ const VideoUrlInput = ({
             className="h-10 w-10 rounded-md app-wide-button-high-contrast"
             disabled={showLoading}
           >
-            <Camera className="h-4 w-4" />
-            <span className="sr-only">Open camera</span>
+            <Clock className="h-4 w-4" />
+            <span className="sr-only">View Download History</span>
           </Button>
         )}
       </div>
