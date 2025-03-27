@@ -1,3 +1,4 @@
+
 import { Card } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
@@ -6,6 +7,7 @@ import { VideoFormat } from "./VideoFormatSelector";
 import { Download, Trash2, FolderOpen, Clock, Play, FilePenLine, ArrowLeft } from 'lucide-react';
 import { toast } from "sonner";
 import { useTheme } from "@/components/ThemeProvider";
+import { Link, useNavigate } from "react-router-dom";
 
 export interface DownloadItem {
   id: string;
@@ -27,6 +29,7 @@ interface DownloadHistoryProps {
 
 const DownloadHistory = ({ downloads, onClearHistory, onOpenFile }: DownloadHistoryProps) => {
   const { theme } = useTheme();
+  const navigate = useNavigate();
   
   const formatDate = (date: Date): string => {
     return new Intl.DateTimeFormat('en-US', {
@@ -43,6 +46,10 @@ const DownloadHistory = ({ downloads, onClearHistory, onOpenFile }: DownloadHist
     }
   };
 
+  const handleBackClick = () => {
+    navigate('/');
+  };
+
   const itemBgColor = theme === "dark" ? "bg-[#1e2130]" : "bg-[#9c8e6c]/40";
   const headerBgColor = theme === "dark" ? "bg-[#0f1118]" : "bg-transparent";
   const textColor = theme === "dark" ? "text-[#e8d1aa]" : "text-[#0f1118]";
@@ -55,7 +62,7 @@ const DownloadHistory = ({ downloads, onClearHistory, onOpenFile }: DownloadHist
         <Button 
           variant="highContrast" 
           className="app-wide-button-high-contrast"
-          onClick={() => window.history.back()}
+          onClick={handleBackClick}
         >
           <ArrowLeft className="h-4 w-4 mr-2" />
           Back
@@ -147,7 +154,6 @@ const DownloadHistory = ({ downloads, onClearHistory, onOpenFile }: DownloadHist
           ))}
         </div>
       )}
-      
     </div>
   );
 };

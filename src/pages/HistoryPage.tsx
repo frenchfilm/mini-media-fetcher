@@ -4,10 +4,21 @@ import DownloadHistory from "@/components/DownloadHistory";
 import { useDownloadHistory } from "@/hooks/useDownloadHistory";
 import AppLayout from "@/components/AppLayout";
 import DialogManager from "@/components/DialogManager";
+import { useEffect } from "react";
 
 const HistoryPage = () => {
   const { theme } = useTheme();
   const { downloads, clearHistory } = useDownloadHistory();
+
+  // Set document title for this page
+  useEffect(() => {
+    document.title = "Download History - Downloader App";
+    
+    return () => {
+      // Reset title when navigating away
+      document.title = "Video Downloader App";
+    };
+  }, []);
 
   const handleOpenFile = (item: any) => {
     console.log("Open file:", item);
