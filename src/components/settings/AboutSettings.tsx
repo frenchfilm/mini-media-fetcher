@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Check, ExternalLink } from "lucide-react";
@@ -9,7 +8,7 @@ interface AboutSettingsProps {
 
 const AboutSettings = ({ licenseKey }: AboutSettingsProps) => {
   const appVersion = "1.0.0";
-  const appSlogan = "Quiet by design, lightweight, no ads, no tracking, just plain function, our Apps are as Nature intended: bare.";
+  const appSlogan = "Quiet by design, lightweight, no ads, no tracking, just plain function. Our Apps are as Nature intended: bare.";
   const isRegistered = licenseKey && licenseKey.length > 8;
   const currentYear = new Date().getFullYear();
 
