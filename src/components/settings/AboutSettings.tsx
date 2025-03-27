@@ -11,6 +11,7 @@ const AboutSettings = ({ licenseKey }: AboutSettingsProps) => {
   const appVersion = "1.0.0";
   const appSlogan = "Quiet by design, lightweight, no ads, no tracking, just plain function, our Apps are as Nature intended: bare.";
   const isRegistered = licenseKey && licenseKey.length > 8;
+  const currentYear = new Date().getFullYear();
 
   const handleCheckForUpdates = () => {
     toast.info("Checking for updates...");
@@ -56,7 +57,7 @@ const AboutSettings = ({ licenseKey }: AboutSettingsProps) => {
       
       <div className="border-t border-border pt-4 mt-6">
         <p className="text-xs text-center text-muted-foreground">
-          © 2025 SoftBare. All rights reserved.
+          © {currentYear} SoftBare. All rights reserved.
         </p>
       </div>
     </div>
