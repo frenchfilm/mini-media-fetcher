@@ -1,79 +1,141 @@
 
-import React, { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { toast } from 'sonner';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Folder, History } from 'lucide-react';
-import { VideoFormat } from './VideoFormatSelector';
-
-const urlSchema = z.object({
-  url: z.string().url('Invalid URL')
-});
+import { ArrowRight, X, Loader2, FolderOpen, Settings2 } from 'lucide-react';
+import { validateUrl } from '@/utils/urlValidation';
+import { useIsMobile } from '@/hooks/use-mobile';
+import FormatPresetPopover from '@/components/FormatPresetPopover';
+import { VideoFormat } from '@/components/VideoFormatSelector';
 
 interface VideoUrlInputProps {
-  onSubmit: (url: string) => Promise<void>;
-  isLoading: boolean;
-  onFolderSelect: () => void;
+  onSubmit: (url: string) => void;
+  isLoading?: boolean;
+  onFolderSelect?: () => void;
   onPresetChange?: (preset: { format: VideoFormat | null, quality: string | null }) => void;
-  onHistoryClick?: () => void;
 }
 
-const VideoUrlInput: React.FC<VideoUrlInputProps> = ({
-  onSubmit,
-  isLoading,
+const VideoUrlInput = ({ 
+  onSubmit, 
+  isLoading = false, 
   onFolderSelect,
-  onPresetChange,
-  onHistoryClick
-}) => {
-  const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: zodResolver(urlSchema)
-  });
+  onPresetChange 
+}: VideoUrlInputProps) => {
+  const [url, setUrl] = useState('');
+  const [isValidating, setIsValidating] = useState(false);
+  const isMobile = useIsMobile();
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  const onSubmitHandler = async (data: { url: string }) => {
-    await onSubmit(data.url);
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!url.trim()) {
+      toast.error("Please enter a video URL");
+      return;
+    }
+    
+    setIsValidating(true);
+    
+    setTimeout(() => {
+      if (validateUrl(url)) {
+        onSubmit(url);
+      } else {
+        toast.error("Please enter a valid URL format");
+      }
+      setIsValidating(false);
+    }, 300);
   };
 
+  const clearInput = () => {
+    setUrl('');
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  };
+
+  const showLoading = isValidating || isLoading;
+
   return (
-    <div className="w-full max-w-md mx-auto space-y-4">
-      <form onSubmit={handleSubmit(onSubmitHandler)} className="flex items-center space-x-2">
-        <div className="flex-1">
+    <form 
+      onSubmit={handleSubmit} 
+      className="w-full max-w-xs sm:max-w-2xl mx-auto flex flex-col items-center space-y-2"
+    >
+      <div className="flex items-stretch gap-1 w-full">
+        <div className="rounded-md bg-white border border-secondary/70 flex items-center overflow-hidden flex-1 dark:bg-secondary dark:border-border">
           <Input
-            placeholder="Paste video URL here"
-            {...register('url')}
-            disabled={isLoading}
+            ref={inputRef}
+            type="text"
+            placeholder="Paste URL here"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            className="border-0 h-10 px-3 bg-transparent text-foreground focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-muted-foreground/70 dark:placeholder:text-secondary-foreground/70 dark:text-secondary-foreground"
+            disabled={showLoading}
           />
-          {errors.url && <p className="text-red-500 text-sm">{errors.url.message as string}</p>}
+          
+          {url && !showLoading && (
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              onClick={clearInput}
+              className="mr-1 h-7 w-7 rounded-full text-muted-foreground hover:text-foreground dark:text-secondary-foreground dark:hover:text-secondary-foreground"
+            >
+              <X className="h-3 w-3" />
+              <span className="sr-only">Clear</span>
+            </Button>
+          )}
         </div>
-        <Button 
-          type="submit" 
-          variant="secondary" 
-          disabled={isLoading}
-        >
-          {isLoading ? 'Loading...' : 'Download'}
-        </Button>
-        <Button 
-          type="button"
-          variant="outline"
+        
+        <Button
+          type="submit"
+          variant="contrast"
           size="icon"
-          onClick={onFolderSelect}
+          disabled={showLoading || !url.trim()}
+          className="h-10 w-10 rounded-md app-wide-button-high-contrast"
         >
-          <Folder className="h-4 w-4" />
+          {showLoading ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          ) : (
+            <ArrowRight className="h-4 w-4" />
+          )}
+          <span className="sr-only">Get Video</span>
         </Button>
-        {onHistoryClick && (
-          <Button 
-            type="button"
-            variant="outline"
+      </div>
+
+      <div className="flex items-center gap-2 w-full max-w-xs sm:max-w-2xl">
+        {onFolderSelect && (
+          <Button
+            type="button" // Explicitly set as button type to prevent form submission
+            variant="contrast"
+            onClick={onFolderSelect}
             size="icon"
-            onClick={onHistoryClick}
+            className="h-10 w-10 rounded-md app-wide-button-high-contrast"
+            disabled={showLoading}
           >
-            <History className="h-4 w-4" />
+            <FolderOpen className="h-4 w-4" />
+            <span className="sr-only">Select folder</span>
           </Button>
         )}
-      </form>
-    </div>
+        
+        {onPresetChange && (
+          <div onClick={(e) => e.stopPropagation()}>
+            <FormatPresetPopover onPresetChange={onPresetChange}>
+              <div className="h-10 w-10 rounded-md app-wide-button-high-contrast flex items-center justify-center">
+                <Settings2 className="h-4 w-4" />
+                <span className="sr-only">Format preset settings</span>
+              </div>
+            </FormatPresetPopover>
+          </div>
+        )}
+      </div>
+    </form>
   );
 };
 

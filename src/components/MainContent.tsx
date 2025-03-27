@@ -5,7 +5,6 @@ import FormatSelectionSection from "@/components/FormatSelectionSection";
 import DownloadProgress from "@/components/DownloadProgress";
 import { VideoFormat } from "@/components/VideoFormatSelector";
 import { FormatPreset } from "@/hooks/useAppState";
-import { useNavigate } from "react-router-dom";
 
 interface MainContentProps {
   appState: AppState;
@@ -34,12 +33,6 @@ const MainContent = ({
   onOpenNewsletter,
   onPresetChange
 }: MainContentProps) => {
-  const navigate = useNavigate();
-  
-  const handleHistoryClick = () => {
-    navigate('/my-downloads');
-  };
-
   return (
     <div className="h-full">
       {appState === AppState.INPUT_URL && (
@@ -47,7 +40,6 @@ const MainContent = ({
           onUrlSubmit={onUrlSubmit} 
           onOpenNewsletter={onOpenNewsletter}
           onPresetChange={onPresetChange}
-          onHistoryClick={handleHistoryClick}
         />
       )}
       

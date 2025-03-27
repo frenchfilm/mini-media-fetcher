@@ -10,15 +10,9 @@ interface UrlInputSectionProps {
   onUrlSubmit: (url: string, videoInfo: any) => void;
   onOpenNewsletter: () => void;
   onPresetChange?: (preset: { format: VideoFormat | null, quality: string | null }) => void;
-  onHistoryClick?: () => void; // Add this new optional prop
 }
 
-const UrlInputSection = ({ 
-  onUrlSubmit, 
-  onOpenNewsletter, 
-  onPresetChange, 
-  onHistoryClick 
-}: UrlInputSectionProps) => {
+const UrlInputSection = ({ onUrlSubmit, onOpenNewsletter, onPresetChange }: UrlInputSectionProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const isMobile = useIsMobile();
   
@@ -26,6 +20,7 @@ const UrlInputSection = ({
     setIsLoading(true);
     
     try {
+      // Get actual video details from the URL
       const videoDetails = await getVideoDetails(url);
       
       if (videoDetails) {
@@ -47,6 +42,7 @@ const UrlInputSection = ({
       return;
     }
     
+    // In a real desktop app (Electron/Tauri), this would open a folder picker
     toast.info("This would open a folder selection dialog in a desktop environment");
     console.log("Opening folder selection dialog (simulation)");
   };
@@ -70,7 +66,6 @@ const UrlInputSection = ({
         isLoading={isLoading} 
         onFolderSelect={handleFolderSelect}
         onPresetChange={onPresetChange}
-        onHistoryClick={onHistoryClick} // Add this line
       />
     </div>
   );
