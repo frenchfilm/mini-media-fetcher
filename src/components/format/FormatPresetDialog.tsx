@@ -101,7 +101,7 @@ const FormatPresetDialog = ({
                         value={selectedFormat || ""} 
                         onValueChange={setSelectedFormat}
                       >
-                        <SelectTrigger id="format-select">
+                        <SelectTrigger id="format-select" className="w-[calc(100%-1rem)] mx-auto">
                           <SelectValue placeholder="Select format" />
                         </SelectTrigger>
                         <SelectContent>
@@ -122,7 +122,7 @@ const FormatPresetDialog = ({
                         value={selectedQuality || ""} 
                         onValueChange={setSelectedQuality}
                       >
-                        <SelectTrigger id="quality-select">
+                        <SelectTrigger id="quality-select" className="w-[calc(100%-1rem)] mx-auto">
                           <SelectValue placeholder="Select quality" />
                         </SelectTrigger>
                         <SelectContent>
@@ -155,3 +155,4 @@ const FormatPresetDialog = ({
 };
 
 export default FormatPresetDialog;
+
