@@ -1,6 +1,7 @@
+
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { Settings, Megaphone, RectangleVertical, RectangleHorizontal, MessageSquare } from "lucide-react";
+import { Settings, RectangleVertical, RectangleHorizontal, MessageSquare } from "lucide-react";
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useTheme } from '@/components/ThemeProvider';
 
@@ -104,15 +105,6 @@ const AppFooter: React.FC<AppFooterProps> = ({
           >
             <MessageSquare className="h-5 w-5" />
             <span className="sr-only">Requests / Bugs</span>
-          </Button>
-          
-          <Button 
-            size="icon"
-            onClick={onOpenNewsletter}
-            className="h-9 w-9 rounded-full app-wide-button-high-contrast"
-          >
-            <Megaphone className="h-6 w-6" />
-            <span className="sr-only">Subscriptions</span>
           </Button>
 
           <Button
