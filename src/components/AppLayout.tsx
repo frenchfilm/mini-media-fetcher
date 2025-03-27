@@ -30,17 +30,14 @@ const AppLayout = ({
 
   return (
     <div 
-      className={`w-full ${isMobile ? 'min-w-[300px]' : 'w-[800px]'} min-h-[600px] bg-background relative p-2 sm:p-6`} 
+      className={`w-full ${isMobile ? 'min-w-[300px]' : 'w-[800px]'} min-h-[600px] bg-background flex flex-col relative p-2 sm:p-6`} 
       id="app-container"
       style={{ position: 'relative', overflow: 'hidden' }}
     >
-      {/* Content Area */}
-      <div className="w-full h-full pb-[80px]">
-        {/* Body Section with scrolling content */}
-        <main className="flex-1 w-full overflow-y-auto pb-4 z-0" style={{ height: '100%', maxHeight: '100%' }}>
-          {children}
-        </main>
-      </div>
+      {/* Body Section with scrolling content */}
+      <main className="flex-1 w-full overflow-y-auto pb-4 z-0" style={{ height: 'calc(100% - 80px)', maxHeight: 'calc(100% - 80px)' }}>
+        {children}
+      </main>
       
       {/* Footer Section - Fixed at bottom */}
       <div className="absolute bottom-0 left-0 right-0 z-10 bg-background w-full">
