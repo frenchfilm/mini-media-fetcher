@@ -23,9 +23,6 @@ const Index = () => {
   } = useAppState();
   
   useEffect(() => {
-    // Set the document title for the home page
-    document.title = "Video Downloader App";
-    
     const directoryExists = ensureDownloadDirectoryExists();
     if (!directoryExists) {
       toast.error("Could not create download directory. Please check permissions.");

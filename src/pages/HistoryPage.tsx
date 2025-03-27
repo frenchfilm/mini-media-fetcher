@@ -4,21 +4,11 @@ import DownloadHistory from "@/components/DownloadHistory";
 import { useDownloadHistory } from "@/hooks/useDownloadHistory";
 import AppLayout from "@/components/AppLayout";
 import DialogManager from "@/components/DialogManager";
-import { useEffect } from "react";
+import { Helmet } from "react-helmet";
 
 const HistoryPage = () => {
   const { theme } = useTheme();
   const { downloads, clearHistory } = useDownloadHistory();
-
-  // Set document title for this page
-  useEffect(() => {
-    document.title = "Download History - Downloader App";
-    
-    return () => {
-      // Reset title when navigating away
-      document.title = "Video Downloader App";
-    };
-  }, []);
 
   const handleOpenFile = (item: any) => {
     console.log("Open file:", item);
@@ -26,23 +16,28 @@ const HistoryPage = () => {
   };
 
   return (
-    <DialogManager>
-      {({ openNewsletter, openContact, openSettings }) => (
-        <AppLayout 
-          onOpenNewsletter={openNewsletter}
-          onOpenContact={openContact}
-          downloadsCount={downloads.length}
-        >
-          <div className="h-full">
-            <DownloadHistory 
-              downloads={downloads} 
-              onClearHistory={clearHistory} 
-              onOpenFile={handleOpenFile} 
-            />
-          </div>
-        </AppLayout>
-      )}
-    </DialogManager>
+    <>
+      <Helmet>
+        <title>Download History | SoftBare Video Downloader</title>
+      </Helmet>
+      <DialogManager>
+        {({ openNewsletter, openContact, openSettings }) => (
+          <AppLayout 
+            onOpenNewsletter={openNewsletter}
+            onOpenContact={openContact}
+            downloadsCount={downloads.length}
+          >
+            <div className="h-full">
+              <DownloadHistory 
+                downloads={downloads} 
+                onClearHistory={clearHistory} 
+                onOpenFile={handleOpenFile} 
+              />
+            </div>
+          </AppLayout>
+        )}
+      </DialogManager>
+    </>
   );
 };
 
